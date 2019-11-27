@@ -19,7 +19,7 @@ const App = () => {
 
     return (
         <View>
-            <Video source={{uri: "https://nhkwlive-ojp.akamaized.net/hls/live/2003459/nhkwlive-ojp/index_1180.m3u8"}}
+            <Video source={{uri: "http://178.124.183.14:80/hls/HNBMWPATWZ/variant.m3u8"}}
                    ref={(ref) => {
                        player = ref
                    }}
