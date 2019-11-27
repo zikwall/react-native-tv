@@ -11,7 +11,6 @@
     "android-linux": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android"
   },
   "dependencies": {
-    "@endemolshinegroup/react-native-video-with-ads": "^1.0.5",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-media-controls": "^1.1.1",

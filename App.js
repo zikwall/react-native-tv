@@ -7,18 +7,21 @@ class App extends Component {
     videoPlayer;
     state = {
         currentTime: 0,
-        duration: 2,
-        isFullScreen: true,
+        duration: 0,
+        isFullScreen: false,
         isLoading: true,
         paused: false,
         playerState: PLAYER_STATES.PLAYING,
+        screenType: 'content',
     };
 
     onSeek = seek => {
+        //Handler for change in seekbar
         this.videoPlayer.seek(seek);
     };
 
     onPaused = playerState => {
+        //Handler for Video Pause
         this.setState({
             paused: !this.state.paused,
             playerState,
@@ -26,6 +29,7 @@ class App extends Component {
     };
 
     onReplay = () => {
+        //Handler for Replay
         this.setState({ playerState: PLAYER_STATES.PLAYING });
         this.videoPlayer.seek(0);
     };
@@ -46,18 +50,24 @@ class App extends Component {
 
     onError = () => alert('Oh! ', error);
 
-    exitFullScreen = () => {};
+    exitFullScreen = () => {
+        alert('Exit full screen');
+    };
 
     enterFullScreen = () => {};
 
-    onFullScreen = () => {};
-
+    onFullScreen = () => {
+        if (this.state.screenType == 'content')
+            this.setState({ screenType: 'cover' });
+        else this.setState({ screenType: 'content' });
+    };
     renderToolbar = () => (
-        <View style={styles.toolbar}>
-            <Text>I'm a custom toolbar </Text>
+        <View>
+            <Text> toolbar </Text>
         </View>
     );
     onSeeking = currentTime => this.setState({ currentTime });
+
     render() {
         return (
             <View style={styles.container}>
@@ -68,15 +78,16 @@ class App extends Component {
                     onProgress={this.onProgress}
                     paused={this.state.paused}
                     ref={videoPlayer => (this.videoPlayer = videoPlayer)}
-                    //resizeMode="cover"
+                    resizeMode={this.state.screenType}
+                    onFullScreen={this.state.isFullScreen}
                     source={{ uri: 'http://178.124.183.14:80/hls/HNBMWPATWZ/variant.m3u8' }}
                     style={styles.mediaPlayer}
-                    volume={0.0}
+                    volume={10}
                 />
                 <MediaControls
                     duration={this.state.duration}
                     isLoading={this.state.isLoading}
-                    mainColor="orange"
+                    mainColor="#333"
                     onFullScreen={this.onFullScreen}
                     onPaused={this.onPaused}
                     onReplay={this.onReplay}
@@ -90,7 +101,6 @@ class App extends Component {
         );
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -110,5 +120,4 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
     },
 });
-
 export default App;
