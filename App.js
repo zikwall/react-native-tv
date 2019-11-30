@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Video from 'react-native-video';
 import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
+import { WebView } from 'react-native-webview';
 
 class App extends Component {
     videoPlayer;
@@ -70,34 +71,7 @@ class App extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Video
-                    onEnd={this.onEnd}
-                    onLoad={this.onLoad}
-                    onLoadStart={this.onLoadStart}
-                    onProgress={this.onProgress}
-                    paused={this.state.paused}
-                    ref={videoPlayer => (this.videoPlayer = videoPlayer)}
-                    resizeMode={this.state.screenType}
-                    onFullScreen={this.state.isFullScreen}
-                    source={{ uri: 'http://178.124.183.14:80/hls/HNBMWPATWZ/variant.m3u8' }}
-                    style={styles.mediaPlayer}
-                    volume={10}
-                />
-                <MediaControls
-                    duration={this.state.duration}
-                    isLoading={this.state.isLoading}
-                    mainColor="#333"
-                    onFullScreen={this.onFullScreen}
-                    onPaused={this.onPaused}
-                    onReplay={this.onReplay}
-                    onSeek={this.onSeek}
-                    onSeeking={this.onSeeking}
-                    playerState={this.state.playerState}
-                    progress={this.state.currentTime}
-                    toolbar={this.renderToolbar()}
-                />
-            </View>
+            <WebView source={{ uri: 'https://zikwall.github.io/vk-tv-desktop' }} />
         );
     }
 }

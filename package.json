@@ -15,6 +15,7 @@
     "react-native": "0.61.5",
     "react-native-media-controls": "^1.1.1",
     "react-native-video": "^5.0.2",
+    "react-native-webview": "^7.5.2",
     "set-blocking": "^2.0.0"
   },
   "devDependencies": {
