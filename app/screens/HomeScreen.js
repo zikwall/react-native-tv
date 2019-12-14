@@ -19,7 +19,7 @@ const HomeScreen = () => {
         if (orientation === 'LANDSCAPE') {
             setWebViewSize('100%');
         } else {
-            setWebViewSize(200);
+            setWebViewSize(201);
         }
     };
 
@@ -29,10 +29,14 @@ const HomeScreen = () => {
                 <WebView
                     style={{ backgroundColor: 'transparent' }}
                     source={{uri: 'http://tv.zikwall.ru/vktv/embed/give?epg=100001'}}
-                    javaScriptEnabled={ true }
-                    domStorageEnabled={ true }
+                    javaScriptEnabled
+                    domStorageEnabled
+                    thirdPartyCookiesEnabled
+                    //sharedCookiesEnabled
+                    geolocationEnabled
+                    cacheEnabled
+                    origin="http://tv.zikwall.ru"
                     automaticallyAdjustContentInsets={ false }
-                    scrollEnabled={ false }
                 />
             </View>
             <VideoInfo
