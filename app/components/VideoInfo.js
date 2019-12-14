@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
         paddingBottom: 15,
         flexDirection: 'row',
         marginTop: 5,
+        borderBottomColor: 'red',
+        borderBottomWidth: 1,
     },
     avatarContainer: {
         marginHorizontal: 10,
