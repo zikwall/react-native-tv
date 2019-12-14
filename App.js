@@ -1,16 +1,12 @@
 import React from 'react';
-import { WebView } from 'react-native-webview';
 import { StyleSheet, StatusBar } from 'react-native';
+import AppNavigator from './app/navigation/AppNavigator';
 
 const App = (props) => {
     StatusBar.setHidden(true);
 
     return (
-        <WebView
-            source={{uri: 'http://tv.zikwall.ru/vktv/embed/give?epg=355'}}
-            javaScriptEnabled={true}
-            domStorageEnabled={true}
-        />
+        <AppNavigator />
     );
 };
 
