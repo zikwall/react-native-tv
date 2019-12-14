@@ -28,15 +28,19 @@ const HomeScreen = () => {
             <View style={{ height: webViewSize }}>
                 <WebView
                     style={{ backgroundColor: 'transparent' }}
-                    source={{uri: 'http://tv.zikwall.ru/vktv/embed/give?epg=100001'}}
-                    javaScriptEnabled
-                    domStorageEnabled
-                    thirdPartyCookiesEnabled
-                    //sharedCookiesEnabled
-                    geolocationEnabled
-                    cacheEnabled
+                    source={{ uri: 'http://tv.zikwall.ru/vktv/embed/give?epg=100001' }}
+                    javaScriptEnabled={ true }
+                    domStorageEnabled={ true }
+                    thirdPartyCookiesEnabled={ true }
+                    sharedCookiesEnabled={ true }
+                    geolocationEnabled={ true }
+                    cacheEnabled={ true }
                     origin="http://tv.zikwall.ru"
                     automaticallyAdjustContentInsets={ false }
+                    mixedContentMode="always"
+                    userAgent="Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Mobile Safari/537.36"
+                    //applicationNameForUserAgent={ ' EnjoyTV / 1.1.0 ' }
+                    allowsFullscreenVideo={ true }
                 />
             </View>
             <VideoInfo
