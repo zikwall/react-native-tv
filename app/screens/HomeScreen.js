@@ -1,71 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { WebView } from 'react-native-webview';
-import Orientation from 'react-native-orientation';
-import VideoInfo from '../components/VideoInfo';
+import React from 'react';
+import { View, StyleSheet, Text, FlatList } from 'react-native';
+import SearchBar from "react-native-dynamic-search-bar";
 
-const HomeScreen = () => {
-    const [ webViewSize, setWebViewSize ] = useState(200);
+export default class HomeScreen extends React.Component {
+    filterList = (text) => {
 
-    useEffect(() => {
-        Orientation.addOrientationListener(orientationHandleChange);
-
-        return () => {
-            Orientation.removeOrientationListener(orientationHandleChange);
-        };
-    });
-
-    const orientationHandleChange = (orientation) => {
-        if (orientation === 'LANDSCAPE') {
-            setWebViewSize('100%');
-        } else {
-            setWebViewSize(201);
-        }
     };
 
-    return (
-        <View style={{ flex: 2, backgroundColor: '#121212' }}>
-            <View style={{ height: webViewSize }}>
-                <WebView
-                    style={{ backgroundColor: 'transparent' }}
-                    source={{ uri: 'http://tv.zikwall.ru/vktv/embed/give?epg=100001' }}
-                    javaScriptEnabled={ true }
-                    domStorageEnabled={ true }
-                    thirdPartyCookiesEnabled={ true }
-                    sharedCookiesEnabled={ true }
-                    geolocationEnabled={ true }
-                    cacheEnabled={ true }
-                    origin="http://tv.zikwall.ru"
-                    automaticallyAdjustContentInsets={ false }
-                    mixedContentMode="always"
-                    userAgent="Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Mobile Safari/537.36"
-                    //applicationNameForUserAgent={ ' EnjoyTV / 1.1.0 ' }
-                    allowsFullscreenVideo={ true }
-                />
-            </View>
-            <VideoInfo
-                videoTitle="Video"
-                videoInfo="Video"
-                channelName="Channel Name Here"
-                channelAvatarImage="https://avatars2.githubusercontent.com/u/23422968?s=460&v=4"
-            />
-        </View>
-    );
-};
-
-export default HomeScreen;
+    render() {
+        return (
+            <>
+                <View style={ styles.container }>
+                    <SearchBar
+                        placeholder="Search here"
+                        iconColor="red"
+                        onChangeText={text => {
+                            this.filterList(text);
+                        }}
+                        onPressCancel={() => {
+                            this.filterList("");
+                        }}
+                        onPress={() => alert("onPress")}
+                    />
+                    <View style={{ justifyContent: "center", marginTop: 15 }}>
+                        <FlatList
+                            data={[
+                                {key: 'Devin'},
+                                {key: 'Dan'},
+                                {key: 'Dominic'},
+                                {key: 'Jackson'},
+                                {key: 'James'},
+                                {key: 'Joel'},
+                                {key: 'John'},
+                                {key: 'Jillian'},
+                                {key: 'Jimmy'},
+                                {key: 'Julie'},
+                            ]}
+                            renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+                        />
+                    </View>
+                </View>
+            </>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 2,
         backgroundColor: '#121212',
     },
-    contentContainer: {
-        paddingTop: 0,
-    },
-    welcomeContainer: {
-        alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 20,
+    item: {
+        padding: 10,
+        fontSize: 18,
+        height: 44,
+        textAlign: 'center',
+        color: '#fff'
     },
 });

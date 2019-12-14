@@ -38,6 +38,8 @@ target 'tv' do
 
   pod 'react-native-orientation', :path => '../node_modules/react-native-orientation'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'tvTests' do
     inherit! :search_paths
     # Pods for testing
