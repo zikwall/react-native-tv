@@ -38,10 +38,13 @@ const WatchScreen = () => {
                     origin="http://tv.zikwall.ru"
                     automaticallyAdjustContentInsets={ false }
                     mixedContentMode="always"
-                    userAgent="Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Mobile Safari/537.36"
+                    userAgent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36"
                     //applicationNameForUserAgent={ ' EnjoyTV / 1.1.0 ' }
                     allowsFullscreenVideo={ true }
-                    useWebKit={ true }
+                    //useWebKit={ true }
+                    onShouldStartLoadWithRequest={request => {
+                        return true;
+                    }}
                 />
             </View>
             <VideoInfo
