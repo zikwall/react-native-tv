@@ -24,7 +24,7 @@ const WatchScreen = () => {
     };
 
     return (
-        <View style={{ flex: 2, backgroundColor: '#121212' }}>
+        <View style={{ flex: 2, backgroundColor: '#fff' }}>
             <View style={{ height: webViewSize }}>
                 <WebView
                     style={{ backgroundColor: 'transparent' }}
@@ -50,36 +50,6 @@ const WatchScreen = () => {
                 channelName="Channel Name Here"
                 channelAvatarImage="https://avatars2.githubusercontent.com/u/23422968?s=460&v=4"
             />
-            <FlatList
-                data={[
-                    {key: 'Devin'},
-                    {key: 'Dan'},
-                    {key: 'Dominic'},
-                    {key: 'Jackson'},
-                    {key: 'James'},
-                    {key: 'Joel'},
-                    {key: 'John'},
-                    {key: 'Jillian'},
-                    {key: 'Jimmy'},
-                    {key: 'Julie'},
-                    {key: 'Devin'},
-                    {key: 'Dan'},
-                    {key: 'Dominic'},
-                    {key: 'Jackson'},
-                    {key: 'James'},
-                    {key: 'Devin'},
-                    {key: 'Dan'},
-                    {key: 'Dominic'},
-                    {key: 'Jackson'},
-                    {key: 'James'},
-                    {key: 'Devin'},
-                    {key: 'Dan'},
-                    {key: 'Dominic'},
-                    {key: 'Jackson'},
-                    {key: 'James'},
-                ]}
-                renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-            />
         </View>
     );
 };
@@ -89,7 +59,7 @@ export default WatchScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#121212',
+        backgroundColor: '#fff',
     },
     contentContainer: {
         paddingTop: 0,
@@ -104,6 +74,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         height: 44,
         textAlign: 'center',
-        color: '#fff'
+        color: '#000'
     },
 });

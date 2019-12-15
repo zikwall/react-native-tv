@@ -5,7 +5,7 @@ export default class LibraryScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={{textAlign:"center", color:"#fff"}}>Library</Text>
+                <Text style={{textAlign:"center", color:"#000"}}>Library</Text>
             </View>
         );
     }
@@ -14,7 +14,7 @@ export default class LibraryScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#121212',
+        backgroundColor: '#fff',
         paddingTop: 15,
         justifyContent: "center",
     },

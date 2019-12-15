@@ -33,16 +33,16 @@ export default class VideoOptions extends Component {
                 <Menu
                     ref={this.setMenuRef}
                     button={
-                        <Icon name='more-vert' size={25} color={'#3e3e3e'} onPress={this.showMenu} />
+                        <Icon name='more-vert' size={25} color={'#000'} onPress={this.showMenu} />
                     }>
                     {
                         MenuItems.map((data, i) => {
                             return(
                                 <MenuItem
                                     onPress={this.hideMenu}
-                                    style={{backgroundColor: "#121212"}}
-                                    textStyle={{color:"#fff"}}
-                                    underlayColor={"#121212"}
+                                    style={{backgroundColor: "#fff"}}
+                                    textStyle={{color:"#000"}}
+                                    underlayColor={"#000"}
                                     key={i}>{data}</MenuItem>
                             );
                         })

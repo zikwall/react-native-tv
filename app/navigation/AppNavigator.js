@@ -14,20 +14,20 @@ const MainStack = createStackNavigator({
         // Need Redux
         // header: null,
         headerStyle: {
-            backgroundColor: "#121212",
+            backgroundColor: "#fff",
             borderBottomWidth: 0
         },
         headerLeft: <Image
-            source = {require('../assets/images/enjoy_1.png')}
+            source = {require('../assets/images/enjoy_2.png')}
             style = {{ height: 22, width: 98, marginLeft: 10, }}
         />,
         headerRight: (
             <View style={{ flexDirection: 'row', marginRight: 10 }}>
                 <TouchableOpacity style={{paddingHorizontal: 15}}>
-                    <Icon name='search' size={25} color={'#fff'} />
+                    <Icon name='search' size={25} color={'#000'} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{paddingHorizontal: 15}}>
-                    <Icon name='account-circle' size={25} color={'#fff'}/>
+                    <Icon name='account-circle' size={25} color={'#000'}/>
                 </TouchableOpacity>
             </View>
         )

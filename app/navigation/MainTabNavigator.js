@@ -80,8 +80,8 @@ export default createBottomTabNavigator(
     {
         tabBarComponent: withCustomStyle({
             style: {
-                borderTopColor: 'red',
-                borderTopWidth: 1,
+                //borderTopColor: 'red',
+                //borderTopWidth: 1,
             },
         })(FlexibleTabBarComponent),
     });

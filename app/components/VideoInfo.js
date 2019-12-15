@@ -41,7 +41,7 @@ const VideoInfo = ({ channelName, channelAvatarImage, videoInfo, videoTitle }) =
                     { videoTitle }
                 </Text>
                 <Text style={styles.descriptionText}>
-                    { channelName } · { videoInfo } · { videoInfo }
+                    { channelName } · { '14:00' } - { '15:35' }
                 </Text>
             </View>
             <View>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         paddingBottom: 15,
         flexDirection: 'row',
         marginTop: 5,
-        borderBottomColor: 'red',
+        borderBottomColor: '#f0f1f4',
         borderBottomWidth: 1,
     },
     avatarContainer: {
