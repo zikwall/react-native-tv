@@ -27,10 +27,6 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
     const [ spinner, setSpinner ] = useState(true);
 
     useEffect(() => {
-        props.fetchChannels();
-    }, []);
-
-    useEffect(() => {
         let interval = setInterval(() => {
             setSpinner(false);
         }, 6000);
@@ -38,7 +34,11 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
         return () => {
             clearInterval(interval);
         };
-    });
+    }, []);
+
+    useEffect(() => {
+        props.fetchChannels();
+    }, []);
 
     if (spinner) {
         return (
