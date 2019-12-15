@@ -1,123 +1,81 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Video from 'react-native-video';
-import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, StatusBar } from 'react-native';
+import { Provider, connect } from "react-redux";
+import { bindActionCreators } from "redux";
+//import Spinner from 'react-native-loading-spinner-overlay';
+import PulseLoader from './app/components/PulseLoader';
 
-class App extends Component {
-    videoPlayer;
-    state = {
-        currentTime: 0,
-        duration: 0,
-        isFullScreen: false,
-        isLoading: true,
-        paused: false,
-        playerState: PLAYER_STATES.PLAYING,
-        screenType: 'content',
-    };
+import AppNavigator from './app/navigation/AppNavigator';
+import { fetchChannelsRedux } from "./app/services/channels";
+import { apiFetch } from './app/services/api';
+import { appStore } from './app/redux/Store';
+import { getChannelsError, getChannels, getChannelsPending } from './app/redux/reducers';
 
-    onSeek = seek => {
-        //Handler for change in seekbar
-        this.videoPlayer.seek(seek);
-    };
 
-    onPaused = playerState => {
-        //Handler for Video Pause
-        this.setState({
-            paused: !this.state.paused,
-            playerState,
-        });
-    };
+const mapStateToProps = state => ({
+    error: getChannelsError(state),
+    pending: getChannelsPending(state)
+});
 
-    onReplay = () => {
-        //Handler for Replay
-        this.setState({ playerState: PLAYER_STATES.PLAYING });
-        this.videoPlayer.seek(0);
-    };
+const mapDispatchToProps = dispatch => bindActionCreators({
+    fetchChannels: fetchChannelsRedux,
+}, dispatch);
 
-    onProgress = data => {
-        const { isLoading, playerState } = this.state;
-        // Video Player will continue progress even if the video already ended
-        if (!isLoading && playerState !== PLAYER_STATES.ENDED) {
-            this.setState({ currentTime: data.currentTime });
-        }
-    };
+const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
+    StatusBar.setHidden(true);
 
-    onLoad = data => this.setState({ duration: data.duration, isLoading: false });
+    const [ spinner, setSpinner ] = useState(true);
 
-    onLoadStart = data => this.setState({ isLoading: true });
+    useEffect(() => {
+        let interval = setInterval(() => {
+            setSpinner(false);
+        }, 6000);
 
-    onEnd = () => this.setState({ playerState: PLAYER_STATES.ENDED });
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
-    onError = () => alert('Oh! ', error);
+    useEffect(() => {
+        props.fetchChannels();
+    }, []);
 
-    exitFullScreen = () => {
-        alert('Exit full screen');
-    };
-
-    enterFullScreen = () => {};
-
-    onFullScreen = () => {
-        if (this.state.screenType == 'content')
-            this.setState({ screenType: 'cover' });
-        else this.setState({ screenType: 'content' });
-    };
-    renderToolbar = () => (
-        <View>
-            <Text> toolbar </Text>
-        </View>
-    );
-    onSeeking = currentTime => this.setState({ currentTime });
-
-    render() {
+    if (spinner) {
         return (
-            <View style={styles.container}>
-                <Video
-                    onEnd={this.onEnd}
-                    onLoad={this.onLoad}
-                    onLoadStart={this.onLoadStart}
-                    onProgress={this.onProgress}
-                    paused={this.state.paused}
-                    ref={videoPlayer => (this.videoPlayer = videoPlayer)}
-                    resizeMode={this.state.screenType}
-                    onFullScreen={this.state.isFullScreen}
-                    source={{ uri: 'http://178.124.183.14:80/hls/HNBMWPATWZ/variant.m3u8' }}
-                    style={styles.mediaPlayer}
-                    volume={10}
-                />
-                <MediaControls
-                    duration={this.state.duration}
-                    isLoading={this.state.isLoading}
-                    mainColor="#333"
-                    onFullScreen={this.onFullScreen}
-                    onPaused={this.onPaused}
-                    onReplay={this.onReplay}
-                    onSeek={this.onSeek}
-                    onSeeking={this.onSeeking}
-                    playerState={this.state.playerState}
-                    progress={this.state.currentTime}
-                    toolbar={this.renderToolbar()}
-                />
-            </View>
+            <PulseLoader
+                avatar={'https://avatars2.githubusercontent.com/u/23422968?s=460&v=4'}
+            />
         );
+
+        /*return (
+            <Spinner
+                visible={ spinner }
+                textContent={ 'Loading...' }
+                textStyle={ styles.spinnerTextStyle }
+            />
+        )*/
     }
-}
+
+    return (
+        <AppNavigator />
+    );
+});
+
+const AppMain = () => {
+    return (
+        <Provider store={ appStore }>
+            <App />
+        </Provider>
+    );
+};
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    toolbar: {
-        marginTop: 30,
-        backgroundColor: 'white',
-        padding: 10,
-        borderRadius: 5,
-    },
-    mediaPlayer: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        backgroundColor: 'black',
+    spinnerTextStyle: {
+        color: '#fff'
     },
 });
-export default App;
+
+export default AppMain;
