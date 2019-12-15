@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, TouchableOpacity, Animated, Easing } from 'react-native';
 import Pulse from './Pulse';
 
-
+// need Review
 export default class LocationPulseLoader extends React.Component {
     static defaultProps = {
         interval: 2000,

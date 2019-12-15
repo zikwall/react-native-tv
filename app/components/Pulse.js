@@ -3,6 +3,7 @@ import { View, StyleSheet, Animated, Easing, Dimensions } from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
+// need Review
 export default class Pulse extends React.Component {
     constructor(props) {
         super(props);
