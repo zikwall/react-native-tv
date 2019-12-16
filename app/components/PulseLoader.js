@@ -35,7 +35,7 @@ export default class LocationPulseLoader extends React.Component {
         this.setCircleInterval();
     }
 
-    componentWillUnmount(): void {
+    componentWillUnmount() {
         clearInterval(this.setInterval);
     }
 
