@@ -32,7 +32,7 @@ export const fetchChannelsRedux = () => {
                 }
 
                 dispatch(fetchChannelsSuccess(res));
-                //dispatch(setChannel(res[6]));
+                dispatch(setChannel(res[0]));
 
                 return res;
             })
