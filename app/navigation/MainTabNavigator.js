@@ -1,13 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
-import TabBarIcon from '../components/TabBarIcon';
-import WatchScreen from '../screens/WatchScreen';
-import HomeScreen from '../screens/HomeScreen';
-import InboxScreen from '../screens/InboxScreen';
-import LibraryScreen from '../screens/LibraryScreen';
+import Icon from "react-native-vector-icons/Feather";
+import { WatchScreen, LibraryScreen, HomeScreen, InboxScreen } from '../screens';
 import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
-// import { AnimatedCircleBarComponent } from 'react-navigation-custom-bottom-tab-component/AnimatedCircleBarComponent';
 
 export default createBottomTabNavigator(
     {
@@ -16,7 +12,7 @@ export default createBottomTabNavigator(
             navigationOptions:{
                 tabBarLabel: 'Home',
                 tabBarIcon: ({ tintColor, focused }) => (
-                    <TabBarIcon
+                    <Icon
                         focused={focused}
                         name={'home'} size={20} style={{ color: tintColor}}
                     />
@@ -29,9 +25,9 @@ export default createBottomTabNavigator(
                 tabBarLabel: 'Watch',
                 tabBarIcon: ({ tintColor, focused }) => (
                     <View>
-                        <TabBarIcon
+                        <Icon
                             focused={focused}
-                            name={'whatshot'} size={20} style={{ color: tintColor}}
+                            name={'play'} size={20} style={{ color: tintColor}}
                         />
                         {focused ? null: <View
                             style={{
@@ -57,9 +53,9 @@ export default createBottomTabNavigator(
             navigationOptions:{
                 tabBarLabel: 'Inbox',
                 tabBarIcon: ({ tintColor, focused }) => (
-                    <TabBarIcon
+                    <Icon
                         focused={focused}
-                        name={'mail'} size={20} style={{ color: tintColor}}
+                        name={'send'} size={20} style={{ color: tintColor}}
                     />
                 ),
             }
@@ -69,7 +65,7 @@ export default createBottomTabNavigator(
             navigationOptions:{
                 tabBarLabel: 'Library',
                 tabBarIcon: ({ tintColor, focused }) => (
-                    <TabBarIcon
+                    <Icon
                         focused={focused}
                         name={'folder'} size={20} style={{ color: tintColor}}
                     />

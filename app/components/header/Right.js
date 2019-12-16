@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon from "react-native-vector-icons/Feather";
 import { withNavigation } from 'react-navigation';
 
 const Right = (props) => {
@@ -10,7 +10,7 @@ const Right = (props) => {
                 <Icon name='search' size={25} color={'#000'} />
             </TouchableOpacity>*/}
             <TouchableOpacity style={{paddingHorizontal: 15}}>
-                <Icon name='account-circle' size={25} color={'#000'}
+                <Icon name='user' size={25} color={'#000'}
                       onPress={() => {
                           props.navigation.navigate('Profile')
                       }}
