@@ -11,3 +11,4 @@
     
     - `react-native link react-native-orientation`
     - `react-native link react-native-svg`
+- Попробовать `npx jetify`
