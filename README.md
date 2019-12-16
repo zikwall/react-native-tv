@@ -31,6 +31,11 @@
 - [ ] Native Players
     - [ ] ExoPlayer
     - [ ] JWPlayer SDK
+- [ ] Services
+    - [ ] Auth Primary Client (Login/Pass)
+    - [ ] OAuth (VK, FB, TW, Inst.)
+- [ ] Premium
+    - [ ] Native Web Player supported by ad-free provider
     
 ## App preview
 ![Load screen](screenshots/load.jpg "Load screen")
