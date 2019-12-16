@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import Menu, { MenuItem } from 'react-native-material-menu';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Feather';
 
 const MenuItems = [
     "See fewer videos like this",
@@ -33,7 +33,7 @@ export default class VideoOptions extends Component {
                 <Menu
                     ref={this.setMenuRef}
                     button={
-                        <Icon name='more-vert' size={25} color={'#000'} onPress={this.showMenu} />
+                        <Icon name='sliders' size={25} color={'#000'} onPress={this.showMenu} />
                     }>
                     {
                         MenuItems.map((data, i) => {
