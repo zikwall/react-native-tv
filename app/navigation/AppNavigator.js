@@ -1,14 +1,23 @@
 import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
-import { View, Image, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
+import { Image } from 'react-native';
+import { ProfileScreen } from "../screens/user";
 import MainTabNavigator from './MainTabNavigator';
+import { Back, Right } from "../components/header";
 
 const MainStack = createStackNavigator({
     // You could add another route here for authentication.
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
     Main: MainTabNavigator,
+    Profile: {
+        screen: ProfileScreen,
+        path: 'people/:name',
+
+        // Optional: Override the `navigationOptions` for the screen
+        /*navigationOptions: ({ navigation }) => ({
+            title: `Profile`,
+        })*/
+    },
 }, {
     defaultNavigationOptions: {
         // Need Redux
@@ -22,14 +31,7 @@ const MainStack = createStackNavigator({
             style = {{ height: 22, width: 98, marginLeft: 10, }}
         />,
         headerRight: (
-            <View style={{ flexDirection: 'row', marginRight: 10 }}>
-                <TouchableOpacity style={{paddingHorizontal: 15}}>
-                    <Icon name='search' size={25} color={'#000'} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{paddingHorizontal: 15}}>
-                    <Icon name='account-circle' size={25} color={'#000'}/>
-                </TouchableOpacity>
-            </View>
+            <Right />
         )
     }
 });
