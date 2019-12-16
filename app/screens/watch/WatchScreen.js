@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import Orientation from 'react-native-orientation';
 import VideoInfo from '../../components/VideoInfo';
 import { VideoView } from '../../components/video-view';
+import s from './styles';
+import Heading from "../../components/heading";
+import Divider from "../../components/divider";
 
 const WatchScreen = () => {
     const [ webViewSize, setWebViewSize ] = useState(200);
@@ -28,6 +31,16 @@ const WatchScreen = () => {
             <View style={{ height: webViewSize }}>
                 <VideoView />
             </View>
+            {/*<View style={s.descriptionBlock}>
+                <Heading
+                    text="Description" />
+                <View style={s.itemContainer}>
+                    <Text>
+                        Description
+                    </Text>
+                </View>
+                <Divider />
+            </View>*/}
             <VideoInfo
                 videoTitle="Video"
                 videoInfo="Video"

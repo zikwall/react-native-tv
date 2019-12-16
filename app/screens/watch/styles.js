@@ -20,4 +20,36 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#000'
     },
+
+    header: {
+        flexDirection: 'row',
+        paddingHorizontal: 16,
+        paddingVertical: 24
+    },
+    headerTextContainer: {
+        marginLeft: 16,
+        flexDirection: 'column'
+    },
+    itemContainer: {
+        paddingHorizontal: 16,
+        paddingVertical: 8
+    },
+    description: {
+
+    },
+    statContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    statItemContainer: {
+        alignItems: 'center',
+        width: 75
+    },
+    button: {
+        height: 48,
+        elevation: 0
+    }
 });
+
+
+export default styles;
