@@ -68,7 +68,9 @@ const VideoView = ({ channel, pending }) => {
         <WebView
             ref={ (wv) => webView = wv  }
             style={{ backgroundColor: 'transparent' }}
-            source={{ uri: channel.url }}
+            // TODO PREMIUM just past channel.url for use native web player
+            // without AD and blocking by ORIGIN
+            source={{ uri: `http://tv.zikwall.ru/vktv/embed/give?epg=${channel.epg_id}` }}
             javaScriptEnabled={ true }
             domStorageEnabled={ true }
             thirdPartyCookiesEnabled={ true }
@@ -79,9 +81,7 @@ const VideoView = ({ channel, pending }) => {
             automaticallyAdjustContentInsets={ false }
             mixedContentMode="always"
             userAgent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36"
-            //applicationNameForUserAgent={ ' EnjoyTV / 1.1.0 ' }
             allowsFullscreenVideo={ true }
-            //useWebKit={ true }
             onShouldStartLoadWithRequest={(request) => {
                 return true;
             }}

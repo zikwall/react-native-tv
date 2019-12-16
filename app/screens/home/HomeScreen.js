@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import { withNavigation, NavigationActions } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 import SearchBar from "react-native-dynamic-search-bar";
 import { FlatGrid, SectionGrid } from 'react-native-super-grid';
-import { getChannels } from '../redux/reducers';
-import { ChannelCard } from "../components/channel-item";
-import { setChannel } from "../redux/actions/channels";
+import { getChannels } from '../../redux/reducers';
+import { ChannelCard } from "../../components/channel-item";
+import { setChannel } from "../../redux/actions/channels";
+import styles from "./styles";
 
 const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
     const [ items, setItems ] = useState(channels);
@@ -39,28 +40,11 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
                     onPress={() => alert("onPress")}
                 />
                 <FlatGrid
-                    itemDimension={150}
-                    items={items}
-                    style={styles.gridView}
-                    // staticDimension={300}
-                    // fixed
-                    // spacing={20}
-                    /*sections={[
-                        {
-                            title: 'Sport',
-                            data: items.slice(0, 6),
-                        },
-                        {
-                            title: 'Adventure',
-                            data: items.slice(6, 12),
-                        },
-                        {
-                            title: 'Films',
-                            data: items.slice(12, 20),
-                        },
-                    ]}*/
+                    itemDimension={ 150 }
+                    items={ items }
+                    style={ styles.gridView }
                     renderSectionHeader={({ section }) => (
-                        <Text style={styles.sectionHeader}>{section.title}</Text>
+                        <Text style={ styles.sectionHeader }>{ section.title }</Text>
                     )}
                     renderItem={({ item, index }) => (
                         <ChannelCard
@@ -85,29 +69,3 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 2,
-        backgroundColor: '#fff',
-    },
-
-    backgroundImage: {
-        flex: 1,
-        resizeMode: 'cover', // or 'stretch'
-    },
-    gridView: {
-        marginTop: 20,
-        flex: 1,
-    },
-    sectionHeader: {
-        flex: 1,
-        fontSize: 15,
-        fontWeight: '600',
-        alignItems: 'center',
-        textAlign: 'center',
-        backgroundColor: '#f0f1f4',
-        color: '#000',
-        padding: 10,
-    },
-});

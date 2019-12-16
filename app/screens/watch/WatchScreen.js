@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import Orientation from 'react-native-orientation';
-import VideoInfo from '../components/VideoInfo';
-import { VideoView } from '../components/video-view';
+import VideoInfo from '../../components/VideoInfo';
+import { VideoView } from '../../components/video-view';
 
 const WatchScreen = () => {
     const [ webViewSize, setWebViewSize ] = useState(200);
-
 
     useEffect(() => {
         Orientation.addOrientationListener(orientationHandleChange);
@@ -40,25 +39,3 @@ const WatchScreen = () => {
 };
 
 export default WatchScreen;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-    contentContainer: {
-        paddingTop: 0,
-    },
-    welcomeContainer: {
-        alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 20,
-    },
-    item: {
-        padding: 10,
-        fontSize: 18,
-        height: 44,
-        textAlign: 'center',
-        color: '#000'
-    },
-});
