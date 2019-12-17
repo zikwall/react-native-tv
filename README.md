@@ -42,9 +42,13 @@
     - [ ] Save to Playlist
     - [ ] Share outside
     - [ ] Report Playlist/User
-    
+      
 ## Social Roadmap & Features
 
+- [ ] Users
+    - [ ] Following
+    - [ ] Followers
+    - [ ] Ratings
 - [ ] Playlist Sharing Repositories
     - [ ] Options
         - [ ] Playlist Name
@@ -85,7 +89,7 @@ col1 | col2
 
 1. [VK TV Mini App (desktop)](https://github.com/zikwall/vk-tv-desctop)
 2. [VK TV Mini App (mobile)](https://github.com/zikwall/vk-tv)
-3. [SEO Friendly App by Next,js](https://githnb.com/zikwall/tv-next)
+3. [SEO Friendly App by Next,js](https://github.com/zikwall/tv-next)
 4. [Backend based on PHP7 via Yii2 (custom module)](https://github.com/zikwall/vk-tv-backend)
 5. [Playlist parser (PHP)](https://github.com/zikwall/m3uparse)
 6. [Playlist parser (Go)](https://github.com/zikwall/go3uparse)
