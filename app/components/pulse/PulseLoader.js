@@ -108,7 +108,7 @@ export default class LocationPulseLoader extends React.Component {
                 </View>
 
                 <View style={{ paddingBottom: 10, alignItems: 'center'}}>
-                    <Text>PlayHub powwered by ReactNative</Text>
+                    <Text>PlayHub powered by ReactNative</Text>
                 </View>
             </>
         );
