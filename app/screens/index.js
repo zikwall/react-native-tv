@@ -1,9 +1,9 @@
 import HomeScreen from "./home/HomeScreen";
-import InboxScreen from "./InboxScreen";
+import PlayHubScreen from "./playhub/PlayHubScreen";
 import WatchScreen from "./watch/WatchScreen";
 import LibraryScreen from "./LibraryScreen";
 import ProfileScreen from "./user/ProfileScreen";
 
 export {
-    HomeScreen, ProfileScreen, InboxScreen, LibraryScreen, WatchScreen
+    HomeScreen, ProfileScreen, PlayHubScreen, LibraryScreen, WatchScreen
 }

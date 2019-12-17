@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 import Icon from "react-native-vector-icons/Feather";
-import { WatchScreen, LibraryScreen, HomeScreen, InboxScreen } from '../screens';
+import { WatchScreen, LibraryScreen, HomeScreen, PlayHubScreen } from '../screens';
 import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
 
 export default createBottomTabNavigator(
@@ -48,14 +48,14 @@ export default createBottomTabNavigator(
                 ),
             }
         },
-        InboxScreen: {
-            screen: InboxScreen,
+        PlayHubScreen: {
+            screen: PlayHubScreen,
             navigationOptions:{
-                tabBarLabel: 'Inbox',
+                tabBarLabel: 'PlayHub',
                 tabBarIcon: ({ tintColor, focused }) => (
                     <Icon
                         focused={focused}
-                        name={'send'} size={20} style={{ color: tintColor}}
+                        name={'triangle'} size={20} style={{ color: tintColor}}
                     />
                 ),
             }
@@ -67,7 +67,7 @@ export default createBottomTabNavigator(
                 tabBarIcon: ({ tintColor, focused }) => (
                     <Icon
                         focused={focused}
-                        name={'folder'} size={20} style={{ color: tintColor}}
+                        name={'square'} size={20} style={{ color: tintColor}}
                     />
                 ),
             }
