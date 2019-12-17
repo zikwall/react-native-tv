@@ -19,10 +19,19 @@
     - [x] Home
     - [x] Watch
     - [ ] Favorites
+    - [ ] Own profile
+        - [ ] Settings
+        - [ ] Repositories
     - [ ] User profile
     - [ ] Apps Library
     - [ ] About
     - [ ] Terms
+    - [ ] Repositories
+    - [ ] Top (Tabs)
+        - [ ] Top 10
+        - [ ] Hot
+        - [ ] Recommended
+        - [ ] Most Popular
 - [x] Components
     - [x] Search
     - [x] App preloader
