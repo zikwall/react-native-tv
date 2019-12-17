@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, Animated, Easing } from 'react-native';
+import { View, Image, TouchableOpacity, Animated, Easing, Text } from 'react-native';
 import Pulse from './Pulse';
 
 // need Review
@@ -71,40 +71,46 @@ export default class LocationPulseLoader extends React.Component {
         const { size, avatar, avatarBackgroundColor, interval } = this.props;
 
         return (
-            <View style={{
-                flex: 1,
-                backgroundColor: 'transparent',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}>
-                {this.state.circles.map((circle) => (
-                    <Pulse
-                        key={circle}
-                        {...this.props}
-                    />
-                ))}
+            <>
+                <View style={{
+                    flex: 1,
+                    backgroundColor: 'transparent',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    {this.state.circles.map((circle) => (
+                        <Pulse
+                            key={circle}
+                            {...this.props}
+                        />
+                    ))}
 
-                <TouchableOpacity
-                    activeOpacity={1}
-                    onPressIn={this.onPressIn.bind(this)}
-                    onPressOut={this.onPressOut.bind(this)}
-                    style={{
-                        transform: [{
-                            scale: this.anim
-                        }]
-                    }}
-                >
-                    <Image
-                        source={ avatar }
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        onPressIn={this.onPressIn.bind(this)}
+                        onPressOut={this.onPressOut.bind(this)}
                         style={{
-                            width: size,
-                            height: size,
-                            borderRadius: size/2,
-                            backgroundColor: avatarBackgroundColor
+                            transform: [{
+                                scale: this.anim
+                            }]
                         }}
-                    />
-                </TouchableOpacity>
-            </View>
+                    >
+                        <Image
+                            source={ avatar }
+                            style={{
+                                width: size,
+                                height: size,
+                                borderRadius: size/2,
+                                backgroundColor: avatarBackgroundColor
+                            }}
+                        />
+                    </TouchableOpacity>
+                </View>
+
+                <View style={{ paddingBottom: 10, alignItems: 'center'}}>
+                    <Text>PlayHub powwered by ReactNative</Text>
+                </View>
+            </>
         );
     }
 }

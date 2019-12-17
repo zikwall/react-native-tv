@@ -28,7 +28,7 @@ export default class Pulse extends React.Component {
                 width: pulseMaxSize,
                 height: pulseMaxSize,
                 marginLeft: -pulseMaxSize/2,
-                marginTop: -pulseMaxSize/2,
+                marginTop: -pulseMaxSize/2 - 15,
             }]}>
                 <Animated.View
                     style={[styles.circle, {
