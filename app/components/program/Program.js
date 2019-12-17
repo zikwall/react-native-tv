@@ -1,23 +1,28 @@
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { View, ScrollView } from 'react-native';
 import s from './styles';
 import Item from './Item';
-import Heading from '../../components/heading'
-import Button from '../../components/button'
-import Icon from 'react-native-vector-icons/Feather'
 
 const Program = ({ items }) => {
+    // default by range datetime
+    const [ activeProgram, setActiveProgram ] = useState(5);
+
+    const handleTouchProgram = (index) => {
+        setActiveProgram(index);
+    };
+
     return (
         <View style={ s.sectionHeader }>
             <ScrollView style={ s.itemSection }>
                 { items && items.map((item, index) => (
                     <Item
                         key={ index }
+                        id={ index }
                         name={ item.name }
                         time={ item.time }
-                        active={ item.active }
-                        //onPress={ item.onPress }
+                        active={ index === activeProgram }
+                        onPress={ handleTouchProgram }
                         //onLongPress={ item.onLongPress }
                     />
                 ))}

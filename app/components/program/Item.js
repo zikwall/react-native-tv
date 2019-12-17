@@ -14,7 +14,7 @@ const Item = ({ id, name, time, active, onPress, onLongPress }) => {
     return (
         <>
             <Button
-                //onPress={() => onPress(id)}
+                onPress={() => onPress(id)}
                 //onLongPress={() => onLongPress(id)}
                 style={[s.container,
                     {backgroundColor: itemStyles.backgroundColor}
