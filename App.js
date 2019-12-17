@@ -40,7 +40,7 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
     if (spinner) {
         return (
             <PulseLoader
-                avatar={'https://avatars2.githubusercontent.com/u/23422968?s=460&v=4'}
+                avatar={ require('./app/assets/images/Play_650.png') }
             />
         );
     }

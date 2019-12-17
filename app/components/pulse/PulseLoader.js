@@ -14,8 +14,8 @@ export default class LocationPulseLoader extends React.Component {
         pressDuration: 150,
         pressInEasing: Easing.in,
         pressOutEasing: Easing.in,
-        borderColor: '#D8335B',
-        backgroundColor: '#ED225B55',
+        borderColor: '#000',
+        backgroundColor: '#f0f1f4',
         getStyle: undefined,
     };
 
@@ -95,7 +95,7 @@ export default class LocationPulseLoader extends React.Component {
                     }}
                 >
                     <Image
-                        source={{ uri: avatar }}
+                        source={ avatar }
                         style={{
                             width: size,
                             height: size,
