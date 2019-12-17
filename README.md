@@ -1,4 +1,5 @@
 <div align="center">
+  <img width="100" height="100" src="https://github.com/zikwall/react-native-tv/blob/master/screenshots/PlayHub512.png">
   <h1>PlayHub</h1>
   <h4>Share your playlist here and now!</h4>
   <h5>An application in which users can create and share with their personal or public playlists with other users of the application with the possibility of monetization.</h5>

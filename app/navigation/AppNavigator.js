@@ -27,8 +27,8 @@ const MainStack = createStackNavigator({
             borderBottomWidth: 0
         },
         headerLeft: <Image
-            source = {require('../assets/images/enjoy_2.png')}
-            style = {{ height: 22, width: 98, marginLeft: 10, }}
+            source = {require('../assets/images/PlayHubLogo.png')}
+            style = {{ height: 32, width: 98, marginLeft: 10, }}
         />,
         headerRight: (
             <Right />
