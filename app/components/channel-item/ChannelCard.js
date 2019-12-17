@@ -22,7 +22,7 @@ const images = [
 
 const ChannelCard = ({ id, name, epg_id, onSelectHandle }) => {
     return (
-        <View style={[styles.itemContainer, { backgroundColor: ArrayHelper.random(colors) }]}>
+        <View style={[styles.itemContainer, {/*{ backgroundColor: ArrayHelper.random(colors) }*/}]}>
             <TouchableOpacity style={{ flex: 1 }} onPress={() => {
                 onSelectHandle(id);
             }} >
@@ -30,8 +30,8 @@ const ChannelCard = ({ id, name, epg_id, onSelectHandle }) => {
                     <Image
                         style={{
                             flex: 1,
-                            resizeMode: 'cover',
-                            width: "85%",
+                            resizeMode: 'contain',
+                            width: "55%",
                             flexDirection: 'column',
                         }}
                         source={{ uri: ArrayHelper.random(images) }}
@@ -52,15 +52,17 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         height: 150,
+        borderColor: '#000',
+        borderWidth: 1,
     },
     itemName: {
         fontSize: 16,
-        color: '#fff',
+        color: '#000',
         fontWeight: '600',
     },
     itemCode: {
         fontWeight: '600',
         fontSize: 12,
-        color: '#fff',
+        color: '#000',
     },
 });
