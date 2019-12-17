@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import PropTypes from 'prop-types';
+import React from 'react';
 import { Image } from 'react-native';
 
-const Avatar = ({src, size}) => {
+const Avatar = ({ src, size }) => {
     return (
         <Image
             style={{
@@ -26,4 +26,4 @@ Avatar.propTypes = {
     size: PropTypes.number
 };
 
-export default Avatar
+export default Avatar;

@@ -16,6 +16,7 @@
     "jetifier": "^1.6.5",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-device-info": "^5.4.0",
     "react-native-dynamic-search-bar": "^0.3.0",
     "react-native-dynamic-vector-icons": "^0.2.1",
     "react-native-gesture-handler": "^1.5.2",

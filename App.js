@@ -3,7 +3,7 @@ import { StyleSheet, StatusBar } from 'react-native';
 import { Provider, connect } from "react-redux";
 import { bindActionCreators } from "redux";
 //import Spinner from 'react-native-loading-spinner-overlay';
-import PulseLoader from './app/components/PulseLoader';
+import PulseLoader from './app/components/pulse';
 
 import AppNavigator from './app/navigation/AppNavigator';
 import { fetchChannelsRedux } from "./app/services/channels";
