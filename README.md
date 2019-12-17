@@ -41,6 +41,6 @@
 
 col1 | col2 
 --- | --- |
-![Load screen](screenshots/load.jpg "Load screen") | ![Home rooms screen](screenshots/profile.jpg "Home rooms screen")
-![Watch screen](screenshots/watch.jpg "Watch screen") | Coming Soon
+![Load screen](screenshots/load.jpg "Load screen") | ![Home rooms screen](screenshots/home.jpg "Home rooms screen")
+![Watch screen](screenshots/watch.jpg "Watch screen") | ![Home rooms screen](screenshots/profile.jpg "Home rooms screen")
 
