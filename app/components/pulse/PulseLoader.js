@@ -9,7 +9,7 @@ export default class LocationPulseLoader extends React.Component {
         size: 100,
         pulseMaxSize: 250,
         avatar: undefined,
-        avatarBackgroundColor: 'white',
+        avatarBackgroundColor: 'transparent',
         pressInValue: 0.8,
         pressDuration: 150,
         pressInEasing: Easing.in,
