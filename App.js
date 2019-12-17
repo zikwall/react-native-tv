@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
 import { Provider, connect } from "react-redux";
 import { bindActionCreators } from "redux";
-//import Spinner from 'react-native-loading-spinner-overlay';
 import PulseLoader from './app/components/pulse';
 
 import AppNavigator from './app/navigation/AppNavigator';
 import { fetchChannelsRedux } from "./app/services/channels";
-import { apiFetch } from './app/services/api';
 import { appStore } from './app/redux/Store';
-import { getChannelsError, getChannels, getChannelsPending } from './app/redux/reducers';
-
+import { getChannelsError, getChannelsPending } from './app/redux/reducers';
 
 const mapStateToProps = state => ({
     error: getChannelsError(state),
@@ -46,14 +43,6 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
                 avatar={'https://avatars2.githubusercontent.com/u/23422968?s=460&v=4'}
             />
         );
-
-        /*return (
-            <Spinner
-                visible={ spinner }
-                textContent={ 'Loading...' }
-                textStyle={ styles.spinnerTextStyle }
-            />
-        )*/
     }
 
     return (
