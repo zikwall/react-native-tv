@@ -1,11 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import { Back } from "../../components/header";
-import { UserTop } from "./components/user-top";
 import s from './styles';
-import UserInfo from "./components/user-info";
 
-export default class ProfileScreen extends React.Component {
+export default class FeedScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: `Hi, { username }`,
@@ -19,7 +17,7 @@ export default class ProfileScreen extends React.Component {
         return (
             <View style={s.container}>
                 <Text>
-                    Profile
+                    Feed
                 </Text>
             </View>
         );

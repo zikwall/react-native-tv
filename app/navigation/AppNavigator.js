@@ -4,20 +4,13 @@ import { Image } from 'react-native';
 import { ProfileScreen } from "../screens";
 import MainTabNavigator from './MainTabNavigator';
 import { Back, Right } from "../components/header";
+import ProfileNavigator from "./profile/ProfileNavigator";
 
 const MainStack = createStackNavigator({
     // You could add another route here for authentication.
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
     Main: MainTabNavigator,
-    Profile: {
-        screen: ProfileScreen,
-        path: 'people/:name',
-
-        // Optional: Override the `navigationOptions` for the screen
-        /*navigationOptions: ({ navigation }) => ({
-            title: `Profile`,
-        })*/
-    },
+    Profile: ProfileNavigator,
 }, {
     defaultNavigationOptions: {
         // Need Redux
