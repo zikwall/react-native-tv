@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { withNavigation } from 'react-navigation';
-import SearchBar from "react-native-dynamic-search-bar";
+import SearchBar from "../../components/search";
 import { FlatGrid, SectionGrid } from 'react-native-super-grid';
 import { getChannels } from '../../redux/reducers';
 import { ChannelCard } from "../../components/channel-item";
@@ -26,7 +26,7 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
         <>
             <View style={ styles.container }>
                 <SearchBar
-                    height={ 40 }
+                    height={ 43 }
                     placeholder="Search here"
                     fontColor="#c6c6c6"
                     iconColor="#000"
@@ -37,7 +37,7 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
                     onPressCancel={() => {
                         filterList("");
                     }}
-                    onPress={() => alert("onPress")}
+                    onPress={() => alert("onPressss")}
                 />
                 <FlatGrid
                     itemDimension={ 150 }
