@@ -12,9 +12,17 @@ import styles from "./styles";
 
 const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
     const [ items, setItems ] = useState(channels);
+    // TODO Move to Search Cancel Component
+    const [ cancelVisible, setCancelVisible ] = useState(false);
 
     const filterList = (text) => {
         setItems(channels.filter((item) => item.name.toLowerCase().includes(text.toLowerCase())));
+
+        if (text === '') {
+            setCancelVisible(false);
+        } else {
+            setCancelVisible(true);
+        }
     };
 
     const handleOnChannelPress = (channel_id) => {
@@ -27,8 +35,8 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
             <View style={ styles.container }>
                 <SearchBar
                     height={ 43 }
-                    placeholder="Search here"
-                    fontColor="#c6c6c6"
+                    placeholder="Channel search here"
+                    fontColor="#000"
                     iconColor="#000"
                     cancelIconColor="#000"
                     onChangeText={text => {
@@ -38,6 +46,7 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
                         filterList("");
                     }}
                     onPress={() => alert("onPressss")}
+                    cancelVisible={ cancelVisible }
                 />
                 <FlatGrid
                     itemDimension={ 150 }

@@ -2,9 +2,6 @@ import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-/**
- * ? Local Imports
- */
 import styles from "./styles/SearchCancel.style";
 
 export default class SearchCancel extends React.PureComponent {
@@ -18,6 +15,7 @@ export default class SearchCancel extends React.PureComponent {
       cancelIconComponent,
       cancelButtonDisable
     } = props;
+
     return (
       !cancelButtonDisable && (
         <TouchableOpacity onPress={onPressCancel} style={styles.iconContainer}>
@@ -35,7 +33,12 @@ export default class SearchCancel extends React.PureComponent {
   }
 
   render() {
-    const { cancelComponent } = this.props;
+    const { cancelComponent, cancelVisible } = this.props;
+
+    if (!cancelVisible) {
+      return null;
+    }
+
     return cancelComponent || this.renderIcon(this.props);
   }
 }

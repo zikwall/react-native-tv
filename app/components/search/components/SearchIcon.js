@@ -2,9 +2,6 @@ import React from "react";
 import { View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
-/**
- * ? Local Imports
- */
 import styles from "./styles/SearchIcon.style";
 
 export default class SearchIcon extends React.PureComponent {

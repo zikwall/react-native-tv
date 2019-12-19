@@ -37,6 +37,7 @@ export default class SearchBar extends Component {
       cancelIconType,
       cancelIconSize,
       cancelIconColor,
+      cancelVisible,
       cancelComponent,
       textInputDisable,
       textInputComponent,
@@ -100,6 +101,7 @@ export default class SearchBar extends Component {
             cancelIconSize={cancelIconSize}
             cancelIconColor={cancelIconColor}
             cancelIconComponent={cancelIconComponent}
+            cancelVisible={cancelVisible}
             onPressCancel={() => {
               if (onPressCancel) {
                 if (this.textInput) this.textInput.clear();
