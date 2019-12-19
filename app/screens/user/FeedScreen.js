@@ -6,7 +6,7 @@ import s from './styles';
 export default class FeedScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            title: `Hi, { username }`,
+            title: `Feed`,
             headerLeft: () => (
                 <Back />
             ),

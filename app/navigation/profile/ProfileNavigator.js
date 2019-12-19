@@ -1,55 +1,34 @@
 import React from 'react';
+import { createStackNavigator } from 'react-navigation';
 import { createMaterialTopTabNavigator, MaterialTopTabBar } from 'react-navigation-tabs';
 import TabBar from './TabBar';
 import { UserTop } from "../../screens/user/components/user-top";
-import { ScrollView, View } from "react-native";
+import {ScrollView, Text, View} from "react-native";
 import { ProfileScreen } from "../../screens";
 import FeedScreen from "../../screens/user/FeedScreen";
 import Icon from "react-native-vector-icons/Feather";
+import {Back} from "../../components/header";
 
 const ProfileTopNavStack = createMaterialTopTabNavigator({
     ProfileScreen: {
         screen: ProfileScreen,
-        navigationOptions:{
-            tabBarLabel: 'Profile',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <Icon
-                    focused={focused}
-                    name={'home'} size={20} style={{ color: tintColor}}
-                />
-            ),
-        }
     },
     FeedScreen: {
         screen: FeedScreen,
-        navigationOptions:{
-            tabBarLabel: 'Feed',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <Icon
-                    focused={focused}
-                    name={'home'} size={20} style={{ color: tintColor}}
-                />
-            ),
-        }
     },
 }, {
     initialRouteName: 'ProfileScreen',
     tabBarComponent: MaterialTopTabBar,
+    swipeEnabled: true,
+    animationEnabled: true,
     tabBarOptions: {
-        activeTintColor: 'red',
-        inactiveTintColor: 'grey',
         style: {
-            backgroundColor: 'white',
-            borderTopColor: 'red',
+            //marginTop: 50,
+            backgroundColor: '#fff',
+            color: '#000'
         },
-        labelStyle: {
-            fontSize: 12,
-            fontWeight: 'normal'
-        },
-        indicatorStyle: {
-            borderBottomColor: 'red',
-            borderBottomWidth: 4,
-        },
+        activeTintColor: '#000',
+        inactiveTintColor: '#000',
     },
 });
 
@@ -62,6 +41,15 @@ class ProfileNavigator extends React.Component {
         },
     };
 
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: `Hi, { username }`,
+            headerLeft: () => (
+                <Back />
+            ),
+        };
+    };
+
     componentDidUpdate(lastProps) {
         // Navigation state has changed from lastProps.navigation.state to this.props.navigation.state
     }
@@ -70,7 +58,7 @@ class ProfileNavigator extends React.Component {
         const { navigation } = this.props;
 
         return (
-            <View>
+            <View style={{ flex: 3 }}>
                 <ScrollView>
                     <UserTop
                         displayName="AndreyKa"
@@ -81,24 +69,14 @@ class ProfileNavigator extends React.Component {
                             following: 30
                         }}
                     />
-                </ScrollView>
 
-                <ProfileTopNavStack navigation={ navigation } />
+                    <View style={{ flex: 2 }}>
+                        <ProfileTopNavStack navigation={ navigation } />
+                    </View>
+                </ScrollView>
             </View>
         );
     }
 }
-
-ProfileTopNavStack.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-
-    if (navigation.state.index > 0) {
-        tabBarVisible = false;
-    }
-
-    return {
-        tabBarVisible,
-    };
-};
 
 export default ProfileNavigator;

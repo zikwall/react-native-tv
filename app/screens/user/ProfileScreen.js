@@ -8,7 +8,7 @@ import UserInfo from "./components/user-info";
 export default class ProfileScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            title: `Hi, { username }`,
+            title: `Profile`,
             headerLeft: () => (
                 <Back />
             ),
