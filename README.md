@@ -94,7 +94,7 @@
 col1 | col2 
 --- | --- |
 ![Load screen](screenshots/load_v5.jpg "Load screen") | ![Home rooms screen](screenshots/home_v3.jpg "Home rooms screen")
-![Watch screen](screenshots/watch_v3.jpg "Watch screen") | ![Home rooms screen](screenshots/profile.jpg "Home rooms screen")
+![Watch screen](screenshots/watch_v3.jpg "Watch screen") | ![Home rooms screen](screenshots/profile_v2.jpg "Home rooms screen")
 ![PlayHub screen](screenshots/playhub.jpg "PlayHub screen") | 
 
 
