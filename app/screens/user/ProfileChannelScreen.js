@@ -1,14 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 import { Back } from "../../components/header";
-import { UserTop } from "./components/user-top";
-import s from './styles';
-import UserInfo from "./components/user-info";
 
-export default class ProfileScreen extends React.Component {
+export default class ProfileChannelScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            title: `Hi, { username }`,
+            title: `Profile`,
             headerLeft: () => (
                 <Back />
             ),
@@ -17,10 +15,10 @@ export default class ProfileScreen extends React.Component {
 
     render() {
         return (
-            <View style={s.container}>
-                <Text>
-                    Profile
-                </Text>
+            <View style={ styles.container }>
+                <View>
+                    <Icon focused={ false } name={ 'youtube' } size={ 150 } style={{ color: '#f0f1f3', textAlign: 'center' }}/>
+                </View>
             </View>
         );
     }
@@ -32,5 +30,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingTop: 15,
         justifyContent: "center",
+        textAlign: 'center'
     },
 });

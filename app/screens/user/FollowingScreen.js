@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 import { Back } from "../../components/header";
-import s from './styles';
 
-export default class FeedScreen extends React.Component {
+export default class FollowingScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
-            title: `Hi, { username }`,
+            title: `Profile`,
             headerLeft: () => (
                 <Back />
             ),
@@ -15,10 +15,10 @@ export default class FeedScreen extends React.Component {
 
     render() {
         return (
-            <View style={s.container}>
-                <Text>
-                    Feed
-                </Text>
+            <View style={ styles.container }>
+                <View>
+                    <Icon focused={ false } name={ 'user-check' } size={ 150 } style={{ color: '#f0f1f3', textAlign: 'center' }}/>
+                </View>
             </View>
         );
     }
@@ -30,5 +30,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingTop: 15,
         justifyContent: "center",
+        textAlign: 'center'
     },
 });

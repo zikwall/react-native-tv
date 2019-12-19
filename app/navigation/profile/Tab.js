@@ -1,27 +1,13 @@
 import * as React from "react";
-import { Animated, TouchableOpacity } from "react-native";
+import {Animated, Text, TouchableOpacity, View} from 'react-native';
+import s from '../../screens/user/components/user-top/styles';
 
 const Tab = ({ focusAnim, title, onPress }) => {
     return (
-        <TouchableOpacity onPress={onPress}>
-            <Animated.View
-                style={{
-                    padding: 10,
-                    borderRadius: 10,
-                    backgroundColor: focusAnim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: ["transparent", "tomato"]
-                    })
-                }}
-            >
-                <Animated.Text
-                    style={{
-                        color: focusAnim.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: ["#444", "#fff"]
-                        })
-                    }}
-                >{title}</Animated.Text>
+        <TouchableOpacity onPress={onPress} style={{backgroundColor: '#fff'}}>
+            <Animated.View style={[s.githubItem, {backgroundColor: '#fff'}]}>
+                <Animated.Text style={s.bold}>{200}</Animated.Text>
+                <Animated.Text style={s.githubItemText}>followers</Animated.Text>
             </Animated.View>
         </TouchableOpacity>
     )

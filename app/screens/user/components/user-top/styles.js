@@ -4,8 +4,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
         alignItems: 'center',
-        borderBottomColor: '#f0f1f4',
-        borderBottomWidth: 1
+        //borderBottomColor: '#f0f1f4',
+        //borderBottomWidth: 1
     },
     avatarWrapper: {
         marginVertical: 30,
@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold'
     }
-})
+});
 
 export default styles

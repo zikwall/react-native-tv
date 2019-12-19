@@ -1,7 +1,7 @@
 import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { Image } from 'react-native';
-import { ProfileScreen } from "../screens";
+import { HomeScreen } from "../screens";
 import MainTabNavigator from './MainTabNavigator';
 import { Back, Right } from "../components/header";
 import ProfileNavigator from "./profile/ProfileNavigator";

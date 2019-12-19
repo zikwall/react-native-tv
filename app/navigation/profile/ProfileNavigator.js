@@ -1,55 +1,78 @@
 import React from 'react';
-import { createMaterialTopTabNavigator, MaterialTopTabBar } from 'react-navigation-tabs';
-import TabBar from './TabBar';
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { UserTop } from "../../screens/user/components/user-top";
-import { ScrollView, View } from "react-native";
-import { ProfileScreen } from "../../screens";
-import FeedScreen from "../../screens/user/FeedScreen";
-import Icon from "react-native-vector-icons/Feather";
+import { View, } from "react-native";
+import { ProfileHomeScreen, FollowingScreen, FollowersScreen, ProfileChannelScreen } from "../../screens";
+import { Back } from "../../components/header";
+import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
+import Icon from 'react-native-vector-icons/Feather';
 
 const ProfileTopNavStack = createMaterialTopTabNavigator({
-    ProfileScreen: {
-        screen: ProfileScreen,
-        navigationOptions:{
-            tabBarLabel: 'Profile',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <Icon
-                    focused={focused}
-                    name={'home'} size={20} style={{ color: tintColor}}
-                />
-            ),
-        }
-    },
-    FeedScreen: {
-        screen: FeedScreen,
+    ProfileHomeScreen: {
+        screen: ProfileHomeScreen,
         navigationOptions:{
             tabBarLabel: 'Feed',
             tabBarIcon: ({ tintColor, focused }) => (
                 <Icon
                     focused={focused}
-                    name={'home'} size={20} style={{ color: tintColor}}
+                    name={'hexagon'} size={20} style={{ color: tintColor}}
+                />
+            ),
+        }
+    },
+    ProfileChannelScreen: {
+        screen: ProfileChannelScreen,
+        navigationOptions:{
+            tabBarLabel: 'Channel',
+            tabBarIcon: ({ tintColor, focused }) => (
+                <Icon
+                    focused={focused}
+                    name={'youtube'} size={20} style={{ color: tintColor}}
+                />
+            ),
+        }
+    },
+    FollowersScreen: {
+        screen: FollowersScreen,
+        navigationOptions:{
+            tabBarLabel: 'Followers',
+            tabBarIcon: ({ tintColor, focused }) => (
+                <Icon
+                    focused={focused}
+                    name={'user-check'} size={20} style={{ color: tintColor}}
+                />
+            ),
+        }
+    },
+    FollowingScreen: {
+        screen: FollowingScreen,
+        navigationOptions:{
+            tabBarLabel: 'Followers',
+            tabBarIcon: ({ tintColor, focused }) => (
+                <Icon
+                    focused={focused}
+                    name={'users'} size={20} style={{ color: tintColor}}
                 />
             ),
         }
     },
 }, {
-    initialRouteName: 'ProfileScreen',
-    tabBarComponent: MaterialTopTabBar,
-    tabBarOptions: {
-        activeTintColor: 'red',
-        inactiveTintColor: 'grey',
+    initialRouteName: 'ProfileHomeScreen',
+    tabBarComponent: withCustomStyle({
         style: {
-            backgroundColor: 'white',
-            borderTopColor: 'red',
+            borderTopColor: 'transparent',
+            borderTopWidth: 0,
         },
-        labelStyle: {
-            fontSize: 12,
-            fontWeight: 'normal'
+    })(FlexibleTabBarComponent),
+    swipeEnabled: true,
+    animationEnabled: true,
+    tabBarOptions: {
+        style: {
+            backgroundColor: '#fff',
+            color: '#000'
         },
-        indicatorStyle: {
-            borderBottomColor: 'red',
-            borderBottomWidth: 4,
-        },
+        activeTintColor: '#000',
+        inactiveTintColor: '#000',
     },
 });
 
@@ -62,43 +85,37 @@ class ProfileNavigator extends React.Component {
         },
     };
 
-    componentDidUpdate(lastProps) {
-        // Navigation state has changed from lastProps.navigation.state to this.props.navigation.state
-    }
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: `Hi, { username }`,
+            headerLeft: () => (
+                <Back />
+            ),
+        };
+    };
 
     render() {
         const { navigation } = this.props;
 
         return (
-            <View>
-                <ScrollView>
-                    <UserTop
-                        displayName="AndreyKa"
-                        username="zikwall"
-                        github={{
-                            followers: 200,
-                            public_repos: 72,
-                            following: 30
-                        }}
-                    />
-                </ScrollView>
+            <View style={{ flex: 3 }}>
+                <UserTop
+                    displayName="AndreyKa"
+                    username="zikwall"
+                    /*github={{
+                        followers: 200,
+                        public_repos: 72,
+                        following: 30
+                    }}*/
+                />
 
-                <ProfileTopNavStack navigation={ navigation } />
+                <View style={{ flex: 2 }}>
+                    <ProfileTopNavStack navigation={ navigation } />
+                </View>
+
             </View>
         );
     }
 }
-
-ProfileTopNavStack.navigationOptions = ({ navigation }) => {
-    let tabBarVisible = true;
-
-    if (navigation.state.index > 0) {
-        tabBarVisible = false;
-    }
-
-    return {
-        tabBarVisible,
-    };
-};
 
 export default ProfileNavigator;
