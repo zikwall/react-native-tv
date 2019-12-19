@@ -1,9 +1,12 @@
 import * as React from "react";
-import { View } from "react-native";
+import { View, Animated } from "react-native";
 import Tab from './Tab';
 
 const TabBar = (props) => {
-    const { navigationState, navigation, position } = props;
+    const { navigationState, navigation } = props;
+
+    const position = new Animated.Value(0);
+
     return (
         <View style={{
             height: 80,
