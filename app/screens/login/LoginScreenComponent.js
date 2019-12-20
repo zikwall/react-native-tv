@@ -38,7 +38,7 @@ const LoginScreenComponent = props => {
         <KeyboardAvoidingView
             behavior="position"
             style={container(loginButtonBackgroundColor)}
-            keyboardVerticalOffset={-200}
+            keyboardVerticalOffset={-650}
         >
             <View style={ container(loginBackgorundColor) }>
 
