@@ -12,7 +12,7 @@ const Right = (props) => {
             <TouchableOpacity style={{paddingHorizontal: 15}}>
                 <Icon name='user' size={25} color={'#000'}
                       onPress={() => {
-                          props.navigation.navigate('Profile')
+                          props.navigation.navigate('Login')
                       }}
                 />
             </TouchableOpacity>

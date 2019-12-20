@@ -6,10 +6,13 @@ import ProfileHomeScreen from "./user/ProfileHomeScreen";
 import FollowingScreen from './user/FollowingScreen';
 import FollowersScreen from './user/FollowersScreen';
 import ProfileChannelScreen from './user/ProfileChannelScreen';
+import LoginScreen from "./login/LoginScreen";
 
 export {
     // global
     HomeScreen, PlayHubScreen, LibraryScreen, WatchScreen,
     // user
-    ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen
+    ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen,
+    // auth
+    LoginScreen
 }
