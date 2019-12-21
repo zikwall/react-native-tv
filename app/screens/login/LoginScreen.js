@@ -1,34 +1,53 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Back } from "../../components/header";
 import LoginScreenComponent from "./LoginScreenComponent";
+import { handleAuthenticate } from '../../services/auth';
 
-const bgImage = "https://images.unsplash.com/photo-1569685915250-01b72923ca1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80";
+const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
 
-const LoginScreen = () => {
+    const [ username, setUsername ] = useState(null);
+    const [ password, setPassword ] = useState(null);
+    const [ switchValue, setSwitchValue ] = useState(false);
 
-    const [username, setUsername] = useState(null);
-    const [switchValue, setSwitchValue] = useState(false);
+    /*useEffect(() => {
+        let time = setTimeout(() => {
+            if (isAuthenticated) {
+                navigation.navigate('HomeScreen');
+            }
+        }, 2000);
 
-    const loginPressed = () => {
-        // login button is pressed
-        alert("Login Pressed");
+        return () => {
+            clearTimeout(time);
+        }
+    });*/
+
+    const handleClickRegisterText = () => {
+        navigation.navigate('Register');
+    };
+
+    const handleOnLogin = async () => {
+        await auth({username: username, password: '123456'}, 'token_by_login');
+        navigation.navigate('Profile');
     };
 
     return (
         <View style={ styles.container }>
             <LoginScreenComponent
-                onPress={loginPressed}
+                onPress={ handleClickRegisterText }
+                onLogin={ handleOnLogin }
                 loginButtonBackgroundColor="#000"
                 loginBackgorundColor="#fff"
-                loginText="Login"
+                loginText="Don't have a Play account yet? Create now!"
                 loginButtonTextStyle={{ color: '#000' }}
                 onSwitchValueChange={switchValue => {
                     setSwitchValue(switchValue);
                 }}
                 switchValue={switchValue}
                 usernameOnChangeText={username => setUsername(username)}
-                passwordOnChangeText={password => console.log("Password: ", password)}
+                passwordOnChangeText={password => setPassword(password)}
             >
             </LoginScreenComponent>
         </View>
@@ -45,13 +64,21 @@ LoginScreen.navigationOptions = ({ navigation }) => {
     };
 };
 
-export default LoginScreen;
+const mapStateToProps = (state) => (
+    { isAuthenticated: !!state.authentication.token }
+);
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    auth: handleAuthenticate
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        //marginTop: 46,
+        marginBottom: 10,
         justifyContent: 'center',
         textAlign: 'center'
     },

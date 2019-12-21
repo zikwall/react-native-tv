@@ -1,27 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, Switch, Text, View, TouchableOpacity} from 'react-native';
+import { View } from "react-native";
 import Card from "../Card/Card";
 import styles, { container } from "./BottomContainer.style";
 
 const BottomContainer = props => {
     const {
-        onLogin,
-        switchText,
-        switchValue,
         passwordTitle,
         usernameTitle,
         backgroundColor,
-        switchTextStyle,
         usernamePlaceholder,
         passwordPlaceholder,
-        onSwitchValueChange,
         usernameOnChangeText,
         passwordOnChangeText,
         usernameIconComponent,
         passwordIconComponent,
         usernameTextinputValue,
-        passwordTextinputValue
+        passwordTextinputValue,
+        emailTitle,
+        emailTextinputValue,
+        emailPlaceholder,
+        emailOnChangeText,
+        emailIconComponent
     } = props;
     return (
         <View style={container(backgroundColor)}>
@@ -35,9 +35,16 @@ const BottomContainer = props => {
                     {...props}
                 />
                 <Card
+                    title={emailTitle}
+                    value={emailTextinputValue}
+                    placeholder={emailPlaceholder}
+                    onChangeText={emailOnChangeText}
+                    iconComponent={emailIconComponent}
+                    {...props}
+                />
+                <Card
                     name="key"
                     secureTextEntry
-                    title="Password"
                     type="FontAwesome"
                     title={passwordTitle}
                     value={passwordTextinputValue}
@@ -47,56 +54,21 @@ const BottomContainer = props => {
                     {...props}
                 />
             </View>
-            <View style={styles.footerContainer}>
-                <TouchableOpacity onPress={ onLogin }>
-                    <View style={ ss.leftContainer }>
-                        <Text style={ ss.button }>Login</Text>
-                    </View>
-                </TouchableOpacity>
-                <Text style={switchTextStyle || styles.switchTextStyle}>
-                    {switchText}
-                </Text>
-                <Switch
-                    value={switchValue}
-                    ios_backgroundColor="black"
-                    onValueChange={onSwitchValueChange}
-                    trackColor={{ true: "default", false: "black" }}
-                />
-            </View>
         </View>
     );
 };
 
-const ss = StyleSheet.create({
-    button: {
-        backgroundColor: '#fff',
-        borderColor: '#000',
-        borderWidth: 1,
-        borderRadius: 15,
-        color: '#000',
-        fontSize: 12,
-        fontWeight: 'bold',
-        overflow: 'hidden',
-        padding: 12,
-        textAlign:'center',
-        marginRight: 10,
-    },
-    leftContainer: {
-       marginRight: 30
-    },
-});
-
 BottomContainer.propTypes = {
-    switchText: PropTypes.string,
     backgroundColor: PropTypes.string
 };
 
 BottomContainer.defaultProps = {
-    switchText: "Remember me",
     usernameTitle: "Username",
     passwordTitle: "Password",
     usernamePlaceholder: "Your Username",
     passwordPlaceholder: "Your Password",
+    emailTitle: "Email",
+    emailPlaceholder: "Your Email",
     backgroundColor: "rgba(255,255,255,0.45)"
 };
 

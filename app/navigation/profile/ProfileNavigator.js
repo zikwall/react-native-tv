@@ -2,10 +2,11 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { UserTop } from "../../screens/user/components/user-top";
 import { View, } from "react-native";
-import { ProfileHomeScreen, FollowingScreen, FollowersScreen, ProfileChannelScreen } from "../../screens";
-import { Back } from "../../components/header";
 import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
 import Icon from 'react-native-vector-icons/Feather';
+import { connect } from 'react-redux';
+import { ProfileHomeScreen, FollowingScreen, FollowersScreen, ProfileChannelScreen } from "../../screens";
+import { Back } from "../../components/header";
 
 const ProfileTopNavStack = createMaterialTopTabNavigator({
     ProfileHomeScreen: {
@@ -76,46 +77,46 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
     },
 });
 
-class ProfileNavigator extends React.Component {
-    static router = {
-        ...ProfileTopNavStack.router,
-        getStateForAction: (action, lastState) => {
-            // check for custom actions and return a different navigation state.
-            return ProfileTopNavStack.router.getStateForAction(action, lastState);
-        },
-    };
+const ProfileNavigator = ({ navigation }) => {
+    return (
+        <View style={{ flex: 3 }}>
+            <UserTop
+                displayName="AndreyKa"
+                username="zikwall"
+                /*github={{
+                    followers: 200,
+                    public_repos: 72,
+                    following: 30
+                }}*/
+            />
 
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: `Hi, { username }`,
-            headerLeft: () => (
-                <Back />
-            ),
-        };
-    };
-
-    render() {
-        const { navigation } = this.props;
-
-        return (
-            <View style={{ flex: 3 }}>
-                <UserTop
-                    displayName="AndreyKa"
-                    username="zikwall"
-                    /*github={{
-                        followers: 200,
-                        public_repos: 72,
-                        following: 30
-                    }}*/
-                />
-
-                <View style={{ flex: 2 }}>
-                    <ProfileTopNavStack navigation={ navigation } />
-                </View>
-
+            <View style={{ flex: 2 }}>
+                <ProfileTopNavStack navigation={ navigation } />
             </View>
-        );
-    }
-}
 
-export default ProfileNavigator;
+        </View>
+    );
+};
+
+ProfileNavigator.router = {
+    ...ProfileTopNavStack.router,
+    getStateForAction: (action, lastState) => {
+        // check for custom actions and return a different navigation state.
+        return ProfileTopNavStack.router.getStateForAction(action, lastState);
+    },
+};
+
+ProfileNavigator.navigationOptions = ({ navigation }) => {
+    return {
+        title: `Hi, { username }`,
+        headerLeft: () => (
+            <Back />
+        ),
+    };
+};
+
+const mapStateToProps = (state) => (
+    { isAuthenticated: !!state.authentication.token }
+);
+
+export default connect(mapStateToProps)(ProfileNavigator);

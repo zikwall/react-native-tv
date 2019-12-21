@@ -1,11 +1,8 @@
 import { AUTHENTICATE, DEAUTHENTICATE } from '../types';
 import { apiFetch } from "../../services/api";
+import { Session } from '../../services/auth';
 
-const authenticate = ({ username, password }, type) => {
-    if (type !== 'signin' && type !== 'signup') {
-        throw new Error('Wrong API call!');
-    }
-
+const authenticate = ({ username, password }, token) => {
     return (dispatch) => {
         apiFetch('/vktv/auth/signin', {
             method: 'POST',
@@ -14,8 +11,7 @@ const authenticate = ({ username, password }, type) => {
                 password
             })
         }).then((response) => {
-            Cookie.setCookie(SESSION_TOKEN_KEY, response.token);
-            //Router.push('/');
+            Session.setToken(response.token);
             dispatch({type: AUTHENTICATE, token: response.token});
         }).catch((error) => {
             throw new Error(error);
@@ -34,8 +30,7 @@ const reauthenticate = (token) => {
 const deauthenticate = () => {
     return (dispatch) => {
         apiFetch('/vktv/auth/logout').then((response) => {
-            Cookie.removeCookie(SESSION_TOKEN_KEY);
-            //Router.push('/');
+            Session.removeToken();
             dispatch({type: DEAUTHENTICATE});
         }).catch((error) => {
             throw new Error(error);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { Image } from 'react-native';
-import { HomeScreen, LoginScreen } from "../screens";
+import {HomeScreen, LoginScreen, RegisterScreen} from '../screens';
 import MainTabNavigator from './MainTabNavigator';
 import { Back, Right } from "../components/header";
 import ProfileNavigator from "./profile/ProfileNavigator";
@@ -11,7 +11,8 @@ const MainStack = createStackNavigator({
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
     Main: MainTabNavigator,
     Profile: ProfileNavigator,
-    Login: LoginScreen
+    Login: LoginScreen,
+    Register: RegisterScreen
 }, {
     defaultNavigationOptions: {
         // Need Redux

@@ -8,6 +8,7 @@ import AppNavigator from './app/navigation/AppNavigator';
 import { fetchChannelsRedux } from "./app/services/channels";
 import { appStore } from './app/redux/Store';
 import { getChannelsError, getChannelsPending } from './app/redux/reducers';
+import { handleJWTMiddleware } from './app/services/auth';
 
 const mapStateToProps = state => ({
     error: getChannelsError(state),
@@ -16,6 +17,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     fetchChannels: fetchChannelsRedux,
+    handleJWTMiddleware
 }, dispatch);
 
 const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
@@ -34,7 +36,12 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
     }, []);
 
     useEffect(() => {
-        props.fetchChannels();
+        function init() {
+            props.handleJWTMiddleware();
+            props.fetchChannels();
+        }
+
+        init();
     }, []);
 
     if (spinner) {
