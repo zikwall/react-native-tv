@@ -2,17 +2,41 @@ import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { handleLogout } from '../../services/auth';
 
-const Right = (props) => {
+const Right = ({ isAuthenticated, logout, navigation }) => {
+
+    const handlePress = async () => {
+        await logout();
+
+        if (['Profile'].includes(navigation.state.routeName)) {
+            navigation.navigate('HomeScreen');
+        }
+    };
+
     return (
         <View style={{ flexDirection: 'row', marginRight: 10 }}>
-           {/* <TouchableOpacity style={{paddingHorizontal: 15}}>
-                <Icon name='search' size={25} color={'#000'} />
-            </TouchableOpacity>*/}
+
+            {
+                isAuthenticated &&
+
+                <TouchableOpacity style={{paddingHorizontal: 15}} onPress={ handlePress }>
+                    <Icon name='log-out' size={ 25 } color={'#000'} />
+                </TouchableOpacity>
+            }
+
             <TouchableOpacity style={{paddingHorizontal: 15}}>
-                <Icon name='user' size={25} color={'#000'}
+                <Icon name='user' size={ 25 } color={'#000'}
                       onPress={() => {
-                          props.navigation.navigate('Login')
+                          let route = 'Login';
+
+                          if (isAuthenticated) {
+                              route = 'Profile';
+                          }
+
+                          navigation.navigate(route)
                       }}
                 />
             </TouchableOpacity>
@@ -20,4 +44,12 @@ const Right = (props) => {
     );
 };
 
-export default withNavigation(Right);
+const mapStateToProps = (state) => (
+    { isAuthenticated: !!state.authentication.token }
+);
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    logout: handleLogout
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(Right));
