@@ -5,7 +5,13 @@ export const handleJWTMiddleware = () => {
     return async dispatch => {
         if (!Session.isGuest()) {
             const token = await Session.getToken();
-            dispatch(reauthenticate(token));
+
+            try {
+                Session.getConfirm(token);
+                dispatch(reauthenticate(token));
+            } catch (e) {
+                dispatch(deauthenticate());
+            }
         }
     }
 };

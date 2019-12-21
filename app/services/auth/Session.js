@@ -1,4 +1,4 @@
-//import decode from 'jwt-decode';
+import decode from 'jwt-decode';
 import AsyncStorage from '@react-native-community/async-storage';
 import { SESSION_TOKEN_KEY } from "../../constants";
 
@@ -14,16 +14,14 @@ export default class Session {
     static isLogged = () => {
         const token = Session.getToken();
 
-        return !!token;
+        return !!token && !Session.isSessionExpired(token);
     };
 
     static isSessionExpired = (accessToken) => {
         try {
             const decoded = decode(accessToken);
-
             return (decoded.exp < Date.now() / 1000);
         } catch (err) {
-            console.log('Expired token! Logout...');
             return false;
         }
     };
@@ -47,5 +45,10 @@ export default class Session {
 
     static removeToken = async () => {
         await AsyncStorage.removeItem(buildKey());
+    };
+
+    static getConfirm = (token) => {
+        let answer = decode(token);
+        return answer;
     };
 }
