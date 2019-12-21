@@ -7,6 +7,7 @@ import FollowingScreen from './user/FollowingScreen';
 import FollowersScreen from './user/FollowersScreen';
 import ProfileChannelScreen from './user/ProfileChannelScreen';
 import LoginScreen from "./login/LoginScreen";
+import RegisterScreen from './register/RegisterScreen';
 
 export {
     // global
@@ -14,5 +15,5 @@ export {
     // user
     ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen,
     // auth
-    LoginScreen
+    LoginScreen, RegisterScreen
 }

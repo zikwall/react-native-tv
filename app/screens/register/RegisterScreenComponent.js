@@ -4,28 +4,26 @@ import {
     Text,
     View,
     SafeAreaView,
-    Button,
     TouchableOpacity,
-    KeyboardAvoidingView
-} from "react-native";
+    KeyboardAvoidingView,
+    StyleSheet,
+} from 'react-native';
 import Logo from "./components/Logo/Logo";
 import BottomContainer from "./components/BottomContainer/BottomContainer";
 import styles, { container } from "./style";
 
-const LoginScreenComponent = props => {
+const RegisterScreenComponent = props => {
     const {
-        onPress,
+        onRegister,
         children,
-        loginText,
-        loginButtonTextStyle,
         loginButtonBackgroundColor,
         loginBackgorundColor
     } = props;
 
     function renderLoginButton() {
         return (
-            <TouchableOpacity style={styles.loginButtonStyle} onPress={onPress}>
-                <Text style={loginButtonTextStyle}>{loginText}</Text>
+            <TouchableOpacity style={styles.loginButtonStyle} onPress={ onRegister }>
+                <Text style={ ss.button }>Register Now!</Text>
             </TouchableOpacity>
         );
     }
@@ -34,7 +32,7 @@ const LoginScreenComponent = props => {
         <KeyboardAvoidingView
             behavior="position"
             style={container(loginButtonBackgroundColor)}
-            keyboardVerticalOffset={-297}
+            keyboardVerticalOffset={-310}
         >
             <View style={ container(loginBackgorundColor) }>
 
@@ -56,15 +54,30 @@ const LoginScreenComponent = props => {
     );
 };
 
-LoginScreenComponent.propTypes = {
+const ss = StyleSheet.create({
+    button: {
+        backgroundColor: '#fff',
+        borderColor: '#000',
+        borderWidth: 1,
+        borderRadius: 15,
+        color: '#000',
+        fontSize: 12,
+        fontWeight: 'bold',
+        overflow: 'hidden',
+        padding: 12,
+        textAlign:'center',
+    },
+});
+
+RegisterScreenComponent.propTypes = {
     loginText: PropTypes.string,
     loginButtonBackgroundColor: PropTypes.string
 };
 
-LoginScreenComponent.defaultProps = {
+RegisterScreenComponent.defaultProps = {
     loginText: "Login",
     loginButtonBackgroundColor: "#282828",
     loginButtonTextStyle: styles.loginButtonTextStyle
 };
 
-export default LoginScreenComponent;
+export default RegisterScreenComponent;

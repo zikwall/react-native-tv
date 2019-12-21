@@ -3,25 +3,27 @@ import { View, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
 import { Back } from "../../components/header";
 import LoginScreenComponent from "./LoginScreenComponent";
 
-const bgImage = "https://images.unsplash.com/photo-1569685915250-01b72923ca1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80";
-
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
 
     const [username, setUsername] = useState(null);
     const [switchValue, setSwitchValue] = useState(false);
 
-    const loginPressed = () => {
-        // login button is pressed
-        alert("Login Pressed");
+    const handleClickRegisterText = () => {
+        navigation.navigate('Register');
+    };
+
+    const handleOnLogin = () => {
+        alert('Login!');
     };
 
     return (
         <View style={ styles.container }>
             <LoginScreenComponent
-                onPress={loginPressed}
+                onPress={ handleClickRegisterText }
+                onLogin={ handleOnLogin }
                 loginButtonBackgroundColor="#000"
                 loginBackgorundColor="#fff"
-                loginText="Login"
+                loginText="Don't have a Play account yet? Create now!"
                 loginButtonTextStyle={{ color: '#000' }}
                 onSwitchValueChange={switchValue => {
                     setSwitchValue(switchValue);
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        //marginTop: 46,
+        marginBottom: 10,
         justifyContent: 'center',
         textAlign: 'center'
     },
