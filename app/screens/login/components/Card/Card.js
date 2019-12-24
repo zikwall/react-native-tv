@@ -18,33 +18,35 @@ const Card = props => {
         selectionColor,
         iconComponent
     } = props;
+
     return (
-        <View style={styles.container}>
-            <View style={styles.containerGlue}>
-                <View style={{ width: 35, justifyContent: "center" }}>
-                    {iconComponent || (
-                        <Icon
-                            size={30}
-                            name="user"
-                            color="black"
-                            type="AntDesign"
+        <>
+            <View style={ styles.container }>
+                <View style={ styles.containerGlue }>
+                    <View style={{ width: 35, justifyContent: "center" }}>
+                        {iconComponent || (
+                            <Icon
+                                size={30}
+                                name="user"
+                                color="black"
+                                {...props}
+                            />
+                        )}
+                    </View>
+                    <View style={ styles.textContainer }>
+                        <Text style={titleStyle || _textStyle(titleColor)}>{title}</Text>
+                        <TextInput
+                            placeholder={placeholder}
+                            placeholderTextColor="#ccc"
+                            selectionColor={selectionColor}
+                            onChangeText={onChangeText}
+                            style={textStyle || _textInputStyle(textColor)}
                             {...props}
                         />
-                    )}
-                </View>
-                <View style={styles.textContainer}>
-                    <Text style={titleStyle || _textStyle(titleColor)}>{title}</Text>
-                    <TextInput
-                        placeholder={placeholder}
-                        placeholderTextColor="#ccc"
-                        selectionColor={selectionColor}
-                        onChangeText={onChangeText}
-                        style={textStyle || _textInputStyle(textColor)}
-                        {...props}
-                    />
+                    </View>
                 </View>
             </View>
-        </View>
+        </>
     );
 };
 

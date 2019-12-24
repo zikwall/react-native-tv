@@ -1,6 +1,6 @@
 export default {
     container: {
-        marginTop: 18,
+        //marginTop: 18,
         alignItems: "center",
         justifyContent: "center"
     },

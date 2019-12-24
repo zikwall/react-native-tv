@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
     Text,
@@ -11,6 +11,7 @@ import {
 import Logo from "./components/Logo/Logo";
 import BottomContainer from "./components/BottomContainer/BottomContainer";
 import styles, { container } from "./style";
+import { ErrorText } from "../../components/error";
 
 const RegisterScreenComponent = props => {
     const {
@@ -19,6 +20,15 @@ const RegisterScreenComponent = props => {
         loginButtonBackgroundColor,
         loginBackgorundColor
     } = props;
+
+    const [ error, setError ] = useState({
+        has: true,
+        errors: [
+            "Example the big very very big length text omg omg omg omg omg omg omg",
+            "Another very very bix tape text here, omg omg omg omg omg omg",
+            "Another very very bix tape text here, omg",
+        ]
+    });
 
     function renderLoginButton() {
         return (
@@ -40,6 +50,10 @@ const RegisterScreenComponent = props => {
                     <SafeAreaView style={styles.safeAreaViewStyle}>
                         <View style={styles.loginContainer}>
                             <Logo {...props} />
+
+                            <ErrorText hasError={ error.has }
+                                       errors={ error.errors }
+                            />
                         </View>
 
                         {children}

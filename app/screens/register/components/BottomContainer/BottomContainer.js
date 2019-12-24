@@ -24,7 +24,7 @@ const BottomContainer = props => {
         emailIconComponent
     } = props;
     return (
-        <View style={container(backgroundColor)}>
+        <View style={container('transparent')}>
             <View style={styles.containerGlue}>
                 <Card
                     title={usernameTitle}
