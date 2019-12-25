@@ -8,27 +8,19 @@ import {
     KeyboardAvoidingView,
     StyleSheet,
 } from 'react-native';
-import Logo from "./components/Logo/Logo";
+import Logo from "../../components/auth/Logo";
 import BottomContainer from "./components/BottomContainer/BottomContainer";
 import styles, { container } from "./style";
 import { ErrorText } from "../../components/error";
 
 const RegisterScreenComponent = props => {
     const {
+        error,
         onRegister,
         children,
         loginButtonBackgroundColor,
         loginBackgorundColor
     } = props;
-
-    const [ error, setError ] = useState({
-        has: true,
-        errors: [
-            "Example the big very very big length text omg omg omg omg omg omg omg",
-            "Another very very bix tape text here, omg omg omg omg omg omg",
-            "Another very very bix tape text here, omg",
-        ]
-    });
 
     function renderLoginButton() {
         return (
@@ -52,13 +44,13 @@ const RegisterScreenComponent = props => {
                             <Logo {...props} />
 
                             <ErrorText hasError={ error.has }
-                                       errors={ error.errors }
+                                       error={ error.error }
                             />
                         </View>
 
                         {children}
 
-                        <BottomContainer {...props} />
+                        <BottomContainer {...props} errors={ error.attributes } />
                     </SafeAreaView>
                 </View>
 

@@ -12,21 +12,15 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
     const [ password, setPassword ] = useState(null);
     const [ switchValue, setSwitchValue ] = useState(false);
 
-    /*useEffect(() => {
-        let time = setTimeout(() => {
-            if (isAuthenticated) {
-                navigation.navigate('HomeScreen');
-            }
-        }, 2000);
-
-        return () => {
-            clearTimeout(time);
-        }
-    });*/
-
     const handleClickRegisterText = () => {
         navigation.navigate('Register');
     };
+
+    const [ error, setError ] = useState({
+        has: false,
+        error: "Unexpected error",
+        attributes: []
+    });
 
     const handleOnLogin = async () => {
         await auth({username: username, password: '123456'}, 'token_by_login');
@@ -36,6 +30,7 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
     return (
         <View style={ styles.container }>
             <LoginScreenComponent
+                error={ error }
                 onPress={ handleClickRegisterText }
                 onLogin={ handleOnLogin }
                 loginButtonBackgroundColor="#000"

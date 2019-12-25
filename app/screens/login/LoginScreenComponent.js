@@ -8,29 +8,22 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView
 } from "react-native";
-import Logo from "./components/Logo/Logo";
+import Logo from "../../components/auth/Logo";
 import BottomContainer from "./components/BottomContainer/BottomContainer";
 import styles, { container } from "./style";
 import { ErrorText } from '../../components/error';
 
 const LoginScreenComponent = props => {
     const {
+        error,
         onPress,
         children,
         loginText,
         loginButtonTextStyle,
         loginButtonBackgroundColor,
-        loginBackgorundColor
+        loginBackgorundColor,
     } = props;
 
-    const [ error, setError ] = useState({
-        has: false,
-        errors: [
-            "Example the big very very big length text omg omg omg omg omg omg omg",
-            "Another very very bix tape text here, omg omg omg omg omg omg",
-            "Another very very bix tape text here, omg",
-        ]
-    });
 
     const renderLoginButton = () => {
         return (
@@ -54,13 +47,13 @@ const LoginScreenComponent = props => {
                             <Logo {...props} />
 
                             <ErrorText hasError={ error.has }
-                                errors={ error.errors }
+                                error={ error.error }
                             />
                         </View>
 
                         {children}
 
-                        <BottomContainer {...props} />
+                        <BottomContainer {...props} errors={ error.attributes } />
                     </SafeAreaView>
                 </View>
 
