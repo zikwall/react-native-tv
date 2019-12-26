@@ -1,10 +1,11 @@
 import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { Image } from 'react-native';
-import {HomeScreen, LoginScreen, RegisterScreen} from '../screens';
+import { LoginScreen, RegisterScreen } from '../screens';
 import MainTabNavigator from './MainTabNavigator';
 import { Back, Right } from "../components/header";
 import ProfileNavigator from "./profile/ProfileNavigator";
+import StaticNavigator from './static/StaticNavigator';
 
 const MainStack = createStackNavigator({
     // You could add another route here for authentication.
@@ -12,7 +13,8 @@ const MainStack = createStackNavigator({
     Main: MainTabNavigator,
     Profile: ProfileNavigator,
     Login: LoginScreen,
-    Register: RegisterScreen
+    Register: RegisterScreen,
+    Static: StaticNavigator
 }, {
     defaultNavigationOptions: {
         // Need Redux
