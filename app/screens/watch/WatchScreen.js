@@ -6,7 +6,7 @@ import ChannelInfo from '../../components/channel-info/ChannelInfo';
 import Program from '../../components/program';
 
 const WatchScreen = () => {
-    const [ webViewSize, setWebViewSize ] = useState(200);
+    const [ webViewSize, setWebViewSize ] = useState(210);
 
     useEffect(() => {
         Orientation.addOrientationListener(orientationHandleChange);
@@ -20,7 +20,7 @@ const WatchScreen = () => {
         if (orientation === 'LANDSCAPE') {
             setWebViewSize('100%');
         } else {
-            setWebViewSize(201);
+            setWebViewSize(210);
         }
     };
 

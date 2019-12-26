@@ -70,7 +70,7 @@ const VideoView = ({ channel, pending }) => {
             style={{ backgroundColor: 'transparent' }}
             // TODO PREMIUM just past channel.url for use native web player
             // without AD and blocking by ORIGIN
-            source={{ uri: `http://tv.zikwall.ru/vktv/embed/give?epg=${channel.epg_id}` }}
+            source={{ uri: `http://tv.zikwall.ru/vktv/embed/give?player=1&epg=${channel.epg_id}` }}
             javaScriptEnabled={ true }
             domStorageEnabled={ true }
             thirdPartyCookiesEnabled={ true }
