@@ -4,21 +4,19 @@ import { View, Text } from 'react-native';
 import s from './styles';
 import { Avatar } from '../../components/avatar';
 import Button from '../../components/button';
-import Options from './Options';
 import Divider from '../divider';
 
-const ChannelInfo = ({ id, name, onPress, onLongPress, src }) => {
+const ChannelInfo = ({ name, onPress, onLongPress, src, menu }) => {
     const itemStyles = { backgroundColor:'#fff' };
 
     return (
         <>
             <Button
-                onPress={() => onPress(id)}
-                onLongPress={() => onLongPress(id)}
+                onPress={() => onPress()}
+                onLongPress={() => onLongPress()}
                 style={[s.container,
                     {backgroundColor: itemStyles.backgroundColor}
-                ]}
-                key={ id }>
+                ]}>
 
                 <View style={ s.leftContainer }>
                     <Avatar src={ src } size={ 40 } />
@@ -31,7 +29,7 @@ const ChannelInfo = ({ id, name, onPress, onLongPress, src }) => {
                         </Text>
                     </View>
 
-                    <Options />
+                    { menu }
                 </View>
             </Button>
 
