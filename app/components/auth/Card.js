@@ -7,6 +7,8 @@ import styles, { _textStyle, _textInputStyle } from "./Card.style";
 
 const Card = props => {
     const {
+        inputname,
+        errors,
         title,
         value,
         textStyle,
@@ -18,8 +20,16 @@ const Card = props => {
         selectionColor,
         iconComponent
     } = props;
+
+    const _markAsError = () => {
+        return errors.includes(inputname) ? {
+            borderWidth: 1,
+            borderColor: 'red',
+        } : {};
+    };
+
     return (
-        <View style={styles.container}>
+        <View style={ [ styles.container, _markAsError() ] }>
             <View style={styles.containerGlue}>
                 <View style={{ width: 35, justifyContent: "center" }}>
                     {iconComponent || (
@@ -49,6 +59,8 @@ const Card = props => {
 };
 
 Card.propTypes = {
+    errors: PropTypes.array,
+    inputname: PropTypes.string,
     title: PropTypes.string,
     textColor: PropTypes.string,
     titleColor: PropTypes.string,
@@ -57,6 +69,8 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
+    errors: [],
+    inputname: 'nonamedinput',
     title: "User Name",
     textColor: "black",
     titleColor: "#c7c5c6",

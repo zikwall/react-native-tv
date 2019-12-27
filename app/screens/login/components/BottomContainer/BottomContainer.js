@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, Switch, Text, View, TouchableOpacity} from 'react-native';
-import Card from "../Card/Card";
+import Card from "../../../../components/auth/Card";
 import styles, { container } from "./BottomContainer.style";
 
 const BottomContainer = props => {
@@ -21,30 +21,37 @@ const BottomContainer = props => {
         usernameIconComponent,
         passwordIconComponent,
         usernameTextinputValue,
-        passwordTextinputValue
+        passwordTextinputValue,
+        errors
     } = props;
+
+
     return (
-        <View style={container(backgroundColor)}>
-            <View style={styles.containerGlue}>
+        <View style={ container('transparent') }>
+            <View style={ styles.containerGlue }>
                 <Card
-                    title={usernameTitle}
-                    value={usernameTextinputValue}
-                    placeholder={usernamePlaceholder}
-                    onChangeText={usernameOnChangeText}
-                    iconComponent={usernameIconComponent}
-                    {...props}
+                    inputname={ 'username' }
+                    title={ usernameTitle }
+                    value={ usernameTextinputValue }
+                    placeholder={ usernamePlaceholder }
+                    onChangeText={ usernameOnChangeText }
+                    iconComponent={ usernameIconComponent }
+                    errors={ errors }
+                    { ...props }
                 />
                 <Card
+                    inputname={ 'password' }
                     name="key"
                     secureTextEntry
                     title="Password"
                     type="FontAwesome"
-                    title={passwordTitle}
-                    value={passwordTextinputValue}
-                    placeholder={passwordPlaceholder}
-                    onChangeText={text => passwordOnChangeText(text)}
-                    iconComponent={passwordIconComponent}
-                    {...props}
+                    title={ passwordTitle }
+                    value={ passwordTextinputValue }
+                    placeholder={ passwordPlaceholder }
+                    onChangeText={text => passwordOnChangeText(text) }
+                    iconComponent={ passwordIconComponent }
+                    errors={ errors }
+                    { ...props }
                 />
             </View>
             <View style={styles.footerContainer}>

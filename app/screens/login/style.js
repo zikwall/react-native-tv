@@ -46,6 +46,6 @@ export default {
         flex: 1
     },
     loginContainer: {
-        marginTop: 24,
+        //marginTop: 24,
     }
 };

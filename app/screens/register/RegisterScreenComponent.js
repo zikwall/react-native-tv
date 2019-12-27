@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
     Text,
@@ -8,12 +8,14 @@ import {
     KeyboardAvoidingView,
     StyleSheet,
 } from 'react-native';
-import Logo from "./components/Logo/Logo";
+import Logo from "../../components/auth/Logo";
 import BottomContainer from "./components/BottomContainer/BottomContainer";
 import styles, { container } from "./style";
+import { ErrorText } from "../../components/error";
 
 const RegisterScreenComponent = props => {
     const {
+        error,
         onRegister,
         children,
         loginButtonBackgroundColor,
@@ -40,11 +42,15 @@ const RegisterScreenComponent = props => {
                     <SafeAreaView style={styles.safeAreaViewStyle}>
                         <View style={styles.loginContainer}>
                             <Logo {...props} />
+
+                            <ErrorText hasError={ error.has }
+                                       error={ error.error }
+                            />
                         </View>
 
                         {children}
 
-                        <BottomContainer {...props} />
+                        <BottomContainer {...props} errors={ error.attributes } />
                     </SafeAreaView>
                 </View>
 

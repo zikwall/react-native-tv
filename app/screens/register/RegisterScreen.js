@@ -8,6 +8,14 @@ const RegisterScreen = ({ navigation }) => {
     const [username, setUsername] = useState(null);
     const [email, setEmail] = useState(null);
 
+    const [ error, setError ] = useState({
+        has: true,
+        error: "Unexpected error",
+        attributes: [
+            'email'
+        ]
+    });
+
     const onRegister = () => {
         alert('Register!');
     };
@@ -15,6 +23,7 @@ const RegisterScreen = ({ navigation }) => {
     return (
         <View style={ styles.container }>
             <RegisterScreenComponent
+                error={ error }
                 onRegister={ onRegister }
                 loginButtonBackgroundColor="#000"
                 loginBackgorundColor="#fff"

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Image, Text, View} from "react-native";
-import Icon from "react-native-vector-icons/Feather";
 import styles from "./Logo.style";
 
 const Logo = props => {
@@ -11,7 +10,7 @@ const Logo = props => {
             {logoComponent || (
                 <View style={styles.row}>
                     <View style={{ alignItems: 'center' }}>
-                        <Image style={{ resizeMode: 'contain', height: 250, width: 250, marginTop: 65 }} source={ require('../../../../assets/images/PlayHubFullCommunity.png') }/>
+                        <Image style={{ resizeMode: 'contain', height: 250, width: 250, marginTop: 65 }} source={ require('../../assets/images/PlayHubFullCommunity.png') }/>
                     </View>
                 </View>
             )}
