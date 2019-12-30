@@ -69,7 +69,7 @@ export default {
     justifyContent: "space-between"
   },
   searchStyle: {
-    top: 2,
+    top: 0,
     flex: 1,
     flexDirection: "row"
   },
