@@ -1,17 +1,21 @@
 import React, { useState, useEffect, createRef } from 'react';
-import {View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { View } from 'react-native';
 import Orientation from 'react-native-orientation';
+import Icon from "react-native-vector-icons/Feather";
+import { Modalize } from 'react-native-modalize';
+import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
+
 import { VideoView } from '../../components/video-view';
 import ChannelInfo from '../../components/channel-info/ChannelInfo';
 import Program from '../../components/program';
-import { Modalize } from 'react-native-modalize';
-import Menu, { MenuDivider, MenuItem} from "react-native-material-menu";
 import StaticModal from "./examples/StaticModal";
-import SimpleContentModal from "./examples/SimpleContentModal";
-import AbsoluteHEader, {renderHeader} from "./examples/AbsoluteHeader";
-import Icon from "react-native-vector-icons/Feather";
+import AbsoluteHeader, { renderHeader } from "./examples/AbsoluteHeader";
+import { setPlayer } from '../../redux/actions';
+import { getSelectChannel } from '../../redux/reducers';
 
-const WatchScreen = () => {
+const WatchScreen = ({ selectPlayer, channel }) => {
     const [ webViewSize, setWebViewSize ] = useState(205);
 
     const [ modalContent, setModalContent ] = useState(null);
@@ -82,9 +86,13 @@ const WatchScreen = () => {
     };
 
     const handleOpenSimple = () => {
-        setModalContent(<AbsoluteHEader />);
+        setModalContent(<AbsoluteHeader />);
         hideMenu();
         openAbsoluteModal();
+    };
+
+    const handleSelectPlayer = (playerId) => {
+        selectPlayer(channel.epg_id, playerId);
     };
 
     return (
@@ -106,8 +114,18 @@ const WatchScreen = () => {
                             <Icon name='sliders' size={ 25 } color={ '#000' } onPress={ showMenu } />
                         }>
 
-                        <MenuItem onPress={ hideMenu }>Use Player 1</MenuItem>
-                        <MenuItem onPress={ hideMenu }>Use Player 2</MenuItem>
+                        <MenuItem onPress={() => {
+                            handleSelectPlayer('1');
+                        }}>
+                            Use Player 1
+                        </MenuItem>
+
+                        <MenuItem onPress={() => {
+                            handleSelectPlayer('2');
+                        }}>
+                            Use Player 2
+                        </MenuItem>
+
                         <MenuItem onPress={ hideMenu } disabled>
                             Use Native Player
                         </MenuItem>
@@ -171,13 +189,12 @@ const WatchScreen = () => {
     );
 };
 
-export default WatchScreen;
-
-const s = StyleSheet.create({
-    modal__header: {
-        position: 'absolute',
-        top: 20,
-        right: 20,
-        zIndex: 2,
-    }
+const mapStateToProps = state => ({
+    channel: getSelectChannel(state),
 });
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    selectPlayer: setPlayer,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(WatchScreen);

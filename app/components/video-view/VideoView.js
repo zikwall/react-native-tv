@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Alert, BackHandler, Linking, Platform } from "react-native";
 import { WebView } from "react-native-webview";
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import { INJ_JS } from '../../constants';
-import { getChannelsPending, getSelectChannel } from "../../redux/reducers";
+import { getChannelsPending, getSelectChannel, getSelectPlayer } from '../../redux/reducers';
+import { Player } from '../../services/channels';
+import { initPlayer } from '../../redux/actions';
 
-const VideoView = ({ channel, pending }) => {
-
+const VideoView = ({ channel, pending, player, selectPlayer }) => {
     if (pending === true) {
         return null;
     }
@@ -16,7 +19,14 @@ const VideoView = ({ channel, pending }) => {
     }
 
     const [ canGoBack, setCanGoBack ] = useState(false);
+
     let webView = null;
+
+    useEffect(() => {
+        selectPlayer(channel.epg_id);
+
+        console.log(`http://tv.zikwall.ru/vktv/embed/give?player=${player}&epg=${channel.epg_id}`);
+    });
 
     useEffect(() => {
         if (Platform.OS === 'android') {
@@ -70,7 +80,7 @@ const VideoView = ({ channel, pending }) => {
             style={{ backgroundColor: 'transparent' }}
             // TODO PREMIUM just past channel.url for use native web player
             // without AD and blocking by ORIGIN
-            source={{ uri: `http://tv.zikwall.ru/vktv/embed/give?player=1&epg=${channel.epg_id}` }}
+            source={{ uri: `http://tv.zikwall.ru/vktv/embed/give?player=${player}&epg=${channel.epg_id}` }}
             javaScriptEnabled={ true }
             domStorageEnabled={ true }
             thirdPartyCookiesEnabled={ true }
@@ -102,6 +112,12 @@ const VideoView = ({ channel, pending }) => {
 const mapStateToProps = state => ({
     channel: getSelectChannel(state),
     pending: getChannelsPending(state),
+    player: getSelectPlayer(state)
 });
 
-export default connect(mapStateToProps)(VideoView);
+const mapDispatchToProps = dispatch => bindActionCreators({
+    selectPlayer: initPlayer,
+}, dispatch);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(VideoView);
