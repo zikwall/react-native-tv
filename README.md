@@ -11,7 +11,10 @@
     - [x] JW Player
     - [ ] Plyr
     - [ ] Video.js
-    - [ ] [OpenPlayer.js](https://github.com/openplayerjs/openplayerjs)
+    - [x] [OpenPlayer.js](https://github.com/openplayerjs/openplayerjs)
+- [x] Switch between Players
+    - [x] JW Player
+    - [x] Openplayer.js
 - [X] Ads
     - [x] Preroll on Video Player (IMA, VAST, etc.)
     - [ ] ADMob
@@ -29,8 +32,8 @@
         - [ ] Repositories
     - [ ] User profile
     - [ ] Apps Library
-    - [ ] About
-    - [ ] Terms
+    - [x] About
+    - [x] Terms
     - [ ] Repositories
     - [ ] Top (Tabs)
         - [ ] Top 10
@@ -40,7 +43,6 @@
 - [x] Components
     - [x] Search
     - [x] App preloader
-    - [ ] Drawer Navigation
     - [ ] TV program list
     - [ ] Current TV program
 - [ ] Native Players
@@ -50,7 +52,7 @@
     - [x] Auth Primary Client (Login/Pass)
     - [ ] OAuth (VK, FB, TW, Inst.)
 - [ ] Premium
-    - [ ] Native Web Player supported by ad-free provider
+    - [x] Native Web Player supported by ad-free provider
 - [ ] Functions
     - [ ] Save to watch latter
     - [ ] Block Playlist
@@ -97,10 +99,11 @@
 
 ^_^ | ^_^
 --- | --- |
-![Load screen](screenshots/load_v5.jpg "Load screen") | ![Home rooms screen](screenshots/home_v4.jpg "Home rooms screen")
+![Load screen](screenshots/load_v5.jpg "Load screen") | ![Home rooms screen](screenshots/home_v5.jpg "Home rooms screen")
 ![Watch screen](screenshots/watch_v3.jpg "Watch screen") | ![Home rooms screen](screenshots/profile_v3.jpg "Home rooms screen")
 ![PlayHub screen](screenshots/playhub.jpg "PlayHub screen") | ![Login screen](screenshots/login.jpg "Login screen")
-![Register screen](screenshots/register.jpg "Register screen") | ![Menu screen](screenshots/menu_v2.jpg "Register screen")
+![Register screen](screenshots/register.jpg "Register screen") | ![Menu screen](screenshots/menu_v3.jpg "Register screen")
+![Static screen](screenshots/static_example.jpg "Static screen") | 
 
 ### Related Projects
 
