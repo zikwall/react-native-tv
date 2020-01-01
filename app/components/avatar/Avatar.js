@@ -22,7 +22,10 @@ Avatar.defaultProps = {
 };
 
 Avatar.propTypes = {
-    src: PropTypes.string,
+    src: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object
+    ]),
     size: PropTypes.number
 };
 
