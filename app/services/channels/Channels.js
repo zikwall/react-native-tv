@@ -2,12 +2,12 @@ import { apiFetch } from "../api";
 import { fetchChannelsPending, fetchChannelsError, fetchChannelsSuccess, setChannel } from '../../redux/actions';
 
 const getChannels = async () => {
-    return await apiFetch('/vktv/api/channels');
+    return await apiFetch('/vktv/api/channels?useHttp=1');
 };
 
 export const getChannel = (id) => {
     //return dispatch => {
-    return apiFetch(`/vktv/api/channel?id=${id}`, {}, false).then((response) => {
+    return apiFetch(`/vktv/api/channel?useHttp=1&id=${id}`, {}, false).then((response) => {
         if (response.error) {
             throw(response.error);
         }
@@ -25,7 +25,7 @@ export const fetchChannelsRedux = () => {
     return dispatch => {
         dispatch(fetchChannelsPending());
 
-        apiFetch('/vktv/api/channels')
+        apiFetch('/vktv/api/channels?useHttp=1')
             .then(res => {
                 if(res.error) {
                     throw(res.error);

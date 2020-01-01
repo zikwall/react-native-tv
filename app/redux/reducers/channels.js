@@ -11,27 +11,27 @@ const initialState = {
 const channelsFetchReducer = (state = initialState, action) => {
     switch(action.type) {
         case FETCH_CHANNELS_PENDING:
-            
+
             return {
                 ...state,
                 pending: true
             };
-            
+
         case FETCH_CHANNELS_SUCCESS:
             return {
                 ...state,
                 pending: false,
                 channels: action.channels
             };
-            
+
         case FETCH_CHANNELS_ERROR:
-            
+
             return {
                 ...state,
                 pending: false,
                 error: action.error
             };
-            
+
         default:
             return state;
     }
@@ -41,7 +41,9 @@ const actionInitialState = {
     channel: {
         epg_id: 0,
         name: '',
-        url: ''
+        url: '',
+        image: '',
+        use_origin: 0
     },
 };
 

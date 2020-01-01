@@ -1,14 +1,18 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const ChannelCard = ({ id, name, epg_id, image, onSelectHandle }) => {
+const isTrustImage = (image) => {
+    return image !== '';
+};
 
-    const ifImage = image ? { uri: image } : require('../../assets/images/blank_channel.png');
+const ChannelCard = ({ name, epg_id, image, onSelectHandle }) => {
+
+    const ifImage = isTrustImage(image) ? { uri: image } : require('../../assets/images/blank_channel.png');
 
     return (
         <View style={styles.itemContainer}>
             <TouchableOpacity style={{ flex: 1 }} onPress={() => {
-                onSelectHandle(id);
+                onSelectHandle(epg_id);
             }} >
                 <View style={{ flex: 1, alignItems: 'center' }}>
                     <Image

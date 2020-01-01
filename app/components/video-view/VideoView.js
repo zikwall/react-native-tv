@@ -9,6 +9,10 @@ import { getChannelsPending, getSelectChannel, getSelectPlayer } from '../../red
 import { Player } from '../../services/channels';
 import { initPlayer } from '../../redux/actions';
 
+const isNativeWebPlayer = (state) => {
+    return state == 1;
+};
+
 const VideoView = ({ channel, pending, player, selectPlayer }) => {
     if (pending === true) {
         return null;
@@ -24,9 +28,7 @@ const VideoView = ({ channel, pending, player, selectPlayer }) => {
 
     useEffect(() => {
         selectPlayer(channel.epg_id);
-
-        console.log(`http://tv.zikwall.ru/vktv/embed/give?player=${player}&epg=${channel.epg_id}`);
-    });
+    }, [ channel ]);
 
     useEffect(() => {
         if (Platform.OS === 'android') {
@@ -74,13 +76,15 @@ const VideoView = ({ channel, pending, player, selectPlayer }) => {
         }
     };
 
+    const source = isNativeWebPlayer(channel.use_origin) ?  channel.url : `http://tv.zikwall.ru/vktv/embed/give?player=${player}&epg=${channel.epg_id}`;
+
     return (
         <WebView
             ref={ (wv) => webView = wv  }
             style={{ backgroundColor: 'transparent' }}
             // TODO PREMIUM just past channel.url for use native web player
             // without AD and blocking by ORIGIN
-            source={{ uri: `http://tv.zikwall.ru/vktv/embed/give?player=${player}&epg=${channel.epg_id}` }}
+            source={{ uri: source }}
             javaScriptEnabled={ true }
             domStorageEnabled={ true }
             thirdPartyCookiesEnabled={ true }

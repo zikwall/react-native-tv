@@ -95,6 +95,12 @@ const WatchScreen = ({ selectPlayer, channel }) => {
         selectPlayer(channel.epg_id, playerId);
     };
 
+    const isTrustImage = (image) => {
+        return image !== '';
+    };
+
+    const ifImage = isTrustImage(channel.image) ? channel.image : require('../../assets/images/blank_channel.png');
+
     return (
         <View style={{ flex: 2, backgroundColor: '#fff' }}>
             <View style={{ height: webViewSize }}>
@@ -105,8 +111,8 @@ const WatchScreen = ({ selectPlayer, channel }) => {
 
                 }}
                 onPress={ handleOpenSimple }
-                name="Russian Today HD"
-                src="http://tv.zikwall.ru/images/logo/RT%D0%94.png"
+                name={ channel.name }
+                src={ ifImage }
                 menu={
                     <Menu
                         ref={(ref) => _menu = ref }

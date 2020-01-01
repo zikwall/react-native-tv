@@ -25,9 +25,25 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
         }
     };
 
+    // TODO create key => value object
     const handleOnChannelPress = (channel_id) => {
-        selectChannel(channels[channel_id]);
-        navigation.navigate('WatchScreen');
+        let found = false;
+        let foundChannel = null;
+
+        for (let id in channels) {
+            let channel = channels[id];
+
+            if (channel.epg_id === channel_id) {
+                foundChannel = channel;
+                found = true;
+                break;
+            }
+        }
+
+        if (found && foundChannel) {
+            selectChannel(foundChannel);
+            navigation.navigate('WatchScreen');
+        }
     };
 
     return (
