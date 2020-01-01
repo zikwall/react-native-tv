@@ -24,7 +24,7 @@ const DrawerUserInfo = ({
         },
       ]}>
       <View style={s.topContainer}>
-        <Avatar src={avatarUrlMedium} />
+        <Avatar src={{ uri: avatarUrlMedium }} />
 
         <View style={s.info}>
           <Text style={[s.displayName, {color: '#000'}]}>{displayName}</Text>

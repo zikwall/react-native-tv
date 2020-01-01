@@ -99,7 +99,7 @@ const WatchScreen = ({ selectPlayer, channel }) => {
         return image !== '';
     };
 
-    const ifImage = isTrustImage(channel.image) ? channel.image : require('../../assets/images/blank_channel.png');
+    const ifImage = isTrustImage(channel.image) ? { uri: channel.image } : require('../../assets/images/blank_channel.png');
 
     return (
         <View style={{ flex: 2, backgroundColor: '#fff' }}>

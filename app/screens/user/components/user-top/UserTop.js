@@ -11,7 +11,7 @@ const UserTop = ({displayName, username, github, gravatarImageUrl, onAvatarPress
                 onPress={() => onAvatarPress(avatar)}>
                 <View style={s.avatarWrapper}>
                     <Avatar
-                        src="https://avatars2.githubusercontent.com/u/23422968?s=460&v=4"
+                        src={{ uri: "https://avatars2.githubusercontent.com/u/23422968?s=460&v=4" }}
                         size={80} />
                 </View>
             </TouchableOpacity>

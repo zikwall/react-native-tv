@@ -12,7 +12,7 @@ const Avatar = ({ src, size }) => {
                 borderColor: 'rgba(0,0,0,0.1)',
                 borderWidth: 0.1
             }}
-            source={{uri: src}} />
+            source={ src } />
     )
 };
 
