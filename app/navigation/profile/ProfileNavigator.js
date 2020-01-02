@@ -16,7 +16,7 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
             tabBarIcon: ({ tintColor, focused }) => (
                 <Icon
                     focused={focused}
-                    name={'hexagon'} size={20} style={{ color: tintColor}}
+                    name={'activity'} size={20} style={{ color: tintColor}}
                 />
             ),
         }
@@ -28,7 +28,7 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
             tabBarIcon: ({ tintColor, focused }) => (
                 <Icon
                     focused={focused}
-                    name={'youtube'} size={20} style={{ color: tintColor}}
+                    name={'tv'} size={20} style={{ color: tintColor}}
                 />
             ),
         }
@@ -48,7 +48,7 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
     FollowingScreen: {
         screen: FollowingScreen,
         navigationOptions:{
-            tabBarLabel: 'Followers',
+            tabBarLabel: 'Following',
             tabBarIcon: ({ tintColor, focused }) => (
                 <Icon
                     focused={focused}
