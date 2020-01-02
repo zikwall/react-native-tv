@@ -12,5 +12,5 @@ function convertToDate(obj) {
   return obj instanceof Date ? obj : new Date(obj);
 }
 
-export { shiftDate, getBeginningTimeForDate, convertToDate };
-export default { shiftDate, getBeginningTimeForDate, convertToDate };
+export {shiftDate, getBeginningTimeForDate, convertToDate};
+export default {shiftDate, getBeginningTimeForDate, convertToDate};

@@ -1,11 +1,11 @@
-import { shiftDate, getBeginningTimeForDate, convertToDate } from "./helpers";
+import {shiftDate, getBeginningTimeForDate, convertToDate} from './helpers';
 import {
   SQUARE_SIZE,
   MONTH_LABELS,
   DAYS_IN_WEEK,
   MONTH_LABEL_GUTTER_SIZE,
-  MILLISECONDS_IN_ONE_DAY
-} from "./constants";
+  MILLISECONDS_IN_ONE_DAY,
+} from './constants';
 
 function getTransformForMonthLabels(horizontal, gutterSize) {
   if (horizontal) {
@@ -43,13 +43,13 @@ function getViewBox(numDays, endDate, gutterSize, showMonthLabels, horizontal) {
     return `${getWidth(numDays, endDate, gutterSize)} ${getHeight(
       gutterSize,
       showMonthLabels,
-      horizontal
+      horizontal,
     )}`;
   }
   return `${getHeight(gutterSize, showMonthLabels, horizontal)} ${getWidth(
     numDays,
     endDate,
-    gutterSize
+    gutterSize,
   )}`;
 }
 
@@ -59,7 +59,7 @@ function getValueForIndex(index, valueCache) {
 }
 
 function getTooltipDataAttrsForValue(value, tooltipDataAttrs) {
-  if (typeof tooltipDataAttrs === "function") return tooltipDataAttrs(value);
+  if (typeof tooltipDataAttrs === 'function') return tooltipDataAttrs(value);
   return tooltipDataAttrs;
 }
 
@@ -68,8 +68,8 @@ function getTooltipDataAttrsForIndex(index, valueCache, tooltipDataAttrs) {
     return valueCache[index].tooltipDataAttrs;
   }
   return getTooltipDataAttrsForValue(
-    { date: null, count: null },
-    tooltipDataAttrs
+    {date: null, count: null},
+    tooltipDataAttrs,
   );
 }
 
@@ -91,7 +91,7 @@ function getCountByDuplicateValues(array) {
   Object.keys(hashMap).forEach(key => {
     outputArray.push({
       key,
-      count: hashMap[key]
+      count: hashMap[key],
     });
   });
   return outputArray;
@@ -111,7 +111,7 @@ function getFillColor(index, valueCache, rectColor) {
   if (valueCache[index]) {
     const fillColor = findColorLevel(
       valueCache[index].countedArray.count,
-      rectColor
+      rectColor,
     );
     return fillColor;
   }
@@ -152,25 +152,25 @@ function getMonthLabelCoordinates(
   weekIndex,
   horizontal,
   gutterSize,
-  showMonthLabels
+  showMonthLabels,
 ) {
   if (horizontal) {
     return [
       weekIndex * getSquareSizeWithGutter(gutterSize),
-      getMonthLabelSize(showMonthLabels, horizontal) - MONTH_LABEL_GUTTER_SIZE
+      getMonthLabelSize(showMonthLabels, horizontal) - MONTH_LABEL_GUTTER_SIZE,
     ];
   }
   const verticalOffset = -2;
   return [
     0,
-    (weekIndex + 1) * getSquareSizeWithGutter(gutterSize) + verticalOffset
+    (weekIndex + 1) * getSquareSizeWithGutter(gutterSize) + verticalOffset,
   ];
 }
 
 function getStartDateWithEmptyDays(numDays, endDate) {
   return shiftDate(
     getStartDate(numDays, endDate),
-    -getNumEmptyDaysAtStart(numDays, endDate)
+    -getNumEmptyDaysAtStart(numDays, endDate),
   );
 }
 
@@ -210,22 +210,7 @@ export {
   getCountByDuplicateValues,
   getTooltipDataAttrsForIndex,
   getTooltipDataAttrsForValue,
+  getValueForIndex,
   getHeight,
-  getWidth
-};
-
-export default {
-  getWeekCount,
-  getStartDateWithEmptyDays,
-  getMonthLabelCoordinates,
-  getTransformForWeek,
-  getNumEmptyDaysAtStart,
-  getSquareCoordinates,
-  getTitleForIndex,
-  getFillColor,
-  getCountByDuplicateValues,
-  getTooltipDataAttrsForIndex,
-  getTooltipDataAttrsForValue,
-  getHeight,
-  getWidth
+  getWidth,
 };

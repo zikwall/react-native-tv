@@ -19,8 +19,10 @@ const ProfileHomeScreen = () => {
                     <CalendarHeatmap
                         endDate={ moment().endOf('month').format('YYYY-MM-DD') }
                         numDays={ 100 }
-                        onPress={(index, day) => {
-                            alert(index);
+                        onPress={(value, day) => {
+                           if (value && typeof value.date !== 'undefined') {
+                               alert(value.date);
+                           }
                         }}
                         values={ Fake.contributingData }
                     />
@@ -28,6 +30,7 @@ const ProfileHomeScreen = () => {
                         <Text style={human.caption2}>{ Fake.contributingData.length } contributions in the 100 days</Text>
                     </View>
                 </View>
+
                 {Fake.notificationFeed.all.map((item, n) => {
                     return (
                         <TouchableOpacity
