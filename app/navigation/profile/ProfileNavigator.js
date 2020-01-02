@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { UserTop } from "../../screens/user/components/user-top";
 import { View, } from "react-native";
@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
 import { ProfileHomeScreen, FollowingScreen, FollowersScreen, ProfileChannelScreen } from "../../screens";
 import { Back } from "../../components/header";
+import Orientation from 'react-native-orientation';
 
 const ProfileTopNavStack = createMaterialTopTabNavigator({
     ProfileHomeScreen: {
@@ -78,12 +79,32 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
 });
 
 const ProfileNavigator = ({ navigation }) => {
+    const [ visibleUserTop, setVisibleUserTop ] = useState(true);
+
+    useEffect(() => {
+        Orientation.addOrientationListener(orientationHandleChange);
+
+        return () => {
+            Orientation.removeOrientationListener(orientationHandleChange);
+        };
+    });
+
+    const orientationHandleChange = (orientation) => {
+        if (orientation === 'LANDSCAPE') {
+            setVisibleUserTop(false);
+        } else {
+            if (!visibleUserTop) {
+                setVisibleUserTop(true);
+            }
+        }
+    };
+
     return (
         <View style={{ flex: 1 }}>
-            <UserTop
+            {visibleUserTop && <UserTop
                 displayName="AndreyKa"
                 username="zikwall"
-            />
+            />}
 
             <View style={{ flex: 1 }}>
                 <ProfileTopNavStack navigation={ navigation } />
