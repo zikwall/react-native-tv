@@ -79,13 +79,13 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
 
 const ProfileNavigator = ({ navigation }) => {
     return (
-        <View style={{ flex: 3 }}>
+        <View style={{ flex: 1 }}>
             <UserTop
                 displayName="AndreyKa"
                 username="zikwall"
             />
 
-            <View style={{ flex: 2 }}>
+            <View style={{ flex: 1 }}>
                 <ProfileTopNavStack navigation={ navigation } />
             </View>
 
