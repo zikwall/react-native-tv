@@ -17,6 +17,8 @@
     "faker": "^4.1.0",
     "jetifier": "^1.6.5",
     "jwt-decode": "^2.2.0",
+    "lodash": ">= 4.17.10",
+    "moment": ">= 2.24.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-device-info": "^5.4.0",

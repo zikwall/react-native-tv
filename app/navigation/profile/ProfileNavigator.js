@@ -12,7 +12,7 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
     ProfileHomeScreen: {
         screen: ProfileHomeScreen,
         navigationOptions:{
-            tabBarLabel: 'Feed',
+            tabBarLabel: 'Activity',
             tabBarIcon: ({ tintColor, focused }) => (
                 <Icon
                     focused={focused}
@@ -65,7 +65,7 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
             borderTopWidth: 0,
         },
     })(FlexibleTabBarComponent),
-    swipeEnabled: true,
+    swipeEnabled: false,
     animationEnabled: true,
     tabBarOptions: {
         style: {
@@ -83,11 +83,6 @@ const ProfileNavigator = ({ navigation }) => {
             <UserTop
                 displayName="AndreyKa"
                 username="zikwall"
-                /*github={{
-                    followers: 200,
-                    public_repos: 72,
-                    following: 30
-                }}*/
             />
 
             <View style={{ flex: 2 }}>

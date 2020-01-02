@@ -1,20 +1,49 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
+import moment from 'moment';
+import {
+    human,
+    iOSUIKit,
+} from "react-native-typography";
+
 import { Back } from '../../components/header';
+import CalendarHeatmap from '../../components/heatmap/CalendarHeatmap';
+import { Fake } from '../../utils';
+import NotificationCard from '../../components/notification/NotificationCard';
 
 const ProfileHomeScreen = () => {
     return (
         <View style={ styles.container }>
             <ScrollView>
-                <View style={{ marginTop: 120 }}>
-                    <Icon focused={ false } name={ 'hexagon' } size={ 150 } style={{ color: '#f0f1f3', textAlign: 'center', marginBottom: 1900, }}/>
+                <View style={{ paddingRight: 15, paddingLeft: 15, paddingBottom: 15 }}>
+                    <CalendarHeatmap
+                        endDate={ moment().endOf('month').format('YYYY-MM-DD') }
+                        numDays={ 100 }
+                        onPress={(index, day) => {
+                            alert(index);
+                        }}
+                        values={ Fake.contributingData }
+                    />
+                    <View style={{ paddingTop: 5 }}>
+                        <Text style={human.caption2}>{ Fake.contributingData.length } contributions in the 100 days</Text>
+                    </View>
                 </View>
-                <View>
-                    <Text style={ styles.test }>
-                        Test Text margin 300
-                    </Text>
-                </View>
+                {Fake.notificationFeed.all.map((item, n) => {
+                    return (
+                        <TouchableOpacity
+                            key={n.toString()}
+                            style={{
+                                borderColor: '#ccc',
+                                borderBottomWidth: StyleSheet.hairlineWidth
+                            }}
+                            onPress={() =>
+                                alert('aaaa')
+                            }
+                        >
+                            <NotificationCard data={item}/>
+                        </TouchableOpacity>
+                    );
+                })}
             </ScrollView>
         </View>
     );
@@ -38,13 +67,9 @@ export default ProfileHomeScreen;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: '#fff',
-        paddingTop: 15,
+        padding: 5,
         justifyContent: "center",
         textAlign: 'center'
-    },
-    test : {
-        textAlign: 'center',
     }
 });

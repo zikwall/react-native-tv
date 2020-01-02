@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Image } from 'react-native';
 
-const Avatar = ({ src, size }) => {
+const Avatar = ({ src, size, style }) => {
     return (
         <Image
             style={{
@@ -10,7 +10,8 @@ const Avatar = ({ src, size }) => {
                 height: size,
                 borderRadius: size / 10,
                 borderColor: 'rgba(0,0,0,0.1)',
-                borderWidth: 0.1
+                borderWidth: 0.1,
+                ...style
             }}
             source={ src } />
     )
@@ -22,10 +23,6 @@ Avatar.defaultProps = {
 };
 
 Avatar.propTypes = {
-    src: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.object
-    ]),
     size: PropTypes.number
 };
 

@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         //borderBottomWidth: 1
     },
     avatarWrapper: {
-        marginVertical: 30,
+        marginVertical: 20,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -26,21 +26,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     username: {
-        fontSize: 18
-    },
-    github: {
-        // height: 50,
-        paddingHorizontal: 15,
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    githubItem: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: 15
-    },
-    githubItemText: {
         fontSize: 18
     },
     bold: {
