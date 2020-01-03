@@ -14,72 +14,62 @@ import {
     systemWeights
 } from "react-native-typography";
 
-import { Back } from "../../components/header";
 import { CommonChannelCardItem, CommonChannelListItem } from '../../components/channel-item';
 import { Fake } from '../../utils';
 
-export default class ProfileChannelScreen extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: `Profile`,
-            headerLeft: () => (
-                <Back />
-            ),
-        };
-    };
-
-    render() {
-        return (
-            <View style={styles.screenContainer}>
-                <View style={styles.recentlyPlayed}>
-                    <ScrollView>
+const ProfileChannelScreen = () => {
+    return (
+        <View style={styles.screenContainer}>
+            <View style={styles.recentlyPlayed}>
+                <ScrollView>
+                    <View style={styles.recentlyPlayedTitleBar}>
+                        <Text style={styles.recentlyPlayedTitle}>Favorites for you</Text>
+                        <TouchableOpacity>
+                            <Text style={styles.seeAll}>See All</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flexDirection: 'column' }}>
+                        <ScrollView
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            contentContainerStyle={styles.recentlyPlayedSongList}
+                        >
+                            {Fake.userPlaylist.map((playlist, index) => (
+                                <CommonChannelCardItem
+                                    key={index}
+                                    title={playlist.channel}
+                                    subtitle={playlist.category}
+                                    image={playlist.cover}
+                                    imageHeight={60}
+                                    size={130}
+                                />
+                            ))}
+                        </ScrollView>
+                    </View>
+                    <View style={{ marginTop: 10 }}>
                         <View style={styles.recentlyPlayedTitleBar}>
-                            <Text style={styles.recentlyPlayedTitle}>Favorites for you</Text>
-                            <TouchableOpacity>
-                                <Text style={styles.seeAll}>See All</Text>
-                            </TouchableOpacity>
+                            <Text style={styles.recentlyPlayedTitle}>All playlist</Text>
                         </View>
-                        <View style={{ flexDirection: 'column' }}>
-                            <ScrollView
-                                horizontal
-                                showsHorizontalScrollIndicator={false}
-                                contentContainerStyle={styles.recentlyPlayedSongList}
-                            >
-                                {Fake.userPlaylist.map((playlist, index) => (
-                                    <CommonChannelCardItem
-                                        key={index}
-                                        title={playlist.channel}
-                                        subtitle={playlist.category}
-                                        image={playlist.cover}
-                                        imageHeight={60}
-                                        size={130}
-                                    />
-                                ))}
-                            </ScrollView>
+                        <View style={{paddingTop: 10}}>
+                            {Fake.userPlaylist.map((playlist, index) => (
+                                <CommonChannelListItem
+                                    key={index}
+                                    number={index + 1}
+                                    title={playlist.album}
+                                    subtitle={playlist.category}
+                                    image={playlist.cover}
+                                    rating={playlist.rating}
+                                />
+                            ))}
                         </View>
-                        <View style={{ marginTop: 10 }}>
-                            <View style={styles.recentlyPlayedTitleBar}>
-                                <Text style={styles.recentlyPlayedTitle}>All playlist</Text>
-                            </View>
-                            <View style={{paddingTop: 10}}>
-                                {Fake.userPlaylist.map((playlist, index) => (
-                                    <CommonChannelListItem
-                                        key={index}
-                                        number={index + 1}
-                                        title={playlist.album}
-                                        subtitle={playlist.category}
-                                        image={playlist.cover}
-                                        rating={playlist.rating}
-                                    />
-                                ))}
-                            </View>
-                        </View>
-                    </ScrollView>
-                </View>
+                    </View>
+                </ScrollView>
             </View>
-        );
-    }
-}
+        </View>
+    );
+};
+
+export default ProfileChannelScreen;
 
 const styles = StyleSheet.create({
     screenContainer: {

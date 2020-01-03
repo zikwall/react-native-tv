@@ -3,10 +3,8 @@ import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-nati
 import moment from 'moment';
 import {
     human,
-    iOSUIKit,
 } from "react-native-typography";
 
-import { Back } from '../../components/header';
 import CalendarHeatmap from '../../components/heatmap/CalendarHeatmap';
 import { Fake } from '../../utils';
 import NotificationCard from '../../components/notification/NotificationCard';
@@ -50,20 +48,6 @@ const ProfileHomeScreen = () => {
             </ScrollView>
         </View>
     );
-};
-
-ProfileHomeScreen.navigationOptions = ({ navigation }) => {
-    return {
-        title: `Profile`,
-        headerLeft: () => (
-            <Back />
-        ),
-        headerRight: () => (
-            <Text>
-                sss
-            </Text>
-        )
-    };
 };
 
 export default ProfileHomeScreen;
