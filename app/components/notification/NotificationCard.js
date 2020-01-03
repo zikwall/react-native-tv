@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
+import { human, iOSColors } from 'react-native-typography';
 
 import Icon from 'react-native-vector-icons/Feather';
 import { Avatar } from "../avatar";
@@ -13,7 +14,7 @@ const bolderText = text => {
         let item = textSplit[i];
         if (item !== "") {
             boldFormatedText = (
-                <Text style={[{ fontSize: 16 }, i % 2 !== 0 && { fontWeight: "600" }]}>
+                <Text style={styles.maintext}>
                     {boldFormatedText}
                     {item}
                 </Text>
@@ -96,11 +97,8 @@ class NotificationCard extends React.Component {
                         }}
                     >
                         {bolderText(title)}
-                        <Text
-                            style={{
-                                color: '#ccc'
-                            }}
-                        >
+
+                        <Text style={styles.sublinetext}>
                             {desc}
                         </Text>
                     </View>
@@ -127,6 +125,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         padding: 15
+    },
+    maintext: {
+        ...human.subhead,
+        marginBottom: 5
+    },
+    sublinetext: {
+        ...human.caption2,
+        color: iOSColors.gray
     }
 });
 

@@ -39,7 +39,7 @@ export const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imag
                     height={imageHeight}
                 />
             </View>
-            <Text style={styles.title}>{title}</Text>
+            <Text numberOfLines={1} style={styles.title}>{title}</Text>
             <View style={{ flexDirection: 'row' }}>
                 <Text style={[styles.subtitle]}>
                     {subtitle}
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
     },
     title: {
-        ...human.caption1,
+        ...human.subhead,
         marginTop: 5
     },
     subtitle: {

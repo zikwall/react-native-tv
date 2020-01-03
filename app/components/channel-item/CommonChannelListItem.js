@@ -1,11 +1,11 @@
 import React from 'react';
 import {
     View,
-    Text,
-} from "react-native";
+    Text, StyleSheet,
+} from 'react-native';
 import {
-    human,
-} from "react-native-typography";
+    human, iOSColors,
+} from 'react-native-typography';
 
 import Button from '../button/index.android';
 import s from './styles-list';
@@ -24,7 +24,7 @@ export const CommonChannelListItem = ({ image, title, subtitle, onPress, number,
 
             <View style={ s.leftContainer }>
                 {
-                    number && <Text style={[ human.caption2, {paddingRight: 10, color: '#ccc' } ]}>
+                    number && <Text style={s.number}>
                         { number }
                     </Text>
                 }
@@ -40,13 +40,13 @@ export const CommonChannelListItem = ({ image, title, subtitle, onPress, number,
                     <Text
                         numberOfLines={ 1 }
                         ellipsizeMode="tail"
-                        style={[human.caption1]}>
+                        style={s.title}>
                         { title }
                     </Text>
                     <Text
                         numberOfLines={ 1 }
                         ellipsizeMode="tail"
-                        style={[human.caption2]}>
+                        style={s.subtitle}>
                         { subtitle }
                     </Text>
                 </View>

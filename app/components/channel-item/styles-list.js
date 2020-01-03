@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import {human, iOSColors} from 'react-native-typography';
 
 const styles = StyleSheet.create({
     container: {
@@ -11,9 +12,6 @@ const styles = StyleSheet.create({
         padding: 5,
         height: 50,
         backgroundColor: 'white',
-        /*borderWidth: 1,
-        borderColor: '#000',
-        borderRadius: 5,*/
         borderBottomColor: '#f0f1f4',
         borderBottomWidth: 1,
     },
@@ -28,6 +26,19 @@ const styles = StyleSheet.create({
     leftContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    number: {
+        ...human.caption2,
+        color: iOSColors.gray,
+        paddingRight: 25
+    },
+    title: {
+        ...human.subhead,
+        marginBottom: 5
+    },
+    subtitle: {
+        ...human.caption2,
+        color: iOSColors.gray
     }
 });
 
