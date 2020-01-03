@@ -1,11 +1,8 @@
 import React from 'react';
 import {
     View,
-    Text, StyleSheet,
+    Text,
 } from 'react-native';
-import {
-    human, iOSColors,
-} from 'react-native-typography';
 
 import Button from '../button/index.android';
 import s from './styles-list';
