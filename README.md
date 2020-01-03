@@ -104,7 +104,7 @@
 ![PlayHub screen](screenshots/playhub.jpg "PlayHub screen") | ![Login screen](screenshots/login.jpg "Login screen")
 ![Register screen](screenshots/register.jpg "Register screen") | ![Menu screen](screenshots/menu_v3.jpg "Register screen")
 ![Static screen](screenshots/static_example.jpg "Static screen") | ![User Channels screen](screenshots/user_channels_v2.jpg "User channels screen")
-![User followers screen](screenshots/user_followers.jpg "User Followers screen") |)
+![User followers screen](screenshots/user_followers.jpg "User Followers screen") | ![FAQ screen](screenshots/faq.jpg "FAQ screen")
 
 ### Related Projects
 
