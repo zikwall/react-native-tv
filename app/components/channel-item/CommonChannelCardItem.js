@@ -27,7 +27,7 @@ export const TouchableRoundedImage = ({ style, width=80, height=80, ...props }) 
 
 export const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight, size, rating }) => {
     return (
-        <View
+        <TouchableOpacity
             style={
                 [styles.channelCard, {height: size, width: size,}]
             }
@@ -41,7 +41,7 @@ export const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imag
                     {subtitle}
                 </Text>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 };
 
