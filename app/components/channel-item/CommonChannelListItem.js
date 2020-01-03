@@ -8,6 +8,7 @@ import Button from '../button/index.android';
 import s from './styles-list';
 import { TouchableRoundedImage } from './CommonChannelCardItem';
 import Rating from '../rating';
+import {Avatar} from '../avatar';
 
 export const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating }) => {
     const itemStyles = { backgroundColor:'#fff' };
@@ -20,18 +21,11 @@ export const CommonChannelListItem = ({ image, title, subtitle, onPress, number,
             ]}>
 
             <View style={ s.leftContainer }>
-                {
-                    number && <Text style={s.number}>
-                        { number }
-                    </Text>
-                }
+                {number && <Text style={s.number}>
+                    { number }
+                </Text>}
 
-                <TouchableRoundedImage
-                    style={{ borderRadius: 3 }}
-                    source={image}
-                    height={50}
-                    width={50}
-                />
+                <Avatar src={image} resizeMode="contain" />
 
                 <View style={ s.headingContainer }>
                     <Text

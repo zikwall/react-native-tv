@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Image } from 'react-native';
 
-const Avatar = ({ src, size, style }) => {
+const Avatar = ({ src, size, style, ...props }) => {
     return (
         <Image
             style={{
@@ -13,12 +13,13 @@ const Avatar = ({ src, size, style }) => {
                 borderWidth: 0.1,
                 ...style
             }}
+            {...props}
             source={ src } />
     )
 };
 
 Avatar.defaultProps = {
-    src: 'https://avatars.githubusercontent.com/ammorium?v=3&s=100',
+    src: { uri: 'https://avatars.githubusercontent.com/ammorium?v=3&s=100' },
     size: 40
 };
 

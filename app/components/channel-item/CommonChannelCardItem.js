@@ -12,6 +12,7 @@ import {
 } from 'react-native-typography';
 
 import Rating from '../rating';
+import {Avatar} from '../avatar';
 
 export const TouchableRoundedImage = ({ style, width=80, height=80, ...props }) => (
     <TouchableOpacity style={style}>
@@ -24,7 +25,7 @@ export const TouchableRoundedImage = ({ style, width=80, height=80, ...props }) 
     </TouchableOpacity>
 );
 
-export const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight, size=150, rating }) => {
+export const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight, size, rating }) => {
     return (
         <View
             style={
@@ -32,12 +33,7 @@ export const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imag
             }
         >
             <View style={{ flex: 1, alignItems: 'center' }}>
-                <TouchableRoundedImage
-                    style={styles.channelCardImage}
-                    source={image}
-                    width={imageWidth}
-                    height={imageHeight}
-                />
+                <Avatar src={image} resizeMode="contain" width={imageWidth} height={imageHeight}/>
             </View>
             <Text numberOfLines={1} style={styles.title}>{title}</Text>
             <View style={{ flexDirection: 'row' }}>
@@ -47,6 +43,12 @@ export const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imag
             </View>
         </View>
     )
+};
+
+CommonChannelCardItem.defaultProps = {
+    imageWidth: 70,
+    imageHeight: 70,
+    size: 150
 };
 
 const styles = StyleSheet.create({
