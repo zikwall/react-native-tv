@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/Feather";
 import { WatchScreen, LibraryScreen, HomeScreen, PlayHubScreen } from '../screens';
 import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
 import DrawerNavigator from './drawer/DrawerNavigator';
+import PlayhubNavigator from './playhub/PlayhubNavigator';
 
 export default createBottomTabNavigator(
     {
@@ -50,7 +51,7 @@ export default createBottomTabNavigator(
             }
         },
         PlayHubScreen: {
-            screen: PlayHubScreen,
+            screen: PlayhubNavigator,
             navigationOptions:{
                 tabBarLabel: 'PlayHub',
                 tabBarIcon: ({ tintColor, focused }) => (

@@ -14,6 +14,10 @@ import TermsScreen from './static/TermsScreen';
 import PrivacyScreen from './static/PrivacyScreen';
 import AboutScreen from './static/AboutScreen';
 import FaqScreen from './static/FaqScreen';
+import PlayHubBestScreen from './playhub/PlayHubBestScreen';
+import PlayHubCategoryScreen from './playhub/PlayHubCategoryScreen';
+import PlayHubForFamilyScreen from './playhub/PlayHubForFamilyScreen';
+import PlayHubRecommendedScreen from './playhub/PlayHubRecommendedScreen';
 
 export {
     // global
@@ -23,5 +27,7 @@ export {
     // auth
     LoginScreen, RegisterScreen,
     // menu
-    DrawerScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen
+    DrawerScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen,
+    // playhub
+    PlayHubBestScreen, PlayHubCategoryScreen, PlayHubForFamilyScreen, PlayHubRecommendedScreen
 }
