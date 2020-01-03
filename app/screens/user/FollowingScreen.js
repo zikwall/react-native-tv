@@ -1,35 +1,39 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import { Back } from "../../components/header";
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { iOSColors, human } from 'react-native-typography';
 
-export default class FollowingScreen extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: `Profile`,
-            headerLeft: () => (
-                <Back />
-            ),
-        };
-    };
+import { UserLineItem } from '../../components/user-item';
+import { Fake } from '../../utils';
 
-    render() {
-        return (
-            <View style={ styles.container }>
-                <View>
-                    <Icon focused={ false } name={ 'user-check' } size={ 150 } style={{ color: '#f0f1f3', textAlign: 'center' }}/>
-                </View>
-            </View>
-        );
-    }
-}
+const FollowingScreen = () => {
+    return (
+        <View style={ styles.screenContainer }>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <Text style={[human.subhead, {marginLeft: 20, marginTop: 5, marginBottom: 10}]}>
+                    Apparently, he respects them, as he subscribed to them.
+                </Text>
+                {Fake.users.map((user, index) => {
+                    return <UserLineItem
+                        key={index}
+                        id={index + 1}
+                        name={user.user}
+                        username={user.userName}
+                        image={user.avatar}
+                        moreOnPress={(id, name, username) => {
+                            alert(`Hi, my name is ${name}`)
+                        }}
+                    />
+                })}
+            </ScrollView>
+        </View>
+    );
+};
+
+export default FollowingScreen;
 
 const styles = StyleSheet.create({
-    container: {
+    screenContainer: {
         flex: 1,
-        backgroundColor: '#fff',
-        paddingTop: 15,
-        justifyContent: "center",
-        textAlign: 'center'
+        backgroundColor: iOSColors.white
     },
 });
