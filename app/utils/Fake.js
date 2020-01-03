@@ -1,3 +1,5 @@
+import faker from 'faker';
+
 export const homeFeed = [
     {
         type: "tweet",
@@ -339,5 +341,53 @@ export const userPlaylist = [
         category: "Спорт",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
         rating: '4,4',
+    }
+];
+
+export const users = [
+    {
+        user: "Rodney Diaz",
+        userName: "@rodiaz",
+        avatar: require("../assets/avatar/user1.jpg"),
+    },
+    {
+        user: "Rustam Abashirov",
+        userName: "@rus_team",
+        avatar: { uri: faker.image.avatar() },
+    },
+    {
+        user: "Terry Davidson",
+        userName: "@davidson",
+        avatar: require("../assets/avatar/user6.jpg"),
+    },
+    {
+        user: "Stepanov Alexander",
+        userName: "@stepa",
+        avatar: { uri: faker.image.avatar() },
+    },
+    {
+        user: "Craig Griffin",
+        userName: "@cgriffin",
+        avatar: require("../assets/avatar/user4.jpg"),
+    },
+    {
+        user: "Sergey Tichonov",
+        userName: "@tihon",
+        avatar: require("../assets/avatar/user5.jpg"),
+    },
+    {
+        user: "Wyatt Fleming",
+        userName: "@attFleming",
+        avatar: require("../assets/avatar/user3.jpg"),
+    },
+    {
+        user: "Andrey Nikolayev",
+        userName: "@nickolay",
+        avatar: require("../assets/avatar/user2.jpg"),
+    },
+    {
+        user: "Nikita Timurbulatov",
+        userName: "@dawshak",
+        avatar: { uri: faker.image.avatar() },
     }
 ];
