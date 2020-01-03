@@ -16,57 +16,7 @@ import {
 
 import { Back } from "../../components/header";
 import { CommonChannelCardItem, CommonChannelListItem } from '../../components/channel-item';
-
-const recents = [
-    {
-        album: "Кинопремьера",
-        author: "Кино",
-        cover: {uri: 'http://tv.zikwall.ru/images/logo/Кинопремьера.png'},
-        rating: '4,4',
-    },
-    {
-        album: "Fox",
-        author: "Развлекательное",
-        cover: {uri: 'http://tv.zikwall.ru/images/logo/FOX.png'},
-        rating: '4,2',
-    },
-    {
-        album: "Матч ТВ",
-        author: "Спорт",
-        cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
-        rating: '3,1',
-    },
-    {
-        album: "Cartoon Network",
-        author: "Развлекательное",
-        cover: {uri: 'http://tv.zikwall.ru/images/logo/Cartoon Network.png'},
-        rating: '4,9',
-    },
-    {
-        album: "Amedia premium HD",
-        author: "Премиум",
-        cover: {uri: 'http://tv.zikwall.ru/images/logo/Amedia premium HD.png'},
-        rating: '4,3',
-    },
-    {
-        album: "National Geographic",
-        author: "Позвновательное",
-        cover: {uri: 'http://tv.zikwall.ru/images/logo/National Geographic.png'},
-        rating: '2',
-    },
-    {
-        album: "Матч ТВ",
-        author: "Спорт",
-        cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
-        rating: '4,4',
-    },
-    {
-        album: "Матч ТВ",
-        author: "Спорт",
-        cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
-        rating: '4,4',
-    }
-];
+import { Fake } from '../../utils';
 
 export default class ProfileChannelScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -95,12 +45,12 @@ export default class ProfileChannelScreen extends React.Component {
                                 showsHorizontalScrollIndicator={false}
                                 contentContainerStyle={styles.recentlyPlayedSongList}
                             >
-                                {recents.map((recent, index) => (
+                                {Fake.userPlaylist.map((playlist, index) => (
                                     <CommonChannelCardItem
                                         key={index}
-                                        title={recent.album}
-                                        subtitle={recent.author}
-                                        image={recent.cover}
+                                        title={playlist.channel}
+                                        subtitle={playlist.category}
+                                        image={playlist.cover}
                                         imageHeight={60}
                                         size={130}
                                     />
@@ -112,14 +62,14 @@ export default class ProfileChannelScreen extends React.Component {
                                 <Text style={styles.recentlyPlayedTitle}>All playlist</Text>
                             </View>
                             <View style={{paddingTop: 10}}>
-                                {recents.map((recent, index) => (
+                                {Fake.userPlaylist.map((playlist, index) => (
                                     <CommonChannelListItem
                                         key={index}
                                         number={index + 1}
-                                        title={recent.album}
-                                        subtitle={recent.author}
-                                        image={recent.cover}
-                                        rating={recent.rating}
+                                        title={playlist.album}
+                                        subtitle={playlist.category}
+                                        image={playlist.cover}
+                                        rating={playlist.rating}
                                     />
                                 ))}
                             </View>
