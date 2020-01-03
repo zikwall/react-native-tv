@@ -21,7 +21,7 @@ const ProfileChannelScreen = () => {
     return (
         <View style={styles.screenContainer}>
             <View style={styles.recentlyPlayed}>
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.recentlyPlayedTitleBar}>
                         <Text style={styles.recentlyPlayedTitle}>Favorites for you</Text>
                         <TouchableOpacity>
@@ -40,7 +40,6 @@ const ProfileChannelScreen = () => {
                                     title={playlist.channel}
                                     subtitle={playlist.category}
                                     image={playlist.cover}
-                                    imageHeight={60}
                                     size={130}
                                 />
                             ))}
@@ -55,7 +54,7 @@ const ProfileChannelScreen = () => {
                                 <CommonChannelListItem
                                     key={index}
                                     number={index + 1}
-                                    title={playlist.album}
+                                    title={playlist.channel}
                                     subtitle={playlist.category}
                                     image={playlist.cover}
                                     rating={playlist.rating}
