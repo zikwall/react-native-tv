@@ -44,7 +44,7 @@ const DrawerScreen = ({ navigation, isAuthenticated }) => {
                 <MenuItem onPress={onMenuClick} to={''} icon={ 'at-sign' } name={'Contacts'}/>
                 <Divider />
                 <MenuItem onPress={onMenuClick} to={'AboutScreen'} icon={ 'info' } name={'About the Project'}/>
-                <MenuItem onPress={onMenuClick} to={''} icon={ 'help-circle' } name={'FAQ'}/>
+                <MenuItem onPress={onMenuClick} to={'FaqScreen'} icon={ 'help-circle' } name={'FAQ'}/>
                 <MenuItem onPress={onMenuClick} to={''} icon={ 'help-circle' } name={'Help'}/>
             </ScrollView>
         </View>

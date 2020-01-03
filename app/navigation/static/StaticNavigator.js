@@ -1,7 +1,7 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { Back, Right } from '../../components/header';
-import { CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen } from '../../screens';
+import { CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen } from '../../screens';
 import Icon from 'react-native-vector-icons/Feather';
 
 const StaticNavigation = createMaterialTopTabNavigator({

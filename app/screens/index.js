@@ -13,6 +13,7 @@ import CopyrightScreen from './static/CopyrightScreen';
 import TermsScreen from './static/TermsScreen';
 import PrivacyScreen from './static/PrivacyScreen';
 import AboutScreen from './static/AboutScreen';
+import FaqScreen from './static/FaqScreen';
 
 export {
     // global
@@ -22,5 +23,5 @@ export {
     // auth
     LoginScreen, RegisterScreen,
     // menu
-    DrawerScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen
+    DrawerScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen
 }
