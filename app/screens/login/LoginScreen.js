@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import { Back } from "../../components/header";
 import LoginScreenComponent from "./LoginScreenComponent";
 import { authenticate } from '../../redux/actions';
+import { Validator } from '../../utils';
+import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_PASSWORD, ERROR_INVALID_USERNAME } from '../../constants';
 
 
 const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
@@ -28,6 +30,26 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
     });
 
     const handleOnLogin = async () => {
+        if (!Validator.isValidUsername(username)) {
+            setError({
+                has: true,
+                error: ERROR_INVALID_USERNAME.message,
+                attributes: ERROR_INVALID_USERNAME.attributes
+            });
+
+            return false;
+        }
+
+        if (!Validator.isValidPassword(password)) {
+            setError({
+                has: true,
+                error: ERROR_INVALID_PASSWORD.message,
+                attributes: ERROR_INVALID_PASSWORD.attributes
+            });
+
+            return false;
+        }
+
         const status = await auth({username: username, password: password}, 'token_by_login');
 
         if (status.state === true) {
