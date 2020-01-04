@@ -8,7 +8,7 @@ import {
 
 export const container = loginButtonBackgroundColor => {
     return {
-        marginBottom: 32,
+        marginBottom: 12,
         width: ScreenWidth,
         height: ScreenHeight,
         backgroundColor: loginButtonBackgroundColor

@@ -111,10 +111,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen);
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        paddingTop: 15,
-        justifyContent: "center",
-        textAlign: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 });

@@ -8,7 +8,6 @@ import { authenticate } from '../../redux/actions';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_PASSWORD, ERROR_INVALID_USERNAME } from '../../constants';
 
-
 const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
 
     const [ username, setUsername ] = useState(null);
@@ -110,9 +109,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        marginBottom: 10,
         justifyContent: 'center',
         textAlign: 'center'
     },
