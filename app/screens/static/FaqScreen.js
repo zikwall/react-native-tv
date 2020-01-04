@@ -58,7 +58,7 @@ const FaqScreen = () => {
                 </View>
             </View>
             <View>
-                <View style={{ margin: 15, paddingBottom: 70 }}>
+                <View style={{ margin: 15, paddingBottom: 100 }}>
                     { renderFAQ() }
                 </View>
             </View>
