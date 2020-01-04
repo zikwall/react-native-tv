@@ -13,8 +13,12 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
     const [ password, setPassword ] = useState(null);
     const [ switchValue, setSwitchValue ] = useState(false);
 
-    const handleClickRegisterText = () => {
+    const handlePressRegister = () => {
         navigation.navigate('Register');
+    };
+
+    const handlePressForgot = () => {
+        navigation.navigate('Forgot');
     };
 
     const [ error, setError ] = useState({
@@ -42,11 +46,13 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
         <View style={ styles.container }>
             <LoginScreenComponent
                 error={ error }
-                onPress={ handleClickRegisterText }
+                onPress={ handlePressRegister }
+                onPressForgot={ handlePressForgot }
                 onLogin={ handleOnLogin }
                 loginButtonBackgroundColor="#000"
                 loginBackgorundColor="#fff"
                 loginText="Don't have a Play account yet? Create now!"
+                forgotText="Forgot your password? No problems!"
                 loginButtonTextStyle={{ color: '#000' }}
                 onSwitchValueChange={switchValue => {
                     setSwitchValue(switchValue);

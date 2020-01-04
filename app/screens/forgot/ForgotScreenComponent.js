@@ -12,15 +12,15 @@ import Logo from "../../components/auth/Logo";
 import BottomContainer from "./components/BottomContainer/BottomContainer";
 import styles, { container } from "./style";
 import { ErrorText } from '../../components/error';
+import { SuccessText } from '../../components/success';
 
-const LoginScreenComponent = props => {
+const ForgotScreenComponent = props => {
     const {
         error,
+        message,
         onPress,
-        onPressForgot,
         children,
         loginText,
-        forgotText,
         loginButtonTextStyle,
         loginButtonBackgroundColor,
         loginBackgorundColor,
@@ -29,14 +29,9 @@ const LoginScreenComponent = props => {
 
     const renderLoginButton = () => {
         return (
-            <View>
-                <TouchableOpacity style={styles.forgotButtonStyle} onPress={onPressForgot}>
-                    <Text style={loginButtonTextStyle}>{forgotText}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.loginButtonStyle} onPress={onPress}>
-                    <Text style={loginButtonTextStyle}>{loginText}</Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={styles.loginButtonStyle} onPress={onPress}>
+                <Text style={loginButtonTextStyle}>{loginText}</Text>
+            </TouchableOpacity>
         );
     };
 
@@ -52,6 +47,8 @@ const LoginScreenComponent = props => {
                     <SafeAreaView style={styles.safeAreaViewStyle}>
                         <View style={styles.loginContainer}>
                             <Logo {...props} />
+
+                            <SuccessText hasMessage={!!message} message={message} />
 
                             <ErrorText hasError={ error.has }
                                 error={ error.error }
@@ -70,15 +67,15 @@ const LoginScreenComponent = props => {
     );
 };
 
-LoginScreenComponent.propTypes = {
+ForgotScreenComponent.propTypes = {
     loginText: PropTypes.string,
     loginButtonBackgroundColor: PropTypes.string
 };
 
-LoginScreenComponent.defaultProps = {
+ForgotScreenComponent.defaultProps = {
     loginText: "Login",
     loginButtonBackgroundColor: "#282828",
     loginButtonTextStyle: styles.loginButtonTextStyle
 };
 
-export default LoginScreenComponent;
+export default ForgotScreenComponent;

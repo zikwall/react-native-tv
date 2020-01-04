@@ -12,8 +12,6 @@ export const registration = ({ username, email, password }, token) => {
                 password
             })
         }).then((response) => {
-            console.log('AAAAAAAAAAAA');
-            console.log(response);
 
             if (response.code === 200) {
                 Session.setToken(response.token);
@@ -43,8 +41,6 @@ const authenticate = ({ username, password }, token) => {
                 password
             })
         }).then((response) => {
-            console.log('AAAAAAAAAAAA');
-            console.log(response);
 
             if (response.code === 200) {
                 Session.setToken(response.token);

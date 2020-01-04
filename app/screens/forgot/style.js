@@ -25,15 +25,6 @@ export default {
         justifyContent: "center",
         bottom: isAndroid ? 32 : isIPhoneXFamily() ? 32 : ScreenHeight * 0.01,
     },
-    forgotButtonStyle: {
-        left: 0,
-        right: 0,
-        height: 50,
-        position: "absolute",
-        alignItems: "center",
-        justifyContent: "center",
-        bottom: isAndroid ? 62 : isIPhoneXFamily() ? 62 : ScreenHeight * 0.01,
-    },
     loginButtonTextStyle: {
         color: "#000",
         fontSize: 15,

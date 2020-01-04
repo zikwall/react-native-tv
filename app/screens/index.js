@@ -8,6 +8,7 @@ import FollowersScreen from './user/FollowersScreen';
 import ProfileChannelScreen from './user/ProfileChannelScreen';
 import LoginScreen from "./login/LoginScreen";
 import RegisterScreen from './register/RegisterScreen';
+import ForgotScreen from './forgot/ForgotScreen';
 import DrawerScreen from './drawer/DrawerScreen';
 import CopyrightScreen from './static/CopyrightScreen';
 import TermsScreen from './static/TermsScreen';
@@ -25,7 +26,7 @@ export {
     // user
     ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen,
     // auth
-    LoginScreen, RegisterScreen,
+    LoginScreen, RegisterScreen, ForgotScreen,
     // menu
     DrawerScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen,
     // playhub
