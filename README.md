@@ -6,7 +6,12 @@
 </div>
 
 ## Base Features & Roadmap
- 
+
+- [ ] Available Platforms
+    - [x] Android
+    - [ ] iOS
+    - [ ] Android TV
+    - [ ] tvOS
 - [x] WebView
     - [x] JW Player
     - [ ] Plyr
