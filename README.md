@@ -25,7 +25,7 @@
     - [x] Watch
     - [x] Login
     - [x] Register
-    - [ ] Forgot password
+    - [x] Forgot password
     - [ ] Favorites
     - [ ] Own profile
         - [ ] Settings
