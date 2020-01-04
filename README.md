@@ -133,6 +133,25 @@
 ![User followers screen](screenshots/user_followers.jpg "User Followers screen") | ![FAQ screen](screenshots/faq_v2.jpg "FAQ screen")
 ![Forgot screen](screenshots/forgot.jpg "Forgot screen") |
 
+### Disclaimer
+
+At the moment, the code in some places may force you:
+
+- scared
+- I do not like
+- refusal
+- trembling skin
+
+I apologize, everything will be fixed in the future. ^_^
+
+> Premature optimization is the root of all evil (or at least most of it) in programming.
+> -- <cite>[Donald Ervin Knuth][1]</cite> «Computer Programming as an Art», «Communications of the ACM» (Vol. 17, Issue 12)
+
+[1]:http://www.paulgraham.com/knuth.html
+
+
+Functionality, UI, screenshots and content in different languages: English and Russian. Soon there will be i18n.
+
 ### Related Projects
 
 1. [VK TV Mini App (desktop)](https://github.com/zikwall/vk-tv-desctop)
