@@ -11,7 +11,7 @@ import {
 import Logo from "../../components/auth/Logo";
 import BottomContainer from "./components/BottomContainer/BottomContainer";
 import styles, { container } from "./style";
-import { ErrorText } from "../../components/error";
+import { ErrorText } from "../../components/flash";
 
 const RegisterScreenComponent = props => {
     const {

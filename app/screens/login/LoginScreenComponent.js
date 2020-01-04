@@ -4,14 +4,13 @@ import {
     Text,
     View,
     SafeAreaView,
-    Button,
     TouchableOpacity,
     KeyboardAvoidingView
 } from "react-native";
 import Logo from "../../components/auth/Logo";
 import BottomContainer from "./components/BottomContainer/BottomContainer";
 import styles, { container } from "./style";
-import { ErrorText } from '../../components/error';
+import { ErrorText } from '../../components/flash';
 
 const LoginScreenComponent = props => {
     const {

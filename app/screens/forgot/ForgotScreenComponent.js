@@ -4,15 +4,13 @@ import {
     Text,
     View,
     SafeAreaView,
-    Button,
     TouchableOpacity,
     KeyboardAvoidingView
 } from "react-native";
 import Logo from "../../components/auth/Logo";
 import BottomContainer from "./components/BottomContainer/BottomContainer";
 import styles, { container } from "./style";
-import { ErrorText } from '../../components/error';
-import { SuccessText } from '../../components/success';
+import { ErrorText, SuccessText } from '../../components/flash';
 
 const ForgotScreenComponent = props => {
     const {
