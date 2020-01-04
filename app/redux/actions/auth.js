@@ -1,6 +1,6 @@
 import { AUTHENTICATE, DEAUTHENTICATE } from '../types';
 import { apiFetch } from "../../services/api";
-import { Session } from '../../services/auth';
+import {Identity, Session} from '../../services/auth';
 
 export const registration = ({ username, email, password }, token) => {
     return (dispatch) => {
@@ -13,9 +13,10 @@ export const registration = ({ username, email, password }, token) => {
             })
         }).then((response) => {
 
-            if (response.code === 200) {
+            if (response.code && response.code === 200) {
                 Session.setToken(response.token);
-                dispatch({type: AUTHENTICATE, token: response.token});
+                Identity.setUser(response.user);
+                dispatch({type: AUTHENTICATE, token: response.token, user: response.user});
 
                 return {
                     state: true
@@ -42,14 +43,17 @@ const authenticate = ({ username, password }, token) => {
             })
         }).then((response) => {
 
-            if (response.code === 200) {
+            if (response.code && response.code === 200) {
                 Session.setToken(response.token);
-                dispatch({type: AUTHENTICATE, token: response.token});
+                Identity.setUser(response.user);
+                dispatch({type: AUTHENTICATE, token: response.token, user: response.user});
 
                 return {
                     state: true
                 };
             }
+
+            console.log(response);
 
             return {
                 state: false,
@@ -62,9 +66,9 @@ const authenticate = ({ username, password }, token) => {
 };
 
 // gets the token from the cookie and saves it in the store
-const reauthenticate = (token) => {
+const reauthenticate = (token, user) => {
     return (dispatch) => {
-        dispatch({type: AUTHENTICATE, token: token});
+        dispatch({type: AUTHENTICATE, token: token, user: user});
     };
 };
 
@@ -73,6 +77,7 @@ const deauthenticate = () => {
     return (dispatch) => {
         apiFetch('/vktv/auth/logout').then((response) => {
             Session.removeToken();
+            Identity.removeUser();
             dispatch({type: DEAUTHENTICATE});
         }).catch((error) => {
             throw new Error(error);

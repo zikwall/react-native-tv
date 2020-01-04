@@ -12,7 +12,7 @@ import NotificationCard from '../../components/notification/NotificationCard';
 const ProfileHomeScreen = () => {
     return (
         <View style={ styles.container }>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ paddingRight: 15, paddingLeft: 15, paddingBottom: 15 }}>
                     <CalendarHeatmap
                         endDate={ moment().endOf('month').format('YYYY-MM-DD') }

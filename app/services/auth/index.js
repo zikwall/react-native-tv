@@ -1,6 +1,8 @@
 import Session from "./Session";
 import { handleJWTMiddleware, handleAuthenticate, handleLogout } from './Auth';
+import * as Identity from './Identity';
 
 export {
-    Session, handleJWTMiddleware, handleAuthenticate, handleLogout
+    Session, Identity,
+    handleJWTMiddleware, handleAuthenticate, handleLogout
 };

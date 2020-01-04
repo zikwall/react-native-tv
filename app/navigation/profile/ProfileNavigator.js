@@ -5,9 +5,11 @@ import { View, } from "react-native";
 import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
 import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
+import Orientation from 'react-native-orientation';
+
 import { ProfileHomeScreen, FollowingScreen, FollowersScreen, ProfileChannelScreen } from "../../screens";
 import { Back } from "../../components/header";
-import Orientation from 'react-native-orientation';
+import { UserHelper } from '../../utils';
 
 const ProfileTopNavStack = createMaterialTopTabNavigator({
     ProfileHomeScreen: {
@@ -78,8 +80,14 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
     },
 });
 
-const ProfileNavigator = ({ navigation }) => {
+const ProfileNavigator = ({ navigation, user, isAuthenticated }) => {
     const [ visibleUserTop, setVisibleUserTop ] = useState(true);
+
+    useEffect(() => {
+        if(!isAuthenticated) {
+            navigation.navigate('Login');
+        }
+    });
 
     useEffect(() => {
         Orientation.addOrientationListener(orientationHandleChange);
@@ -102,8 +110,9 @@ const ProfileNavigator = ({ navigation }) => {
     return (
         <View style={{ flex: 1 }}>
             {visibleUserTop && <UserTop
-                displayName="AndreyKa"
-                username="zikwall"
+                displayName={UserHelper.buildUserId(user)}
+                username={user.username}
+                avatar={UserHelper.makeUserAvatar(user)}
             />}
 
             <View style={{ flex: 1 }}>
@@ -131,8 +140,9 @@ ProfileNavigator.navigationOptions = ({ navigation }) => {
     };
 };
 
-const mapStateToProps = (state) => (
-    { isAuthenticated: !!state.authentication.token }
-);
+const mapStateToProps = (state) => ({
+    isAuthenticated: !!state.authentication.token,
+    user: state.authentication.user
+});
 
 export default connect(mapStateToProps)(ProfileNavigator);

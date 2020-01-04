@@ -24,7 +24,7 @@ const DrawerUserInfo = ({
         },
       ]}>
       <View style={s.topContainer}>
-        <Avatar src={{ uri: avatarUrlMedium }} />
+        <Avatar src={avatarUrlMedium} />
 
         <View style={s.info}>
           <Text style={[s.displayName, {color: '#000'}]}>{displayName}</Text>
@@ -47,7 +47,6 @@ const DrawerUserInfo = ({
 DrawerUserInfo.propTypes = {
   username: PropTypes.string,
   displayName: PropTypes.string,
-  avatarUrlMedium: PropTypes.string,
 };
 
 export default DrawerUserInfo;

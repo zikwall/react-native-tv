@@ -2,11 +2,13 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
+
 import DrawerUserInfo from './DrawerUserInfo'
 import MenuItem from '../../components/menu-item/MenuItem';
 import Divider from '../../components/divider';
+import { UserHelper } from '../../utils';
 
-const DrawerScreen = ({ navigation, isAuthenticated }) => {
+const DrawerScreen = ({ navigation, user, isAuthenticated }) => {
     const handleSettingsPress = () => {
         alert('Press settings')
     };
@@ -23,9 +25,9 @@ const DrawerScreen = ({ navigation, isAuthenticated }) => {
         <View style={styles.container}>
             {
                 isAuthenticated && <DrawerUserInfo
-                    username='zikwall'
-                    displayName='AndreyKa'
-                    avatarUrlMedium='https://avatars2.githubusercontent.com/u/23422968?s=460&v=4'
+                    username={user.username}
+                    displayName={UserHelper.buildUserId(user)}
+                    avatarUrlMedium={UserHelper.makeUserAvatar(user)}
                     onSettingsPress={handleSettingsPress}
                     onSearchPress={handleSearchPress}
                 />
@@ -51,9 +53,10 @@ const DrawerScreen = ({ navigation, isAuthenticated }) => {
     );
 };
 
-const mapStateToProps = (state) => (
-    { isAuthenticated: !!state.authentication.token }
-);
+const mapStateToProps = (state) => ({
+    isAuthenticated: !!state.authentication.token,
+    user: state.authentication.user
+});
 
 export default connect(mapStateToProps)(withNavigation(DrawerScreen));
 

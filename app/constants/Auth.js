@@ -1,3 +1,6 @@
+export const SESSION_TOKEN_KEY = 'session';
+export const IDENTITY_STORAGE_KEY = 'identity';
+
 export const ERROR_INVALID_PASSWORD = {
     'code': 5,
     'message': 'Password may contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number.',
