@@ -6,7 +6,7 @@ import { Back } from "../../components/header";
 import LoginScreenComponent from "./LoginScreenComponent";
 import { authenticate } from '../../redux/actions';
 import { Validator } from '../../utils';
-import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_PASSWORD, ERROR_INVALID_USERNAME } from '../../constants';
+import { ERROR_INVALID_PASSWORD, ERROR_INVALID_USERNAME } from '../../constants';
 
 
 const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
