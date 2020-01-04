@@ -5,42 +5,63 @@
   <h5>An application in which users can create and share with their personal or public playlists with other users of the application with the possibility of monetization.</h5>
 </div>
 
-## Base Features & Roadmap
+## Base Features & Roadmap - dirty
 
 - [ ] Available Platforms
-    - [x] Android
+    - [x] Android (minimal support version??)
     - [ ] iOS
     - [ ] Android TV
     - [ ] tvOS
 - [x] WebView
-    - [x] JW Player
-    - [ ] Plyr
-    - [ ] Video.js
-    - [x] [OpenPlayer.js](https://github.com/openplayerjs/openplayerjs)
+    - [x] JW Player _[SSR]_
+    - [ ] Plyr _[SSR]_
+    - [ ] Video.js _[SSR]_
+    - [x] [OpenPlayer.js](https://github.com/openplayerjs/openplayerjs) (SSR)
+    - [X] Native player _[CS]_
 - [x] Switch between Players
-    - [x] JW Player
-    - [x] Openplayer.js
+    - [x] JW Player _[SS]_
+    - [x] Openplayer.js _[SS]_
+    - [x] Native player (origin stream) _[CS]_ - temporary or premium
 - [X] Ads
     - [x] Preroll on Video Player (IMA, VAST, etc.)
     - [ ] ADMob
     - [ ] Interstitial 
     - [ ] Other native ad
 - [x] Screens
-    - [x] Home
+    - [x] Home (TODO caching playlists)
     - [x] Watch
     - [x] Login
-    - [x] Register
-    - [x] Forgot password
+    - [x] Register (TODO apply Privacy Policy)
+    - [x] Forgot password (left server revision)
     - [ ] Favorites
     - [ ] Own profile
         - [ ] Settings
         - [ ] Repositories
+        - [ ] Friends
+        - [ ] Messages
+        - [ ] Communities
+        - [ ] Bookmarks
+        - [ ] Liked
+        - [ ] Purchases _(maybe)_
     - [ ] User profile
-    - [ ] Apps Library
+        - [ ] Activity
+            - [ ] Hot maps like a github
+            - [ ] Feed/Stream
+        - [ ] Playlists
+            - [ ] User Selected Top Playlists
+            - [ ] All User Playlists
+        - [ ] Followers
+        - [ ] Following
+    - [ ] Apps Library _(it might be better to specify related services such as [Vk TV Mini Apps](https://github.com/zikwall/vk-tv-desktop), [enjoy.tv](https://github.com/zikwall/tv-next))_
     - [x] About
     - [x] Terms
-    - [ ] Repositories
-    - [ ] Top (Tabs)
+    - [x] Copyright
+    - [x] Privacy policy
+    - [X] FAQ
+    - [x] Contacts
+    - [ ] Help
+    - [ ] Repositories _(deprecated)_
+    - [ ] Top (Tabs) _(maybe make deprecated)_
         - [ ] Top 10
         - [ ] Hot
         - [ ] Recommended
@@ -48,15 +69,15 @@
 - [x] Components
     - [x] Search
     - [x] App preloader
-    - [ ] TV program list
-    - [ ] Current TV program
+    - [ ] TV program list _(have layout)_
+    - [ ] Current TV program _(left server revision, [m3uparse](https://github.com/zikwall/m3uparse))_
 - [ ] Native Players
     - [ ] ExoPlayer
     - [ ] JWPlayer SDK
 - [ ] Services
     - [x] Auth Primary Client (Login/Pass)
     - [ ] OAuth (VK, FB, TW, Inst.)
-- [ ] Premium
+- [ ] Premium _(hmm...)_
     - [x] Native Web Player supported by ad-free provider
 - [ ] Functions
     - [ ] Save to watch latter
