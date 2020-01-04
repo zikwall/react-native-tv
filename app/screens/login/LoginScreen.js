@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Back } from "../../components/header";
 import LoginScreenComponent from "./LoginScreenComponent";
-import { handleAuthenticate } from '../../services/auth';
+import { authenticate } from '../../redux/actions';
+
 
 const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
 
@@ -23,8 +24,18 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
     });
 
     const handleOnLogin = async () => {
-        await auth({username: username, password: '123456'}, 'token_by_login');
-        navigation.navigate('Profile');
+        const status = await auth({username: username, password: password}, 'token_by_login');
+
+        if (status.state === true) {
+            navigation.navigate('Profile');
+            return true;
+        }
+
+        setError({
+            has: true,
+            error: status.response.message,
+            attributes: status.response.attributes
+        })
     };
 
     return (
@@ -64,7 +75,7 @@ const mapStateToProps = (state) => (
 );
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    auth: handleAuthenticate
+    auth: authenticate
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

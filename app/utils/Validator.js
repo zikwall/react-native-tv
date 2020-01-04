@@ -3,7 +3,7 @@ export const isValidEmail = (email) => {
 };
 
 export const isValidPassword = (password) => {
-    if (password.length < 8) {
+    if (!password || password.length < 8) {
         return false;
     }
 
@@ -11,7 +11,7 @@ export const isValidPassword = (password) => {
 };
 
 export const isValidUsername = (username) => {
-    if (username.length < 5 || username.length > 20) {
+    if (!username || username.length < 5 || username.length > 20) {
         return false;
     }
 

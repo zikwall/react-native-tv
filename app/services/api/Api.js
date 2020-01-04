@@ -1,4 +1,12 @@
 import { API_DOMAIN } from "../../constants";
+import {
+    UnauthorizedException,
+    ForbiddenHttpException,
+    BadRequestHttpException,
+    InternalServerErrorException,
+    NotFoundHttpException,
+    Exception
+} from "../../exceptions";
 
 export const apiFetch = (url, options, useAuth = true) => {
     let headers = {};
@@ -20,8 +28,32 @@ export const pureFetch = (url, options, headers) => {
         .then(response => response.json());
 };
 
-const handleResponse = (response) => {
-    return response;
+export const handleResponse = (response) => {
+    if (response.status >= 200 && response.status < 300) {
+        return response;
+    }
+
+    if (response.status === 400) {
+        throw (new BadRequestHttpException(response));
+    }
+
+    if (response.status === 401) {
+        throw (new UnauthorizedException(response));
+    }
+
+    if (response.status === 403) {
+        throw (new ForbiddenHttpException(response));
+    }
+
+    if (response.status === 404) {
+        throw (new NotFoundHttpException(response));
+    }
+
+    if (response.status === 500) {
+        throw (new InternalServerErrorException(response));
+    }
+
+    throw (new Exception('Server request execution error.'));
 };
 
 export const apiUrl = (url) => {

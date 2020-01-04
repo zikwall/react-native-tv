@@ -1,30 +1,76 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
 import { Back } from "../../components/header";
 import RegisterScreenComponent from './RegisterScreenComponent';
-import Icon from 'react-native-vector-icons/Feather';
+import { registration } from '../../redux/actions';
+import { Validator } from '../../utils';
+import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_USERNAME, ERROR_INVALID_PASSWORD } from '../../constants';
 
-const RegisterScreen = ({ navigation }) => {
-    const [username, setUsername] = useState(null);
-    const [email, setEmail] = useState(null);
+const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
+    const [ username, setUsername ] = useState(null);
+    const [ password, setPassword ] = useState(null);
+    const [ email, setEmail ]       = useState(null);
 
     const [ error, setError ] = useState({
-        has: true,
+        has: false,
         error: "Unexpected error",
-        attributes: [
-            'email'
-        ]
+        attributes: []
     });
 
-    const onRegister = () => {
-        alert('Register!');
+    const handleOnRegister = async () => {
+        if (!Validator.isValidPassword(password)) {
+            setError({
+                has: true,
+                error: ERROR_INVALID_PASSWORD.message,
+                attributes: ERROR_INVALID_PASSWORD.attributes
+            });
+
+            return false;
+        }
+
+        if (!Validator.isValidEmail(email)) {
+            setError({
+                has: true,
+                error: ERROR_INVALID_EMAIL_ADRESS.message,
+                attributes: ERROR_INVALID_EMAIL_ADRESS.attributes
+            });
+
+            return false;
+        }
+
+        if (!Validator.isValidUsername(username)) {
+            setError({
+                has: true,
+                error: ERROR_INVALID_USERNAME.message,
+                attributes: ERROR_INVALID_USERNAME.attributes
+            });
+
+            return false;
+        }
+
+        const status = await register({username: username, email: email, password: password}, 'token_by_register');
+
+        if (status.state === true) {
+            navigation.navigate('Profile');
+            return true;
+        }
+
+        setError({
+            has: true,
+            error: status.response.message,
+            attributes: status.response.attributes
+        })
     };
 
     return (
         <View style={ styles.container }>
             <RegisterScreenComponent
                 error={ error }
-                onRegister={ onRegister }
+                onRegister={ handleOnRegister }
                 loginButtonBackgroundColor="#000"
                 loginBackgorundColor="#fff"
                 loginText="Already have a Play account? OK, let's go!"
@@ -37,8 +83,8 @@ const RegisterScreen = ({ navigation }) => {
                 }
                 loginButtonTextStyle={{ color: '#000' }}
                 usernameOnChangeText={username => setUsername(username)}
-                emailOnChangeText={email => console.log("Email: ", email)}
-                passwordOnChangeText={password => console.log("Password: ", password)}
+                passwordOnChangeText={password => setPassword(password)}
+                emailOnChangeText={email => setEmail(email)}
             />
         </View>
     );
@@ -53,7 +99,15 @@ RegisterScreen.navigationOptions = ({ navigation }) => {
     };
 };
 
-export default RegisterScreen;
+const mapStateToProps = (state) => (
+    { isAuthenticated: !!state.authentication.token }
+);
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    register: registration
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen);
 
 const styles = StyleSheet.create({
     container: {

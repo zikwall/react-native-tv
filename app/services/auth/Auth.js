@@ -18,7 +18,7 @@ export const handleJWTMiddleware = () => {
 
 export const handleAuthenticate = ({username, password}, token) => {
     return async dispatch => {
-        dispatch(authenticate({username, password}, token));
+        return dispatch(authenticate({username, password}, token));
     }
 };
 
