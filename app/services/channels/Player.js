@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import { Players } from '../../constants';
 
 const buildPlayerKey = (id) => {
     return `player_${id}`;
@@ -9,13 +10,13 @@ export const getPlayer = async (epg_id) => {
         const pl = await AsyncStorage.getItem(buildPlayerKey(epg_id));
 
         if (!pl) {
-            return '1';
+            return Players.JW_PLAYER;
         }
 
         return pl;
     } catch (e) {
         // default player
-        return '1';
+        return Players.JW_PLAYER;
     }
 };
 

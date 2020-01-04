@@ -14,6 +14,7 @@ import StaticModal from "./examples/StaticModal";
 import AbsoluteHeader, { renderHeader } from "./examples/AbsoluteHeader";
 import { setPlayer } from '../../redux/actions';
 import { getSelectChannel } from '../../redux/reducers';
+import { Players } from '../../constants';
 
 const WatchScreen = ({ selectPlayer, channel }) => {
     const [ webViewSize, setWebViewSize ] = useState(205);
@@ -132,7 +133,9 @@ const WatchScreen = ({ selectPlayer, channel }) => {
                             Use Player 2
                         </MenuItem>
 
-                        <MenuItem onPress={ hideMenu } disabled>
+                        <MenuItem onPress={() => {
+                            handleSelectPlayer(Players.ORIGIN_PLAYER);
+                        }}>
                             Use Native Player
                         </MenuItem>
                         <MenuDivider />
