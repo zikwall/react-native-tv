@@ -24,6 +24,40 @@ const isTrustImage = (image) => {
     return image !== '';
 };
 
+const defaultEpg = [
+    {title: 'Позавчера 4', data: <NotItem />},
+    {title: 'Позавчера 3', data: <NotItem />},
+    {title: 'Позавчера 2', data: <NotItem />},
+    {title: 'Позавчера', data: <NotItem />},
+    {title: 'Вчера', data: <NotItem />},
+    {title: 'Сегодня', data:
+            <View style={{ paddingTop: 10 }}>
+                <View style={{ padding: 5 }}>
+                    <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
+                </View>
+                <View style={{ padding: 5 }}>
+                    <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
+                </View>
+                <View style={{ padding: 5 }}>
+                    <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
+                </View>
+                <View style={{ padding: 5 }}>
+                    <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
+                </View>
+                <View style={{ padding: 5 }}>
+                    <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
+                </View>
+                <View style={{ padding: 5 }}>
+                    <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
+                </View>
+            </View>
+    },
+    {title: 'Завтра', data: <NotItem />},
+    {title: 'Послезавтра', data: <NotItem />},
+    {title: 'Послезавтра 2', data: <NotItem />},
+    {title: 'Послезавтра 3', data: <NotItem />},
+];
+
 const WatchScreen = ({ selectPlayer, channel }) => {
     const [ webViewSize, setWebViewSize ] = useState(205);
     const [ modalContent, setModalContent ] = useState(null);
@@ -40,23 +74,14 @@ const WatchScreen = ({ selectPlayer, channel }) => {
 
     useEffect(() => {
         async function initEPG() {
-            let epg = await EPG.getEPGList(channel.epg_id);
+            if (channel.xmltv_id && channel.xmltv_id > 0) {
+                let epg = await EPG.getEPGList(channel.xmltv_id);
 
-            // temporary test empty epg
-            let testEpg = [];
-            for (let id in epg) {
-                let epgItem = epg[id];
-
-                // emulate example invalid data
-                if (epgItem.title === 'Вчера') {
-                    epgItem.data = [];
+                if (epg.data && epg.data.length > 0) {
+                    setActiveTab(epg.active);
+                    setEpgContent(epg.data);
                 }
-
-                testEpg.push(epgItem);
             }
-            // temporary test empty epg
-
-            setEpgContent(testEpg);
         }
 
         let mountedScreen = setTimeout(() => {
@@ -140,40 +165,6 @@ const WatchScreen = ({ selectPlayer, channel }) => {
     const ifImage = isTrustImage(channel.image) ? { uri: channel.image } : require('../../assets/images/blank_channel.png');
 
     const ifRenderContent = () => {
-        const defaultEpg = [
-            {title: 'Позавчера 4', data: <NotItem />},
-            {title: 'Позавчера 3', data: <NotItem />},
-            {title: 'Позавчера 2', data: <NotItem />},
-            {title: 'Позавчера', data: <NotItem />},
-            {title: 'Вчера', data: <NotItem />},
-            {title: 'Сегодня', data:
-                    <View style={{ paddingTop: 10 }}>
-                        <View style={{ padding: 5 }}>
-                            <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
-                        </View>
-                        <View style={{ padding: 5 }}>
-                            <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
-                        </View>
-                        <View style={{ padding: 5 }}>
-                            <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
-                        </View>
-                        <View style={{ padding: 5 }}>
-                            <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
-                        </View>
-                        <View style={{ padding: 5 }}>
-                            <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
-                        </View>
-                        <View style={{ padding: 5 }}>
-                            <ContentLoader loading={true} pRows={1} pWidth={["100%"]} />
-                        </View>
-                    </View>
-            },
-            {title: 'Завтра', data: <NotItem />},
-            {title: 'Послезавтра', data: <NotItem />},
-            {title: 'Послезавтра 2', data: <NotItem />},
-            {title: 'Послезавтра 3', data: <NotItem />},
-        ];
-
         if (!epgContent) {
             return defaultEpg.map((epg, i) => {
                 return <View key={i} tabLabel={epg.title}>

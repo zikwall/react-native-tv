@@ -43,7 +43,8 @@ const actionInitialState = {
         name: '',
         url: '',
         image: '',
-        use_origin: 0
+        use_origin: 0,
+        xmltv_id: 0,
     },
 };
 
