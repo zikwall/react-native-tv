@@ -126,7 +126,7 @@
 ^_^ | ^_^
 --- | --- |
 ![Load screen](screenshots/load_v5.jpg "Load screen") | ![Home rooms screen](screenshots/home_v6.jpg "Home rooms screen")
-![Watch screen](screenshots/watch_v3.jpg "Watch screen") | ![Home rooms screen](screenshots/profile_v5.jpg "Home rooms screen")
+![Watch screen](screenshots/watch_v4.jpg "Watch screen") | ![Home rooms screen](screenshots/profile_v5.jpg "Home rooms screen")
 ![PlayHub screen](screenshots/playhub_v2.jpg "PlayHub screen") | ![Login screen](screenshots/login_v2.jpg "Login screen")
 ![Register screen](screenshots/register.jpg "Register screen") | ![Menu screen](screenshots/menu_v3.jpg "Register screen")
 ![Static screen](screenshots/static_example.jpg "Static screen") | ![User Channels screen](screenshots/user_channels_v2.jpg "User channels screen")
