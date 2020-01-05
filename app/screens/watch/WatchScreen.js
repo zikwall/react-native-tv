@@ -70,7 +70,9 @@ const WatchScreen = ({ selectPlayer, channel }) => {
         return () => {
             Orientation.removeOrientationListener(orientationHandleChange);
         };
-    });
+    }, []);
+
+    let isMounted = false;
 
     useEffect(() => {
         async function initEPG() {
@@ -85,13 +87,21 @@ const WatchScreen = ({ selectPlayer, channel }) => {
         }
 
         let mountedScreen = setTimeout(() => {
-            initEPG();
+            if (isMounted === false) {
+                initEPG();
+            }
+
+            isMounted = true;
         }, 500);
 
         return  () => {
             clearTimeout(mountedScreen);
             // clear epg list
-            setEpgContent(null);
+            if (epgContent !== null) {
+                setEpgContent(null);
+            }
+
+            isMounted = false;
         };
     }, [ channel ]);
 
@@ -165,7 +175,7 @@ const WatchScreen = ({ selectPlayer, channel }) => {
     const ifImage = isTrustImage(channel.image) ? { uri: channel.image } : require('../../assets/images/blank_channel.png');
 
     const ifRenderContent = () => {
-        if (!epgContent) {
+        if (epgContent === null) {
             return defaultEpg.map((epg, i) => {
                 return <View key={i} tabLabel={epg.title}>
                     { epg.data }

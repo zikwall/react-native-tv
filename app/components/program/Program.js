@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { View, ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 import Item from './Item';
 import { NotItem } from './index';
 
@@ -17,22 +17,18 @@ const Program = ({ items }) => {
     }
 
     return (
-        <ScrollView>
-            <View>
-                { items && items.map((item, index) => (
-                    <Item
-                        key={ index }
-                        id={ index }
-                        name={ item.name }
-                        time={ item.time }
-                        active={ index === activeProgram }
-                        onPress={ handleTouchProgram }
-                        //onLongPress={ item.onLongPress }
-                    />
-                ))}
-            </View>
-        </ScrollView>
-    )
+        <FlatList
+            data={items}
+            renderItem={({ item, index }) => <Item
+                name={ item.name }
+                time={ item.time }
+                active={ index === activeProgram }
+                onPress={ handleTouchProgram }
+                //onLongPress={ item.onLongPress }
+            />}
+            keyExtractor={(item, index) => `${index}-${item.epg_id}`}
+        />
+    );
 };
 
 
