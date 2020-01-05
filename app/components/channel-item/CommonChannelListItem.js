@@ -6,7 +6,6 @@ import {
 
 import Button from '../button/index.android';
 import s from './styles-list';
-import { TouchableRoundedImage } from './CommonChannelCardItem';
 import Rating from '../rating';
 import {Avatar} from '../avatar';
 

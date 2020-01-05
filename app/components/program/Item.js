@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/Feather';
 const Item = ({ id, name, time, active, onPress, onLongPress }) => {
     const itemStyles = { backgroundColor:'#fff' };
     //const activeClass = active ? s.active : {};
-    const icon = active ? 'play' : 'youtube';
+    const icon = active ? 'play-circle' : 'tv';
     const size = active ? 30 : 20;
 
     return (
@@ -29,7 +29,7 @@ const Item = ({ id, name, time, active, onPress, onLongPress }) => {
                     </Text>
 
                     <View style={ s.headingContainer }>
-                        <Text numberOfLines={ 1 }
+                        <Text numberOfLines={ 2 }
                             ellipsizeMode="tail"
                             style={[s.heading, {color: '#000'}]}>
                             { name }

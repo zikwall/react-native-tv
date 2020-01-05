@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
     },
     headingContainer: {
         marginLeft: 10,
-        flex: 1
+        flex: 1,
+        flexDirection: 'row'
     },
     heading: {
         fontSize: 12,

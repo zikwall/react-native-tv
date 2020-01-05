@@ -13,8 +13,8 @@ const Program = ({ items }) => {
     };
 
     return (
-        <View style={ s.sectionHeader }>
-            <ScrollView style={ s.itemSection }>
+        <ScrollView>
+            <View>
                 { items && items.map((item, index) => (
                     <Item
                         key={ index }
@@ -26,8 +26,8 @@ const Program = ({ items }) => {
                         //onLongPress={ item.onLongPress }
                     />
                 ))}
-            </ScrollView>
-        </View>
+            </View>
+        </ScrollView>
     )
 };
 

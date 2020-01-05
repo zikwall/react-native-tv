@@ -33,7 +33,7 @@ const ChannelInfo = ({ name, onPress, onLongPress, src, menu }) => {
                 </View>
             </Button>
 
-            <Divider />
+            {/*<Divider />*/}
         </>
     )
 };
