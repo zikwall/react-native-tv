@@ -24,18 +24,6 @@ const isTrustImage = (image) => {
     return image !== '';
 };
 
-const EPGTabView = ({ label, epgOnDay }) => (
-    <View tabLabel={label}>
-        <Program items={epgOnDay} />
-    </View>
-);
-
-const renderAllEPGDays = (epg) => {
-    return epg.map(([day, v], i) => {
-        return <EPGTabView key={i} label={day} epgOnDay={v} />;
-    });
-};
-
 const WatchScreen = ({ selectPlayer, channel }) => {
     const [ webViewSize, setWebViewSize ] = useState(205);
     const [ modalContent, setModalContent ] = useState(null);
@@ -52,8 +40,23 @@ const WatchScreen = ({ selectPlayer, channel }) => {
 
     useEffect(() => {
         async function initEPG() {
-            const epg = await EPG.getEPGList();
-            setEpgContent(epg);
+            let epg = await EPG.getEPGList(channel.epg_id);
+
+            // temporary test empty epg
+            let testEpg = [];
+            for (let id in epg) {
+                let epgItem = epg[id];
+
+                // emulate example invalid data
+                if (epgItem.title === 'Вчера') {
+                    epgItem.data = [];
+                }
+
+                testEpg.push(epgItem);
+            }
+            // temporary test empty epg
+
+            setEpgContent(testEpg);
         }
 
         let mountedScreen = setTimeout(() => {
@@ -62,6 +65,8 @@ const WatchScreen = ({ selectPlayer, channel }) => {
 
         return  () => {
             clearTimeout(mountedScreen);
+            // clear epg list
+            setEpgContent(null);
         };
     }, [ channel ]);
 
@@ -249,13 +254,14 @@ const WatchScreen = ({ selectPlayer, channel }) => {
                 { ifRenderContent() }
             </ScrollableTabView>
 
-            <Modalize ref={modal}
-                      adjustToContentHeight={{
-                          showsVerticalScrollIndicator: false
-                      }}
-                      HeaderComponent={
-                          renderHeader(closeModal)
-                      }
+            <Modalize
+                ref={modal}
+                adjustToContentHeight={{
+                    showsVerticalScrollIndicator: false
+                }}
+                HeaderComponent={
+                    renderHeader(closeModal)
+                }
             >
                 {renderModalContent()}
             </Modalize>

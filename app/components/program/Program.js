@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { View, ScrollView } from 'react-native';
-import s from './styles';
 import Item from './Item';
+import { NotItem } from './index';
 
 const Program = ({ items }) => {
     // default by range datetime
@@ -11,6 +11,10 @@ const Program = ({ items }) => {
     const handleTouchProgram = (index) => {
         setActiveProgram(index);
     };
+
+    if (!items || items.length === 0) {
+        return <NotItem />
+    }
 
     return (
         <ScrollView>
