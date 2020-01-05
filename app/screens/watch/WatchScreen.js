@@ -20,6 +20,10 @@ import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab
 import ContentLoader, { Bullets } from '@sarmad1995/react-native-content-loader';
 import { EPG } from '../../services';
 
+const isTrustImage = (image) => {
+    return image !== '';
+};
+
 const EPGTabView = ({ label, epgOnDay }) => (
     <View tabLabel={label}>
         <Program items={epgOnDay} />
@@ -36,8 +40,7 @@ const WatchScreen = ({ selectPlayer, channel }) => {
     const [ webViewSize, setWebViewSize ] = useState(205);
     const [ modalContent, setModalContent ] = useState(null);
     const [ epgContent, setEpgContent ] = useState(null);
-
-    let activeTab = 5;
+    const [ activeTab, setActiveTab ] = useState(2);
 
     useEffect(() => {
         Orientation.addOrientationListener(orientationHandleChange);
@@ -53,7 +56,15 @@ const WatchScreen = ({ selectPlayer, channel }) => {
             setEpgContent(epg);
         }
 
-        initEPG();
+        let mountedScreen = setTimeout(() => {
+            setActiveTab(5);
+            initEPG();
+        }, 500);
+
+        return  () => {
+            clearTimeout(mountedScreen);
+            setActiveTab(2);
+        };
     }, [ channel ]);
 
     const orientationHandleChange = (orientation) => {
@@ -121,10 +132,6 @@ const WatchScreen = ({ selectPlayer, channel }) => {
 
     const handleSelectPlayer = (playerId) => {
         selectPlayer(channel.epg_id, playerId);
-    };
-
-    const isTrustImage = (image) => {
-        return image !== '';
     };
 
     const ifImage = isTrustImage(channel.image) ? { uri: channel.image } : require('../../assets/images/blank_channel.png');
