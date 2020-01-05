@@ -69,8 +69,8 @@
 - [x] Components
     - [x] Search
     - [x] App preloader
-    - [ ] TV program list _(have layout)_
-    - [ ] Current TV program _(left server revision, [m3uparse](https://github.com/zikwall/m3uparse))_
+    - [x] TV program list
+    - [x] Current TV program _(left server revision, [m3uparse](https://github.com/zikwall/m3uparse))_
 - [ ] Native Players
     - [ ] ExoPlayer
     - [ ] JWPlayer SDK
