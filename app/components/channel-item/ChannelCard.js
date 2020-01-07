@@ -1,13 +1,9 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
-const isTrustImage = (image) => {
-    return image !== '' && image !== null;
-};
+import { SafeValidator } from '../../utils';
 
 const ChannelCard = ({ name, epg_id, image, onSelectHandle }) => {
-
-    const ifImage = isTrustImage(image) ? { uri: image } : require('../../assets/images/blank_channel.png');
+    const ifImage = SafeValidator.getSafeChannelImage(image);
 
     return (
         <View style={styles.itemContainer}>

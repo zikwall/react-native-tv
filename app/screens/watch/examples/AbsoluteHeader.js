@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
-import faker from 'faker';
+import Icon from 'react-native-vector-icons/Feather';
+import {NotDescription} from '../../../components/channel-info';
 
 export const renderHeader = (handleClose) => (
     <TouchableOpacity
@@ -9,29 +10,31 @@ export const renderHeader = (handleClose) => (
         onPress={handleClose}
         hitSlop={{ top: 15, right: 15, bottom: 15, left: 15 }}
     >
-        <Image
-            source={{
-                uri:
-                    'https://flaticons.net/gd/makefg.php?i=icons/Mobile%20Application/Close.png&r=255&g=255&b=255',
-            }}
-            style={{ width: '40%', height: '40%' }}
-        />
+        <Icon name={'x-square'} size={25} />
     </TouchableOpacity>
 );
 
-const renderContent = () => (
+const renderContent = (title, description, time) => (
     <View style={s.content}>
         <ScrollView>
-            <Text style={s.content__heading}>Description TV Program</Text>
-            <Text style={s.content__subheading}>December 27st 2019</Text>
-            <Text style={s.content__paragraph}>{faker.lorem.paragraphs(8)}</Text>
+            <Text style={s.content__heading}>{title}</Text>
+            <Text style={s.content__subheading}>{time}</Text>
+            { renderDescription(description) }
         </ScrollView>
     </View>
 );
 
-const AbsoluteHeader = ({ onCloseModal }) => {
+const renderDescription = (description) => {
+    if (!description && description.length === 0) {
+        return <NotDescription />;
+    }
+
+    return <Text style={s.content__paragraph}>{description}</Text>;
+};
+
+const AbsoluteHeader = ({ onCloseModal, title, description, time }) => {
     return (
-        renderContent()
+        renderContent(title, description, time)
     )
 };
 
@@ -49,9 +52,6 @@ const s = StyleSheet.create({
 
         width: 25,
         height: 25,
-
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        borderRadius: 4,
     },
 
     content: {
@@ -61,7 +61,7 @@ const s = StyleSheet.create({
     content__heading: {
         marginBottom: 2,
 
-        fontSize: 24,
+        fontSize: 27,
         fontWeight: '600',
         color: '#333',
     },

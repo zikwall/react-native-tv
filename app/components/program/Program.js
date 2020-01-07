@@ -22,7 +22,7 @@ const Program = ({ items }) => {
             renderItem={({ item, index }) => <Item
                 name={ item.name }
                 time={ item.time }
-                active={ index === activeProgram }
+                active={ item.is_active }
                 onPress={ handleTouchProgram }
                 //onLongPress={ item.onLongPress }
             />}

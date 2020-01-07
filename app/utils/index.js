@@ -3,7 +3,8 @@ import * as Validator from './Validator';
 import * as StringHelper from './String';
 import * as Fake from './Fake';
 import * as UserHelper from './User';
+import * as SafeValidator from './SafeValidator';
 
 export {
-    ArrayHelper, StringHelper, Validator, Fake, UserHelper
+    ArrayHelper, StringHelper, Validator, Fake, UserHelper, SafeValidator
 }

@@ -8,7 +8,7 @@ import { Modalize } from 'react-native-modalize';
 import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
 
 import { VideoView } from '../../components/video-view';
-import ChannelInfo from '../../components/channel-info/ChannelInfo';
+import ChannelInfo from '../../components/channel-info';
 import Program, { NotItem } from '../../components/program';
 import StaticModal from "./examples/StaticModal";
 import AbsoluteHeader, { renderHeader } from "./examples/AbsoluteHeader";
@@ -19,10 +19,7 @@ import { Players } from '../../constants';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import ContentLoader, { Bullets } from '@sarmad1995/react-native-content-loader';
 import { EPG } from '../../services';
-
-const isTrustImage = (image) => {
-    return image !== '' && image !== null;
-};
+import { SafeValidator } from '../../utils';
 
 const defaultEpg = [
     {title: 'Позапозавчера', data: <NotItem />},
@@ -52,6 +49,7 @@ const defaultEpg = [
     },
     {title: 'Завтра', data: <NotItem />},
     {title: 'Послезавтра', data: <NotItem />},
+    {title: 'Послепослезавтра', data: <NotItem />},
 ];
 
 const WatchScreen = ({ selectPlayer, channel }) => {
@@ -72,10 +70,10 @@ const WatchScreen = ({ selectPlayer, channel }) => {
 
     useEffect(() => {
         async function initEPG() {
-            if (channel.xmltv_id && channel.xmltv_id > 0) {
+            if (SafeValidator.isValidXMLTVID(channel.xmltv_id)) {
                 let epg = await EPG.getEPGList(channel.xmltv_id);
 
-                if (epg.data && epg.data.length > 0) {
+                if (SafeValidator.isDataExist(epg.data)) {
                     setActiveTab(epg.active);
                     setEpgContent(epg.data);
                 }
@@ -94,6 +92,7 @@ const WatchScreen = ({ selectPlayer, channel }) => {
             clearTimeout(mountedScreen);
             // clear epg list
             if (epgContent !== null) {
+                setActiveTab(3);
                 setEpgContent(null);
             }
 
@@ -159,16 +158,30 @@ const WatchScreen = ({ selectPlayer, channel }) => {
     };
 
     const handleOpenSimple = () => {
-        setModalContent(<AbsoluteHeader />);
-        hideMenu();
-        openAbsoluteModal();
+        if (SafeValidator.isValidXMLTVID(channel.xmltv_id)) {
+
+            EPG.getEPGDescription(channel.xmltv_id).then((epgDescription) => {
+                if (SafeValidator.isSuccessResponse(epgDescription)) {
+
+                    setModalContent(
+                        <AbsoluteHeader
+                            title={epgDescription.data.name}
+                            description={epgDescription.data.description}
+                            time={epgDescription.data.time}
+                        />
+                    );
+                }
+            });
+
+            openAbsoluteModal();
+        }
     };
 
     const handleSelectPlayer = (playerId) => {
         selectPlayer(channel.epg_id, playerId);
     };
 
-    const ifImage = isTrustImage(channel.image) ? { uri: channel.image } : require('../../assets/images/blank_channel.png');
+    const ifImage = SafeValidator.getSafeChannelImage(channel.image);
 
     const ifRenderContent = () => {
         if (epgContent === null) {
