@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image, TouchableOpacity, Animated, Easing, Text } from 'react-native';
+import { human } from 'react-native-typography';
 import Pulse from './Pulse';
 
 // need Review
@@ -108,7 +109,7 @@ export default class LocationPulseLoader extends React.Component {
                 </View>
 
                 <View style={{ paddingBottom: 10, alignItems: 'center'}}>
-                    <Text>PlayHub powered by ReactNative</Text>
+                    <Text style={human.caption1}>Powered by PlayHub service</Text>
                 </View>
             </>
         );
