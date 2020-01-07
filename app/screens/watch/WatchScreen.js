@@ -21,13 +21,11 @@ import ContentLoader, { Bullets } from '@sarmad1995/react-native-content-loader'
 import { EPG } from '../../services';
 
 const isTrustImage = (image) => {
-    return image !== '';
+    return image !== '' && image !== null;
 };
 
 const defaultEpg = [
-    {title: 'Позавчера 4', data: <NotItem />},
-    {title: 'Позавчера 3', data: <NotItem />},
-    {title: 'Позавчера 2', data: <NotItem />},
+    {title: 'Позапозавчера', data: <NotItem />},
     {title: 'Позавчера', data: <NotItem />},
     {title: 'Вчера', data: <NotItem />},
     {title: 'Сегодня', data:
@@ -54,15 +52,13 @@ const defaultEpg = [
     },
     {title: 'Завтра', data: <NotItem />},
     {title: 'Послезавтра', data: <NotItem />},
-    {title: 'Послезавтра 2', data: <NotItem />},
-    {title: 'Послезавтра 3', data: <NotItem />},
 ];
 
 const WatchScreen = ({ selectPlayer, channel }) => {
     const [ webViewSize, setWebViewSize ] = useState(205);
     const [ modalContent, setModalContent ] = useState(null);
     const [ epgContent, setEpgContent ] = useState(null);
-    const [ activeTab, setActiveTab ] = useState(5);
+    const [ activeTab, setActiveTab ] = useState(3);
 
     useEffect(() => {
         Orientation.addOrientationListener(orientationHandleChange);

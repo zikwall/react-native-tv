@@ -16,6 +16,9 @@ import SearchTextInput from "./components/SearchTextInput";
 let textInputRef = null;
 
 export default class SearchBar extends Component {
+  // in future
+  searchByWaiting = null;
+
   render() {
     const {
       onPress,

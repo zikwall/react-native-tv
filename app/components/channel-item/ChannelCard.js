@@ -2,7 +2,7 @@ import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const isTrustImage = (image) => {
-    return image !== '';
+    return image !== '' && image !== null;
 };
 
 const ChannelCard = ({ name, epg_id, image, onSelectHandle }) => {

@@ -8,7 +8,42 @@ import { FlatGrid, SectionGrid } from 'react-native-super-grid';
 import { getChannels } from '../../redux/reducers';
 import { ChannelCard } from "../../components/channel-item";
 import { setChannel } from "../../redux/actions/channels";
+
 import styles from "./styles";
+
+const getGroupedItems = (items) => {
+    if (!items && items.length === 0) {
+        return [];
+    }
+
+    let groups = {};
+
+    for (let i in items) {
+        let groupName = items[i].category;
+
+        if (groups.hasOwnProperty(groupName) === false) {
+            groups[groupName] = {
+                title: groupName,
+                data: []
+            };
+        }
+
+        groups[groupName].data.push(items[i]);
+    }
+
+    let sections = [];
+
+    for (let groupId in groups) {
+        let group = groups[groupId];
+
+        sections.push({
+            title: group.title,
+            data: group.data
+        });
+    }
+
+    return sections;
+};
 
 const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
     const [ items, setItems ] = useState(channels);
@@ -55,7 +90,7 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
                     fontColor="#000"
                     iconColor="#000"
                     cancelIconColor="#000"
-                    onChangeText={text => {
+                    onChangeText={(text) => {
                         filterList(text);
                     }}
                     onPressCancel={() => {
@@ -64,9 +99,9 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
                     onPress={() => alert("onPressss")}
                     cancelVisible={ cancelVisible }
                 />
-                <FlatGrid
+                <SectionGrid
                     itemDimension={ 150 }
-                    items={ items }
+                    sections={ getGroupedItems(items) }
                     style={ styles.gridView }
                     renderSectionHeader={({ section }) => (
                         <Text style={ styles.sectionHeader }>{ section.title }</Text>
