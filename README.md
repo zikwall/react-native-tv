@@ -85,6 +85,9 @@
     - [ ] Save to Playlist
     - [ ] Share outside
     - [ ] Report Playlist/User
+- [ ] Extra
+    - [ ] White & Dark themes
+    - [ ] User i18n (Select Language in settings)
       
 ## Social Roadmap & Features
 
