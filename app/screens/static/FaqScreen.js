@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Bullets } from '@sarmad1995/react-native-content-loader';
-import {View, Text, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import {
     iOSUIKit,
 } from 'react-native-typography';
@@ -8,6 +8,8 @@ import {
 import viewStyles from './styles';
 import { Accordion, _renderHeader, _renderContent} from '../../components/collapse';
 import { FAQ } from '../../services';
+
+const {height, width} = Dimensions.get('window');
 
 const FaqScreen = () => {
     const [ activeSection, setActiveSection ] = useState([]);
@@ -25,7 +27,7 @@ const FaqScreen = () => {
 
     const renderFAQ = () => {
         if (!faqContent) {
-            return <Bullets active listSize={20} tWidth={260} tHeight={15}/>;
+            return <Bullets active listSize={20} tWidth={width * 0.8} tHeight={15}/>;
         }
 
         return (

@@ -5,7 +5,8 @@ import {
     Text,
     Image,
     TouchableOpacity,
-} from "react-native";
+    Dimensions,
+} from 'react-native';
 import {
     human,
     iOSColors
@@ -13,6 +14,8 @@ import {
 
 import Rating from '../rating';
 import {Avatar} from '../avatar';
+
+const {height, width} = Dimensions.get('window');
 
 export const TouchableRoundedImage = ({ style, width=80, height=80, ...props }) => (
     <TouchableOpacity style={style}>
@@ -48,7 +51,7 @@ export const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imag
 CommonChannelCardItem.defaultProps = {
     imageWidth: 70,
     imageHeight: 70,
-    size: 150
+    size: height * 0.1
 };
 
 const styles = StyleSheet.create({

@@ -1,4 +1,6 @@
 import { isAndroid } from "@freakycoder/react-native-helpers";
+import {Dimensions} from 'react-native';
+const {height, width} = Dimensions.get('window');
 
 export const _textInputStyle = textColor => {
     return {
@@ -22,7 +24,7 @@ export const _textStyle = titleColor => {
 export default {
     container: {
         margin: 8,
-        height: 75,
+        height: height * 0.1,
         width: "95%",
         marginTop: 0,
         borderRadius: 24,

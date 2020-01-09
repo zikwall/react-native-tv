@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import {View, Text, Dimensions} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { withNavigation } from 'react-navigation';
@@ -10,6 +10,8 @@ import { ChannelCard } from "../../components/channel-item";
 import { setChannel } from "../../redux/actions/channels";
 
 import styles from "./styles";
+
+const {height, width} = Dimensions.get('window');
 
 const getGroupedItems = (items) => {
     if (!items && items.length === 0) {
@@ -85,7 +87,7 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
         <>
             <View style={ styles.container }>
                 <SearchBar
-                    height={ 43 }
+                    height={ height * 0.06 + width * 0.005 }
                     placeholder="Channel search here"
                     fontColor="#000"
                     iconColor="#000"
@@ -100,7 +102,7 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
                     cancelVisible={ cancelVisible }
                 />
                 <SectionGrid
-                    itemDimension={ 150 }
+                    itemDimension={ height * 0.2 }
                     sections={ getGroupedItems(items) }
                     style={ styles.gridView }
                     renderSectionHeader={({ section }) => (

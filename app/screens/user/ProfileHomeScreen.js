@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
+import {View, StyleSheet, Text, ScrollView, TouchableOpacity, Dimensions} from 'react-native';
 import moment from 'moment';
 import {
     human,
@@ -9,11 +9,13 @@ import CalendarHeatmap from '../../components/heatmap/CalendarHeatmap';
 import { Fake } from '../../utils';
 import NotificationCard from '../../components/notification/NotificationCard';
 
+const {height, width} = Dimensions.get('window');
+
 const ProfileHomeScreen = () => {
     return (
         <View style={ styles.container }>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{ paddingRight: 15, paddingLeft: 15, paddingBottom: 15 }}>
+                <View style={{ paddingRight: width * 0.02, paddingLeft: width * 0.02, paddingBottom: 15 }}>
                     <CalendarHeatmap
                         endDate={ moment().endOf('month').format('YYYY-MM-DD') }
                         numDays={ 100 }

@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, Switch, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Switch, Text, View, TouchableOpacity, Dimensions} from 'react-native';
 import Card from "../../../../components/auth/Card";
 import styles, { container } from "./BottomContainer.style";
+const {height, width} = Dimensions.get('window');
+
+const margin = width * 0.025;
 
 const BottomContainer = props => {
     const {
@@ -30,7 +33,7 @@ const BottomContainer = props => {
                 />
             </View>
 
-            <View style={{marginLeft: 10, marginRight: 10, marginTop: 15 }}>
+            <View style={{paddingHorizontal: 10, width: width * 0.9, marginTop: 15 }}>
                 <TouchableOpacity onPress={ onLogin }>
                     <Text style={ ss.button }>Forgot!</Text>
                 </TouchableOpacity>
