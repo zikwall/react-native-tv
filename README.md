@@ -136,6 +136,12 @@
 ![User followers screen](screenshots/user_followers.jpg "User Followers screen") | ![FAQ screen](screenshots/faq_v2.jpg "FAQ screen")
 ![Forgot screen](screenshots/forgot.jpg "Forgot screen") |
 
+### Responsive Layout
+
+Mobile | Tabled/Pad
+--- | --- |
+![Mobile](screenshots/responsive_layout.png "Mobile responsive layout") | ![Tabled](screenshots/responsive_layout_tabled_pad.png "Tabled responsive layout")
+
 ### Disclaimer
 
 At the moment, the code in some places may force you:
