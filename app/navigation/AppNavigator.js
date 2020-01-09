@@ -6,8 +6,6 @@ import MainTabNavigator from './MainTabNavigator';
 import { Back, Right } from "../components/header";
 import ProfileNavigator from "./profile/ProfileNavigator";
 import StaticNavigator from './static/StaticNavigator';
-import Icon from 'react-native-vector-icons/index';
-import PlayhubNavigator from './playhub/PlayhubNavigator';
 
 const MainStack = createStackNavigator({
     // You could add another route here for authentication.
