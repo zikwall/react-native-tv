@@ -76,6 +76,9 @@ export default createBottomTabNavigator(
         },
     },
     {
+        navigationOptions: {
+            initialRouteName: "HomeScreen",
+        },
         tabBarComponent: withCustomStyle({
             style: {
                 //borderTopColor: 'red',

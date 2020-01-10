@@ -38,7 +38,7 @@ const VideoView = ({ channel, pending, player, selectPlayer }) => {
         selectPlayer(channel.epg_id);
     }, [ channel ]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (Platform.OS === 'android') {
             BackHandler.addEventListener('hardwareBackPress', onAndroidBackPress);
         }
@@ -48,7 +48,7 @@ const VideoView = ({ channel, pending, player, selectPlayer }) => {
                 BackHandler.removeEventListener('hardwareBackPress');
             }
         };
-    });
+    });*/
 
     const onAndroidBackPress = () => {
         if (canGoBack && webView) {

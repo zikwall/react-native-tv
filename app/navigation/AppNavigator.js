@@ -51,6 +51,7 @@ MainStack.navigationOptions = ({ navigation }) => {
     }
 
     return {
+        initialRouteName: "Main",
         tabBarVisible,
     };
 };
