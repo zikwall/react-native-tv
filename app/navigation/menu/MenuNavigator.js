@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import { DrawerScreen } from '../../screens';
+import { MenuScreen } from '../../screens';
 
-const DrawerNavigator = createStackNavigator({
+const MenuNavigator = createStackNavigator({
     MenuScreen: {
         screen: DrawerScreen
     },
@@ -13,4 +13,4 @@ const DrawerNavigator = createStackNavigator({
     }
 });
 
-export default DrawerNavigator;
+export default MenuNavigator;

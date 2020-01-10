@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Image, View, Text} from 'react-native';
+import {View, Text} from 'react-native';
 import Button from '../../../components/button';
 import {Avatar} from '../../../components/avatar';
 import SearchField from '../SearchField';
 import Icon from 'react-native-vector-icons/Feather';
 import s from './styles';
 
-const DrawerUserInfo = ({
+const MenuUserInfo = ({
   username,
   displayName,
   avatarUrlMedium,
@@ -44,9 +44,9 @@ const DrawerUserInfo = ({
   );
 };
 
-DrawerUserInfo.propTypes = {
+MenuUserInfo.propTypes = {
   username: PropTypes.string,
   displayName: PropTypes.string,
 };
 
-export default DrawerUserInfo;
+export default MenuUserInfo;

@@ -3,12 +3,12 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import DrawerUserInfo from './DrawerUserInfo'
+import MenuUserInfo from './MenuUserInfo'
 import MenuItem from '../../components/menu-item/MenuItem';
 import Divider from '../../components/divider';
 import { UserHelper } from '../../utils';
 
-const DrawerScreen = ({ navigation, user, isAuthenticated }) => {
+const MenuScreen = ({ navigation, user, isAuthenticated }) => {
     const handleSettingsPress = () => {
         alert('Press settings')
     };
@@ -24,7 +24,7 @@ const DrawerScreen = ({ navigation, user, isAuthenticated }) => {
     return (
         <View style={styles.container}>
             {
-                isAuthenticated && <DrawerUserInfo
+                isAuthenticated && <MenuUserInfo
                     username={user.username}
                     displayName={UserHelper.buildUserId(user)}
                     avatarUrlMedium={UserHelper.makeUserAvatar(user)}
@@ -58,7 +58,7 @@ const mapStateToProps = (state) => ({
     user: state.authentication.user
 });
 
-export default connect(mapStateToProps)(withNavigation(DrawerScreen));
+export default connect(mapStateToProps)(withNavigation(MenuScreen));
 
 const styles = StyleSheet.create({
     container: {

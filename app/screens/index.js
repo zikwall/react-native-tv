@@ -9,7 +9,7 @@ import ProfileChannelScreen from './user/ProfileChannelScreen';
 import LoginScreen from "./login/LoginScreen";
 import RegisterScreen from './register/RegisterScreen';
 import ForgotScreen from './forgot/ForgotScreen';
-import DrawerScreen from './drawer/DrawerScreen';
+import MenuScreen from './menu/MenuScreen';
 import CopyrightScreen from './static/CopyrightScreen';
 import TermsScreen from './static/TermsScreen';
 import PrivacyScreen from './static/PrivacyScreen';
@@ -28,7 +28,7 @@ export {
     // auth
     LoginScreen, RegisterScreen, ForgotScreen,
     // menu
-    DrawerScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen,
+    MenuScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen,
     // playhub
     PlayHubBestScreen, PlayHubCategoryScreen, PlayHubForFamilyScreen, PlayHubRecommendedScreen
 }
