@@ -14,9 +14,9 @@ export const apiFetch = (url, options, headers={}) => {
         if (!headers.hasOwnProperty("Authorization")) {
             getAuthorizationHeader().then((token) => {
                 headers = {...headers, ...{"Authorization": token}};
-            });
 
-            console.log(headers);
+                console.log(headers);
+            });
         }
     }
 
