@@ -44,8 +44,6 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
         };*/
 
         if (!Validator.isValidName(name)) {
-            console.log(name);
-
             setError({
                 has: true,
                 error: ERROR_INVALID_NAME.message,

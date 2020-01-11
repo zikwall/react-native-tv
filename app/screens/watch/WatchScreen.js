@@ -90,8 +90,6 @@ const WatchScreen = ({ selectPlayer, channel }) => {
             isMounted = true;
         }, 500);
 
-        console.log('MOUNTED WATCH SCREEN ' + channel.name);
-
         return  () => {
             clearTimeout(mountedScreen);
             // clear epg list
@@ -99,8 +97,6 @@ const WatchScreen = ({ selectPlayer, channel }) => {
                 setActiveTab(3);
                 setEpgContent(null);
             }
-
-            console.log('UNMOUNTED WATCH SCREEN ' + channel.name);
 
             isMounted = false;
         };

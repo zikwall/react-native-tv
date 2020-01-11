@@ -72,7 +72,6 @@ const CalendarHeatmap = props => {
   };
 
   useEffect(() => {
-    console.log('Value Cache: ', getValueCache(values));
     setValueCache(getValueCache(values));
   }, []);
 
