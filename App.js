@@ -26,12 +26,12 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
     const [ spinner, setSpinner ] = useState(true);
 
     useEffect(() => {
-        let interval = setInterval(() => {
+        let interval = setTimeout(() => {
             setSpinner(false);
         }, 6000);
 
         return () => {
-            clearInterval(interval);
+            clearTimeout(interval);
         };
     }, []);
 
