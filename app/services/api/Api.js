@@ -7,11 +7,36 @@ import {
     NotFoundHttpException,
     Exception
 } from "../../exceptions";
+import Session from '../auth/Session';
 
-export const apiFetch = (url, options, useAuth = true) => {
-    let headers = {};
+export const apiFetch = (url, options, headers={}) => {
+    if (!Session.isGuest()) {
+        if (!headers.hasOwnProperty("Authorization")) {
+            getAuthorizationHeader().then((token) => {
+                headers = {...headers, ...{"Authorization": token}};
+            });
+
+            console.log(headers);
+        }
+    }
 
     return pureFetch(apiUrl(url), options, headers);
+};
+
+export const formDataPost = (url, data, options, headers) => {
+    headers = {...headers, ...{
+            'Accept': "application/json",
+            'Content-Type': 'multipart/form-data',
+        }};
+
+    return fetch(apiUrl(url), {
+        method: 'POST',
+        data: data,
+        headers: headers,
+        ...options
+    })
+        .then(handleResponse)
+        .then(response => response.json());
 };
 
 export const pureFetch = (url, options, headers) => {
@@ -29,33 +54,14 @@ export const pureFetch = (url, options, headers) => {
 };
 
 export const handleResponse = (response) => {
-    if (response.status >= 200 && response.status < 300) {
-        return response;
-    }
-
-    if (response.status === 400) {
-        throw (new BadRequestHttpException(response));
-    }
-
-    if (response.status === 401) {
-        throw (new UnauthorizedException(response));
-    }
-
-    if (response.status === 403) {
-        throw (new ForbiddenHttpException(response));
-    }
-
-    if (response.status === 404) {
-        throw (new NotFoundHttpException(response));
-    }
-
-    if (response.status === 500) {
-        throw (new InternalServerErrorException(response));
-    }
-
-    throw (new Exception('Server request execution error.'));
+    return response;
 };
 
 export const apiUrl = (url) => {
     return API_DOMAIN + url;
+};
+
+export const getAuthorizationHeader = async () => {
+    const token = await Session.getToken();
+    return 'Bearer ' + token;
 };

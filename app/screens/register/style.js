@@ -18,6 +18,27 @@ export const container = loginButtonBackgroundColor => {
 };
 
 export default {
+    avatarContainer: {
+        alignItems: 'center',
+        justifyContent: "center",
+    },
+    centerParagraph: {
+        margin: 24,
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#000',
+    },
+    continueButtonsContainerStyle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: "center",
+        marginTop: height * 0.03,
+        marginBottom: height * 0.1
+    },
+    continueButtonStyle: {
+        marginHorizontal: 10
+    },
     loginButtonStyle: {
         left: 0,
         right: 0,

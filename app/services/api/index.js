@@ -1,5 +1,5 @@
-import { apiFetch } from "./Api";
+import { apiFetch, formDataPost } from "./Api";
 
 export {
-    apiFetch
+    apiFetch, formDataPost
 }

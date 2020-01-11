@@ -32,8 +32,7 @@ export default class Session {
 
     static getToken = async () => {
         try {
-            const token = await AsyncStorage.getItem(buildKey());
-            return token;
+            return await AsyncStorage.getItem(buildKey());
         } catch (e) {
             return null;
         }

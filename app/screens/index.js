@@ -19,6 +19,7 @@ import PlayHubBestScreen from './playhub/PlayHubBestScreen';
 import PlayHubCategoryScreen from './playhub/PlayHubCategoryScreen';
 import PlayHubForFamilyScreen from './playhub/PlayHubForFamilyScreen';
 import PlayHubRecommendedScreen from './playhub/PlayHubRecommendedScreen';
+import ContinueRegisterScreen from './register/ContinueRegisterScreen';
 
 export {
     // global
@@ -26,7 +27,7 @@ export {
     // user
     ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen,
     // auth
-    LoginScreen, RegisterScreen, ForgotScreen,
+    LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen,
     // menu
     MenuScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen,
     // playhub

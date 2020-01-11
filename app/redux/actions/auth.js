@@ -1,6 +1,31 @@
-import { AUTHENTICATE, DEAUTHENTICATE } from '../types';
-import { apiFetch } from "../../services/api";
+import {AUTHENTICATE, DEAUTHENTICATE, SET_USER} from '../types';
+import { apiFetch, formDataPost } from "../../services/api";
 import {Identity, Session} from '../../services/auth';
+import {UserHelper} from '../../utils';
+
+export const registerFinished = ({ name, publicEmail }, token) => {
+    return (dispatch) => {
+        return apiFetch('/vktv/auth/continue-signup', {
+            method: 'POST',
+            body: JSON.stringify({name, publicEmail})
+        }, {"Authorization": UserHelper.makeAuthorizationHeader(token)}).then((response) => {
+
+            if (response.code && response.code === 200) {
+                Identity.setUser(response.response.user);
+                dispatch({type: SET_USER, user: response.response.user});
+
+                return {
+                    state: true
+                };
+            }
+
+            return {
+                state: false,
+                response: response
+            }
+        });
+    }
+};
 
 export const registration = ({ username, email, password }, token) => {
     return (dispatch) => {
@@ -28,7 +53,7 @@ export const registration = ({ username, email, password }, token) => {
                 response: response
             }
         }).catch((error) => {
-            throw new Error(error);
+            throw error;
         });
     }
 };
@@ -52,8 +77,6 @@ const authenticate = ({ username, password }, token) => {
                     state: true
                 };
             }
-
-            console.log(response);
 
             return {
                 state: false,
@@ -83,6 +106,13 @@ const deauthenticate = () => {
             throw new Error(error);
         });
     };
+};
+
+export const setProfile = (user) => {
+    return {
+        type: SET_USER,
+        user: user
+    }
 };
 
 export {

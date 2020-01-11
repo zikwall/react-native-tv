@@ -1,7 +1,7 @@
 import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { Image } from 'react-native';
-import { FaqScreen, LoginScreen, RegisterScreen, ForgotScreen } from '../screens';
+import { FaqScreen, LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen } from '../screens';
 import MainTabNavigator from './MainTabNavigator';
 import { Back, Right } from "../components/header";
 import ProfileNavigator from "./profile/ProfileNavigator";
@@ -14,6 +14,7 @@ const MainStack = createStackNavigator({
     Profile: ProfileNavigator,
     Login: LoginScreen,
     Register: RegisterScreen,
+    ContinueRegister: ContinueRegisterScreen,
     Forgot: ForgotScreen,
     Static: StaticNavigator,
     FaqScreen: {

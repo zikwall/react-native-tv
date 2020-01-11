@@ -4,7 +4,8 @@ import * as StringHelper from './String';
 import * as Fake from './Fake';
 import * as UserHelper from './User';
 import * as SafeValidator from './SafeValidator';
+import * as FormHelper from './Form';
 
 export {
-    ArrayHelper, StringHelper, Validator, Fake, UserHelper, SafeValidator
+    ArrayHelper, StringHelper, Validator, Fake, UserHelper, SafeValidator, FormHelper
 }

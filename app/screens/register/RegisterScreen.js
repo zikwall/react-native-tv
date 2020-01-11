@@ -11,7 +11,7 @@ import { Validator } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_USERNAME, ERROR_INVALID_PASSWORD } from '../../constants';
 
 const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
-    const [ username, setUsername ] = useState(null);
+    const [ username, setProfilename ] = useState(null);
     const [ password, setPassword ] = useState(null);
     const [ email, setEmail ]       = useState(null);
 
@@ -55,7 +55,7 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
         const status = await register({username: username, email: email, password: password}, 'token_by_register');
 
         if (status.state === true) {
-            navigation.navigate('Profile');
+            navigation.navigate('ContinueRegister');
             return true;
         }
 
@@ -82,7 +82,7 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
                     />
                 }
                 loginButtonTextStyle={{ color: '#000' }}
-                usernameOnChangeText={username => setUsername(username)}
+                usernameOnChangeText={username => setProfilename(username)}
                 passwordOnChangeText={password => setPassword(password)}
                 emailOnChangeText={email => setEmail(email)}
             />

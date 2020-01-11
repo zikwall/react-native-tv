@@ -17,3 +17,11 @@ export const isValidUsername = (username) => {
 
     return /^[a-zA-Z0-9]{5,20}$/.test(username);
 };
+
+export const isValidName = (name) => {
+    if (!name || name.length < 2 || name.length > 30) {
+        return false;
+    }
+
+    return /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g.test(name);
+};

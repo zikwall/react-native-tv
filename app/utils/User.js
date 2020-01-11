@@ -13,3 +13,7 @@ export const makeUserAvatar = (user) => {
 
     return { uri: user.profile.avatar };
 };
+
+export const makeAuthorizationHeader = (token) => {
+    return `Bearer ${token}`;
+};
