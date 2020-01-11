@@ -132,7 +132,7 @@
 ![Home rooms screen](screenshots/profile_v5.jpg "Home rooms screen") | ![PlayHub screen](screenshots/playhub_v2.jpg "PlayHub screen") | ![Login screen](screenshots/login_v2.jpg "Login screen")
 ![Register screen](screenshots/register.jpg "Register screen") | ![Menu screen](screenshots/menu_v3.jpg "Register screen") | ![Static screen](screenshots/static_example.jpg "Static screen") 
 ![User Channels screen](screenshots/user_channels_v2.jpg "User channels screen") | ![User followers screen](screenshots/user_followers.jpg "User Followers screen") | ![FAQ screen](screenshots/faq_v2.jpg "FAQ screen")
-![Forgot screen](screenshots/forgot.jpg "Forgot screen") | coming soon | coming soon
+![Forgot screen](screenshots/forgot.jpg "Forgot screen") | ![After registration screen](screenshots/after_registration.jpg "After registration screen") | coming soon
 
 ### Responsive Layout
 
