@@ -1,10 +1,10 @@
 import { Dimensions } from "react-native";
-const { width } = Dimensions.get("window");
+const {height, width} = Dimensions.get('window');
 
 export const container = backgroundColor => {
     return {
         height: 250,
-        bottom: 100,
+        bottom: height * 0.15,
         backgroundColor,
         borderRadius: 24,
         width: width * 0.9,
@@ -19,7 +19,7 @@ export default {
     },
     footerContainer: {
         right: 32,
-        bottom: 24,
+        bottom: height * 0.04 - width * 0.07,
         alignItems: "center",
         position: "absolute",
         flexDirection: "row"

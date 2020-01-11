@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Image, Text, View} from "react-native";
+import {Image, Dimensions, View} from "react-native";
 import styles from "./Logo.style";
+
+const {height, width} = Dimensions.get('window');
 
 const Logo = props => {
     const { logoText, logoComponent } = props;
@@ -10,7 +12,7 @@ const Logo = props => {
             {logoComponent || (
                 <View style={styles.row}>
                     <View style={{ alignItems: 'center' }}>
-                        <Image style={{ resizeMode: 'contain', height: 250, width: 250, marginTop: 65 }} source={ require('../../assets/images/PlayHubFullCommunity.png') }/>
+                        <Image style={{ resizeMode: 'contain', height: height * 0.3, width: height * 0.3, marginTop: height * 0.1 }} source={ require('../../assets/images/PlayHubFullCommunity.png') }/>
                     </View>
                 </View>
             )}

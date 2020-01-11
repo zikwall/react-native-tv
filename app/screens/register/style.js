@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import {Dimensions, StyleSheet} from 'react-native';
 import {
     isAndroid,
     ScreenWidth,
@@ -6,9 +6,11 @@ import {
     isIPhoneXFamily
 } from "@freakycoder/react-native-helpers";
 
+const {height, width} = Dimensions.get('window');
+
 export const container = loginButtonBackgroundColor => {
     return {
-        marginBottom: 60,
+        marginBottom: height * 0.09 + width * 0.3,
         width: ScreenWidth,
         height: ScreenHeight,
         backgroundColor: loginButtonBackgroundColor
@@ -23,7 +25,7 @@ export default {
         position: "absolute",
         alignItems: "center",
         justifyContent: "center",
-        bottom: isAndroid ? 32 : isIPhoneXFamily() ? 32 : ScreenHeight * 0.01,
+        bottom: isAndroid ? height * 0.1 - width * 0.16 : isIPhoneXFamily() ? 32 : ScreenHeight * 0.01,
     },
     loginButtonTextStyle: {
         color: "#000",

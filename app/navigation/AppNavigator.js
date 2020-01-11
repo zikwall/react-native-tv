@@ -31,7 +31,7 @@ const MainStack = createStackNavigator({
         // header: null,
         headerStyle: {
             backgroundColor: "#fff",
-            borderBottomWidth: 0
+            borderBottomWidth: 0,
         },
         headerLeft: <Image
             source = {require('../assets/images/PlayHubLogo.png')}

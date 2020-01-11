@@ -1,4 +1,4 @@
-import { Dimensions } from "react-native";
+import { Dimensions, Platform } from "react-native";
 const { width } = Dimensions.get("window");
 
 export const container = backgroundColor => {
@@ -7,7 +7,7 @@ export const container = backgroundColor => {
         bottom: 100,
         backgroundColor,
         borderRadius: 24,
-        width: width * 0.9,
+        width: Platform.isPad ? width * 0.92 : width * 0.925,
         alignSelf: "center",
         position: "absolute"
     };

@@ -1,10 +1,12 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import {Dimensions, TouchableOpacity, View} from 'react-native';
 import Icon from "react-native-vector-icons/Feather";
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { handleLogout } from '../../services/auth';
+
+const {height, width} = Dimensions.get('window');
 
 const Right = ({ isAuthenticated, logout, navigation }) => {
 
@@ -22,7 +24,7 @@ const Right = ({ isAuthenticated, logout, navigation }) => {
             {
                 isAuthenticated &&
 
-                <TouchableOpacity style={{paddingHorizontal: 15}} onPress={ handlePress }>
+                <TouchableOpacity style={{paddingHorizontal: width * 0.01}} onPress={ handlePress }>
                     <Icon name='log-out' size={ 25 } color={'#000'} />
                 </TouchableOpacity>
             }

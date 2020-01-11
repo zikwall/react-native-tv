@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { View, Text } from 'react-native';
+import {View, Text, Dimensions} from 'react-native';
 import Orientation from 'react-native-orientation';
 import Icon from "react-native-vector-icons/Feather";
 import { Modalize } from 'react-native-modalize';
@@ -20,6 +20,8 @@ import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab
 import ContentLoader, { Bullets } from '@sarmad1995/react-native-content-loader';
 import { EPG } from '../../services';
 import { SafeValidator } from '../../utils';
+
+const {height, width} = Dimensions.get('window');
 
 const defaultEpg = [
     {title: 'Позапозавчера', data: <NotItem />},
@@ -53,7 +55,7 @@ const defaultEpg = [
 ];
 
 const WatchScreen = ({ selectPlayer, channel }) => {
-    const [ webViewSize, setWebViewSize ] = useState(205);
+    const [ webViewSize, setWebViewSize ] = useState(height * 0.275 + width * 0.03);
     const [ modalContent, setModalContent ] = useState(null);
     const [ epgContent, setEpgContent ] = useState(null);
     const [ activeTab, setActiveTab ] = useState(3);
@@ -108,7 +110,7 @@ const WatchScreen = ({ selectPlayer, channel }) => {
         if (orientation === 'LANDSCAPE') {
             setWebViewSize('100%');
         } else {
-            setWebViewSize(205);
+            setWebViewSize(height * 0.3);
         }
     };
 

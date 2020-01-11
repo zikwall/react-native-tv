@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, Switch, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Switch, Text, View, TouchableOpacity, Dimensions} from 'react-native';
 import Card from "../../../../components/auth/Card";
 import styles, { container } from "./BottomContainer.style";
+
+const {height, width} = Dimensions.get('window');
 
 const BottomContainer = props => {
     const {
