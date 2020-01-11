@@ -2,15 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { StackActions, NavigationActions } from 'react-navigation';
+
 import { Back } from "../../components/header";
 import LoginScreenComponent from "./LoginScreenComponent";
 import { authenticate } from '../../redux/actions';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_PASSWORD, ERROR_INVALID_USERNAME } from '../../constants';
 
+const resetAction = StackActions.reset({
+    index: 0,
+    actions: [NavigationActions.navigate({ routeName: 'Main' })],
+});
+
 const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
 
-    const [ username, setUsername ] = useState(null);
+    const [ username, setProfilename ] = useState(null);
     const [ password, setPassword ] = useState(null);
     const [ switchValue, setSwitchValue ] = useState(false);
 
@@ -52,7 +59,8 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
         const status = await auth({username: username, password: password}, 'token_by_login');
 
         if (status.state === true) {
-            navigation.navigate('Profile');
+            //navigation.navigate('Profile');
+            navigation.dispatch(resetAction);
             return true;
         }
 
@@ -79,7 +87,7 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
                     setSwitchValue(switchValue);
                 }}
                 switchValue={switchValue}
-                usernameOnChangeText={username => setUsername(username)}
+                usernameOnChangeText={username => setProfilename(username)}
                 passwordOnChangeText={password => setPassword(password)}
             >
             </LoginScreenComponent>
