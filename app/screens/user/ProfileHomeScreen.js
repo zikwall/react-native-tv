@@ -21,7 +21,7 @@ const ProfileHomeScreen = () => {
                         numDays={ 100 }
                         onPress={(value, day) => {
                            if (value && typeof value.date !== 'undefined') {
-                               alert(value.date);
+                               alert(`User activity on this day ${value.date}`);
                            }
                         }}
                         values={ Fake.contributingData }
@@ -40,7 +40,7 @@ const ProfileHomeScreen = () => {
                                 borderBottomWidth: StyleSheet.hairlineWidth
                             }}
                             onPress={() =>
-                                alert('aaaa')
+                                alert('You clicked on User Activity Stream item')
                             }
                         >
                             <NotificationCard data={item}/>

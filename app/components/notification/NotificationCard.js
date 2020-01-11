@@ -106,7 +106,7 @@ class NotificationCard extends React.Component {
                 <View style={{ paddingRight: 5 }}>
                     <Icon
                         name={"chevron-down"}
-                        size={10}
+                        size={20}
                         color={'#ccc'}
                     />
                 </View>
