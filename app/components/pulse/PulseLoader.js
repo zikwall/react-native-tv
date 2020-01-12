@@ -70,6 +70,7 @@ export default class LocationPulseLoader extends React.Component {
 
     render() {
         const { size, avatar, avatarBackgroundColor, interval } = this.props;
+        const isHermes = () => global.HermesInternal != null;
 
         return (
             <>
@@ -109,7 +110,7 @@ export default class LocationPulseLoader extends React.Component {
                 </View>
 
                 <View style={{ paddingBottom: 10, alignItems: 'center'}}>
-                    <Text style={human.caption1}>Powered by PlayHub Service</Text>
+                    <Text style={human.caption1}>Powered by PlayHub Service { isHermes ? ' HermesEngine On' : ' HermesEngine Off' }</Text>
                 </View>
             </>
         );
