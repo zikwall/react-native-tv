@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image, TouchableOpacity, Animated, Easing, Text } from 'react-native';
 import { human } from 'react-native-typography';
 import Pulse from './Pulse';
+import { Environment } from '../../utils';
 
 // need Review
 export default class LocationPulseLoader extends React.Component {
@@ -70,7 +71,6 @@ export default class LocationPulseLoader extends React.Component {
 
     render() {
         const { size, avatar, avatarBackgroundColor, interval } = this.props;
-        const isHermes = () => global.HermesInternal != null;
 
         return (
             <>
@@ -110,7 +110,10 @@ export default class LocationPulseLoader extends React.Component {
                 </View>
 
                 <View style={{ paddingBottom: 10, alignItems: 'center'}}>
-                    <Text style={human.caption1}>Powered by PlayHub Service { isHermes ? ' HermesEngine On' : ' HermesEngine Off' }</Text>
+                    <Text style={human.caption1}>
+                        { Environment.isDev() ? '(dev)' : '' } Powered by PlayHub Service
+                        { Environment.isHermes ? ' HermesEngine On' : ' HermesEngine Off' }
+                    </Text>
                 </View>
             </>
         );
