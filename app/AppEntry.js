@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
 import { Provider, connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { PulseLoader } from './app/components';
 
-import AppNavigator from './app/navigation/AppNavigator';
-import { fetchChannelsRedux } from "./app/services/channels";
-import { appStore } from './app/redux/Store';
-import { getChannelsError, getChannelsPending } from './app/redux/reducers';
-import { handleJWTMiddleware } from './app/services/auth';
+import { PulseLoader } from './components';
+import { fetchChannelsRedux } from "./services/channels";
+import { appStore } from './redux/Store';
+import { getChannelsError, getChannelsPending } from './redux/reducers';
+import { handleJWTMiddleware } from './services/auth';
+import AppNavigator from './navigation/AppNavigator';
 
 const mapStateToProps = state => ({
     error: getChannelsError(state),
@@ -47,7 +47,7 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
     if (spinner) {
         return (
             <PulseLoader
-                avatar={ require('./app/assets/images/Play_650.png') }
+                avatar={ require('./assets/images/Play_650.png') }
             />
         );
     }
