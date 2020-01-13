@@ -3,7 +3,7 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { Image } from 'react-native';
 import { FaqScreen, LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen } from '../screens';
 import MainTabNavigator from './MainTabNavigator';
-import { Back, Right } from "../components/header";
+import { NavigationHeaderLeft, NavigationHeaderRight } from "../components";
 import ProfileNavigator from "./profile/ProfileNavigator";
 import StaticNavigator from './static/StaticNavigator';
 
@@ -22,7 +22,7 @@ const MainStack = createStackNavigator({
         navigationOptions:{
             title: `FAQ`,
             headerLeft: () => (
-                <Back />
+                <NavigationHeaderLeft />
             )
         }
     },
@@ -39,7 +39,7 @@ const MainStack = createStackNavigator({
             style = {{ height: 32, width: 98, marginLeft: 10, }}
         />,
         headerRight: (
-            <Right />
+            <NavigationHeaderRight />
         )
     }
 });

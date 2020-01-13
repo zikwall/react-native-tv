@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { iOSColors, human } from 'react-native-typography';
 
-import { UserLineItem } from '../../components/user-item';
+import { UserLineItem } from '../../components';
 import { Fake } from '../../utils';
 
 const FollowersScreen = () => {

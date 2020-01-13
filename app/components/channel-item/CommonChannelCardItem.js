@@ -12,8 +12,7 @@ import {
     iOSColors
 } from 'react-native-typography';
 
-import Rating from '../rating';
-import {Avatar} from '../avatar';
+import { Avatar } from '../avatar';
 
 const {height, width} = Dimensions.get('window');
 
@@ -28,7 +27,7 @@ export const TouchableRoundedImage = ({ style, width=80, height=80, ...props }) 
     </TouchableOpacity>
 );
 
-export const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight, size, rating }) => {
+const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight, size, rating }) => {
     return (
         <TouchableOpacity
             style={
@@ -47,6 +46,8 @@ export const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imag
         </TouchableOpacity>
     )
 };
+
+export default CommonChannelCardItem;
 
 CommonChannelCardItem.defaultProps = {
     imageWidth: 70,

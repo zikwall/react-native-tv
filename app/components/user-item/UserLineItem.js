@@ -4,7 +4,6 @@ import {
     Text,
     TouchableOpacity
 } from 'react-native';
-import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
 
 import Button from '../button/index.android';
 import s from './styles-list';
@@ -17,9 +16,7 @@ const UserLineItem = ({ id, image, name, username, onPress, moreOnPress }) => {
     return (
         <Button
             onPress={onPress}
-            style={[s.container,
-                {backgroundColor: itemStyles.backgroundColor}
-            ]}>
+            style={[s.container, {backgroundColor: itemStyles.backgroundColor}]}>
 
             <View style={ s.leftContainer }>
                 <Avatar src={image} />

@@ -6,27 +6,24 @@ import Orientation from 'react-native-orientation';
 import Icon from "react-native-vector-icons/Feather";
 import { Modalize } from 'react-native-modalize';
 import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
+import ContentLoader, { Bullets } from '@sarmad1995/react-native-content-loader';
 
-import { VideoView } from '../../components/video-view';
-import ChannelInfo from '../../components/channel-info';
-import Program, { NotItem } from '../../components/program';
+import { VideoView, ChannelInfo, TVProgram, TVProgramNotItem } from '../../components';
 import StaticModal from "./examples/StaticModal";
 import AbsoluteHeader, { renderHeader } from "./examples/AbsoluteHeader";
 import { setPlayer } from '../../redux/actions';
 import { getSelectChannel } from '../../redux/reducers';
 import { Players } from '../../constants';
-
-import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
-import ContentLoader, { Bullets } from '@sarmad1995/react-native-content-loader';
 import { EPG } from '../../services';
 import { SafeValidator } from '../../utils';
 
 const {height, width} = Dimensions.get('window');
 
 const defaultEpg = [
-    {title: 'Позапозавчера', data: <NotItem />},
-    {title: 'Позавчера', data: <NotItem />},
-    {title: 'Вчера', data: <NotItem />},
+    {title: 'Позапозавчера', data: <TVProgramNotItem />},
+    {title: 'Позавчера', data: <TVProgramNotItem />},
+    {title: 'Вчера', data: <TVProgramNotItem />},
     {title: 'Сегодня', data:
             <View style={{ paddingTop: 10 }}>
                 <View style={{ padding: 5 }}>
@@ -49,9 +46,9 @@ const defaultEpg = [
                 </View>
             </View>
     },
-    {title: 'Завтра', data: <NotItem />},
-    {title: 'Послезавтра', data: <NotItem />},
-    {title: 'Послепослезавтра', data: <NotItem />},
+    {title: 'Завтра', data: <TVProgramNotItem />},
+    {title: 'Послезавтра', data: <TVProgramNotItem />},
+    {title: 'Послепослезавтра', data: <TVProgramNotItem />},
 ];
 
 const WatchScreen = ({ selectPlayer, channel }) => {
@@ -196,7 +193,7 @@ const WatchScreen = ({ selectPlayer, channel }) => {
 
         return epgContent.map((epg, i) => {
             return <View key={i} tabLabel={epg.title}>
-                <Program items={epg.data} />
+                <TVProgram items={epg.data} />
             </View>
         });
     };

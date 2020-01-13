@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {
     Text,
@@ -8,10 +8,10 @@ import {
     StyleSheet,
 } from 'react-native';
 
-import BottomContainerContinue from './components/BottomContainerContinue/BottomContainerContinue';
 import styles, { container } from "./style";
-import { ErrorText } from "../../components/flash";
-import {Avatar} from '../../components/avatar';
+import { ErrorMessage, Avatar } from "../../components";
+import BottomContainerContinue from './components/BottomContainerContinue/BottomContainerContinue';
+
 
 const ContinueRegisterScreenComponent = props => {
     const {
@@ -21,25 +21,22 @@ const ContinueRegisterScreenComponent = props => {
         children,
         loginButtonBackgroundColor,
         loginBackgorundColor,
-
         avatar,
         onTouchAvatar,
     } = props;
 
     const defaultAvatar = avatar.uri != null ? avatar: require('../../assets/images/placeholders/image-placeholder-350x350.png');
 
-    function renderLoginButton() {
-        return (
-            <View style={styles.continueButtonsContainerStyle}>
-                <TouchableOpacity onPress={ onContinue }>
-                    <Text style={ [ss.button, styles.continueButtonStyle] }>Continue</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={ onContinueLater }>
-                    <Text style={ [ss.button, styles.continueButtonStyle] }>Then I will do it!!</Text>
-                </TouchableOpacity>
-            </View>
-        );
-    }
+    const renderLoginButton = () => (
+        <View style={styles.continueButtonsContainerStyle}>
+            <TouchableOpacity onPress={ onContinue }>
+                <Text style={[ss.button, styles.continueButtonStyle]}>Continue</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={ onContinueLater }>
+                <Text style={[ss.button, styles.continueButtonStyle]}>Then I will do it!!</Text>
+            </TouchableOpacity>
+        </View>
+    );
 
     return (
         <KeyboardAvoidingView
@@ -47,27 +44,26 @@ const ContinueRegisterScreenComponent = props => {
             style={container(loginButtonBackgroundColor)}
             keyboardVerticalOffset={-310}
         >
-            <View style={ container(loginBackgorundColor) }>
+            <View style={container(loginBackgorundColor)}>
                 <Text style={styles.centerParagraph}>
                     Was the last, tiny little step!
                 </Text>
-                <View style={{flex: 1}}>
-                    <View style={{flex: 1}}>
-                        <View>
-                            <ErrorText hasError={ error.has }
-                                       error={ error.error }
-                            />
-                        </View>
+                <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1 }}>
+                        <ErrorMessage hasError={error.has} error={error.error} />
 
                         {children}
 
-                        <BottomContainerContinue {...props} errors={ error.attributes } />
+                        <BottomContainerContinue{...props} errors={error.attributes} />
+
                         <View style={styles.avatarContainer}>
                             <TouchableOpacity onPress={onTouchAvatar} >
                                 <Avatar size={150} src={defaultAvatar} />
                             </TouchableOpacity>
                         </View>
+
                         {renderLoginButton()}
+
                     </View>
                 </View>
             </View>

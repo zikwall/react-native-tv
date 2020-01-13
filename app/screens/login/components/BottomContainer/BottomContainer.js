@@ -1,10 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {StyleSheet, Switch, Text, View, TouchableOpacity, Dimensions} from 'react-native';
-import Card from "../../../../components/auth/Card";
+import {
+    StyleSheet,
+    Switch,
+    Text,
+    View,
+    TouchableOpacity
+} from 'react-native';
+import { CardInput } from "../../../../components";
 import styles, { container } from "./BottomContainer.style";
-
-const {height, width} = Dimensions.get('window');
 
 const BottomContainer = props => {
     const {
@@ -29,9 +33,9 @@ const BottomContainer = props => {
 
 
     return (
-        <View style={ container('transparent') }>
-            <View style={ styles.containerGlue }>
-                <Card
+        <View style={container('transparent')}>
+            <View style={styles.containerGlue}>
+                <CardInput
                     inputname={ 'username' }
                     title={ usernameTitle }
                     value={ usernameTextinputValue }
@@ -41,7 +45,7 @@ const BottomContainer = props => {
                     errors={ errors }
                     { ...props }
                 />
-                <Card
+                <CardInput
                     inputname={ 'password' }
                     name="key"
                     secureTextEntry
@@ -57,8 +61,8 @@ const BottomContainer = props => {
                 />
             </View>
             <View style={styles.footerContainer}>
-                <TouchableOpacity onPress={ onLogin }>
-                    <View style={ ss.leftContainer }>
+                <TouchableOpacity onPress={onLogin}>
+                    <View style={ss.leftContainer}>
                         <Text style={ ss.button }>Login</Text>
                     </View>
                 </TouchableOpacity>

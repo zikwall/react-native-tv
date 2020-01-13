@@ -3,10 +3,9 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import MenuUserInfo from './MenuUserInfo'
-import MenuItem from '../../components/menu-item/MenuItem';
-import Divider from '../../components/divider';
+import { MenuItemLine, Divider } from '../../components';
 import { UserHelper } from '../../utils';
+import MenuUserInfo from './MenuUserInfo';
 
 const MenuScreen = ({ navigation, user, isAuthenticated }) => {
     const handleSettingsPress = () => {
@@ -17,7 +16,7 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
         alert('Press Search')
     };
 
-    const onMenuClick = (to) => {
+    const onMenuPress = (to) => {
         navigation.navigate(to);
     };
 
@@ -33,21 +32,21 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
                 />
             }
             <ScrollView>
-                <MenuItem onPress={onMenuClick} to={''} icon={ 'user-check' } name={'Friends'}/>
-                <MenuItem unreadItems={20} onPress={onMenuClick} to={''} icon={ 'message-square' } name={'Messages'}/>
-                <MenuItem onPress={onMenuClick} to={''} icon={ 'users' } name={'Communities'}/>
-                <MenuItem onPress={onMenuClick} to={''} icon={ 'star' } name={'Bookmarks'}/>
-                <MenuItem onPress={onMenuClick} to={''} icon={ 'heart' } name={'Liked'}/>
-                <MenuItem onPress={onMenuClick} to={''} icon={ 'shopping-bag' } name={'Purchases'}/>
+                <MenuItemLine onPress={onMenuPress} to={''} icon={'user-check'} name={'Friends'} onLongPress={() => alert('Looong!')} />
+                <MenuItemLine onPress={onMenuPress} to={''} icon={'message-square'} name={'Messages'} unreadItems={20} />
+                <MenuItemLine onPress={onMenuPress} to={''} icon={'users'} name={'Communities'} />
+                <MenuItemLine onPress={onMenuPress} to={''} icon={'star'} name={'Bookmarks'} />
+                <MenuItemLine onPress={onMenuPress} to={''} icon={'heart'} name={'Liked'} />
+                <MenuItemLine onPress={onMenuPress} to={''} icon={'shopping-bag'} name={'Purchases'} />
                 <Divider />
-                <MenuItem onPress={onMenuClick} to={'CopyrightScreen'} icon={ 'alert-circle' } name={'Copyright holders'}/>
-                <MenuItem onPress={onMenuClick} to={'TermsScreen'} icon={ 'book' } name={'Terms of Use'}/>
-                <MenuItem onPress={onMenuClick} to={'PrivacyScreen'} icon={ 'book-open' } name={'Privacy policy'}/>
-                <MenuItem onPress={onMenuClick} to={''} icon={ 'at-sign' } name={'Contacts'}/>
+                <MenuItemLine onPress={onMenuPress} to={'CopyrightScreen'} icon={'alert-circle'} name={'Copyright holders'} />
+                <MenuItemLine onPress={onMenuPress} to={'TermsScreen'} icon={'book'} name={'Terms of Use'} />
+                <MenuItemLine onPress={onMenuPress} to={'PrivacyScreen'} icon={'book-open'} name={'Privacy policy'} />
+                <MenuItemLine onPress={onMenuPress} to={''} icon={'at-sign'} name={'Contacts'} />
                 <Divider />
-                <MenuItem onPress={onMenuClick} to={'AboutScreen'} icon={ 'info' } name={'About the Project'}/>
-                <MenuItem onPress={onMenuClick} to={'FaqScreen'} icon={ 'help-circle' } name={'FAQ'}/>
-                <MenuItem onPress={onMenuClick} to={''} icon={ 'help-circle' } name={'Help'}/>
+                <MenuItemLine onPress={onMenuPress} to={'AboutScreen'} icon={'info'} name={'About the Project'} />
+                <MenuItemLine onPress={onMenuPress} to={'FaqScreen'} icon={'help-circle'} name={'FAQ'} />
+                <MenuItemLine onPress={onMenuPress} to={''} icon={'help-circle'} name={'Help'} />
             </ScrollView>
         </View>
     );

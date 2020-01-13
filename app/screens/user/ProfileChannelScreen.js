@@ -14,7 +14,7 @@ import {
     systemWeights
 } from "react-native-typography";
 
-import { CommonChannelCardItem, CommonChannelListItem } from '../../components/channel-item';
+import { CommonChannelCardItem, CommonChannelListItem } from '../../components';
 import { Fake } from '../../utils';
 
 const ProfileChannelScreen = () => {
@@ -49,7 +49,7 @@ const ProfileChannelScreen = () => {
                         <View style={styles.recentlyPlayedTitleBar}>
                             <Text style={styles.recentlyPlayedTitle}>All playlist</Text>
                         </View>
-                        <View style={{paddingTop: 10}}>
+                        <View style={{ paddingTop: 10 }}>
                             {Fake.userPlaylist.map((playlist, index) => (
                                 <CommonChannelListItem
                                     key={index}

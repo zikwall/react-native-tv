@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {
     Text,
@@ -7,10 +7,10 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView
 } from "react-native";
-import Logo from "../../components/auth/Logo";
-import BottomContainer from "./components/BottomContainer/BottomContainer";
+
+import { AppLogo, ErrorMessage, SuccessMessage } from "../../components";
 import styles, { container } from "./style";
-import { ErrorText, SuccessText } from '../../components/flash';
+import BottomContainer from "./components/BottomContainer/BottomContainer";
 
 const ForgotScreenComponent = props => {
     const {
@@ -23,7 +23,6 @@ const ForgotScreenComponent = props => {
         loginButtonBackgroundColor,
         loginBackgorundColor,
     } = props;
-
 
     const renderLoginButton = () => {
         return (
@@ -39,23 +38,18 @@ const ForgotScreenComponent = props => {
             style={container(loginButtonBackgroundColor)}
             keyboardVerticalOffset={-297}
         >
-            <View style={ container(loginBackgorundColor) }>
-
+            <View style={container(loginBackgorundColor)}>
                 <View style={styles.blackoverlay}>
                     <SafeAreaView style={styles.safeAreaViewStyle}>
                         <View style={styles.loginContainer}>
-                            <Logo {...props} />
-
-                            <SuccessText hasMessage={!!message} message={message} />
-
-                            <ErrorText hasError={ error.has }
-                                error={ error.error }
-                            />
+                            <AppLogo {...props} />
+                            <SuccessMessage hasMessage={!!message} message={message} />
+                            <ErrorMessage hasError={error.has} error={error.error} />
                         </View>
 
                         {children}
 
-                        <BottomContainer {...props} errors={ error.attributes } />
+                        <BottomContainer {...props} errors={error.attributes} />
                     </SafeAreaView>
                 </View>
 

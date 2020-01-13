@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, Platform } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { View } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
+import Icon from 'react-native-vector-icons/Feather';
 
-import { Back } from "../../components/header";
+import { NavigationHeaderLeft } from "../../components";
 import { registerFinished, setProfile } from '../../redux/actions';
 import { Validator, FormHelper } from '../../utils';
+import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_NAME } from '../../constants';
 import ContinueRegisterScreenComponent from './ContinueRegisterScreenComponent';
-import {ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_PASSWORD} from '../../constants';
-import {ERROR_INVALID_NAME} from '../../constants/Auth';
 
 const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAuthenticated, token }) => {
     useEffect(() => {
@@ -136,7 +135,7 @@ ContinueRegisterScreen.navigationOptions = ({ navigation }) => {
     return {
         title: 'Last Step',
         headerLeft: () => (
-            <Back />
+            <NavigationHeaderLeft />
         ),
     };
 };

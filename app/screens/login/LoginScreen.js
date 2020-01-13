@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
 
-import { Back } from "../../components/header";
+import { NavigationHeaderLeft } from "../../components";
 import LoginScreenComponent from "./LoginScreenComponent";
 import { authenticate } from '../../redux/actions';
 import { Validator } from '../../utils';
@@ -100,7 +100,7 @@ LoginScreen.navigationOptions = ({ navigation }) => {
     return {
         title: `Login`,
         headerLeft: () => (
-            <Back />
+            <NavigationHeaderLeft />
         ),
     };
 };

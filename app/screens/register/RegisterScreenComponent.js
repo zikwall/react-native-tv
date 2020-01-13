@@ -8,10 +8,9 @@ import {
     KeyboardAvoidingView,
     StyleSheet,
 } from 'react-native';
-import Logo from "../../components/auth/Logo";
-import BottomContainer from "./components/BottomContainer/BottomContainer";
+import { AppLogo, ErrorMessage } from "../../components";
 import styles, { container } from "./style";
-import { ErrorText } from "../../components/flash";
+import BottomContainer from "./components/BottomContainer/BottomContainer";
 
 const RegisterScreenComponent = props => {
     const {
@@ -25,7 +24,7 @@ const RegisterScreenComponent = props => {
     function renderLoginButton() {
         return (
             <TouchableOpacity style={styles.loginButtonStyle} onPress={ onRegister }>
-                <Text style={ ss.button }>Register Now!</Text>
+                <Text style={ss.button}>Register Now!</Text>
             </TouchableOpacity>
         );
     }
@@ -36,21 +35,17 @@ const RegisterScreenComponent = props => {
             style={container(loginButtonBackgroundColor)}
             keyboardVerticalOffset={-310}
         >
-            <View style={ container(loginBackgorundColor) }>
-
+            <View style={container(loginBackgorundColor)}>
                 <View style={styles.blackoverlay}>
                     <SafeAreaView style={styles.safeAreaViewStyle}>
                         <View style={styles.loginContainer}>
-                            <Logo {...props} />
-
-                            <ErrorText hasError={ error.has }
-                                       error={ error.error }
-                            />
+                            <AppLogo {...props} />
+                            <ErrorMessage hasError={error.has} error={error.error}/>
                         </View>
 
                         {children}
 
-                        <BottomContainer {...props} errors={ error.attributes } />
+                        <BottomContainer {...props} errors={error.attributes} />
                     </SafeAreaView>
                 </View>
 

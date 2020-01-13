@@ -2,21 +2,16 @@ import PropTypes from 'prop-types'
 import React from 'react';
 import { View, Text } from 'react-native';
 import s from './styles';
-import { Avatar } from '../../components/avatar';
+import { Avatar } from '../../components';
 import Button from '../../components/button';
-import Divider from '../divider';
 
 const ChannelInfo = ({ name, onPress, onLongPress, src, menu }) => {
-    const itemStyles = { backgroundColor:'#fff' };
-
     return (
         <>
             <Button
                 onPress={() => onPress()}
                 onLongPress={() => onLongPress()}
-                style={[s.container,
-                    {backgroundColor: itemStyles.backgroundColor}
-                ]}>
+                style={[s.container, { backgroundColor: '#fff' }]}>
 
                 <View style={ s.leftContainer }>
                     <Avatar src={ src } size={ 40 } />
@@ -32,8 +27,6 @@ const ChannelInfo = ({ name, onPress, onLongPress, src, menu }) => {
                     { menu }
                 </View>
             </Button>
-
-            {/*<Divider />*/}
         </>
     )
 };

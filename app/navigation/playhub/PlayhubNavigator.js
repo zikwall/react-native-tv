@@ -1,6 +1,7 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
-import { Back, Right } from '../../components/header';
+import Icon from 'react-native-vector-icons/Feather';
+import { NavigationHeaderLeft } from '../../components';
 import {
     PlayHubScreen,
     PlayHubRecommendedScreen,
@@ -8,7 +9,6 @@ import {
     PlayHubCategoryScreen,
     PlayHubBestScreen
 } from '../../screens';
-import Icon from 'react-native-vector-icons/Feather';
 
 const StaticNavigation = createMaterialTopTabNavigator({
     PlayHubScreen: {
@@ -104,7 +104,7 @@ PlayhubNavigator.router = {
 PlayhubNavigator.navigationOptions = ({ navigation }) => {
     return {
         headerLeft: () => (
-            <Back />
+            <NavigationHeaderLeft />
         ),
     };
 };

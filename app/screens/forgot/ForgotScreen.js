@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Back } from "../../components/header";
-import ForgotScreenComponent from "./ForgotScreenComponent";
+
+import { NavigationHeaderLeft } from "../../components";
 import { authenticate } from '../../redux/actions';
 import { apiFetch } from '../../services/api';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS } from '../../constants';
+import ForgotScreenComponent from "./ForgotScreenComponent";
 
 const ForgotScreen = ({ navigation, auth, isAuthenticated }) => {
     const [ email, setEmail ] = useState(null);
@@ -103,7 +104,7 @@ ForgotScreen.navigationOptions = ({ navigation }) => {
     return {
         title: `Forgot`,
         headerLeft: () => (
-            <Back />
+            <NavigationHeaderLeft />
         ),
     };
 };

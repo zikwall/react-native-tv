@@ -1,15 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, Text, ScrollView, TouchableOpacity, Dimensions} from 'react-native';
+import {
+    View,
+    StyleSheet,
+    Text,
+    ScrollView,
+    TouchableOpacity,
+    Dimensions
+} from 'react-native';
 import moment from 'moment';
 import {
     human,
 } from "react-native-typography";
 
-import CalendarHeatmap from '../../components/heatmap/CalendarHeatmap';
+import { CalendarHeatmap, NotificationCard } from '../../components';
 import { Fake } from '../../utils';
-import NotificationCard from '../../components/notification/NotificationCard';
 
-const {height, width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const ProfileHomeScreen = () => {
     return (

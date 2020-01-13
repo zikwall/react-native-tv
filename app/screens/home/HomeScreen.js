@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import {View, Text, Dimensions} from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { withNavigation } from 'react-navigation';
-import SearchBar from "../../components/search";
 import { FlatGrid, SectionGrid } from 'react-native-super-grid';
+
+import { SearchBar, ChannelCard } from "../../components";
 import { getChannels } from '../../redux/reducers';
-import { ChannelCard } from "../../components/channel-item";
 import { setChannel } from "../../redux/actions/channels";
 
 import styles from "./styles";

@@ -7,9 +7,9 @@ import {
 import Button from '../button/index.android';
 import s from './styles-list';
 import Rating from '../rating';
-import {Avatar} from '../avatar';
+import { Avatar } from '../avatar';
 
-export const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating }) => {
+const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating }) => {
     const itemStyles = { backgroundColor:'#fff' };
 
     return (
@@ -45,3 +45,5 @@ export const CommonChannelListItem = ({ image, title, subtitle, onPress, number,
         </Button>
     )
 };
+
+export default CommonChannelListItem;

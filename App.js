@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
 import { Provider, connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import PulseLoader from './app/components/pulse';
+import { PulseLoader } from './app/components';
 
 import AppNavigator from './app/navigation/AppNavigator';
 import { fetchChannelsRedux } from "./app/services/channels";

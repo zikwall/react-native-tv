@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { View } from "react-native";
-import Card from "../../../../components/auth/Card";
+import { CardInput } from "../../../../components";
 import styles, { container } from "./BottomContainerContinue.style";
 
 const BottomContainerContinue = props => {
@@ -21,7 +21,7 @@ const BottomContainerContinue = props => {
 
     return (
         <View style={styles.containerGlue}>
-            <Card
+            <CardInput
                 inputname={ 'name' }
                 title={nameTitle}
                 value={nameTextinputValue}
@@ -30,7 +30,7 @@ const BottomContainerContinue = props => {
                 iconComponent={nameIconComponent}
                 {...props}
             />
-            <Card
+            <CardInput
                 inputname={ 'email' }
                 title={publicEmailTitle}
                 value={publicEmailTextinputValue}

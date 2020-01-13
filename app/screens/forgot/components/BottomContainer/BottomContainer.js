@@ -1,11 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {StyleSheet, Switch, Text, View, TouchableOpacity, Dimensions} from 'react-native';
-import Card from "../../../../components/auth/Card";
-import styles, { container } from "./BottomContainer.style";
-const {height, width} = Dimensions.get('window');
+import {
+    StyleSheet,
+    Text,
+    View,
+    TouchableOpacity,
+    Dimensions
+} from 'react-native';
 
-const margin = width * 0.025;
+import { CardInput } from "../../../../components";
+import styles, { container } from "./BottomContainer.style";
+
+const { width } = Dimensions.get('window');
 
 const BottomContainer = props => {
     const {
@@ -19,9 +25,9 @@ const BottomContainer = props => {
     } = props;
 
     return (
-        <View style={ container('transparent') }>
-            <View style={ styles.containerGlue }>
-                <Card
+        <View style={container('transparent')}>
+            <View style={styles.containerGlue}>
+                <CardInput
                     inputname={ 'email' }
                     title={ emailTitle }
                     value={ emailTextinputValue }
@@ -33,9 +39,9 @@ const BottomContainer = props => {
                 />
             </View>
 
-            <View style={{paddingHorizontal: 10, width: width * 0.9, marginTop: 15 }}>
+            <View style={{ paddingHorizontal: 10, width: width * 0.9, marginTop: 15 }}>
                 <TouchableOpacity onPress={ onLogin }>
-                    <Text style={ ss.button }>Forgot!</Text>
+                    <Text style={ss.button}>Forgot!</Text>
                 </TouchableOpacity>
             </View>
         </View>

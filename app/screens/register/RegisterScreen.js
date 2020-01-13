@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
 
-import { Back } from "../../components/header";
-import RegisterScreenComponent from './RegisterScreenComponent';
+import { NavigationHeaderLeft } from "../../components";
 import { registration } from '../../redux/actions';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_USERNAME, ERROR_INVALID_PASSWORD } from '../../constants';
+import RegisterScreenComponent from './RegisterScreenComponent';
 
 const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
     const [ username, setProfilename ] = useState(null);
     const [ password, setPassword ] = useState(null);
-    const [ email, setEmail ]       = useState(null);
+    const [ email, setEmail ] = useState(null);
 
     const [ error, setError ] = useState({
         has: false,
@@ -94,7 +94,7 @@ RegisterScreen.navigationOptions = ({ navigation }) => {
     return {
         title: `Registration`,
         headerLeft: () => (
-            <Back />
+            <NavigationHeaderLeft />
         ),
     };
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
-import { UserTop } from "../../screens/user/components/user-top";
+import { UserTop } from "../../components";
 import { View, } from "react-native";
 import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
 import Icon from 'react-native-vector-icons/Feather';
@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Orientation from 'react-native-orientation';
 
 import { ProfileHomeScreen, FollowingScreen, FollowersScreen, ProfileChannelScreen } from "../../screens";
-import { Back } from "../../components/header";
+import { NavigationHeaderLeft } from "../../components";
 import { UserHelper } from '../../utils';
 
 const ProfileTopNavStack = createMaterialTopTabNavigator({
@@ -136,7 +136,7 @@ ProfileNavigator.navigationOptions = ({ navigation }) => {
     return {
         title: `Hi, { username }`,
         headerLeft: () => (
-            <Back />
+            <NavigationHeaderLeft />
         ),
     };
 };

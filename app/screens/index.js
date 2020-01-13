@@ -1,7 +1,6 @@
 import HomeScreen from "./home/HomeScreen";
 import PlayHubScreen from "./playhub/PlayHubScreen";
 import WatchScreen from "./watch/WatchScreen";
-import LibraryScreen from "./LibraryScreen";
 import ProfileHomeScreen from "./user/ProfileHomeScreen";
 import FollowingScreen from './user/FollowingScreen';
 import FollowersScreen from './user/FollowersScreen';
@@ -23,7 +22,7 @@ import ContinueRegisterScreen from './register/ContinueRegisterScreen';
 
 export {
     // global
-    HomeScreen, PlayHubScreen, LibraryScreen, WatchScreen,
+    HomeScreen, PlayHubScreen, WatchScreen,
     // user
     ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen,
     // auth

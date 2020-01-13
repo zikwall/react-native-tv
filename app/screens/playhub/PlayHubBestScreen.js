@@ -8,7 +8,7 @@ const PlayHubBestScreen = () =>{
                 <Image style={{ resizeMode: 'contain', height: 250, width: 250 }} source={ require('../../assets/images/PlayHubFull.png') }/>
             </View>
 
-            <Text style={{textAlign:"center", color:"#000"}}>Coming Soon...</Text>
+            <Text style={{ textAlign:"center", color:"#000" }}>Coming Soon...</Text>
         </View>
     );
 };

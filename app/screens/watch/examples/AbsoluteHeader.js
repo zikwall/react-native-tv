@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import {NotDescription} from '../../../components/channel-info';
+import { ChannelNotDescription } from '../../../components';
 
 export const renderHeader = (handleClose) => (
     <TouchableOpacity
@@ -17,19 +17,21 @@ export const renderHeader = (handleClose) => (
 const renderContent = (title, description, time) => (
     <View style={s.content}>
         <ScrollView>
-            <Text style={s.content__heading}>{title}</Text>
-            <Text style={s.content__subheading}>{time}</Text>
-            { renderDescription(description) }
+            <Text style={s.content__heading}>{ title }</Text>
+            <Text style={s.content__subheading}>{ time }</Text>
+            {
+                renderDescription(description)
+            }
         </ScrollView>
     </View>
 );
 
 const renderDescription = (description) => {
     if (!description && description.length === 0) {
-        return <NotDescription />;
+        return <ChannelNotDescription />;
     }
 
-    return <Text style={s.content__paragraph}>{description}</Text>;
+    return <Text style={s.content__paragraph}>{ description }</Text>;
 };
 
 const AbsoluteHeader = ({ onCloseModal, title, description, time }) => {

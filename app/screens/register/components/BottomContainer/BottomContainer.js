@@ -1,14 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { View } from "react-native";
-import Card from "../../../../components/auth/Card";
+import { CardInput } from "../../../../components";
 import styles, { container } from "./BottomContainer.style";
 
 const BottomContainer = props => {
     const {
         passwordTitle,
         usernameTitle,
-        backgroundColor,
         usernamePlaceholder,
         passwordPlaceholder,
         usernameOnChangeText,
@@ -27,7 +26,7 @@ const BottomContainer = props => {
     return (
         <View style={container('transparent')}>
             <View style={styles.containerGlue}>
-                <Card
+                <CardInput
                     inputname={ 'username' }
                     title={usernameTitle}
                     value={usernameTextinputValue}
@@ -36,7 +35,7 @@ const BottomContainer = props => {
                     iconComponent={usernameIconComponent}
                     {...props}
                 />
-                <Card
+                <CardInput
                     inputname={ 'email' }
                     title={emailTitle}
                     value={emailTextinputValue}
@@ -45,7 +44,7 @@ const BottomContainer = props => {
                     iconComponent={emailIconComponent}
                     {...props}
                 />
-                <Card
+                <CardInput
                     inputname={ 'password' }
                     name="key"
                     secureTextEntry
