@@ -113,6 +113,7 @@ const ProfileNavigator = ({ navigation, user, isAuthenticated }) => {
                 displayName={UserHelper.buildUserId(user)}
                 username={user.username}
                 avatar={UserHelper.makeUserAvatar(user)}
+                onAvatarPress={() => alert('U press avatar')}
             />}
 
             <View style={{ flex: 1 }}>
