@@ -6,6 +6,7 @@ import * as UserHelper from './User';
 import * as SafeValidator from './SafeValidator';
 import * as FormHelper from './Form';
 import * as Environment from './Environment';
+import * as DataHelper from './DataHelper';
 
 export {
     ArrayHelper,
@@ -15,5 +16,6 @@ export {
     UserHelper,
     SafeValidator,
     FormHelper,
-    Environment
+    Environment,
+    DataHelper
 }

@@ -1,55 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, Dimensions } from 'react-native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
-import { withNavigation } from 'react-navigation';
-import { FlatGrid, SectionGrid } from 'react-native-super-grid';
+import { useSelector, useDispatch } from 'react-redux';
+import { SectionGrid } from 'react-native-super-grid';
 
 import { SearchBar, ChannelCard } from "../../components";
 import { getChannels } from '../../redux/reducers';
 import { setChannel } from "../../redux/actions/channels";
-
+import { DataHelper } from '../../utils';
 import styles from "./styles";
 
-const {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
-const getGroupedItems = (items) => {
-    if (!items && items.length === 0) {
-        return [];
-    }
+const HomeScreen = ({ navigation }) => {
+    const channels = useSelector(state => getChannels(state));
+    const dispatch = useDispatch();
+    const selectChannel = useCallback(channel => dispatch(setChannel(channel)), [ dispatch ]);
 
-    let groups = {};
-
-    for (let i in items) {
-        let groupName = items[i].category;
-
-        if (groups.hasOwnProperty(groupName) === false) {
-            groups[groupName] = {
-                title: groupName,
-                data: []
-            };
-        }
-
-        groups[groupName].data.push(items[i]);
-    }
-
-    let sections = [];
-
-    for (let groupId in groups) {
-        let group = groups[groupId];
-
-        sections.push({
-            title: group.title,
-            data: group.data
-        });
-    }
-
-    return sections;
-};
-
-const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
     const [ items, setItems ] = useState(channels);
-    // TODO Move to Search Cancel Component
     const [ cancelVisible, setCancelVisible ] = useState(false);
 
     const filterList = (text) => {
@@ -103,7 +70,7 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
                 />
                 <SectionGrid
                     itemDimension={ height * 0.2 }
-                    sections={ getGroupedItems(items) }
+                    sections={ DataHelper.getGroupedChannels(items) }
                     style={ styles.gridView }
                     renderSectionHeader={({ section }) => (
                         <Text style={ styles.sectionHeader }>{ section.title }</Text>
@@ -121,14 +88,6 @@ const HomeScreen = withNavigation(({ channels, selectChannel, navigation }) => {
             </View>
         </>
     );
-});
+};
 
-const mapStateToProps = state => ({
-    channels: getChannels(state),
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-    selectChannel: setChannel,
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default HomeScreen;
