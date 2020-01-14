@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { NavigationHeaderLeft } from "../../components";
+import { NavigationHeaderLeft, NavigationHeaderTitle } from "../../components";
 import { registration } from '../../redux/actions';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_USERNAME, ERROR_INVALID_PASSWORD } from '../../constants';
@@ -92,7 +92,9 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
 
 RegisterScreen.navigationOptions = ({ navigation }) => {
     return {
-        title: `Registration`,
+        headerTitle: () => (
+            <NavigationHeaderTitle title={'Register'} />
+        ),
         headerLeft: () => (
             <NavigationHeaderLeft />
         ),

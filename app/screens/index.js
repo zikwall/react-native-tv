@@ -19,6 +19,7 @@ import PlayHubCategoryScreen from './playhub/PlayHubCategoryScreen';
 import PlayHubForFamilyScreen from './playhub/PlayHubForFamilyScreen';
 import PlayHubRecommendedScreen from './playhub/PlayHubRecommendedScreen';
 import ContinueRegisterScreen from './register/ContinueRegisterScreen';
+import SystemScreen from "./static/SystemScreen";
 
 export {
     // global
@@ -28,7 +29,7 @@ export {
     // auth
     LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen,
     // menu
-    MenuScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen,
+    MenuScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen, SystemScreen,
     // playhub
     PlayHubBestScreen, PlayHubCategoryScreen, PlayHubForFamilyScreen, PlayHubRecommendedScreen
 }

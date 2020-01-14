@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { NavigationHeaderLeft } from "../../components";
+import { NavigationHeaderLeft, NavigationHeaderTitle } from "../../components";
 import { authenticate } from '../../redux/actions';
 import { apiFetch } from '../../services/api';
 import { Validator } from '../../utils';
@@ -102,16 +102,18 @@ const ForgotScreen = ({ navigation, auth, isAuthenticated }) => {
 
 ForgotScreen.navigationOptions = ({ navigation }) => {
     return {
-        title: `Forgot`,
+        headerTitle: () => (
+            <NavigationHeaderTitle title={'Forgot'} />
+        ),
         headerLeft: () => (
             <NavigationHeaderLeft />
         ),
     };
 };
 
-const mapStateToProps = (state) => (
-    { isAuthenticated: !!state.authentication.token }
-);
+const mapStateToProps = (state) => ({
+    isAuthenticated: !!state.authentication.token
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     auth: authenticate

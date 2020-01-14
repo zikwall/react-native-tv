@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
-import { UserTop } from "../../components";
+import { NavigationHeaderTitle, UserTop } from "../../components";
 import { View, } from "react-native";
 import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
 import Icon from 'react-native-vector-icons/Feather';
@@ -134,7 +134,9 @@ ProfileNavigator.router = {
 
 ProfileNavigator.navigationOptions = ({ navigation }) => {
     return {
-        title: `Hi, { username }`,
+        headerTitle: () => (
+            <NavigationHeaderTitle title={'Hi, { username }'} />
+        ),
         headerLeft: () => (
             <NavigationHeaderLeft />
         ),

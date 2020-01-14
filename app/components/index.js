@@ -32,3 +32,4 @@ export { default as OverlaySpinner } from './spinner/Overlay';
 export { default as UnreadBadge } from './unread-badge';
 export { default as VideoView } from './video-view/VideoView';
 export { default as UserTop } from './user-top/UserTop';
+export { default as NavigationHeaderTitle } from './navigation-header/NavigationHeaderTitle';

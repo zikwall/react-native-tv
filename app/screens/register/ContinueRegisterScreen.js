@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { NavigationHeaderLeft } from "../../components";
+import { NavigationHeaderLeft, NavigationHeaderTitle } from "../../components";
 import { registerFinished, setProfile } from '../../redux/actions';
 import { Validator, FormHelper } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_NAME } from '../../constants';
@@ -133,7 +133,9 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
 
 ContinueRegisterScreen.navigationOptions = ({ navigation }) => {
     return {
-        title: 'Last Step',
+        headerTitle: () => (
+            <NavigationHeaderTitle title={'Last step'} />
+        ),
         headerLeft: () => (
             <NavigationHeaderLeft />
         ),

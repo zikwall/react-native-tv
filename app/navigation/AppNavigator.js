@@ -1,9 +1,16 @@
 import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { Image } from 'react-native';
-import { FaqScreen, LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen } from '../screens';
+import {
+    FaqScreen,
+    LoginScreen,
+    RegisterScreen,
+    ForgotScreen,
+    ContinueRegisterScreen,
+    SystemScreen
+} from '../screens';
 import MainTabNavigator from './MainTabNavigator';
-import { NavigationHeaderLeft, NavigationHeaderRight } from "../components";
+import { NavigationHeaderLeft, NavigationHeaderRight, NavigationHeaderTitle } from "../components";
 import ProfileNavigator from "./profile/ProfileNavigator";
 import StaticNavigator from './static/StaticNavigator';
 
@@ -20,7 +27,20 @@ const MainStack = createStackNavigator({
     FaqScreen: {
         screen: FaqScreen,
         navigationOptions:{
-            title: `FAQ`,
+            headerTitle: () => (
+                <NavigationHeaderTitle title={'FAQ'} />
+            ),
+            headerLeft: () => (
+                <NavigationHeaderLeft />
+            )
+        }
+    },
+    SystemScreen: {
+        screen: SystemScreen,
+        navigationOptions:{
+            headerTitle: () => (
+                <NavigationHeaderTitle title={'System'} />
+            ),
             headerLeft: () => (
                 <NavigationHeaderLeft />
             )

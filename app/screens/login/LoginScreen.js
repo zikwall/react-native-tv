@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
 
-import { NavigationHeaderLeft } from "../../components";
+import { NavigationHeaderLeft, NavigationHeaderTitle } from "../../components";
 import LoginScreenComponent from "./LoginScreenComponent";
 import { authenticate } from '../../redux/actions';
 import { Validator } from '../../utils';
@@ -98,7 +98,9 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
 
 LoginScreen.navigationOptions = ({ navigation }) => {
     return {
-        title: `Login`,
+        headerTitle: () => (
+            <NavigationHeaderTitle title={'Login'} />
+        ),
         headerLeft: () => (
             <NavigationHeaderLeft />
         ),
