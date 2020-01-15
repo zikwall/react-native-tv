@@ -1,43 +1,57 @@
 import React from 'react';
-import { View, FlatList, StyleSheet, Text } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { human } from "react-native-typography"
+import { CellView, CellViewSwitch } from "../../components";
+import { Environment } from '../../utils';
+import { useSelector } from "react-redux";
+import { getChannels } from "../../redux/reducers";
 
-const DATA = [
-    {
-        id: 'bd7acbea',
-        title: 'First Item',
-    },
-    {
-        id: '3ac68afc',
-        title: 'Second Item',
-    },
-    {
-        id: '58694a0f',
-        title: 'Third Item',
-    },
-];
-
-const Item = ({ id, title }) => (
-    <View style={styles.container}>
-        <View style={styles.item}>
+const Item = ({ left, right }) => (
+    <CellView
+        leftContent={
             <Text style={styles.text} numberOfLines={1} ellipsizeMode="tail">
-                { id }
+                { left }
             </Text>
-        </View>
-        <View>
-            <Text style={styles.text}>
-                { title }
-            </Text>
-        </View>
-    </View>
+        }
+        rightContent={
+            <View>
+                { right }
+            </View>
+        }
+        cellStyles={{
+            padding: 5,
+            marginHorizontal: 5,
+            marginVertical: 6,
+            borderBottomColor: '#f0f1f4',
+            borderBottomWidth: 1,
+        }}
+    />
 );
 
-const SystemScreen = ({ text1 }) => {
+const SystemScreen = () => {
+    const channels = useSelector(state => getChannels(state));
+
+    const DATA = [
+        {
+            left: `Environment { Production }`,
+            right: <CellViewSwitch disabled value={Environment.isProd()} />,
+        },
+        {
+            left: 'Hermes Engine { Enabled }',
+            right: <CellViewSwitch disabled value={Environment.isHermes()} />,
+        },
+        {
+            left: 'Count Channels',
+            right: <Text style={human.callout}>{Object.keys(channels).length}</Text>,
+        },
+    ];
+
     return (
         <FlatList
+            style={{ paddingTop: 5 }}
             data={DATA}
-            renderItem={({ item }) => <Item id={item.id} title={item.title} />}
-            keyExtractor={item => item.id}
+            renderItem={({ item }) => <Item left={item.left} right={item.right} />}
+            keyExtractor={(item, index) => `key_${index}`}
         />
     );
 };
@@ -45,18 +59,6 @@ const SystemScreen = ({ text1 }) => {
 export default SystemScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        padding: 5,
-        marginHorizontal: 5,
-        marginVertical: 6,
-        borderBottomColor: '#f0f1f4',
-        borderBottomWidth: 1,
-    },
-    item: {
-        flex: 1,
-        justifyContent: 'center',
-    },
     text: {
         ...human.callout,
     }

@@ -33,3 +33,5 @@ export { default as UnreadBadge } from './unread-badge';
 export { default as VideoView } from './video-view/VideoView';
 export { default as UserTop } from './user-top/UserTop';
 export { default as NavigationHeaderTitle } from './navigation-header/NavigationHeaderTitle';
+export { default as CellView } from './cellview/CellView';
+export { default as CellViewSwitch } from './cellview/CellViewSwitch';

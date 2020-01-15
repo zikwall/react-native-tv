@@ -73,7 +73,8 @@ const BottomContainer = props => {
                     value={switchValue}
                     ios_backgroundColor="black"
                     onValueChange={onSwitchValueChange}
-                    trackColor={{ true: "default", false: "black" }}
+                    trackColor={{ true: "#ccc", false: "#ccc" }}
+                    thumbColor={'#000'}
                 />
             </View>
         </View>

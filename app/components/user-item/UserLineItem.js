@@ -8,6 +8,7 @@ import {
 import Button from '../button/index.android';
 import s from './styles-list';
 import { Avatar } from '../avatar';
+import CellView from "../cellview/CellView";
 import Icon from 'react-native-vector-icons/Feather';
 
 const UserLineItem = ({ id, image, name, username, onPress, moreOnPress }) => {

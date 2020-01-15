@@ -39,7 +39,7 @@ const MainStack = createStackNavigator({
         screen: SystemScreen,
         navigationOptions:{
             headerTitle: () => (
-                <NavigationHeaderTitle title={'System'} />
+                <NavigationHeaderTitle title={'System & App State'} />
             ),
             headerLeft: () => (
                 <NavigationHeaderLeft />

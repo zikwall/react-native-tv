@@ -111,8 +111,7 @@ export default class LocationPulseLoader extends React.Component {
 
                 <View style={{ paddingBottom: 10, alignItems: 'center'}}>
                     <Text style={human.caption1}>
-                        { Environment.isDev() ? '(dev)' : '' } Powered by PlayHub Service
-                        { Environment.isHermes ? ' HermesEngine On' : ' HermesEngine Off' }
+                        Powered by PlayHub Service { Environment.isDev() ? '(dev)' : '' }
                     </Text>
                 </View>
             </>

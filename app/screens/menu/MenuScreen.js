@@ -47,7 +47,7 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
                 <MenuItemLine onPress={onMenuPress} to={'AboutScreen'} icon={'info'} name={'About the Project'} />
                 <MenuItemLine onPress={onMenuPress} to={'FaqScreen'} icon={'help-circle'} name={'FAQ'} />
                 <MenuItemLine onPress={onMenuPress} to={''} icon={'help-circle'} name={'Help'} />
-                <MenuItemLine onPress={onMenuPress} to={'SystemScreen'} icon={'layers'} name={'System'} />
+                <MenuItemLine onPress={onMenuPress} to={'SystemScreen'} icon={'layers'} name={'System & App State'} />
             </ScrollView>
         </View>
     );
