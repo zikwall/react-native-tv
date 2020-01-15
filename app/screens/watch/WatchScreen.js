@@ -180,7 +180,7 @@ const WatchScreen = ({ selectPlayer, channel }) => {
         selectPlayer(channel.epg_id, playerId);
     };
 
-    const ifImage = SafeValidator.getSafeChannelImage(channel.image);
+    const ifImage = SafeValidator.getSafeChannelImage(channel.image ? channel.image : null);
 
     const ifRenderContent = () => {
         if (epgContent === null) {
