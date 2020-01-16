@@ -41,7 +41,7 @@ const UserMenuScreen = ({ navigation }) => {
                 <MenuItemLine onPress={onMenuPress} to={''} icon={'eye'} name={'Privacy settings'} />
                 <Heading icon={'database'} iconColor={'#000'} text={'Content'} color={'#000'} />
                 <MenuItemLine onPress={onMenuPress} to={''} icon={'film'} name={'Your Videos'} />
-                <MenuItemLine onPress={onMenuPress} to={'UserStatisticScreen'} icon={'bar-chart-2'} name={'Your Statistic'} />
+                <MenuItemLine onPress={onMenuPress} to={'UserStatisticScreen'} icon={'bar-chart-2'} name={'Your Analytics'} />
                 <Heading icon={'terminal'} iconColor={'#000'} text={'Developer Block'} color={'#000'} />
                 <MenuItemLine onPress={onMenuPress} to={''} icon={'video'} name={'Debug Video'} />
                 <MenuItemLine onPress={onMenuPress} to={''} icon={'edit-3'} name={'Write to developer'} />

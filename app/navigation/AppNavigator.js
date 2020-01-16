@@ -63,7 +63,7 @@ const MainStack = createStackNavigator({
         screen: StatisticScreen,
         navigationOptions:{
             headerTitle: () => (
-                <NavigationHeaderTitle title={'You Statistic'} />
+                <NavigationHeaderTitle title={'You Analytics'} />
             ),
             headerLeft: () => (
                 <NavigationHeaderLeft />
