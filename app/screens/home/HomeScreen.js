@@ -20,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
     const [ cancelVisible, setCancelVisible ] = useState(false);
 
     const filterList = (text) => {
-        setItems(channels.filter((item) => item.name.toLowerCase().includes(text.toLowerCase())));
+        setItems(Object.values(channels).filter((item) => item.name.toLowerCase().includes(text.toLowerCase())));
 
         if (text === '') {
             setCancelVisible(false);
