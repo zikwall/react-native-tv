@@ -9,7 +9,7 @@ import MenuUserInfo from './MenuUserInfo';
 
 const MenuScreen = ({ navigation, user, isAuthenticated }) => {
     const handleSettingsPress = () => {
-        alert('Press settings')
+        navigation.navigate('UserMenuScreen');
     };
 
     const handleSearchPress = () => {

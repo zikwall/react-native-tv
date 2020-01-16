@@ -20,12 +20,14 @@ import PlayHubForFamilyScreen from './playhub/PlayHubForFamilyScreen';
 import PlayHubRecommendedScreen from './playhub/PlayHubRecommendedScreen';
 import ContinueRegisterScreen from './register/ContinueRegisterScreen';
 import SystemScreen from "./static/SystemScreen";
+import StatisticScreen from "./user/StatisticScreen";
+import UserMenuScreen from "./menu/UserMenuScreen";
 
 export {
     // global
     HomeScreen, PlayHubScreen, WatchScreen,
     // user
-    ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen,
+    ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen, StatisticScreen, UserMenuScreen,
     // auth
     LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen,
     // menu

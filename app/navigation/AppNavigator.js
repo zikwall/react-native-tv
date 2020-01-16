@@ -7,7 +7,9 @@ import {
     RegisterScreen,
     ForgotScreen,
     ContinueRegisterScreen,
-    SystemScreen
+    SystemScreen,
+    StatisticScreen,
+    UserMenuScreen
 } from '../screens';
 import MainTabNavigator from './MainTabNavigator';
 import { NavigationHeaderLeft, NavigationHeaderRight, NavigationHeaderTitle } from "../components";
@@ -40,6 +42,28 @@ const MainStack = createStackNavigator({
         navigationOptions:{
             headerTitle: () => (
                 <NavigationHeaderTitle title={'System & App State'} />
+            ),
+            headerLeft: () => (
+                <NavigationHeaderLeft />
+            )
+        }
+    },
+    UserMenuScreen: {
+        screen: UserMenuScreen,
+        navigationOptions:{
+            headerTitle: () => (
+                <NavigationHeaderTitle title={'You Dashboard'} />
+            ),
+            headerLeft: () => (
+                <NavigationHeaderLeft />
+            )
+        }
+    },
+    UserStatisticScreen: {
+        screen: StatisticScreen,
+        navigationOptions:{
+            headerTitle: () => (
+                <NavigationHeaderTitle title={'You Statistic'} />
             ),
             headerLeft: () => (
                 <NavigationHeaderLeft />

@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {View} from 'react-native';
 
-const Divider = ({inset, style, light}) => {
+const Divider = ({inset, style, light, height}) => {
     return (
         <View
             style={[
-                {height: 1},
+                {height: height},
                 {marginLeft: inset ? 72 : 0},
                 {backgroundColor: light ? 'rgba(0,0,0,.12)' : 'rgba(255,255,255,.12)'},
                 style
@@ -15,7 +15,8 @@ const Divider = ({inset, style, light}) => {
 };
 
 Divider.defaultProps = {
-    light: true
+    light: true,
+    height: 1
 };
 
 Divider.propTypes = {

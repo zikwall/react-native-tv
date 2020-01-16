@@ -25,6 +25,7 @@
     "moment": ">= 2.24.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-chart-kit": "^4.4.1",
     "react-native-device-info": "^5.4.1",
     "react-native-gesture-handler": "^1.5.3",
     "react-native-image-picker": "^2.0.0",

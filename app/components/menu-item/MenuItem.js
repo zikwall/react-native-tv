@@ -7,7 +7,7 @@ import s from './styles';
 import Button from '../../components/button';
 import UnreadBadge from '../unread-badge';
 
-const MenuItem = ({ name, icon, to, unreadItems, onPress, onLongPress }) => {
+const MenuItem = ({ name, icon, iconColor, to, unreadItems, onPress, onLongPress }) => {
     return (
         <Button
             onLongPress={onLongPress}
@@ -15,7 +15,7 @@ const MenuItem = ({ name, icon, to, unreadItems, onPress, onLongPress }) => {
             style={[s.container, { backgroundColor:'#fff' }]}>
 
             <View style={s.leftContainer}>
-                <Icon name={icon} size={25}/>
+                <Icon name={icon} size={25} color={iconColor}/>
 
                 <View style={s.headingContainer}>
                     <Text
@@ -33,12 +33,17 @@ const MenuItem = ({ name, icon, to, unreadItems, onPress, onLongPress }) => {
     )
 };
 
+MenuItem.defaultProps = {
+    iconColor: '#000'
+};
+
 MenuItem.propTypes = {
     onLongPress: PropTypes.func,
     onPress: PropTypes.func,
     unreadItems: PropTypes.number,
     name: PropTypes.string,
     icon: PropTypes.string,
+    iconColor: PropTypes.string,
     to: PropTypes.string,
 };
 
