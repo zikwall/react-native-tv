@@ -104,6 +104,7 @@ LoginScreen.navigationOptions = ({ navigation }) => {
         headerLeft: () => (
             <NavigationHeaderLeft />
         ),
+        tabBarVisible: false
     };
 };
 

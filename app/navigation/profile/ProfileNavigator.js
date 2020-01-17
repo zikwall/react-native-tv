@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from "react-navigation";
 import { NavigationHeaderTitle, UserTop } from "../../components";
 import { View, } from "react-native";
 import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
@@ -78,6 +79,14 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
         activeTintColor: '#000',
         inactiveTintColor: '#000',
     },
+    navigationOptions: {
+        headerTitle: () => (
+            <NavigationHeaderTitle title={'Hi, { username }'} />
+        ),
+        headerLeft: () => (
+            <NavigationHeaderLeft onHome={true}/>
+        )
+    }
 });
 
 const ProfileNavigator = ({ navigation, user, isAuthenticated }) => {
@@ -132,6 +141,7 @@ ProfileNavigator.router = {
     },
 };
 
+
 ProfileNavigator.navigationOptions = ({ navigation }) => {
     return {
         headerTitle: () => (
@@ -142,6 +152,21 @@ ProfileNavigator.navigationOptions = ({ navigation }) => {
         ),
     };
 };
+
+
+export const ProfileStackNavigator = createStackNavigator({
+    Profile: {
+        screen: ProfileNavigator,
+        defaultNavigationOptions:{
+            headerTitle: () => (
+                <NavigationHeaderTitle title={'Hi, { username }'} />
+            ),
+            headerLeft: () => (
+                <NavigationHeaderLeft />
+            )
+        }
+    }
+});
 
 const mapStateToProps = (state) => ({
     isAuthenticated: !!state.authentication.token,

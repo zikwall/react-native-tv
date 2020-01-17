@@ -1,15 +1,15 @@
 import React from 'react';
-import { View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 import Icon from "react-native-vector-icons/Feather";
 import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
-import { WatchScreen, HomeScreen, MenuScreen } from '../screens';
-import PlayhubNavigator from './playhub/PlayhubNavigator';
+import { PlayHubStackNavigator } from './playhub/PlayhubNavigator';
+import WatchNavigator from "./watch/WatchNavigation";
+import MenuNavigator from "./menu/MenuNavigator";
 
 export default createBottomTabNavigator(
     {
         HomeScreen: {
-            screen: HomeScreen,
+            screen: WatchNavigator,
             navigationOptions:{
                 tabBarLabel: 'Home',
                 tabBarIcon: ({ tintColor, focused }) => (
@@ -20,37 +20,8 @@ export default createBottomTabNavigator(
                 ),
             }
         },
-        WatchScreen: {
-            screen: WatchScreen,
-            navigationOptions:{
-                tabBarLabel: 'Watch',
-                tabBarIcon: ({ tintColor, focused }) => (
-                    <View>
-                        <Icon
-                            focused={focused}
-                            name={'play'} size={20} style={{ color: tintColor}}
-                        />
-                        {focused ? null: <View
-                            style={{
-                                // /If you're using react-native < 0.57 overflow outside of the parent
-                                // will not work on Android, see https://git.io/fhLJ8
-                                position: 'absolute',
-                                right: 0,
-                                top: 0,
-                                backgroundColor: 'red',
-                                borderRadius: 6,
-                                width: 8,
-                                height: 8,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}>
-                        </View> }
-                    </View>
-                ),
-            }
-        },
         PlayHubScreen: {
-            screen: PlayhubNavigator,
+            screen: PlayHubStackNavigator,
             navigationOptions:{
                 tabBarLabel: 'PlayHub',
                 tabBarIcon: ({ tintColor, focused }) => (
@@ -62,7 +33,7 @@ export default createBottomTabNavigator(
             }
         },
         NavigationScreen: {
-            screen: MenuScreen,
+            screen: MenuNavigator,
             navigationOptions:{
                 tabBarLabel: 'Menu',
                 tabBarIcon: ({ tintColor, focused }) => (
