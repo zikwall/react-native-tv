@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -14,6 +14,14 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
     const [ username, setProfilename ] = useState(null);
     const [ password, setPassword ] = useState(null);
     const [ email, setEmail ] = useState(null);
+
+    useEffect(() => {
+        console.log('MOUNT REGISTER');
+
+        return () => {
+            console.log('UNMOUNT REGISTER');
+        }
+    });
 
     const [ error, setError ] = useState({
         has: false,

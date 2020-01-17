@@ -58,6 +58,14 @@ const WatchScreen = ({ selectPlayer, channel }) => {
     const [ activeTab, setActiveTab ] = useState(3);
 
     useEffect(() => {
+        console.log('MOUNT WATCH');
+
+        return () => {
+            console.log('UNMOUNT WATCH');
+        }
+    });
+
+    useEffect(() => {
         Orientation.addOrientationListener(orientationHandleChange);
 
         return () => {

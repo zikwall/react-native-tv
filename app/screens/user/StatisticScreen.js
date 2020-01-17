@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Dimensions, ScrollView } from 'react-native';
 import { LineChart, BarChart } from "react-native-chart-kit";
 import { Heading, Divider } from '../../components';
@@ -45,6 +45,14 @@ const chartOptions = {
 };
 
 const StatisticScreen = () => {
+    useEffect(() => {
+        console.log('MOUNT ANALYTICS');
+
+        return () => {
+            console.log('UNMOUNT ANALYTICS');
+        }
+    });
+
     return (
         <ScrollView>
             <Heading text={'Unique Users by Months'} icon={'user-plus'}/>

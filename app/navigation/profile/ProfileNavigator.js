@@ -141,30 +141,27 @@ ProfileNavigator.router = {
     },
 };
 
-
 ProfileNavigator.navigationOptions = ({ navigation }) => {
     return {
         headerTitle: () => (
             <NavigationHeaderTitle title={'Hi, { username }'} />
         ),
         headerLeft: () => (
-            <NavigationHeaderLeft />
+            <NavigationHeaderLeft onHome={true} />
         ),
     };
 };
 
-
 export const ProfileStackNavigator = createStackNavigator({
-    Profile: {
-        screen: ProfileNavigator,
-        defaultNavigationOptions:{
-            headerTitle: () => (
-                <NavigationHeaderTitle title={'Hi, { username }'} />
-            ),
-            headerLeft: () => (
-                <NavigationHeaderLeft />
-            )
-        }
+    Profile:  ProfileNavigator
+}, {
+    defaultNavigationOptions:{
+        headerTitle: () => (
+            <NavigationHeaderTitle title={'Hi, { username }'} />
+        ),
+        headerLeft: () => (
+            <NavigationHeaderLeft />
+        )
     }
 });
 

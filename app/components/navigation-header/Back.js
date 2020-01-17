@@ -10,7 +10,7 @@ const Back = ({ navigation, onHome }) => (
               color={'#000'}
               onPress={() => {
                   if (onHome) {
-                      navigation.goBack('Main')
+                      navigation.navigate('Main')
                   } else {
                       navigation.goBack()
                   }
@@ -18,5 +18,9 @@ const Back = ({ navigation, onHome }) => (
         />
     </TouchableOpacity>
 );
+
+Back.defaultProps = {
+    onHome: false
+};
 
 export default withNavigation(Back);

@@ -17,6 +17,14 @@ const resetAction = StackActions.reset({
 
 const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
 
+    useEffect(() => {
+        console.log('MOUNT LOGIN');
+
+        return () => {
+            console.log('UNMOUNT LOGIN');
+        }
+    });
+
     const [ username, setProfilename ] = useState(null);
     const [ password, setPassword ] = useState(null);
     const [ switchValue, setSwitchValue ] = useState(false);
@@ -102,9 +110,8 @@ LoginScreen.navigationOptions = ({ navigation }) => {
             <NavigationHeaderTitle title={'Login'} />
         ),
         headerLeft: () => (
-            <NavigationHeaderLeft />
+            <NavigationHeaderLeft onHome={true}/>
         ),
-        tabBarVisible: false
     };
 };
 
