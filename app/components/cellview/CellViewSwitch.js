@@ -1,11 +1,12 @@
 import React from 'react';
 import { Switch, View } from "react-native";
 
-const CellViewSwitch = ({ value, disabled }) => {
+const CellViewSwitch = ({ value, disabled, onValueChange }) => {
     return (
         <View>
             <Switch
-                value={!value}
+                value={value}
+                onValueChange={onValueChange}
                 disabled={disabled}
                 ios_backgroundColor="black"
                 trackColor={{true: "#ccc", false: "#ccc"}}
@@ -16,7 +17,8 @@ const CellViewSwitch = ({ value, disabled }) => {
 };
 
 CellViewSwitch.defaultProps = {
-    disabled: true
+    disabled: true,
+    onValueChange: () => {}
 };
 
 export default CellViewSwitch;
