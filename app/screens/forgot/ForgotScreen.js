@@ -19,7 +19,7 @@ const ForgotScreen = ({ navigation, auth, isAuthenticated }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
     }, [ theme ]);
 
     const handleClickLoginText = () => {
@@ -97,7 +97,7 @@ const ForgotScreen = ({ navigation, auth, isAuthenticated }) => {
                 onPress={ handleClickLoginText }
                 onLogin={ handleOnForgot }
                 loginButtonBackgroundColor={theme.primaryColor}
-                loginBackgorundColor={theme.primaryBackgroudColor}
+                loginBackgorundColor={theme.primaryBackgroundColor}
                 loginText="Did you suddenly remember the password ?? OK!"
                 loginButtonTextStyle={{ color: theme.primaryColor }}
                 emailOnChangeText={username => setEmail(username)}

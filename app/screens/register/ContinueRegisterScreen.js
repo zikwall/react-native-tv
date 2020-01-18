@@ -17,7 +17,7 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
     }, [ theme ]);
 
     useEffect(() => {
@@ -118,7 +118,7 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
                 onContinue={handleOnContinueRegister}
                 onContinueLater={handleOnContinueLater}
                 loginButtonBackgroundColor={theme.primaryColor}
-                loginBackgorundColor={theme.primaryBackgroudColor}
+                loginBackgorundColor={theme.primaryBackgroundColor}
                 nameTitle={'Your Name'}
                 publicEmailTitle={'Your Public Email'}
                 publicEmailPlaceholder={'my.public@mail.my'}

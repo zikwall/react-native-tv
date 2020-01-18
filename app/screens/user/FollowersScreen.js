@@ -11,7 +11,7 @@ const FollowersScreen = () => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
-        <View style={ [styles.screenContainer, { backgroundColor: theme.primaryBackgroudColor }] }>
+        <View style={ [styles.screenContainer, { backgroundColor: theme.primaryBackgroundColor }] }>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Text style={[human.subhead, { marginLeft: 20, marginTop: 5, marginBottom: 10, color: theme.primaryColor }]}>
                     Look, maybe you know someone

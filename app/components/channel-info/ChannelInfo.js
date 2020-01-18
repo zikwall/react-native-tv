@@ -15,7 +15,7 @@ const ChannelInfo = ({ name, onPress, onLongPress, src, menu }) => {
             <Button
                 onPress={() => onPress()}
                 onLongPress={() => onLongPress()}
-                style={[s.container, { backgroundColor: theme.primaryBackgroudColor }]}>
+                style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}>
 
                 <View style={ s.leftContainer }>
                     <Avatar src={ src } size={ 40 } />

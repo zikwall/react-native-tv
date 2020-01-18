@@ -18,7 +18,7 @@ const HomeScreen = ({ navigation }) => {
     const selectChannel = useCallback(channel => dispatch(setChannel(channel)), [ dispatch ]);
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor, logo: theme.logo });
+        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor, logo: theme.logo });
     }, [ theme ]);
 
     const [ items, setItems ] = useState(channels);
@@ -42,14 +42,14 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <>
-            <View style={ [styles.container, { backgroundColor: theme.primaryBackgroudColor }] }>
+            <View style={ [styles.container, { backgroundColor: theme.primaryBackgroundColor }] }>
                 <SearchBar
                     height={ height * 0.06 + width * 0.005 }
                     placeholder="Channel search here"
                     fontColor={theme.primaryColor}
                     iconColor={theme.primaryColor}
                     cancelIconColor={theme.primaryColor}
-                    backgroundColor={theme.primaryBackgroudColor}
+                    backgroundColor={theme.primaryBackgroundColor}
                     borderColor={theme.primaryColor}
                     onChangeText={(text) => {
                         filterList(text);
@@ -65,7 +65,7 @@ const HomeScreen = ({ navigation }) => {
                     sections={ DataHelper.getGroupedChannels(items) }
                     style={ styles.gridView }
                     renderSectionHeader={({ section }) => (
-                        <Text style={ [styles.sectionHeader, { color: theme.primaryColor, backgroundColor: theme.primaryBackgroudColor }] }>
+                        <Text style={ [styles.sectionHeader, { color: theme.primaryColor, backgroundColor: theme.primaryBackgroundColor }] }>
                             { section.title }
                         </Text>
                     )}

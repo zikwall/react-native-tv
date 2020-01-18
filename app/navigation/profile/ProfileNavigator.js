@@ -89,7 +89,7 @@ const ProfileNavigator = ({ navigation, user, isAuthenticated }) => {
 
     useEffect(() => {
         navigation.setParams({
-            backgroundColor: theme.primaryBackgroudColor, color: theme.primaryColor, logo: theme.logo
+            backgroundColor: theme.primaryBackgroundColor, color: theme.primaryColor, logo: theme.logo
         });
     }, [ theme ]);
 
@@ -126,7 +126,7 @@ const ProfileNavigator = ({ navigation, user, isAuthenticated }) => {
                 onAvatarPress={() => alert('U press avatar')}
             />}
 
-            <View style={{ flex: 1, backgroundColor: theme.primaryBackgroudColor }}>
+            <View style={{ flex: 1, backgroundColor: theme.primaryBackgroundColor }}>
                 <ProfileTopNavStack navigation={ navigation } />
             </View>
 

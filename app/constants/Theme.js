@@ -3,7 +3,7 @@ export const THEME_STORAGE_KEY = 'app_theme';
 const Theme = {
     dark: {
         primaryColor: '#000',
-        primaryBackgroudColor: '#fff',
+        primaryBackgroundColor: '#fff',
         secondaryColor: '#ccc',
         secondaryBackgroundColor: '#f0f1f4',
         extraColor: '#be2f79',
@@ -15,7 +15,7 @@ const Theme = {
     },
     light: {
         primaryColor: '#fff',
-        primaryBackgroudColor: '#000',
+        primaryBackgroundColor: '#000',
         secondaryColor: '#ccc',
         secondaryBackgroundColor: '#f0f1f4',
         extraColor: '#be2f79',

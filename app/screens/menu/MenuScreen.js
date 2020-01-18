@@ -13,7 +13,7 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor, logo: theme.logo });
+        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor, logo: theme.logo });
     }, [ theme ]);
 
     const handleSettingsPress = () => {

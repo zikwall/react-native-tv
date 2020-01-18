@@ -67,7 +67,7 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     const [ activeTab, setActiveTab ] = useState(3);
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
     }, [ theme ]);
 
     useEffect(() => {
@@ -220,7 +220,7 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     };
 
     return (
-        <View style={{ flex: 2, backgroundColor: theme.primaryBackgroudColor}}>
+        <View style={{ flex: 2, backgroundColor: theme.primaryBackgroundColor}}>
             <View style={{ height: webViewSize }}>
                 <VideoView />
             </View>

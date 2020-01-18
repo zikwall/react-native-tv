@@ -59,9 +59,9 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
 
     if (spinner) {
         return (
-            <View style={{ flex: 1, backgroundColor: theme.primaryBackgroudColor }}>
+            <View style={{ flex: 1, backgroundColor: theme.primaryBackgroundColor }}>
                 <PulseLoader
-                    backgroundColor={theme.primaryBackgroudColor}
+                    backgroundColor={theme.primaryBackgroundColor}
                     borderColor={theme.primaryColor}
                     avatar={ theme.image }
                 />

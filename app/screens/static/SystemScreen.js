@@ -33,7 +33,7 @@ const SystemScreen = ({ navigation }) => {
     const channels = useSelector(state => getChannels(state));
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
     }, [ theme ]);
 
     const DATA = [
@@ -52,7 +52,7 @@ const SystemScreen = ({ navigation }) => {
     ];
 
     return (
-        <View style={{ flex: 1, backgroundColor: theme.primaryBackgroudColor }}>
+        <View style={{ flex: 1, backgroundColor: theme.primaryBackgroundColor }}>
             <FlatList
                 style={{ paddingTop: 5 }}
                 data={DATA}

@@ -8,11 +8,11 @@ const LikedScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor, logo: theme.logo });
+        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor, logo: theme.logo });
     }, [ theme ]);
 
     return (
-        <View style={[styles.container, { backgroundColor: theme.primaryBackgroudColor }]}>
+        <View style={[styles.container, { backgroundColor: theme.primaryBackgroundColor }]}>
             <Text style={{ textAlign:"center", color: theme.primaryColor }}>Liked...</Text>
         </View>
     );

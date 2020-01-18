@@ -11,7 +11,7 @@ const FollowingScreen = () => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
-        <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroudColor } ]}>
+        <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroundColor } ]}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Text style={[human.subhead, { marginLeft: 20, marginTop: 5, marginBottom: 10, color: theme.primaryColor }]}>
                     Apparently, he respects them, as he subscribed to them.

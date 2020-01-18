@@ -8,7 +8,7 @@ const TabBarComponent = (props) => {
     return (
         <MaterialTopTabBar
             {...props}
-            style={{ backgroundColor: theme.primaryBackgroudColor, borderBottomColor: theme.primaryColor }}
+            style={{ backgroundColor: theme.primaryBackgroundColor, borderBottomColor: theme.primaryColor }}
             activeTintColor={theme.primaryColor}
             inactiveTintColor={theme.primaryColor}
             indicatorStyle={{

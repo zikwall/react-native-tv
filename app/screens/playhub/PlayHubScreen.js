@@ -29,9 +29,9 @@ const PlayHubScreen = () => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
-        <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroudColor }]}>
+        <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroundColor }]}>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={[ styles.card, { backgroundColor: theme.primaryBackgroudColor }]}>
+                <View style={[ styles.card, { backgroundColor: theme.primaryBackgroundColor }]}>
                     <View style={styles.recentlyPlayedTitleBar}>
                         <Icon name={'award'} size={30} color={'red'}/>
                         <Text style={[styles.recentlyPlayedTitle, { color: theme.primaryColor }]}>Best user choice</Text>

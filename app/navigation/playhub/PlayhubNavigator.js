@@ -99,7 +99,7 @@ const PlayhubNavigator = ({ navigation }) => {
 
     useEffect(() => {
         navigation.setParams({
-            backgroundColor: theme.primaryBackgroudColor, color: theme.primaryColor, logo: theme.logo
+            backgroundColor: theme.primaryBackgroundColor, color: theme.primaryColor, logo: theme.logo
         });
     }, [ theme ]);
 

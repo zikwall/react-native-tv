@@ -18,7 +18,7 @@ const Item = ({ id, name, time, active, onPress, onLongPress }) => {
             <Button
                 onPress={() => onPress(id)}
                 //onLongPress={() => onLongPress(id)}
-                style={[ s.container, { backgroundColor: theme.primaryBackgroudColor } ]}
+                style={[ s.container, { backgroundColor: theme.primaryBackgroundColor } ]}
                 key={ id }>
 
                 <View style={s.leftContainer}>

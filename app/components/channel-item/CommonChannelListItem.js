@@ -17,7 +17,7 @@ const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating
     return (
         <Button
             onPress={onPress}
-            style={[s.container, { backgroundColor: theme.primaryBackgroudColor }]}
+            style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}
         >
             <View style={ s.leftContainer }>
                 {number && <Text style={s.number}>

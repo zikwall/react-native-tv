@@ -41,9 +41,9 @@ const StatisticScreen = () => {
     };
 
     const chartOptions = {
-        backgroundColor: theme.primaryBackgroudColor,
-        backgroundGradientFrom: theme.primaryBackgroudColor,
-        backgroundGradientTo: theme.primaryBackgroudColor,
+        backgroundColor: theme.primaryBackgroundColor,
+        backgroundGradientFrom: theme.primaryBackgroundColor,
+        backgroundGradientTo: theme.primaryBackgroundColor,
         decimalPlaces: 2, // optional, defaults to 2dp
         color: (opacity = 1) => theme.primaryColor,
         labelColor: (opacity = 1) => theme.primaryColor,
@@ -58,7 +58,7 @@ const StatisticScreen = () => {
     };
 
     return (
-        <ScrollView style={{ backgroundColor: theme.primaryBackgroudColor }}>
+        <ScrollView style={{ backgroundColor: theme.primaryBackgroundColor }}>
             <Heading text={'Unique Users by Months'} icon={'user-plus'} color={theme.primaryColor}/>
             <Divider />
             <ScrollView horizontal>

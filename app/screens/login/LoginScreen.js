@@ -20,7 +20,7 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
     }, [ theme ]);
 
     useEffect(() => {
@@ -93,7 +93,7 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
                 onPressForgot={ handlePressForgot }
                 onLogin={ handleOnLogin }
                 loginButtonBackgroundColor={theme.primaryColor}
-                loginBackgorundColor={theme.primaryBackgroudColor}
+                loginBackgorundColor={theme.primaryBackgroundColor}
                 loginText="Don't have a Play account yet? Create now!"
                 forgotText="Forgot your password? No problems!"
                 loginButtonTextStyle={{ color: theme.primaryColor }}

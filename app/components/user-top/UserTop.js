@@ -9,7 +9,7 @@ import { getAppTheme } from '../../redux/reducers';
 const UserTop = ({ displayName, username, avatar, onAvatarPress }) => {
     const theme = useSelector(state => getAppTheme(state));
     return (
-        <View style={[ s.container, { backgroundColor: theme.primaryBackgroudColor }]}>
+        <View style={[ s.container, { backgroundColor: theme.primaryBackgroundColor }]}>
             <TouchableOpacity onPress={() => onAvatarPress(avatar)}>
                 <View style={s.avatarWrapper}>
                     <Avatar

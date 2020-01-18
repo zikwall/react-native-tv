@@ -21,7 +21,7 @@ const UserMenuScreen = ({ navigation }) => {
     const [ themeValue, setThemeValue ] = useState(false);
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
     }, [ theme.primaryColor ]);
 
     useEffect(() => {
@@ -46,7 +46,7 @@ const UserMenuScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={ [styles.container, { backgroundColor: theme.primaryBackgroudColor }]}>
+        <View style={ [styles.container, { backgroundColor: theme.primaryBackgroundColor }]}>
             <ScrollView>
                 <CellView
                     leftContent={

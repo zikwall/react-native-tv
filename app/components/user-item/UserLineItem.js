@@ -19,7 +19,7 @@ const UserLineItem = ({ id, image, name, username, onPress, moreOnPress }) => {
     return (
         <Button
             onPress={onPress}
-            style={[s.container, { backgroundColor: theme.primaryBackgroudColor }]}>
+            style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}>
 
             <View style={ s.leftContainer }>
                 <Avatar src={image} />

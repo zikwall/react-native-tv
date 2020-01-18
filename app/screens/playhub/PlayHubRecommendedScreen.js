@@ -7,7 +7,7 @@ const PlayHubRecommendedScreen = () => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
-        <View style={[styles.container, { backgroundColor: theme.primaryBackgroudColor }]}>
+        <View style={[styles.container, { backgroundColor: theme.primaryBackgroundColor }]}>
             <View style={{ alignItems: 'center' }}>
                 <Image style={{ resizeMode: 'contain', height: 250, width: 250 }} source={ theme.playHubFull }/>
             </View>

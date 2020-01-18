@@ -70,7 +70,7 @@ const NotificationCard = ({ data }) => {
                 paddingVertical: 20,
                 alignItems: "flex-start",
                 justifyContent: "space-between",
-                backgroundColor: theme.primaryBackgroudColor
+                backgroundColor: theme.primaryBackgroundColor
             }}
         >
             {icon}

@@ -18,7 +18,7 @@ const FaqScreen = ({ navigation }) => {
     const [ faqContent, setFaqContent ] = useState(null);
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
     }, [ theme ]);
 
     useEffect(() => {
@@ -59,7 +59,7 @@ const FaqScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={[ viewStyles.screenContainer, { backgroundColor: theme.primaryBackgroudColor }]}>
+        <View style={[ viewStyles.screenContainer, { backgroundColor: theme.primaryBackgroundColor }]}>
             <View style={viewStyles.header}>
                 <View>
                     <Text style={viewStyles.date}>ИНФОРМАЦИЯ</Text>

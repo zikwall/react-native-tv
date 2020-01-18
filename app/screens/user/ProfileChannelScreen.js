@@ -23,7 +23,7 @@ const ProfileChannelScreen = () => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
-        <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroudColor }]}>
+        <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroundColor }]}>
             <View style={styles.recentlyPlayed}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.recentlyPlayedTitleBar}>

@@ -13,7 +13,7 @@ import { IconWrap } from '../../../components';
 const MenuUserInfo = ({ username, displayName, avatarUrlMedium, onSearchPress, onSettingsPress }) => {
     const theme = useSelector(state => getAppTheme(state));
     return (
-        <View style={[s.container, { backgroundColor: theme.primaryBackgroudColor, borderBottomWidth: 1, borderBottomColor: theme.secondaryColor }]}>
+        <View style={[s.container, { backgroundColor: theme.primaryBackgroundColor, borderBottomWidth: 1, borderBottomColor: theme.secondaryColor }]}>
             <View style={s.topContainer}>
                 <Avatar src={avatarUrlMedium} />
 
@@ -30,7 +30,7 @@ const MenuUserInfo = ({ username, displayName, avatarUrlMedium, onSearchPress, o
                 </Button>
             </View>
 
-            <SearchField onPress={() => onSearchPress()} backgroundColor={theme.primaryBackgroudColor} color={theme.primaryColor}/>
+            <SearchField onPress={() => onSearchPress()} backgroundColor={theme.primaryBackgroundColor} color={theme.primaryColor}/>
         </View>
     );
 };

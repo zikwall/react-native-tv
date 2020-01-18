@@ -16,7 +16,7 @@ const MenuItem = ({ name, icon, iconColor, to, unreadItems, onPress, onLongPress
         <Button
             onLongPress={onLongPress}
             onPress={() => onPress(to)}
-            style={[s.container, { backgroundColor: theme.primaryBackgroudColor }]}>
+            style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}>
 
             <View style={s.leftContainer}>
                 <IconWrap name={icon} size={25} color={iconColor} />

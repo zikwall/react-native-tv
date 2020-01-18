@@ -19,7 +19,7 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
     }, [ theme ]);
 
     useEffect(() => {
@@ -87,7 +87,7 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
                 error={ error }
                 onRegister={ handleOnRegister }
                 loginButtonBackgroundColor={theme.primaryColor}
-                loginBackgorundColor={theme.primaryBackgroudColor}
+                loginBackgorundColor={theme.primaryBackgroundColor}
                 loginText="Already have a Play account? OK, let's go!"
                 emailIconComponent={
                     <Icon

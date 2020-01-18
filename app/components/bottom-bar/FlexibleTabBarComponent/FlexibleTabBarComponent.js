@@ -220,7 +220,7 @@ class FlexibleTabBarComponent extends React.Component {
     const { routes } = state;
 
     return (
-        <SafeAreaView style={[styles.container, style, { backgroundColor: this.props.theme.primaryBackgroudColor }]}>
+        <SafeAreaView style={[styles.container, style, { backgroundColor: this.props.theme.primaryBackgroundColor }]}>
           {this.renderAnimatedBackground()}
           {routes.map((route, key) => {
             console.log(route);

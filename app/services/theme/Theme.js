@@ -43,6 +43,6 @@ export class Singleton {
     };
 
     static getBackgroundColor = () => {
-        return this.getTheme().primaryBackgroudColor;
+        return this.getTheme().primaryBackgroundColor;
     };
 }

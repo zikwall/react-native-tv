@@ -31,7 +31,7 @@ const ProfileHomeScreen = () => {
     });
 
     return (
-        <View style={[ styles.container, { backgroundColor: theme.primaryBackgroudColor }]}>
+        <View style={[ styles.container, { backgroundColor: theme.primaryBackgroundColor }]}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ paddingRight: width * 0.02, paddingLeft: width * 0.02, paddingBottom: 15 }}>
                     <CalendarHeatmap
