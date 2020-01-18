@@ -9,11 +9,26 @@ export const setAppThemeService = async (theme) => {
     await AsyncStorage.setItem(buildKey(), theme);
 };
 
-export const getAppThemeService = async (theme) => {
+export const getAppThemeService = async () => {
     try {
-        return await AsyncStorage.getItem(buildKey());
+        let theme = await AsyncStorage.getItem(buildKey());
+
+        if (!theme) {
+            return 'light';
+        }
+
+        if (!['light', 'dark'].includes(theme)) {
+            return 'light';
+        }
+
+        if (typeof theme == 'undefined' || theme === "null" || theme === "") {
+            return 'light';
+        }
+
+        return theme;
+
     } catch (e) {
-        return Theme.light;
+        return 'light';
     }
 };
 
