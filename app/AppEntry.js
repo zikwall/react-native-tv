@@ -28,6 +28,7 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
     StatusBar.setHidden(true);
 
     const [ spinner, setSpinner ] = useState(true);
+    const [ update, setUpdate ] = useState(false);
 
     useEffect(() => {
         let interval = setTimeout(() => {
@@ -62,16 +63,14 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
                 <PulseLoader
                     backgroundColor={theme.primaryBackgroudColor}
                     borderColor={theme.primaryColor}
-                    avatar={ require('./assets/images/Play_650.png') }
+                    avatar={ theme.image }
                 />
             </View>
         );
     }
 
     return (
-        <View style={{ flex: 1, backgroundColor: theme.primaryBackgroudColor }}>
-            <AppNavigator />
-        </View>
+        <AppNavigator />
     );
 });
 

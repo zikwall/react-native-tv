@@ -36,7 +36,7 @@ export function textInputStyle(fontSize, fontColor) {
   };
 }
 
-export function _shadowStyle(shadowColor) {
+export function _shadowStyle(borderColor) {
   return {
     /*...Platform.select({
       ios: {
@@ -49,7 +49,7 @@ export function _shadowStyle(shadowColor) {
     })*/
 
     ...{
-      borderColor: '#000',
+      borderColor: borderColor || '#000',
       borderWidth: 1,
     }
   };

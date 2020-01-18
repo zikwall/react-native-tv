@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SectionGrid } from 'react-native-super-grid';
 
 import { SearchBar, ChannelCard } from "../../components";
-import { getChannels } from '../../redux/reducers';
+import { getChannels, getAppTheme } from '../../redux/reducers';
 import { setChannel } from "../../redux/actions/channels";
 import { DataHelper } from '../../utils';
 import styles from "./styles";
@@ -13,6 +13,7 @@ const { height, width } = Dimensions.get('window');
 
 const HomeScreen = ({ navigation }) => {
     const channels = useSelector(state => getChannels(state));
+    const theme = useSelector(state => getAppTheme(state));
     const dispatch = useDispatch();
     const selectChannel = useCallback(channel => dispatch(setChannel(channel)), [ dispatch ]);
 
@@ -37,13 +38,15 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <>
-            <View style={ styles.container }>
+            <View style={ [styles.container, { backgroundColor: theme.primaryBackgroudColor }] }>
                 <SearchBar
                     height={ height * 0.06 + width * 0.005 }
                     placeholder="Channel search here"
-                    fontColor="#000"
-                    iconColor="#000"
-                    cancelIconColor="#000"
+                    fontColor={theme.primaryColor}
+                    iconColor={theme.primaryColor}
+                    cancelIconColor={theme.primaryColor}
+                    backgroundColor={theme.primaryBackgroudColor}
+                    borderColor={theme.primaryColor}
                     onChangeText={(text) => {
                         filterList(text);
                     }}
@@ -58,7 +61,9 @@ const HomeScreen = ({ navigation }) => {
                     sections={ DataHelper.getGroupedChannels(items) }
                     style={ styles.gridView }
                     renderSectionHeader={({ section }) => (
-                        <Text style={ styles.sectionHeader }>{ section.title }</Text>
+                        <Text style={ [styles.sectionHeader, { color: theme.primaryColor, backgroundColor: theme.primaryBackgroudColor }] }>
+                            { section.title }
+                        </Text>
                     )}
                     renderItem={({ item, index }) => (
                         <ChannelCard

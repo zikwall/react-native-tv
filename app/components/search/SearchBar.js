@@ -46,7 +46,7 @@ export default class SearchBar extends Component {
       textInputComponent,
       cancelIconComponent,
       cancelButtonDisable,
-      noExtraMargin
+      noExtraMargin, borderColor
     } = this.props;
 
     return (
@@ -55,7 +55,7 @@ export default class SearchBar extends Component {
           styles.center,
           container(this.props),
           ifIPhoneXHeader(noExtraMargin),
-          _shadowStyle(shadowColor)
+          _shadowStyle(borderColor)
         ]}
         onPress={() => {
           onPressToFocus ? textInputRef.focus() : onPress();

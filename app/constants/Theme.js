@@ -8,6 +8,7 @@ const Theme = {
         secondaryBackgroundColor: '#f0f1f4',
         extraColor: '#be2f79',
         extraBackgroundColor: '#802764',
+        image: require('../assets/images/Play_650.png')
     },
     light: {
         primaryColor: '#fff',
@@ -16,6 +17,7 @@ const Theme = {
         secondaryBackgroundColor: '#f0f1f4',
         extraColor: '#be2f79',
         extraBackgroundColor: '#802764',
+        image: require('../assets/images/Play_650_Light.png')
     },
 };
 

@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { View, Text } from 'react-native';
-import Icon from "react-native-vector-icons/Feather";
+import IconWrap from '../icon/IconWrap';
 
 const Heading = ({text, color, icon, iconColor, styles}) => (
     <View style={{ padding: 16, flexDirection: 'row'}}>
         {
-            icon && <Icon name={icon} color={iconColor} size={17} style={{ marginRight: 5 }} />
+            icon && <IconWrap name={icon}  size={17} style={{ marginRight: 5 }} />
         }
 
         <Text style={{

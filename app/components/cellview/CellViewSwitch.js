@@ -1,7 +1,11 @@
 import React from 'react';
 import { Switch, View } from "react-native";
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
 const CellViewSwitch = ({ value, disabled, onValueChange }) => {
+    const theme = useSelector(state => getAppTheme(state));
+
     return (
         <View>
             <Switch
@@ -10,7 +14,7 @@ const CellViewSwitch = ({ value, disabled, onValueChange }) => {
                 disabled={disabled}
                 ios_backgroundColor="black"
                 trackColor={{true: "#ccc", false: "#ccc"}}
-                thumbColor={'#000'}
+                thumbColor={theme.primaryColor}
             />
         </View>
     );

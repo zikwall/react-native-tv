@@ -2,7 +2,7 @@ import {StyleSheet, StatusBar, Platform} from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    elevation: 2
+    //elevation: 2
   },
   topContainer: {
     paddingLeft: 16,

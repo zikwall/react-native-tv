@@ -35,3 +35,4 @@ export { default as UserTop } from './user-top/UserTop';
 export { default as NavigationHeaderTitle } from './navigation-header/NavigationHeaderTitle';
 export { default as CellView } from './cellview/CellView';
 export { default as CellViewSwitch } from './cellview/CellViewSwitch';
+export { default as IconWrap } from './icon/IconWrap';
