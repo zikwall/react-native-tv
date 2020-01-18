@@ -14,10 +14,14 @@ import {
 
 import { CalendarHeatmap, NotificationCard } from '../../components';
 import { Fake } from '../../utils';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
 const { width } = Dimensions.get('window');
 
 const ProfileHomeScreen = () => {
+    const theme = useSelector(state => getAppTheme(state));
+
     useEffect(() => {
        console.log('MOUNT PROFILE');
 
@@ -27,7 +31,7 @@ const ProfileHomeScreen = () => {
     });
 
     return (
-        <View style={ styles.container }>
+        <View style={[ styles.container, { backgroundColor: theme.primaryBackgroudColor }]}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ paddingRight: width * 0.02, paddingLeft: width * 0.02, paddingBottom: 15 }}>
                     <CalendarHeatmap
@@ -41,7 +45,7 @@ const ProfileHomeScreen = () => {
                         values={ Fake.contributingData }
                     />
                     <View style={{ paddingTop: 5 }}>
-                        <Text style={human.caption2}>{ Fake.contributingData.length } contributions in the 100 days</Text>
+                        <Text style={[ human.caption2, { color: theme.primaryColor }]}>{ Fake.contributingData.length } contributions in the 100 days</Text>
                     </View>
                 </View>
 

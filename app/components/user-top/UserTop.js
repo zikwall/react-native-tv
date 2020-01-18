@@ -3,20 +3,23 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import s from './styles';
 import { Avatar } from "../avatar";
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
 const UserTop = ({ displayName, username, avatar, onAvatarPress }) => {
+    const theme = useSelector(state => getAppTheme(state));
     return (
-        <View style={s.container}>
+        <View style={[ s.container, { backgroundColor: theme.primaryBackgroudColor }]}>
             <TouchableOpacity onPress={() => onAvatarPress(avatar)}>
                 <View style={s.avatarWrapper}>
                     <Avatar
                         src={avatar}
                         size={80}
                     />
-                    <Text style={s.displayName}>
+                    <Text style={[ s.displayName, { color: theme.primaryColor }]}>
                         {displayName}
                     </Text>
-                    <Text style={s.username}>
+                    <Text style={[ s.username, { color: theme.primaryColor }]}>
                         @{username}
                     </Text>
                 </View>

@@ -58,8 +58,8 @@ const StatisticScreen = () => {
     };
 
     return (
-        <ScrollView>
-            <Heading text={'Unique Users by Months'} icon={'user-plus'}/>
+        <ScrollView style={{ backgroundColor: theme.primaryBackgroudColor }}>
+            <Heading text={'Unique Users by Months'} icon={'user-plus'} color={theme.primaryColor}/>
             <Divider />
             <ScrollView horizontal>
                 <View style={{ paddingHorizontal: 5 }}>
@@ -76,7 +76,7 @@ const StatisticScreen = () => {
                 </View>
             </ScrollView>
 
-            <Heading text={'Count of Views'} icon={'eye'}/>
+            <Heading text={'Count of Views'} icon={'eye'} color={theme.primaryColor} />
             <Divider />
             <ScrollView horizontal>
                 <View style={{ paddingHorizontal: 5 }}>

@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from "react-navigation";
-import { NavigationHeaderTitle, UserTop } from "../../components";
+import { IconWrap, NavigationHeaderTitle, UserTop, BottomBarComponent } from '../../components';
 import { View, } from "react-native";
-import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
-import Icon from 'react-native-vector-icons/Feather';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Orientation from 'react-native-orientation';
 
 import { ProfileHomeScreen, FollowingScreen, FollowersScreen, ProfileChannelScreen } from "../../screens";
 import { NavigationHeaderLeft } from "../../components";
 import { UserHelper } from '../../utils';
+import { getAppTheme } from '../../redux/reducers';
 
 const ProfileTopNavStack = createMaterialTopTabNavigator({
     ProfileHomeScreen: {
@@ -18,9 +17,9 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
         navigationOptions:{
             tabBarLabel: 'Activity',
             tabBarIcon: ({ tintColor, focused }) => (
-                <Icon
-                    focused={focused}
-                    name={'activity'} size={20} style={{ color: tintColor}}
+                <IconWrap
+                    reverse={focused}
+                    name={'activity'} size={20}
                 />
             ),
         }
@@ -30,9 +29,9 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
         navigationOptions:{
             tabBarLabel: 'Channel',
             tabBarIcon: ({ tintColor, focused }) => (
-                <Icon
-                    focused={focused}
-                    name={'tv'} size={20} style={{ color: tintColor}}
+                <IconWrap
+                    reverse={focused}
+                    name={'tv'} size={20}
                 />
             ),
         }
@@ -42,9 +41,9 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
         navigationOptions:{
             tabBarLabel: 'Followers',
             tabBarIcon: ({ tintColor, focused }) => (
-                <Icon
-                    focused={focused}
-                    name={'user-check'} size={20} style={{ color: tintColor}}
+                <IconWrap
+                    reverse={focused}
+                    name={'user-check'} size={20}
                 />
             ),
         }
@@ -54,21 +53,16 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
         navigationOptions:{
             tabBarLabel: 'Following',
             tabBarIcon: ({ tintColor, focused }) => (
-                <Icon
-                    focused={focused}
-                    name={'users'} size={20} style={{ color: tintColor}}
+                <IconWrap
+                    reverse={focused}
+                    name={'users'} size={20}
                 />
             ),
         }
     },
 }, {
     initialRouteName: 'ProfileHomeScreen',
-    tabBarComponent: withCustomStyle({
-        style: {
-            borderTopColor: 'transparent',
-            borderTopWidth: 0,
-        },
-    })(FlexibleTabBarComponent),
+    tabBarComponent: BottomBarComponent,
     swipeEnabled: false,
     animationEnabled: true,
     tabBarOptions: {
@@ -91,6 +85,13 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
 
 const ProfileNavigator = ({ navigation, user, isAuthenticated }) => {
     const [ visibleUserTop, setVisibleUserTop ] = useState(true);
+    const theme = useSelector(state => getAppTheme(state));
+
+    useEffect(() => {
+        navigation.setParams({
+            backgroundColor: theme.primaryBackgroudColor, color: theme.primaryColor, logo: theme.logo
+        });
+    }, [ theme ]);
 
     useEffect(() => {
         if(!isAuthenticated) {
@@ -125,7 +126,7 @@ const ProfileNavigator = ({ navigation, user, isAuthenticated }) => {
                 onAvatarPress={() => alert('U press avatar')}
             />}
 
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor: theme.primaryBackgroudColor }}>
                 <ProfileTopNavStack navigation={ navigation } />
             </View>
 
@@ -143,6 +144,7 @@ ProfileNavigator.router = {
 
 ProfileNavigator.navigationOptions = ({ navigation }) => {
     return {
+        headerStyle: {backgroundColor: navigation.getParam('backgroundColor')},
         headerTitle: () => (
             <NavigationHeaderTitle title={'Hi, { username }'} />
         ),
@@ -151,19 +153,6 @@ ProfileNavigator.navigationOptions = ({ navigation }) => {
         ),
     };
 };
-
-export const ProfileStackNavigator = createStackNavigator({
-    Profile:  ProfileNavigator
-}, {
-    defaultNavigationOptions:{
-        headerTitle: () => (
-            <NavigationHeaderTitle title={'Hi, { username }'} />
-        ),
-        headerLeft: () => (
-            <NavigationHeaderLeft />
-        )
-    }
-});
 
 const mapStateToProps = (state) => ({
     isAuthenticated: !!state.authentication.token,

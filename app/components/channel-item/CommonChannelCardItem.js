@@ -13,8 +13,10 @@ import {
 } from 'react-native-typography';
 
 import { Avatar } from '../avatar';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
-const {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 export const TouchableRoundedImage = ({ style, width=80, height=80, ...props }) => (
     <TouchableOpacity style={style}>
@@ -28,18 +30,16 @@ export const TouchableRoundedImage = ({ style, width=80, height=80, ...props }) 
 );
 
 const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight, size, rating }) => {
+    const theme = useSelector(state => getAppTheme(state));
+
     return (
-        <TouchableOpacity
-            style={
-                [styles.channelCard, {height: size, width: size,}]
-            }
-        >
+        <TouchableOpacity style={[styles.channelCard, { height: size, width: size, borderColor: theme.primaryColor }]}>
             <View style={{ flex: 1, alignItems: 'center' }}>
                 <Avatar src={image} resizeMode="contain" width={imageWidth} height={imageHeight}/>
             </View>
-            <Text numberOfLines={1} style={styles.title}>{title}</Text>
+            <Text numberOfLines={1} style={[ styles.title, { color: theme.primaryColor }]}>{title}</Text>
             <View style={{ flexDirection: 'row' }}>
-                <Text style={[styles.subtitle]}>
+                <Text style={[styles.subtitle, { color: theme.secondaryColor }]}>
                     {subtitle}
                 </Text>
             </View>

@@ -4,8 +4,11 @@ import { human, iOSColors } from 'react-native-typography';
 
 import Icon from 'react-native-vector-icons/Feather';
 import { Avatar } from "../avatar";
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
+import IconWrap from '../icon/IconWrap';
 
-const bolderText = text => {
+const bolderText = (text, color) => {
     if (text.indexOf("*") === -1) return text;
 
     let boldFormatedText;
@@ -14,7 +17,7 @@ const bolderText = text => {
         let item = textSplit[i];
         if (item !== "") {
             boldFormatedText = (
-                <Text style={styles.maintext}>
+                <Text style={[ styles.maintext, { color: color }]}>
                     {boldFormatedText}
                     {item}
                 </Text>
@@ -25,10 +28,12 @@ const bolderText = text => {
     return <View style={{ flexDirection: "row" }}>{boldFormatedText}</View>;
 };
 
-class NotificationCard extends React.Component {
-    state = {
+const NotificationCard = ({ data }) => {
+    const theme = useSelector(state => getAppTheme(state));
+
+    const state = {
         discover: (
-            <Icon
+            <IconWrap
                 name={"activity"}
                 size={24}
                 color={"#929"}
@@ -36,15 +41,14 @@ class NotificationCard extends React.Component {
             />
         ),
         follow: (
-            <Icon
+            <IconWrap
                 name={"user"}
                 size={24}
-                color={'#000'}
                 style={{ marginLeft: 10 }}
             />
         ),
         like: (
-            <Icon
+            <IconWrap
                 name={"heart"}
                 size={24}
                 color={"#f78"}
@@ -53,67 +57,67 @@ class NotificationCard extends React.Component {
         )
     };
 
-    render() {
-        let { type, users, title, desc } = this.props.data;
 
-        let icon = this.state[type];
+    let { type, users, title, desc } = data;
 
-        return (
+    let icon = state[type];
+
+    return (
+        <View
+            style={{
+                flexDirection: "row",
+                paddingHorizontal: 5,
+                paddingVertical: 20,
+                alignItems: "flex-start",
+                justifyContent: "space-between",
+                backgroundColor: theme.primaryBackgroudColor
+            }}
+        >
+            {icon}
             <View
                 style={{
-                    flexDirection: "row",
-                    paddingHorizontal: 5,
-                    paddingVertical: 20,
+                    paddingLeft: 10,
+                    flex: 1,
                     alignItems: "flex-start",
-                    justifyContent: "space-between",
-                    backgroundColor: '#fff'
+                    justifyContent: "flex-start"
                 }}
             >
-                {icon}
+                <View style={{ flexDirection: "row" }}>
+                    {users.map((i, n) => (
+                        <Avatar
+                            src={i}
+                            key={n}
+                            style={{
+                                marginRight: 5
+                            }}
+                        />
+                    ))}
+                </View>
                 <View
                     style={{
-                        paddingLeft: 10,
-                        flex: 1,
+                        paddingTop: 5,
                         alignItems: "flex-start",
                         justifyContent: "flex-start"
                     }}
                 >
-                    <View style={{ flexDirection: "row" }}>
-                        {users.map((i, n) => (
-                            <Avatar
-                                src={i}
-                                key={n}
-                                style={{
-                                    marginRight: 5
-                                }}
-                            />
-                        ))}
-                    </View>
-                    <View
-                        style={{
-                            paddingTop: 5,
-                            alignItems: "flex-start",
-                            justifyContent: "flex-start"
-                        }}
-                    >
-                        {bolderText(title)}
+                    {bolderText(title, theme.primaryColor)}
 
-                        <Text style={styles.sublinetext}>
-                            {desc}
-                        </Text>
-                    </View>
-                </View>
-                <View style={{ paddingRight: 5 }}>
-                    <Icon
-                        name={"chevron-down"}
-                        size={20}
-                        color={'#ccc'}
-                    />
+                    <Text style={styles.sublinetext}>
+                        {desc}
+                    </Text>
                 </View>
             </View>
-        );
-    }
-}
+            <View style={{ paddingRight: 5 }}>
+                <IconWrap
+                    name={"chevron-down"}
+                    size={20}
+                    color={'#ccc'}
+                />
+            </View>
+        </View>
+    );
+
+};
 
 const styles = StyleSheet.create({
     container: {

@@ -16,14 +16,18 @@ import {
 
 import { CommonChannelCardItem, CommonChannelListItem } from '../../components';
 import { Fake } from '../../utils';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
 const ProfileChannelScreen = () => {
+    const theme = useSelector(state => getAppTheme(state));
+
     return (
-        <View style={styles.screenContainer}>
+        <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroudColor }]}>
             <View style={styles.recentlyPlayed}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.recentlyPlayedTitleBar}>
-                        <Text style={styles.recentlyPlayedTitle}>Favorites for you</Text>
+                        <Text style={[ styles.recentlyPlayedTitle, { color: theme.primaryColor }]}>Favorites for you</Text>
                         <TouchableOpacity>
                             <Text style={styles.seeAll}>See All</Text>
                         </TouchableOpacity>
@@ -47,7 +51,7 @@ const ProfileChannelScreen = () => {
                     </View>
                     <View style={{ marginTop: 10 }}>
                         <View style={styles.recentlyPlayedTitleBar}>
-                            <Text style={styles.recentlyPlayedTitle}>All playlist</Text>
+                            <Text style={[ styles.recentlyPlayedTitle, { color: theme.primaryColor }]}>All playlist</Text>
                         </View>
                         <View style={{ paddingTop: 10 }}>
                             {Fake.userPlaylist.map((playlist, index) => (
@@ -81,7 +85,6 @@ const styles = StyleSheet.create({
     },
     recentlyPlayed: {
         paddingTop: 5,
-        backgroundColor: iOSColors.white
     },
     recentlyPlayedTitleBar: {
         paddingHorizontal: 16,

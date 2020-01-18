@@ -4,12 +4,16 @@ import { iOSColors, human } from 'react-native-typography';
 
 import { UserLineItem } from '../../components';
 import { Fake } from '../../utils';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
 const FollowingScreen = () => {
+    const theme = useSelector(state => getAppTheme(state));
+
     return (
-        <View style={ styles.screenContainer }>
+        <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroudColor } ]}>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <Text style={[human.subhead, {marginLeft: 20, marginTop: 5, marginBottom: 10}]}>
+                <Text style={[human.subhead, { marginLeft: 20, marginTop: 5, marginBottom: 10, color: theme.primaryColor }]}>
                     Apparently, he respects them, as he subscribed to them.
                 </Text>
                 {Fake.users.map((user, index) => {

@@ -8,16 +8,18 @@ import {
 import Button from '../button/index.android';
 import s from './styles-list';
 import { Avatar } from '../avatar';
-import CellView from "../cellview/CellView";
 import Icon from 'react-native-vector-icons/Feather';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
+import IconWrap from '../icon/IconWrap';
 
 const UserLineItem = ({ id, image, name, username, onPress, moreOnPress }) => {
-    const itemStyles = { backgroundColor:'#fff' };
+    const theme = useSelector(state => getAppTheme(state));
 
     return (
         <Button
             onPress={onPress}
-            style={[s.container, {backgroundColor: itemStyles.backgroundColor}]}>
+            style={[s.container, { backgroundColor: theme.primaryBackgroudColor }]}>
 
             <View style={ s.leftContainer }>
                 <Avatar src={image} />
@@ -26,13 +28,13 @@ const UserLineItem = ({ id, image, name, username, onPress, moreOnPress }) => {
                     <Text
                         numberOfLines={ 1 }
                         ellipsizeMode="tail"
-                        style={s.title}>
+                        style={[ s.title, { color: theme.primaryColor }]}>
                         { name }
                     </Text>
                     <Text
                         numberOfLines={ 1 }
                         ellipsizeMode="tail"
-                        style={s.subtitle}>
+                        style={[ s.subtitle, { color: theme.secondaryColor }]}>
                         { username }
                     </Text>
                 </View>
@@ -40,7 +42,7 @@ const UserLineItem = ({ id, image, name, username, onPress, moreOnPress }) => {
                 <TouchableOpacity onPress={() => {
                     moreOnPress(id, name, username);
                 }} >
-                    <Icon name={'more-horizontal'} size={20} />
+                    <IconWrap name={'more-horizontal'} size={20} />
                 </TouchableOpacity>
 
             </View>
