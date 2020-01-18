@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     View,
     StyleSheet,
@@ -18,6 +18,14 @@ import { Fake } from '../../utils';
 const { width } = Dimensions.get('window');
 
 const ProfileHomeScreen = () => {
+    useEffect(() => {
+       console.log('MOUNT PROFILE');
+
+       return () => {
+           console.log('UNMOUNT PROFILE');
+       }
+    });
+
     return (
         <View style={ styles.container }>
             <ScrollView showsVerticalScrollIndicator={false}>

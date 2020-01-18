@@ -1,7 +1,9 @@
 import React from 'react';
+import { Image } from "react-native";
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from "react-navigation";
 import Icon from 'react-native-vector-icons/Feather';
-import { NavigationHeaderLeft } from '../../components';
+import { NavigationHeaderLeft, NavigationHeaderRight } from '../../components';
 import {
     PlayHubScreen,
     PlayHubRecommendedScreen,
@@ -101,12 +103,34 @@ PlayhubNavigator.router = {
     },
 };
 
-PlayhubNavigator.navigationOptions = ({ navigation }) => {
+/*PlayhubNavigator.navigationOptions = ({ navigation }) => {
     return {
         headerLeft: () => (
             <NavigationHeaderLeft />
         ),
     };
-};
+};*/
 
 export default PlayhubNavigator;
+
+export const PlayHubStackNavigator = createStackNavigator({
+    MainPlayHub: {
+        screen: PlayhubNavigator,
+    }
+}, {
+    defaultNavigationOptions: {
+        // Need Redux
+        // header: null,
+        headerStyle: {
+            backgroundColor: "#fff",
+            borderBottomWidth: 0,
+        },
+        headerLeft: <Image
+            source = {require('../../assets/images/PlayHubLogo.png')}
+            style = {{ height: 32, width: 98, marginLeft: 10, }}
+        />,
+        headerRight: (
+            <NavigationHeaderRight />
+        )
+    },
+});

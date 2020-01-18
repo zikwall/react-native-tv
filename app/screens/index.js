@@ -22,10 +22,11 @@ import ContinueRegisterScreen from './register/ContinueRegisterScreen';
 import SystemScreen from "./static/SystemScreen";
 import StatisticScreen from "./user/StatisticScreen";
 import UserMenuScreen from "./menu/UserMenuScreen";
+import LikedScreen from './liked/LikedScreen';
 
 export {
     // global
-    HomeScreen, PlayHubScreen, WatchScreen,
+    HomeScreen, PlayHubScreen, WatchScreen, LikedScreen,
     // user
     ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen, StatisticScreen, UserMenuScreen,
     // auth
