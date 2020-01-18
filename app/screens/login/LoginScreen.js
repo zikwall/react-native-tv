@@ -10,7 +10,6 @@ import { authenticate } from '../../redux/actions';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_PASSWORD, ERROR_INVALID_USERNAME } from '../../constants';
 import { getAppTheme } from '../../redux/reducers';
-import SystemScreen from '../static/SystemScreen';
 
 const resetAction = StackActions.reset({
     index: 0,

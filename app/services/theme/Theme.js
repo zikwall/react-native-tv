@@ -16,3 +16,33 @@ export const getAppThemeService = async (theme) => {
         return Theme.light;
     }
 };
+
+// one
+export class Singleton {
+    static theme = null;
+    static instance = null;
+
+    static init = async (theme) => {
+        Singleton.setTheme(theme);
+    };
+
+    static getInstance = () => {
+        return Singleton.instance;
+    };
+
+    static setTheme = (theme) => {
+        Singleton.theme = Theme[theme];
+    };
+
+    static getTheme = () => {
+        if (Singleton.theme == null) {
+            return getAppThemeService();
+        }
+
+        return Singleton.theme;
+    };
+
+    static getBackgroundColor = () => {
+        return this.getTheme().primaryBackgroudColor;
+    };
+}

@@ -83,6 +83,10 @@ const MenuNavigator = createStackNavigator({
             )
         }
     }
+}, {
+    defaultNavigationOptions: {
+        headerStyle: { backgroundColor: '#000'},
+    }
 });
 
 
