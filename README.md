@@ -8,7 +8,7 @@
 ## Base Features & Roadmap - dirty
 
 - [ ] Available Platforms
-    - [x] Android (minimal support version??)
+    - [x] Android
     - [ ] iOS
     - [ ] Android TV
     - [ ] tvOS
@@ -86,7 +86,7 @@
     - [ ] Share outside
     - [ ] Report Playlist/User
 - [ ] Extra
-    - [ ] Light & Dark themes
+    - [x] Light & Dark themes
     - [ ] User i18n (Select Language in settings)
       
 ## Social Roadmap & Features
