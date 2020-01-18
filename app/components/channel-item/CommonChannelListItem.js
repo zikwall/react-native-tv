@@ -8,17 +8,17 @@ import Button from '../button/index.android';
 import s from './styles-list';
 import Rating from '../rating';
 import { Avatar } from '../avatar';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
 const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating }) => {
-    const itemStyles = { backgroundColor:'#fff' };
+    const theme = useSelector(state => getAppTheme(state));
 
     return (
         <Button
             onPress={onPress}
-            style={[s.container,
-                {backgroundColor: itemStyles.backgroundColor}
-            ]}>
-
+            style={[s.container, { backgroundColor: theme.primaryBackgroudColor }]}
+        >
             <View style={ s.leftContainer }>
                 {number && <Text style={s.number}>
                     { number }
@@ -30,17 +30,17 @@ const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating
                     <Text
                         numberOfLines={ 1 }
                         ellipsizeMode="tail"
-                        style={s.title}>
+                        style={[s.title, { color: theme.primaryColor }]}>
                         { title }
                     </Text>
                     <Text
                         numberOfLines={ 1 }
                         ellipsizeMode="tail"
-                        style={s.subtitle}>
+                        style={[s.subtitle, { color: theme.secondaryColor }]}>
                         { subtitle }
                     </Text>
                 </View>
-                <Rating rating={rating} />
+                <Rating rating={rating} style={{ color: theme.primaryColor }} />
             </View>
         </Button>
     )

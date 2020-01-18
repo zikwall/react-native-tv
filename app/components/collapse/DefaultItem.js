@@ -2,20 +2,21 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {human} from 'react-native-typography';
 import Icon from 'react-native-vector-icons/Feather';
+import IconWrap from '../icon/IconWrap';
 
-export const _renderHeader = (section, _, isActive) => {
+export const _renderHeader = (section, _, isActive, __, color) => {
     return (
         <View style={styles.questionItem}>
-            <Icon name={ isActive ? 'chevron-down' : 'chevron-right' } size={20} style={{ marginRight: 15 }}/>
-            <Text numberOfLines={ 2 } style={styles.headerText}>{section.question}</Text>
+            <IconWrap name={ isActive ? 'chevron-down' : 'chevron-right' } size={20} style={{ marginRight: 15 }}/>
+            <Text numberOfLines={ 2 } style={[ styles.headerText, { color: color } ]}>{section.question}</Text>
         </View>
     );
 };
 
-export const _renderContent = (section) => {
+export const _renderContent = (section, _, __, ___, color) => {
     return (
         <View style={styles.contentContainer}>
-            <Text style={styles.contentBody}>
+            <Text style={[ styles.contentBody, { color: color }]}>
                 {section.answer}
             </Text>
         </View>

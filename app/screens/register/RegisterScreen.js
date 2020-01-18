@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { NavigationHeaderLeft, NavigationHeaderTitle } from "../../components";
@@ -9,11 +9,18 @@ import { registration } from '../../redux/actions';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_USERNAME, ERROR_INVALID_PASSWORD } from '../../constants';
 import RegisterScreenComponent from './RegisterScreenComponent';
+import { getAppTheme } from '../../redux/reducers';
 
 const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
     const [ username, setProfilename ] = useState(null);
     const [ password, setPassword ] = useState(null);
     const [ email, setEmail ] = useState(null);
+
+    const theme = useSelector(state => getAppTheme(state));
+
+    useEffect(() => {
+        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+    }, [ theme ]);
 
     useEffect(() => {
         console.log('MOUNT REGISTER');
@@ -79,8 +86,8 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
             <RegisterScreenComponent
                 error={ error }
                 onRegister={ handleOnRegister }
-                loginButtonBackgroundColor="#000"
-                loginBackgorundColor="#fff"
+                loginButtonBackgroundColor={theme.primaryColor}
+                loginBackgorundColor={theme.primaryBackgroudColor}
                 loginText="Already have a Play account? OK, let's go!"
                 emailIconComponent={
                     <Icon
@@ -89,7 +96,7 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
                         color="black"
                     />
                 }
-                loginButtonTextStyle={{ color: '#000' }}
+                loginButtonTextStyle={{ color: theme.primaryColor }}
                 usernameOnChangeText={username => setProfilename(username)}
                 passwordOnChangeText={password => setPassword(password)}
                 emailOnChangeText={email => setEmail(email)}
@@ -100,8 +107,9 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
 
 RegisterScreen.navigationOptions = ({ navigation }) => {
     return {
+        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
         headerTitle: () => (
-            <NavigationHeaderTitle title={'Register'} />
+            <NavigationHeaderTitle title={'Login'} />
         ),
         headerLeft: () => (
             <NavigationHeaderLeft />
@@ -122,6 +130,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen);
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: 2
     },
 });

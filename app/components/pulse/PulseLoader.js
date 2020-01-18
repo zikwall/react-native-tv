@@ -110,7 +110,7 @@ export default class LocationPulseLoader extends React.Component {
                 </View>
 
                 <View style={{ paddingBottom: 10, alignItems: 'center'}}>
-                    <Text style={human.caption1}>
+                    <Text style={[ human.caption1, { color: this.props.borderColor }]}>
                         Powered by PlayHub Service { Environment.isDev() ? '(dev)' : '' }
                     </Text>
                 </View>

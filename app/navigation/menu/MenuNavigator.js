@@ -21,36 +21,12 @@ const MenuNavigator = createStackNavigator({
     },
     FaqScreen: {
         screen: FaqScreen,
-        navigationOptions:{
-            headerTitle: () => (
-                <NavigationHeaderTitle title={'FAQ'} />
-            ),
-            headerLeft: () => (
-                <NavigationHeaderLeft />
-            )
-        }
     },
     SystemScreen: {
         screen: SystemScreen,
-        navigationOptions:{
-            headerTitle: () => (
-                <NavigationHeaderTitle title={'System & App State'} />
-            ),
-            headerLeft: () => (
-                <NavigationHeaderLeft />
-            )
-        }
     },
     UserMenuScreen: {
         screen: UserMenuScreen,
-        navigationOptions:{
-            headerTitle: () => (
-                <NavigationHeaderTitle title={'You Dashboard'} />
-            ),
-            headerLeft: () => (
-                <NavigationHeaderLeft />
-            )
-        }
     },
     UserStatisticScreen: {
         screen: StatisticScreen,
@@ -107,22 +83,6 @@ const MenuNavigator = createStackNavigator({
             )
         }
     }
-}, {
-    defaultNavigationOptions: {
-        // Need Redux
-        // header: null,
-        headerStyle: {
-            backgroundColor: "#fff",
-            borderBottomWidth: 0,
-        },
-        headerLeft: <Image
-            source = {require('../../assets/images/PlayHubLogo.png')}
-            style = {{ height: 32, width: 98, marginLeft: 10, }}
-        />,
-        headerRight: (
-            <NavigationHeaderRight />
-        )
-    },
 });
 
 

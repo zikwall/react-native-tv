@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image } from "react-native";
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from "react-navigation";
@@ -11,6 +11,9 @@ import {
     PlayHubCategoryScreen,
     PlayHubBestScreen
 } from '../../screens';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
+import TabBarComponent from '../../components/navigation-header/CustomTab';
 
 const StaticNavigation = createMaterialTopTabNavigator({
     PlayHubScreen: {
@@ -65,7 +68,7 @@ const StaticNavigation = createMaterialTopTabNavigator({
         screen: PlayHubForFamilyScreen,
         navigationOptions:{
             tabBarLabel: 'Для всей семьи',
-            tabBarIcon: ({ tintColor, focused }) => (
+            tabBarIcon: ({ tintColor, focused, navigation }) => (
                 <Icon
                     focused={focused}
                     name={'hexagon'} size={20} style={{ color: tintColor}}
@@ -88,9 +91,18 @@ const StaticNavigation = createMaterialTopTabNavigator({
             borderWidth: 1,
         }
     },
+    tabBarComponent: TabBarComponent
 });
 
 const PlayhubNavigator = ({ navigation }) => {
+    const theme = useSelector(state => getAppTheme(state));
+
+    useEffect(() => {
+        navigation.setParams({
+            backgroundColor: theme.primaryBackgroudColor, color: theme.primaryColor, logo: theme.logo
+        });
+    }, [ theme ]);
+
     return (
         <StaticNavigation navigation={ navigation } />
     )
@@ -103,13 +115,18 @@ PlayhubNavigator.router = {
     },
 };
 
-/*PlayhubNavigator.navigationOptions = ({ navigation }) => {
+PlayhubNavigator.navigationOptions = ({ navigation }) => {
     return {
-        headerLeft: () => (
-            <NavigationHeaderLeft />
-        ),
+        headerStyle: {backgroundColor: navigation.getParam('backgroundColor')},
+        headerLeft: <Image
+            source = {navigation.getParam('logo')}
+            style = {{ height: 32, width: 98, marginLeft: 10, }}
+        />,
+        headerRight: (
+            <NavigationHeaderRight />
+        )
     };
-};*/
+};
 
 export default PlayhubNavigator;
 
@@ -117,20 +134,4 @@ export const PlayHubStackNavigator = createStackNavigator({
     MainPlayHub: {
         screen: PlayhubNavigator,
     }
-}, {
-    defaultNavigationOptions: {
-        // Need Redux
-        // header: null,
-        headerStyle: {
-            backgroundColor: "#fff",
-            borderBottomWidth: 0,
-        },
-        headerLeft: <Image
-            source = {require('../../assets/images/PlayHubLogo.png')}
-            style = {{ height: 32, width: 98, marginLeft: 10, }}
-        />,
-        headerRight: (
-            <NavigationHeaderRight />
-        )
-    },
 });

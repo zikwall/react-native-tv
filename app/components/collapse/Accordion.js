@@ -85,6 +85,7 @@ export default class Accordion extends Component {
       renderHeader,
       renderFooter,
       renderSectionTitle,
+      color,
     } = this.props;
 
     const renderCollapsible = (section, key) => (
@@ -92,7 +93,7 @@ export default class Accordion extends Component {
         collapsed={!activeSections.includes(key)}
         {...collapsibleProps}
         onAnimationEnd={() => onAnimationEnd(section, key)}>
-        {renderContent(section, key, activeSections.includes(key), sections)}
+        {renderContent(section, key, activeSections.includes(key), sections, color)}
       </Collapsible>
     );
 
@@ -113,6 +114,7 @@ export default class Accordion extends Component {
                 key,
                 activeSections.includes(key),
                 sections,
+                color
               )}
             </Touchable>
 

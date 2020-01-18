@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import React, { useState, useCallback, useEffect } from 'react';
+import {View, Text, Dimensions, Image} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { SectionGrid } from 'react-native-super-grid';
 
-import { SearchBar, ChannelCard } from "../../components";
+import { SearchBar, ChannelCard, NavigationHeaderRight } from '../../components';
 import { getChannels, getAppTheme } from '../../redux/reducers';
 import { setChannel } from "../../redux/actions/channels";
 import { DataHelper } from '../../utils';
@@ -16,6 +16,10 @@ const HomeScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const dispatch = useDispatch();
     const selectChannel = useCallback(channel => dispatch(setChannel(channel)), [ dispatch ]);
+
+    useEffect(() => {
+        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor, logo: theme.logo });
+    }, [ theme ]);
 
     const [ items, setItems ] = useState(channels);
     const [ cancelVisible, setCancelVisible ] = useState(false);
@@ -78,6 +82,19 @@ const HomeScreen = ({ navigation }) => {
             </View>
         </>
     );
+};
+
+HomeScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
+        headerLeft: <Image
+            source = {navigation.getParam('logo')}
+            style = {{ height: 32, width: 98, marginLeft: 10, }}
+        />,
+        headerRight: (
+            <NavigationHeaderRight />
+        )
+    }
 };
 
 export default HomeScreen;

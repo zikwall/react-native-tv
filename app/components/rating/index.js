@@ -1,9 +1,7 @@
 import React from 'react';
-import {Text} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import {
-    human,
-} from "react-native-typography";
+import { Text } from 'react-native';
+import { human } from "react-native-typography";
+import IconWrap from '../icon/IconWrap';
 
 export default ({rating, size=12, style}) => {
     return (
@@ -12,7 +10,7 @@ export default ({rating, size=12, style}) => {
                 { rating }
             </Text>
 
-            <Icon
+            <IconWrap
                 name={'star'}
                 size={size}
             />

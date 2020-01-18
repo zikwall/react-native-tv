@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
 
@@ -9,6 +9,8 @@ import LoginScreenComponent from "./LoginScreenComponent";
 import { authenticate } from '../../redux/actions';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_PASSWORD, ERROR_INVALID_USERNAME } from '../../constants';
+import { getAppTheme } from '../../redux/reducers';
+import SystemScreen from '../static/SystemScreen';
 
 const resetAction = StackActions.reset({
     index: 0,
@@ -16,6 +18,11 @@ const resetAction = StackActions.reset({
 });
 
 const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
+    const theme = useSelector(state => getAppTheme(state));
+
+    useEffect(() => {
+        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+    }, [ theme ]);
 
     useEffect(() => {
         console.log('MOUNT LOGIN');
@@ -80,21 +87,23 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
     };
 
     return (
-        <View style={ styles.container }>
+        <View style={styles.container}>
             <LoginScreenComponent
                 error={ error }
                 onPress={ handlePressRegister }
                 onPressForgot={ handlePressForgot }
                 onLogin={ handleOnLogin }
-                loginButtonBackgroundColor="#000"
-                loginBackgorundColor="#fff"
+                loginButtonBackgroundColor={theme.primaryColor}
+                loginBackgorundColor={theme.primaryBackgroudColor}
                 loginText="Don't have a Play account yet? Create now!"
                 forgotText="Forgot your password? No problems!"
-                loginButtonTextStyle={{ color: '#000' }}
+                loginButtonTextStyle={{ color: theme.primaryColor }}
                 onSwitchValueChange={switchValue => {
                     setSwitchValue(switchValue);
                 }}
                 switchValue={switchValue}
+                switchTextStyle={{ color: theme.primaryColor, marginRight: 8 }}
+                switchColor={theme.primaryColor}
                 usernameOnChangeText={username => setProfilename(username)}
                 passwordOnChangeText={password => setPassword(password)}
             >
@@ -106,6 +115,7 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
 
 LoginScreen.navigationOptions = ({ navigation }) => {
     return {
+        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
         headerTitle: () => (
             <NavigationHeaderTitle title={'Login'} />
         ),

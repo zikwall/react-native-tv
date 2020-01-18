@@ -8,7 +8,15 @@ import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import ContentLoader, { Bullets } from '@sarmad1995/react-native-content-loader';
 
-import { VideoView, ChannelInfo, TVProgram, TVProgramNotItem, IconWrap } from '../../components';
+import {
+    VideoView,
+    ChannelInfo,
+    TVProgram,
+    TVProgramNotItem,
+    IconWrap,
+    NavigationHeaderTitle,
+    NavigationHeaderLeft,
+} from '../../components';
 import StaticModal from "./examples/StaticModal";
 import AbsoluteHeader, { renderHeader } from "./examples/AbsoluteHeader";
 import { setPlayer } from '../../redux/actions';
@@ -51,12 +59,16 @@ const defaultEpg = [
     {title: 'Послепослезавтра', data: <TVProgramNotItem />},
 ];
 
-const WatchScreen = ({ selectPlayer, channel }) => {
+const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     const theme = useSelector(state => getAppTheme(state));
     const [ webViewSize, setWebViewSize ] = useState(height * 0.275 + width * 0.03);
     const [ modalContent, setModalContent ] = useState(null);
     const [ epgContent, setEpgContent ] = useState(null);
     const [ activeTab, setActiveTab ] = useState(3);
+
+    useEffect(() => {
+        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+    }, [ theme ]);
 
     useEffect(() => {
         console.log('MOUNT WATCH');
@@ -295,6 +307,18 @@ const WatchScreen = ({ selectPlayer, channel }) => {
             </Modalize>
         </View>
     );
+};
+
+WatchScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
+        headerTitle: () => (
+            <NavigationHeaderTitle title={'Watch'} />
+        ),
+        headerLeft: () => (
+            <NavigationHeaderLeft />
+        )
+    }
 };
 
 const mapStateToProps = state => ({

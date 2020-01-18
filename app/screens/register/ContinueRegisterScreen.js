@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -10,8 +10,16 @@ import { registerFinished, setProfile } from '../../redux/actions';
 import { Validator, FormHelper } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_NAME } from '../../constants';
 import ContinueRegisterScreenComponent from './ContinueRegisterScreenComponent';
+import { getAppTheme } from '../../redux/reducers';
+import LoginScreenComponent from '../login/LoginScreenComponent';
 
 const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAuthenticated, token }) => {
+    const theme = useSelector(state => getAppTheme(state));
+
+    useEffect(() => {
+        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+    }, [ theme ]);
+
     useEffect(() => {
         if (!isAuthenticated) {
             navigation.navigate('HomeScreen');
@@ -109,8 +117,8 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
                 error={ error }
                 onContinue={handleOnContinueRegister}
                 onContinueLater={handleOnContinueLater}
-                loginButtonBackgroundColor="#000"
-                loginBackgorundColor="#fff"
+                loginButtonBackgroundColor={theme.primaryColor}
+                loginBackgorundColor={theme.primaryBackgroudColor}
                 nameTitle={'Your Name'}
                 publicEmailTitle={'Your Public Email'}
                 publicEmailPlaceholder={'my.public@mail.my'}
@@ -121,7 +129,7 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
                         color="black"
                     />
                 }
-                loginButtonTextStyle={{ color: '#000' }}
+                loginButtonTextStyle={{ color: theme.primaryColor }}
                 nameOnChangeText={name => setName(name)}
                 publicEmailOnChangeText={email => setEmail(email)}
                 avatar={{ uri: avatar.uri }}
@@ -133,8 +141,9 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
 
 ContinueRegisterScreen.navigationOptions = ({ navigation }) => {
     return {
+        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
         headerTitle: () => (
-            <NavigationHeaderTitle title={'Last step'} />
+            <NavigationHeaderTitle title={'Login'} />
         ),
         headerLeft: () => (
             <NavigationHeaderLeft />

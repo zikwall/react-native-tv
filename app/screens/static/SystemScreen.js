@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { human } from "react-native-typography"
-import { CellView, CellViewSwitch } from "../../components";
+import { CellView, CellViewSwitch, NavigationHeaderLeft, NavigationHeaderTitle } from '../../components';
 import { Environment } from '../../utils';
 import { useSelector } from "react-redux";
-import { getChannels } from "../../redux/reducers";
+import { getAppTheme, getChannels } from '../../redux/reducers';
 
-const Item = ({ left, right }) => (
+const Item = ({ left, right, colorText }) => (
     <CellView
         leftContent={
-            <Text style={styles.text} numberOfLines={1} ellipsizeMode="tail">
+            <Text style={[ styles.text, { color: colorText }]} numberOfLines={1} ellipsizeMode="tail">
                 { left }
             </Text>
         }
@@ -28,8 +28,13 @@ const Item = ({ left, right }) => (
     />
 );
 
-const SystemScreen = () => {
+const SystemScreen = ({ navigation }) => {
+    const theme = useSelector(state => getAppTheme(state));
     const channels = useSelector(state => getChannels(state));
+
+    useEffect(() => {
+        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+    }, [ theme ]);
 
     const DATA = [
         {
@@ -47,13 +52,27 @@ const SystemScreen = () => {
     ];
 
     return (
-        <FlatList
-            style={{ paddingTop: 5 }}
-            data={DATA}
-            renderItem={({ item }) => <Item left={item.left} right={item.right} />}
-            keyExtractor={(item, index) => `key_${index}`}
-        />
+        <View style={{ flex: 1, backgroundColor: theme.primaryBackgroudColor }}>
+            <FlatList
+                style={{ paddingTop: 5 }}
+                data={DATA}
+                renderItem={({ item }) => <Item left={item.left} right={item.right} colorText={theme.primaryColor}/>}
+                keyExtractor={(item, index) => `key_${index}`}
+            />
+        </View>
     );
+};
+
+SystemScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
+        headerTitle: () => (
+            <NavigationHeaderTitle title={'System & App State'} />
+        ),
+        headerLeft: () => (
+            <NavigationHeaderLeft />
+        )
+    }
 };
 
 export default SystemScreen;

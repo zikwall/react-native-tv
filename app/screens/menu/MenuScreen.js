@@ -1,13 +1,21 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect } from 'react';
+import {View, StyleSheet, ScrollView, Image} from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
-import { MenuItemLine, Divider } from '../../components';
+import {MenuItemLine, Divider, NavigationHeaderRight} from '../../components';
 import { UserHelper } from '../../utils';
 import MenuUserInfo from './MenuUserInfo';
+import { getAppTheme } from '../../redux/reducers';
+import HomeScreen from '../home/HomeScreen';
 
 const MenuScreen = ({ navigation, user, isAuthenticated }) => {
+    const theme = useSelector(state => getAppTheme(state));
+
+    useEffect(() => {
+        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor, logo: theme.logo });
+    }, [ theme ]);
+
     const handleSettingsPress = () => {
         navigation.navigate('UserMenuScreen');
     };
@@ -51,6 +59,19 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
             </ScrollView>
         </View>
     );
+};
+
+MenuScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
+        headerLeft: <Image
+            source = {navigation.getParam('logo')}
+            style = {{ height: 32, width: 98, marginLeft: 10, }}
+        />,
+        headerRight: (
+            <NavigationHeaderRight />
+        )
+    }
 };
 
 const mapStateToProps = (state) => ({

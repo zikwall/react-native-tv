@@ -2,7 +2,14 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import Icon from "react-native-vector-icons/Feather";
 import {useDispatch, useSelector} from 'react-redux';
-import { MenuItemLine, Heading, CellView, CellViewSwitch } from '../../components';
+import {
+    MenuItemLine,
+    Heading,
+    CellView,
+    CellViewSwitch,
+    NavigationHeaderTitle,
+    NavigationHeaderLeft,
+} from '../../components';
 import { changeTheme } from "../../redux/actions";
 import { ThemeService } from "../../services";
 import { getAppTheme } from '../../redux/reducers';
@@ -12,6 +19,10 @@ const UserMenuScreen = ({ navigation }) => {
     const selectTheme = useCallback(theme => dispatch(changeTheme(theme)), [ dispatch ]);
     const theme = useSelector(state => getAppTheme(state));
     const [ themeValue, setThemeValue ] = useState(false);
+
+    useEffect(() => {
+        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+    }, [ theme.primaryColor ]);
 
     useEffect(() => {
         ThemeService.getAppThemeService().then((theme) => {
@@ -73,6 +84,18 @@ const UserMenuScreen = ({ navigation }) => {
             </ScrollView>
         </View>
     )
+};
+
+UserMenuScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
+        headerTitle: () => (
+            <NavigationHeaderTitle title={'You Dashboard'} />
+        ),
+        headerLeft: () => (
+            <NavigationHeaderLeft />
+        )
+    }
 };
 
 export default UserMenuScreen;

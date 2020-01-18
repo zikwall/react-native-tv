@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { NavigationHeaderLeft, NavigationHeaderTitle } from "../../components";
@@ -9,10 +9,18 @@ import { apiFetch } from '../../services/api';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS } from '../../constants';
 import ForgotScreenComponent from "./ForgotScreenComponent";
+import { getAppTheme } from '../../redux/reducers';
+import RegisterScreenComponent from '../register/RegisterScreenComponent';
 
 const ForgotScreen = ({ navigation, auth, isAuthenticated }) => {
     const [ email, setEmail ] = useState(null);
     const [ message, setMessage ] = useState(null);
+
+    const theme = useSelector(state => getAppTheme(state));
+
+    useEffect(() => {
+        navigation.setParams({ backgroundColor: theme.primaryBackgroudColor });
+    }, [ theme ]);
 
     const handleClickLoginText = () => {
         navigation.navigate('Login');
@@ -88,10 +96,10 @@ const ForgotScreen = ({ navigation, auth, isAuthenticated }) => {
                 message={ message }
                 onPress={ handleClickLoginText }
                 onLogin={ handleOnForgot }
-                loginButtonBackgroundColor="#000"
-                loginBackgorundColor="#fff"
+                loginButtonBackgroundColor={theme.primaryColor}
+                loginBackgorundColor={theme.primaryBackgroudColor}
                 loginText="Did you suddenly remember the password ?? OK!"
-                loginButtonTextStyle={{ color: '#000' }}
+                loginButtonTextStyle={{ color: theme.primaryColor }}
                 emailOnChangeText={username => setEmail(username)}
             >
             </ForgotScreenComponent>
@@ -102,6 +110,7 @@ const ForgotScreen = ({ navigation, auth, isAuthenticated }) => {
 
 ForgotScreen.navigationOptions = ({ navigation }) => {
     return {
+        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
         headerTitle: () => (
             <NavigationHeaderTitle title={'Forgot'} />
         ),
@@ -125,6 +134,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingBottom: 24
     },
 });

@@ -1,11 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 import Icon from "react-native-vector-icons/Feather";
-import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
+//import { FlexibleTabBarComponent } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
+import { FlexibleTabBarComponent, withCustomStyle } from '../components/bottom-bar/FlexibleTabBarComponent';
 import { PlayHubStackNavigator } from './playhub/PlayhubNavigator';
 import WatchNavigator from "./watch/WatchNavigation";
 import MenuNavigator from "./menu/MenuNavigator";
 import LikedNavigator from './liked/LikedNavigator';
+import { IconWrap } from '../components';
 
 export default createBottomTabNavigator(
     {
@@ -14,9 +16,9 @@ export default createBottomTabNavigator(
             navigationOptions:{
                 tabBarLabel: 'Home',
                 tabBarIcon: ({ tintColor, focused }) => (
-                    <Icon
-                        focused={focused}
-                        name={'home'} size={20} style={{ color: tintColor}}
+                    <IconWrap
+                        reverse={focused}
+                        name={'home'} size={20}
                     />
                 ),
             }
@@ -26,9 +28,9 @@ export default createBottomTabNavigator(
             navigationOptions:{
                 tabBarLabel: 'Liked',
                 tabBarIcon: ({ tintColor, focused }) => (
-                    <Icon
-                        focused={focused}
-                        name={'heart'} size={20} style={{ color: tintColor}}
+                    <IconWrap
+                        reverse={focused}
+                        name={'heart'} size={20}
                     />
                 ),
             }
@@ -38,9 +40,9 @@ export default createBottomTabNavigator(
             navigationOptions:{
                 tabBarLabel: 'PlayHub',
                 tabBarIcon: ({ tintColor, focused }) => (
-                    <Icon
-                        focused={focused}
-                        name={'triangle'} size={20} style={{ color: tintColor}}
+                    <IconWrap
+                        reverse={focused}
+                        name={'triangle'} size={20}
                     />
                 ),
             }
@@ -50,9 +52,9 @@ export default createBottomTabNavigator(
             navigationOptions:{
                 tabBarLabel: 'Menu',
                 tabBarIcon: ({ tintColor, focused }) => (
-                    <Icon
-                        focused={focused}
-                        name={'menu'} size={20} style={{ color: tintColor}}
+                    <IconWrap
+                        reverse={focused}
+                        name={'menu'} size={20}
                     />
                 ),
             }
@@ -62,11 +64,6 @@ export default createBottomTabNavigator(
         navigationOptions: {
             initialRouteName: "HomeScreen",
         },
-        tabBarComponent: withCustomStyle({
-            style: {
-                //borderTopColor: 'red',
-                //borderTopWidth: 1,
-            },
-        })(FlexibleTabBarComponent),
+        tabBarComponent: FlexibleTabBarComponent,
     }
 );

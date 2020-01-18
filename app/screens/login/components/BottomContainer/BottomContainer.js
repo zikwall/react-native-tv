@@ -19,6 +19,7 @@ const BottomContainer = props => {
         usernameTitle,
         backgroundColor,
         switchTextStyle,
+        switchColor,
         usernamePlaceholder,
         passwordPlaceholder,
         onSwitchValueChange,
@@ -74,7 +75,7 @@ const BottomContainer = props => {
                     ios_backgroundColor="black"
                     onValueChange={onSwitchValueChange}
                     trackColor={{ true: "#ccc", false: "#ccc" }}
-                    thumbColor={'#000'}
+                    thumbColor={switchColor || '#000'}
                 />
             </View>
         </View>

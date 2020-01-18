@@ -11,6 +11,8 @@ import Icon from 'react-native-vector-icons/Feather';
 import { Fake } from '../../utils';
 import { CommonChannelCardItem, CommonChannelListItem } from '../../components';
 import styles from './styles';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
 const TouchableRoundedImage = ({ style, ...props }) => (
     <TouchableOpacity style={style}>
@@ -24,13 +26,15 @@ const TouchableRoundedImage = ({ style, ...props }) => (
 );
 
 const PlayHubScreen = () => {
+    const theme = useSelector(state => getAppTheme(state));
+
     return (
-        <View style={styles.screenContainer}>
+        <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroudColor }]}>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={styles.card}>
+                <View style={[ styles.card, { backgroundColor: theme.primaryBackgroudColor }]}>
                     <View style={styles.recentlyPlayedTitleBar}>
                         <Icon name={'award'} size={30} color={'red'}/>
-                        <Text style={styles.recentlyPlayedTitle}>Best user choice</Text>
+                        <Text style={[styles.recentlyPlayedTitle, { color: theme.primaryColor }]}>Best user choice</Text>
                     </View>
                     <View style={styles.suggestionRow}>
                         <TouchableRoundedImage
@@ -102,7 +106,7 @@ const PlayHubScreen = () => {
 
                 <View style={{ marginTop: 10 }}>
                     <View style={styles.recentlyPlayedTitleBarTwo}>
-                        <Text style={styles.recentlyPlayedTitle}>All playlist</Text>
+                        <Text style={[styles.recentlyPlayedTitle, { color: theme.primaryColor }]}>All playlist</Text>
                     </View>
                     <View style={{paddingTop: 10}}>
                         {Fake.userPlaylist.map((playlist, index) => (

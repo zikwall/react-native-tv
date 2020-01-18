@@ -36,3 +36,4 @@ export { default as NavigationHeaderTitle } from './navigation-header/Navigation
 export { default as CellView } from './cellview/CellView';
 export { default as CellViewSwitch } from './cellview/CellViewSwitch';
 export { default as IconWrap } from './icon/IconWrap';
+export { default as BottomBarComponent } from './bottom-bar/FlexibleTabBarComponent/FlexibleTabBarComponent';
