@@ -2,52 +2,56 @@ import React from 'react';
 import { View, Dimensions, ScrollView } from 'react-native';
 import { LineChart, BarChart } from "react-native-chart-kit";
 import { Heading, Divider } from '../../components';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
 const {width} = Dimensions.get('window');
 
-const data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jule", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [
-        {
-            data: [
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100
-            ]
-        }
-    ]
-};
-
-const chartOptions = {
-    backgroundColor: "#fff",
-    backgroundGradientFrom: "#fff",
-    backgroundGradientTo: "#fff",
-    decimalPlaces: 2, // optional, defaults to 2dp
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    style: {
-        borderRadius: 16
-    },
-    propsForDots: {
-        r: "6",
-        strokeWidth: "2",
-        stroke: "#000"
-    }
-};
-
 const StatisticScreen = () => {
+    const theme = useSelector(state => getAppTheme(state));
+
+    const data = {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jule", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [
+            {
+                data: [
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100
+                ]
+            }
+        ]
+    };
+
+    const chartOptions = {
+        backgroundColor: theme.primaryBackgroudColor,
+        backgroundGradientFrom: theme.primaryBackgroudColor,
+        backgroundGradientTo: theme.primaryBackgroudColor,
+        decimalPlaces: 2, // optional, defaults to 2dp
+        color: (opacity = 1) => theme.primaryColor,
+        labelColor: (opacity = 1) => theme.primaryColor,
+        style: {
+            borderRadius: 16
+        },
+        propsForDots: {
+            r: "6",
+            strokeWidth: "2",
+            stroke: theme.primaryColor
+        }
+    };
+
     return (
-        <ScrollView>
-            <Heading text={'Unique Users by Months'} icon={'user-plus'}/>
+        <ScrollView style={{ backgroundColor: theme.primaryBackgroudColor }}>
+            <Heading color={theme.primaryColor} text={'Unique Users by Months'} icon={'user-plus'}/>
             <Divider />
             <ScrollView horizontal>
                 <View style={{ paddingHorizontal: 5 }}>
@@ -55,7 +59,7 @@ const StatisticScreen = () => {
                         data={data}
                         width={width + width * 0.9} // from react-native
                         height={220}
-                        yAxisLabel="V: "
+                        yAxisLabel=""
                         yAxisSuffix="k"
                         chartConfig={chartOptions}
                         bezier
@@ -64,7 +68,7 @@ const StatisticScreen = () => {
                 </View>
             </ScrollView>
 
-            <Heading text={'Count of Views'} icon={'eye'}/>
+            <Heading color={theme.primaryColor} text={'Count of Views'} icon={'eye'}/>
             <Divider />
             <ScrollView horizontal>
                 <View style={{ paddingHorizontal: 5 }}>
@@ -73,7 +77,7 @@ const StatisticScreen = () => {
                         data={data}
                         width={width + width * 0.9}
                         height={220}
-                        yAxisLabel="V: "
+                        yAxisLabel=""
                         chartConfig={chartOptions}
                         verticalLabelRotation={30}
                     />

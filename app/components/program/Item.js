@@ -3,35 +3,35 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import s from './styles-item';
 import Button from '../../components/button';
-import Icon from 'react-native-vector-icons/Feather';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
+import IconWrap from '../icon/IconWrap';
 
 const Item = ({ id, name, time, active, onPress, onLongPress }) => {
-    const itemStyles = { backgroundColor:'#fff' };
     //const activeClass = active ? s.active : {};
     const icon = active ? 'play-circle' : 'tv';
     const size = active ? 30 : 20;
+    const theme = useSelector(state => getAppTheme(state));
 
     return (
         <>
             <Button
                 onPress={() => onPress(id)}
                 //onLongPress={() => onLongPress(id)}
-                style={[s.container,
-                    {backgroundColor: itemStyles.backgroundColor}
-                ]}
+                style={[ s.container, { backgroundColor: theme.primaryBackgroudColor } ]}
                 key={ id }>
 
-                <View style={ [s.leftContainer ]}>
-                    <Icon name={ icon } size={ size } />
+                <View style={s.leftContainer}>
+                    <IconWrap name={ icon } size={ size } />
 
-                    <Text style={ [s.timecodes]  }>
+                    <Text style={s.timecodes}>
                         { time }
                     </Text>
 
-                    <View style={ s.headingContainer }>
+                    <View style={s.headingContainer}>
                         <Text numberOfLines={ 2 }
                             ellipsizeMode="tail"
-                            style={[s.heading, {color: '#000'}]}>
+                            style={[ s.heading, { color: theme.primaryColor } ]}>
                             { name }
                         </Text>
                     </View>

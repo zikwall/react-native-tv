@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {View, Text, Dimensions} from 'react-native';
+import {View, Dimensions} from 'react-native';
 import Orientation from 'react-native-orientation';
-import Icon from "react-native-vector-icons/Feather";
 import { Modalize } from 'react-native-modalize';
 import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import ContentLoader, { Bullets } from '@sarmad1995/react-native-content-loader';
 
-import { VideoView, ChannelInfo, TVProgram, TVProgramNotItem } from '../../components';
+import { VideoView, ChannelInfo, TVProgram, TVProgramNotItem, IconWrap } from '../../components';
 import StaticModal from "./examples/StaticModal";
 import AbsoluteHeader, { renderHeader } from "./examples/AbsoluteHeader";
 import { setPlayer } from '../../redux/actions';
-import { getSelectChannel } from '../../redux/reducers';
+import { getAppTheme, getSelectChannel } from '../../redux/reducers';
 import { Players } from '../../constants';
 import { EPG } from '../../services';
 import { SafeValidator } from '../../utils';
+import Icon from 'react-native-vector-icons/Feather';
 
 const {height, width} = Dimensions.get('window');
 
@@ -52,6 +52,7 @@ const defaultEpg = [
 ];
 
 const WatchScreen = ({ selectPlayer, channel }) => {
+    const theme = useSelector(state => getAppTheme(state));
     const [ webViewSize, setWebViewSize ] = useState(height * 0.275 + width * 0.03);
     const [ modalContent, setModalContent ] = useState(null);
     const [ epgContent, setEpgContent ] = useState(null);
@@ -199,7 +200,7 @@ const WatchScreen = ({ selectPlayer, channel }) => {
     };
 
     return (
-        <View style={{ flex: 2, backgroundColor: '#fff' }}>
+        <View style={{ flex: 2, backgroundColor: theme.primaryBackgroudColor}}>
             <View style={{ height: webViewSize }}>
                 <VideoView />
             </View>
@@ -214,7 +215,7 @@ const WatchScreen = ({ selectPlayer, channel }) => {
                     <Menu
                         ref={(ref) => _menu = ref }
                         button={
-                            <Icon name='sliders' size={ 25 } color={ '#000' } onPress={ showMenu } />
+                            <Icon name='sliders' size={ 25 } onPress={ showMenu } color={theme.primaryColor}/>
                         }>
 
                         <MenuItem onPress={() => {
@@ -251,10 +252,10 @@ const WatchScreen = ({ selectPlayer, channel }) => {
                     height: 50,
                 }}
                 tabBarTextStyle={{
-                    color: '#000'
+                    color: theme.primaryColor
                 }}
                 tabBarUnderlineStyle={{
-                    backgroundColor: '#000',
+                    backgroundColor: theme.primaryColor,
                     height: 2,
                 }}
                 initialPage={activeTab}

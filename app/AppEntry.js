@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, StatusBar } from 'react-native';
+import { StyleSheet, StatusBar, View } from 'react-native';
 import { Provider, connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { PulseLoader } from './components';
 import { fetchChannelsRedux } from "./services/channels";
 import { appStore } from './redux/Store';
-import { getChannelsError, getChannelsPending } from './redux/reducers';
+import { getChannelsError, getChannelsPending, getAppTheme } from './redux/reducers';
 import { handleJWTMiddleware } from './services/auth';
+import { changeTheme } from "./redux/actions";
+import { ThemeService } from './services'
 import AppNavigator from './navigation/AppNavigator';
 
 const mapStateToProps = state => ({
     error: getChannelsError(state),
-    pending: getChannelsPending(state)
+    pending: getChannelsPending(state),
+    theme: getAppTheme(state)
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     fetchChannels: fetchChannelsRedux,
+    selectTheme: changeTheme,
     handleJWTMiddleware
 }, dispatch);
 
@@ -24,6 +28,7 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
     StatusBar.setHidden(true);
 
     const [ spinner, setSpinner ] = useState(true);
+    const [ update, setUpdate ] = useState(false);
 
     useEffect(() => {
         let interval = setTimeout(() => {
@@ -36,6 +41,12 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
     }, []);
 
     useEffect(() => {
+        ThemeService.getAppThemeService().then((theme) => {
+            props.selectTheme(theme);
+        });
+    }, []);
+
+    useEffect(() => {
         function init() {
             props.handleJWTMiddleware();
             props.fetchChannels();
@@ -44,11 +55,17 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
         init();
     }, []);
 
+    const theme = props.theme;
+
     if (spinner) {
         return (
-            <PulseLoader
-                avatar={ require('./assets/images/Play_650.png') }
-            />
+            <View style={{ flex: 1, backgroundColor: theme.primaryBackgroudColor }}>
+                <PulseLoader
+                    backgroundColor={theme.primaryBackgroudColor}
+                    borderColor={theme.primaryColor}
+                    avatar={ theme.image }
+                />
+            </View>
         );
     }
 

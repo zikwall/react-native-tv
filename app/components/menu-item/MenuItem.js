@@ -1,27 +1,31 @@
 import PropTypes from 'prop-types'
 import React from 'react';
 import { View, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
 
 import s from './styles';
 import Button from '../../components/button';
 import UnreadBadge from '../unread-badge';
+import IconWrap from '../icon/IconWrap';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
 const MenuItem = ({ name, icon, iconColor, to, unreadItems, onPress, onLongPress }) => {
+    const theme = useSelector(state => getAppTheme(state));
+
     return (
         <Button
             onLongPress={onLongPress}
             onPress={() => onPress(to)}
-            style={[s.container, { backgroundColor:'#fff' }]}>
+            style={[s.container, { backgroundColor: theme.primaryBackgroudColor }]}>
 
             <View style={s.leftContainer}>
-                <Icon name={icon} size={25} color={iconColor}/>
+                <IconWrap name={icon} size={25} color={iconColor} />
 
                 <View style={s.headingContainer}>
                     <Text
                         numberOfLines={ 1 }
                         ellipsizeMode="tail"
-                        style={[s.heading, { color: '#000' }]}>
+                        style={[s.heading, { color: theme.primaryColor }]}>
                         { name }
                     </Text>
                 </View>
@@ -34,7 +38,7 @@ const MenuItem = ({ name, icon, iconColor, to, unreadItems, onPress, onLongPress
 };
 
 MenuItem.defaultProps = {
-    iconColor: '#000'
+    iconColor: undefined
 };
 
 MenuItem.propTypes = {

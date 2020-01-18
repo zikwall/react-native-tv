@@ -5,13 +5,13 @@ import s from './styles';
 
 import Icon from 'react-native-vector-icons/Feather'
 
-const SearchField = ({ onPress }) => (
+const SearchField = ({ onPress, backgroundColor, color }) => (
     <View style={s.container}>
         <Icon.Button
             name="search"
             size={18}
-            color={'gray'}
-            backgroundColor={'white'}
+            color={color}
+            backgroundColor={backgroundColor}
             onPress={() => onPress()}>
             Search
         </Icon.Button>

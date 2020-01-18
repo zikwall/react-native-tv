@@ -1,12 +1,15 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeValidator } from '../../utils';
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
 const ChannelCard = ({ name, epg_id, image, onSelectHandle }) => {
+    const theme = useSelector(state => getAppTheme(state));
     const ifImage = SafeValidator.getSafeChannelImage(image);
 
     return (
-        <View style={styles.itemContainer}>
+        <View style={[styles.itemContainer, { borderColor: theme.primaryColor }]}>
             <TouchableOpacity style={{ flex: 1 }} onPress={() => {
                 onSelectHandle(epg_id);
             }} >
@@ -21,8 +24,8 @@ const ChannelCard = ({ name, epg_id, image, onSelectHandle }) => {
                         source={ ifImage }
                     />
                 </View>
-                <Text style={ styles.itemName }>{ name }</Text>
-                <Text style={ styles.itemCode }>{ epg_id }</Text>
+                <Text style={ [styles.itemName, { color: theme.primaryColor }] }>{ name }</Text>
+                <Text style={ [styles.itemCode, { color: theme.primaryColor }] }>{ epg_id }</Text>
             </TouchableOpacity>
         </View>
     );
