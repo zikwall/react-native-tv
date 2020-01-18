@@ -19,8 +19,6 @@ const MainStack = createStackNavigator({
 
 MainStack.navigationOptions = ({ navigation }) => {
     let tabBarVisible = true;
-    let headerMode = 'none';
-    let headerVisible = false;
     if (navigation.state.index > 0) {
         tabBarVisible = false;
     }

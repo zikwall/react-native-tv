@@ -5,6 +5,7 @@ import { FlexibleTabBarComponent, withCustomStyle } from 'react-navigation-custo
 import { PlayHubStackNavigator } from './playhub/PlayhubNavigator';
 import WatchNavigator from "./watch/WatchNavigation";
 import MenuNavigator from "./menu/MenuNavigator";
+import LikedNavigator from './liked/LikedNavigator';
 
 export default createBottomTabNavigator(
     {
@@ -16,6 +17,18 @@ export default createBottomTabNavigator(
                     <Icon
                         focused={focused}
                         name={'home'} size={20} style={{ color: tintColor}}
+                    />
+                ),
+            }
+        },
+        LikedScreen: {
+            screen: LikedNavigator,
+            navigationOptions:{
+                tabBarLabel: 'Liked',
+                tabBarIcon: ({ tintColor, focused }) => (
+                    <Icon
+                        focused={focused}
+                        name={'heart'} size={20} style={{ color: tintColor}}
                     />
                 ),
             }
@@ -55,4 +68,5 @@ export default createBottomTabNavigator(
                 //borderTopWidth: 1,
             },
         })(FlexibleTabBarComponent),
-    });
+    }
+);
