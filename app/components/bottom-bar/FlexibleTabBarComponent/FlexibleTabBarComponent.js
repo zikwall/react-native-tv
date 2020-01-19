@@ -55,11 +55,13 @@ class FlexibleTabBarComponent extends React.Component {
   }
 
   shouldComponentUpdate(nextProps: Readonly<Props>) {
-    return (nextProps.navigation.state.index !== this.props.navigation.state.index);
+    return (nextProps.navigation.state.index !== this.props.navigation.state.index)
+        || nextProps.theme.primaryColor !== this.props.theme.primaryColor;
   }
 
   componentDidUpdate(prevProps: Readonly<TabBarComponentProps>) {
-    if (prevProps.navigation.state.index !== this.props.navigation.state.index) {
+    if (prevProps.navigation.state.index !== this.props.navigation.state.index
+        || prevProps.theme.primaryColor !== this.props.theme.primaryColor) {
       this.navigateAnimation(prevProps.navigation.state.index);
     }
   }
