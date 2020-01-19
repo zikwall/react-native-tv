@@ -133,7 +133,7 @@
 ![Register screen](screenshots/register.jpg "Register screen") | ![Menu screen](screenshots/menu_v3.jpg "Register screen") | ![Static screen](screenshots/static_example.jpg "Static screen") 
 ![User Channels screen](screenshots/user_channels_v2.jpg "User channels screen") | ![User followers screen](screenshots/user_followers.jpg "User Followers screen") | ![FAQ screen](screenshots/faq_v2.jpg "FAQ screen")
 ![Forgot screen](screenshots/forgot.jpg "Forgot screen") | ![After registration screen](screenshots/after_registration.jpg "After registration screen") | ![Dark theme](screenshots/theme_dark.jpg "Dark theme")
-![Light theme](screenshots/theme_light.jpg "Light theme") | ![Dark watch](screenshots/watch_dark.jpg "Dark watch") | Coming soon
+![Light theme](screenshots/theme_light.jpg "Light theme") | ![Dark watch](screenshots/watch_dark.jpg "Dark watch") | ![Dark home](screenshots/home_dark.jpg "Dark home")
 
 ### Responsive Layout
 
