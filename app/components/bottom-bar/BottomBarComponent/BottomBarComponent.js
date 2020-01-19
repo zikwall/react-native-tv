@@ -20,7 +20,7 @@ const PressTypes = {
 const screenWidth = Dimensions.get('window').width;
 const defaultTabBarHeight = 49;
 
-class FlexibleTabBarComponent extends React.Component {
+class BottomBarComponent extends React.Component {
   static defaultProps = {
     onPressInScale: 1.3,
     onPressOutScale: 1,
@@ -276,7 +276,7 @@ const mapStateToProps = (state) => ({
   theme: getAppTheme(state)
 });
 
-export default connect(mapStateToProps)(FlexibleTabBarComponent);
+export default connect(mapStateToProps)(BottomBarComponent);
 
 const styles = StyleSheet.create({
   container: {

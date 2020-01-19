@@ -1,8 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
-import Icon from "react-native-vector-icons/Feather";
-//import { FlexibleTabBarComponent } from 'react-navigation-custom-bottom-tab-component/FlexibleTabBarComponent';
-import { FlexibleTabBarComponent, withCustomStyle } from '../components/bottom-bar/FlexibleTabBarComponent';
+import { BottomBarComponent } from '../components';
 import { PlayHubStackNavigator } from './playhub/PlayhubNavigator';
 import WatchNavigator from "./watch/WatchNavigation";
 import MenuNavigator from "./menu/MenuNavigator";
@@ -64,6 +62,6 @@ export default createBottomTabNavigator(
         navigationOptions: {
             initialRouteName: "HomeScreen",
         },
-        tabBarComponent: FlexibleTabBarComponent,
+        tabBarComponent: BottomBarComponent,
     }
 );
