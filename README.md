@@ -91,6 +91,7 @@
     - [ ] Report Playlist/User
 - [ ] Extra
     - [x] Light & Dark themes
+    - [ ] Multi color theming
     - [ ] User i18n (Select Language in settings)
       
 ## Social Roadmap & Features
