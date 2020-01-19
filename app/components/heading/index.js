@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import IconWrap from '../icon/IconWrap';
 
 const Heading = ({text, color, icon, iconColor, styles}) => (
-    <View style={{ padding: 16, flexDirection: 'row'}}>
+    <View style={[{ padding: 16, flexDirection: 'row'}, styles]}>
         {
             icon && <IconWrap name={icon}  size={17} style={{ marginRight: 5 }} />
         }
@@ -20,7 +20,8 @@ const Heading = ({text, color, icon, iconColor, styles}) => (
 
 Heading.defaultProps = {
     color: '#000',
-    iconColor: '#000'
+    iconColor: '#000',
+    styles: {}
 };
 
 Heading.propTypes = {
