@@ -36,6 +36,9 @@
     - [ ] Favorites
     - [ ] Own profile
         - [ ] Settings
+            - [x] Account
+            - [ ] Security
+            - [ ] Privacy
         - [ ] Repositories
         - [ ] Friends
         - [ ] Messages
