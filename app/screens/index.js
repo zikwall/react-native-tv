@@ -24,6 +24,7 @@ import StatisticScreen from "./user/StatisticScreen";
 import UserMenuScreen from "./menu/UserMenuScreen";
 import LikedScreen from './liked/LikedScreen';
 import AccountScreen from './user/AccountScreen';
+import DebugVideoScreen from './menu/DebugVideoScreen';
 
 export {
     // global
@@ -33,7 +34,7 @@ export {
     // auth
     LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen,
     // menu
-    MenuScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen, SystemScreen, AccountScreen,
+    MenuScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen, SystemScreen, AccountScreen, DebugVideoScreen,
     // playhub
     PlayHubBestScreen, PlayHubCategoryScreen, PlayHubForFamilyScreen, PlayHubRecommendedScreen
 }

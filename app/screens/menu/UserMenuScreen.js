@@ -79,7 +79,7 @@ const UserMenuScreen = ({ navigation }) => {
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'film'} name={'Your Videos'} />
                 <MenuItemLine onPress={onMenuPress} to={'UserStatisticScreen'} icon={'bar-chart-2'} name={'Your Analytics'} />
                 <Heading icon={'terminal'} text={'Developer Block'} color={theme.primaryColor} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'video'} name={'Debug Video'} />
+                <MenuItemLine onPress={onMenuPress} to={'DebugVideoScreen'} icon={'video'} name={'Debug Video'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'edit-3'} name={'Write to developer'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={'Andrey, do you want a PlayHub team?'} />
             </ScrollView>

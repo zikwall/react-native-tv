@@ -11,7 +11,8 @@ import {
     SystemScreen,
     TermsScreen,
     UserMenuScreen,
-    AccountScreen
+    AccountScreen,
+    DebugVideoScreen
 } from "../../screens";
 import { NavigationHeaderLeft, NavigationHeaderRight, NavigationHeaderTitle } from "../../components";
 
@@ -30,6 +31,9 @@ const MenuNavigator = createStackNavigator({
     },
     AccountScreen: {
         screen: AccountScreen,
+    },
+    DebugVideoScreen: {
+        screen: DebugVideoScreen,
     },
     UserStatisticScreen: {
         screen: StatisticScreen,
