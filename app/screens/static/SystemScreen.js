@@ -47,7 +47,7 @@ const SystemScreen = ({ navigation }) => {
         },
         {
             left: 'Count Channels',
-            right: <Text style={human.callout}>{Object.keys(channels).length}</Text>,
+            right: <Text style={[ human.callout, { color: theme.primaryColor }]}>{Object.keys(channels).length}</Text>,
         },
     ];
 

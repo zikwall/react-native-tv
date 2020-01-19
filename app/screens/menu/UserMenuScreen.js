@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import Icon from "react-native-vector-icons/Feather";
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     MenuItemLine,
     Heading,
@@ -13,6 +13,7 @@ import {
 import { changeTheme } from "../../redux/actions";
 import { ThemeService } from "../../services";
 import { getAppTheme } from '../../redux/reducers';
+import { Fake } from '../../utils';
 
 const UserMenuScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -70,17 +71,17 @@ const UserMenuScreen = ({ navigation }) => {
                     }}
                 />
                 <Heading icon={'server'} text={'The main'} color={theme.primaryColor} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'bell'} name={'Notifications'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'bell'} name={'Notifications'} />
                 <MenuItemLine onPress={onMenuPress} to={'AccountScreen'} icon={'user-check'} name={'Account'} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'lock'} name={'Security'} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'eye'} name={'Privacy settings'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'lock'} name={'Security'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'eye'} name={'Privacy settings'} />
                 <Heading icon={'database'} text={'Content'} color={theme.primaryColor} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'film'} name={'Your Videos'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'film'} name={'Your Videos'} />
                 <MenuItemLine onPress={onMenuPress} to={'UserStatisticScreen'} icon={'bar-chart-2'} name={'Your Analytics'} />
                 <Heading icon={'terminal'} text={'Developer Block'} color={theme.primaryColor} />
                 <MenuItemLine onPress={onMenuPress} to={''} icon={'video'} name={'Debug Video'} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'edit-3'} name={'Write to developer'} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'heart'} iconColor={'#DC143C'} name={'Andrey, do you want a PlayHub team?'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'edit-3'} name={'Write to developer'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={'Andrey, do you want a PlayHub team?'} />
             </ScrollView>
         </View>
     )

@@ -1,5 +1,9 @@
 import faker from 'faker';
 
+export const onComingSoonFeaturePress = () => {
+    alert('Coming Soon');
+};
+
 export const homeFeed = [
     {
         type: "tweet",

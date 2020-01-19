@@ -4,10 +4,9 @@ import { withNavigation } from 'react-navigation';
 import { connect, useSelector } from 'react-redux';
 
 import {MenuItemLine, Divider, NavigationHeaderRight} from '../../components';
-import { UserHelper } from '../../utils';
+import { UserHelper, Fake } from '../../utils';
 import MenuUserInfo from './MenuUserInfo';
 import { getAppTheme } from '../../redux/reducers';
-import HomeScreen from '../home/HomeScreen';
 
 const MenuScreen = ({ navigation, user, isAuthenticated }) => {
     const theme = useSelector(state => getAppTheme(state));
@@ -40,12 +39,12 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
                 />
             }
             <ScrollView>
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'user-check'} name={'Friends'} onLongPress={() => alert('Looong!')} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'message-square'} name={'Messages'} unreadItems={20} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'users'} name={'Communities'} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'star'} name={'Bookmarks'} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'heart'} name={'Liked'} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'shopping-bag'} name={'Purchases'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'user-check'} name={'Friends'} onLongPress={() => alert('Looong!')} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'message-square'} name={'Messages'} unreadItems={20} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'users'} name={'Communities'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'star'} name={'Bookmarks'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} name={'Liked'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'shopping-bag'} name={'Purchases'} />
                 <Divider />
                 <MenuItemLine onPress={onMenuPress} to={'CopyrightScreen'} icon={'alert-circle'} name={'Copyright holders'} />
                 <MenuItemLine onPress={onMenuPress} to={'TermsScreen'} icon={'book'} name={'Terms of Use'} />
@@ -54,7 +53,7 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
                 <Divider />
                 <MenuItemLine onPress={onMenuPress} to={'AboutScreen'} icon={'info'} name={'About the Project'} />
                 <MenuItemLine onPress={onMenuPress} to={'FaqScreen'} icon={'help-circle'} name={'FAQ'} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'help-circle'} name={'Help'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'help-circle'} name={'Help'} />
                 <MenuItemLine onPress={onMenuPress} to={'SystemScreen'} icon={'layers'} name={'System & App State'} />
             </ScrollView>
         </View>
