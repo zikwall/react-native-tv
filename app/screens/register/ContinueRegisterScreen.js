@@ -50,7 +50,7 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
             name: 'avatar.jpg',
         };*/
 
-        if (!Validator.isValidName(name)) {
+        if (name && !Validator.isValidName(name)) {
             setError({
                 has: true,
                 error: ERROR_INVALID_NAME.message,
@@ -60,7 +60,7 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
             return false;
         }
 
-        if (!Validator.isValidEmail(email)) {
+        if (email && !Validator.isValidEmail(email)) {
             setError({
                 has: true,
                 error: ERROR_INVALID_EMAIL_ADRESS.message,

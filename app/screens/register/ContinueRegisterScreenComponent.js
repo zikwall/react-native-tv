@@ -45,7 +45,7 @@ const ContinueRegisterScreenComponent = props => {
             keyboardVerticalOffset={-310}
         >
             <View style={container(loginBackgorundColor)}>
-                <Text style={styles.centerParagraph}>
+                <Text style={[styles.centerParagraph, { color: loginButtonBackgroundColor }]}>
                     Was the last, tiny little step!
                 </Text>
                 <View style={{ flex: 1 }}>
