@@ -29,7 +29,7 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
         return () => {
             console.log('UNMOUNT LOGIN');
         }
-    });
+    }, []);
 
     const [ username, setProfilename ] = useState(null);
     const [ password, setPassword ] = useState(null);

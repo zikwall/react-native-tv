@@ -1,11 +1,13 @@
-import { AUTHENTICATE, DEAUTHENTICATE, SET_USER } from '../types';
+import { AUTHENTICATE, DEAUTHENTICATE, SET_USER, UPDATE_USER } from '../types';
 
 const initialState = {
     token: null,
     user: {
-        name: null,
-        public_email: null,
-        avatar: null
+        profile: {
+            name: null,
+            public_email: null,
+            avatar: null
+        }
     }
 };
 
@@ -15,6 +17,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 user: action.user
+            };
+        case UPDATE_USER:
+            return {
+                ...state,
+                user: {...state.user, ...action.user}
             };
         case AUTHENTICATE:
             return { token: action.token, user: action.user };

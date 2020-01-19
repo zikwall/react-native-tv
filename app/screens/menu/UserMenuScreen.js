@@ -71,7 +71,7 @@ const UserMenuScreen = ({ navigation }) => {
                 />
                 <Heading icon={'server'} text={'The main'} color={theme.primaryColor} />
                 <MenuItemLine onPress={onMenuPress} to={''} icon={'bell'} name={'Notifications'} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'user-check'} name={'Account'} />
+                <MenuItemLine onPress={onMenuPress} to={'AccountScreen'} icon={'user-check'} name={'Account'} />
                 <MenuItemLine onPress={onMenuPress} to={''} icon={'lock'} name={'Security'} />
                 <MenuItemLine onPress={onMenuPress} to={''} icon={'eye'} name={'Privacy settings'} />
                 <Heading icon={'database'} text={'Content'} color={theme.primaryColor} />

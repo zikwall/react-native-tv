@@ -10,10 +10,10 @@ import {
     StatisticScreen,
     SystemScreen,
     TermsScreen,
-    UserMenuScreen
+    UserMenuScreen,
+    AccountScreen
 } from "../../screens";
 import { NavigationHeaderLeft, NavigationHeaderRight, NavigationHeaderTitle } from "../../components";
-import Icon from "react-native-vector-icons/Feather";
 
 const MenuNavigator = createStackNavigator({
     MemuScreen: {
@@ -27,6 +27,9 @@ const MenuNavigator = createStackNavigator({
     },
     UserMenuScreen: {
         screen: UserMenuScreen,
+    },
+    AccountScreen: {
+        screen: AccountScreen,
     },
     UserStatisticScreen: {
         screen: StatisticScreen,

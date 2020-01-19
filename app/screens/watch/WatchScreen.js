@@ -76,7 +76,7 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
         return () => {
             console.log('UNMOUNT WATCH');
         }
-    });
+    }, []);
 
     useEffect(() => {
         Orientation.addOrientationListener(orientationHandleChange);

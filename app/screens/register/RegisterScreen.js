@@ -28,7 +28,7 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
         return () => {
             console.log('UNMOUNT REGISTER');
         }
-    });
+    }, []);
 
     const [ error, setError ] = useState({
         has: false,

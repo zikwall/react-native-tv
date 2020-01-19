@@ -1,7 +1,32 @@
-import {AUTHENTICATE, DEAUTHENTICATE, SET_USER} from '../types';
+import { AUTHENTICATE, DEAUTHENTICATE, SET_USER, UPDATE_USER } from '../types';
 import { apiFetch, formDataPost } from "../../services/api";
 import {Identity, Session} from '../../services/auth';
 import {UserHelper} from '../../utils';
+
+export const updateAccount = ({ name, publicEmail }, token) => {
+    return (dispatch) => {
+        return apiFetch('/vktv/account/change', {
+            method: 'POST',
+            body: JSON.stringify({name, publicEmail})
+        }, {"Authorization": UserHelper.makeAuthorizationHeader(token)}).then((response) => {
+
+            if (response.code && response.code === 200) {
+                Identity.setUser(response.response.user);
+                dispatch({type: UPDATE_USER, user: response.response.user});
+
+                return {
+                    state: true,
+                    response: response
+                };
+            }
+
+            return {
+                state: false,
+                response: response
+            }
+        });
+    }
+};
 
 export const registerFinished = ({ name, publicEmail }, token) => {
     return (dispatch) => {
