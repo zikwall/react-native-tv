@@ -17,7 +17,7 @@ export const getAppThemeService = async () => {
             return 'light';
         }
 
-        if (!['light', 'dark'].includes(theme)) {
+        if (!Object.keys(Theme).includes(theme)) {
             return 'light';
         }
 

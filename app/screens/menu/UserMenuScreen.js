@@ -9,6 +9,7 @@ import {
     CellViewSwitch,
     NavigationHeaderTitle,
     NavigationHeaderLeft,
+    ThemePicker
 } from '../../components';
 import { changeTheme } from "../../redux/actions";
 import { ThemeService } from "../../services";
@@ -49,27 +50,8 @@ const UserMenuScreen = ({ navigation }) => {
     return (
         <View style={ [styles.container, { backgroundColor: theme.primaryBackgroundColor }]}>
             <ScrollView>
-                <CellView
-                    leftContent={
-                        <View style={{ flexDirection: 'row', alignItems: 'center'}}>
-                            <Icon name={'sun'} size={25} color={theme.primaryColor}/>
-                            <Text style={{ marginLeft: 25, color: theme.primaryColor }} numberOfLines={1} ellipsizeMode="tail">
-                                Dark Theme
-                            </Text>
-                        </View>
-                    }
-                    rightContent={
-                        <CellViewSwitch disabled={false} value={themeValue} onValueChange={theme => handleThemeChange(theme)} />
-                    }
-                    rightStyle={{ flexDirection: 'column', justifyContent: 'center' }}
-                    cellStyles={{
-                        height: 60,
-                        paddingHorizontal: 10,
-                        paddingTop: 7,
-                        paddingBottom: 7,
-                        paddingLeft: 19,
-                    }}
-                />
+                <Heading icon={'target'} text={'Choose a color scheme that interests you'} color={theme.primaryColor} />
+                <ThemePicker />
                 <Heading icon={'server'} text={'The main'} color={theme.primaryColor} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'bell'} name={'Notifications'} />
                 <MenuItemLine onPress={onMenuPress} to={'AccountScreen'} icon={'user-check'} name={'Account'} />
