@@ -33,12 +33,12 @@ class BottomBarComponent extends React.Component {
 
   //theme = null;
   itemWidth;
-  itemWidthAnimations: Animated.Value;
-  pressAnimation: Animated.Value;
-  textAnimation: Animated.Value;
-  currentItem: Animated.Value;
+  itemWidthAnimations;
+  pressAnimation;
+  textAnimation;
+  currentItem;
 
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
 
     const { navigation, activeFlexValue, defaultFlexValue } = props;
@@ -54,12 +54,12 @@ class BottomBarComponent extends React.Component {
     this.textAnimation = routes.map(() => new Animated.Value(state.index === 0 ? 1 : 0));
   }
 
-  shouldComponentUpdate(nextProps: Readonly<Props>) {
+  shouldComponentUpdate(nextProps) {
     return (nextProps.navigation.state.index !== this.props.navigation.state.index)
         || nextProps.theme.info.name !== this.props.theme.info.name;
   }
 
-  componentDidUpdate(prevProps: Readonly<TabBarComponentProps>) {
+  componentDidUpdate(prevProps) {
     if (prevProps.navigation.state.index !== this.props.navigation.state.index
         || prevProps.theme.info.name !== this.props.theme.info.name) {
       this.navigateAnimation(prevProps.navigation.state.index);
@@ -176,7 +176,7 @@ class BottomBarComponent extends React.Component {
     );
   };
 
-  renderIcon = (props): React.ReactNode => {
+  renderIcon = (props) => {
     const { renderIcon } = this.props;
 
     if (!renderIcon) {
