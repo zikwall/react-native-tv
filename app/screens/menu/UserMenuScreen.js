@@ -20,9 +20,9 @@ const UserMenuScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const [ themeValue, setThemeValue ] = useState(false);
 
-    useEffect(() => {
+   /* useEffect(() => {
         navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
-    }, [ theme.info.name ]);
+    }, [ theme.info.name ]);*/
 
     useEffect(() => {
         ThemeService.getAppThemeService().then((theme) => {
