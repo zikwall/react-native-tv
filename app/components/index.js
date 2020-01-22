@@ -43,3 +43,4 @@ export { default as ThemedView } from './ui/ThemedView';
 export { default as ExtendedButton } from './ui/Button';
 export { default as PureVideoWebView } from './video-view/PureVideoWebView';
 export { default as ThemePicker } from './themepicker/Themepicker';
+export { default as FlatButton } from './ui/FlatButton';

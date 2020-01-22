@@ -1,16 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {View, Text} from 'react-native';
-import Button from '../../../components/button';
-import {Avatar} from '../../../components/avatar';
-import SearchField from '../SearchField';
-
-import s from './styles';
+import { View, Text } from 'react-native';
+import { Avatar } from '../../../components/avatar';
+import FlatButton from "../../../components/ui/FlatButton";
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../../redux/reducers';
-import { IconWrap } from '../../../components';
+import s from './styles';
 
-const MenuUserInfo = ({ username, displayName, avatarUrlMedium, onSearchPress, onSettingsPress }) => {
+const MenuUserInfo = ({ username, displayName, avatarUrlMedium, onSettingsPress }) => {
     const theme = useSelector(state => getAppTheme(state));
     return (
         <View style={[s.container, { backgroundColor: theme.primaryBackgroundColor, borderBottomWidth: 1, borderBottomColor: theme.secondaryColor }]}>
@@ -21,22 +18,20 @@ const MenuUserInfo = ({ username, displayName, avatarUrlMedium, onSearchPress, o
                     <Text style={[s.displayName, { color: theme.primaryColor }]}>{displayName}</Text>
                     <Text style={[s.username, { color: theme.primaryColor }]}>@{username}</Text>
                 </View>
-
-                <Button
-                    onPress={onSettingsPress}
-                    background="SelectableBackgroundBorderless"
-                    style={s.buttonStyle}>
-                    <IconWrap name="settings" size={30} />
-                </Button>
             </View>
 
-            <SearchField onPress={() => onSearchPress()} backgroundColor={theme.primaryBackgroundColor} color={theme.primaryColor}/>
+            <FlatButton
+                onPress={onSettingsPress}
+                backgroundColor={theme.secondaryColor}
+                color={'#fff'}
+                text={'Go to Settings'}
+                icon={'settings'}
+            />
         </View>
     );
 };
 
 MenuUserInfo.defaultProps = {
-    onSearchPress: () => {},
     onSettingsPress: () => {}
 };
 
