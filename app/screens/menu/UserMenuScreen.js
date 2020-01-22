@@ -9,7 +9,8 @@ import {
     CellViewSwitch,
     NavigationHeaderTitle,
     NavigationHeaderLeft,
-    ThemePicker
+    ThemePicker,
+    NavigationHeaderComponent
 } from '../../components';
 import { changeTheme } from "../../redux/actions";
 import { ThemeService } from "../../services";
@@ -71,13 +72,17 @@ const UserMenuScreen = ({ navigation }) => {
 
 UserMenuScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
+        /*headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
         headerTitle: () => (
             <NavigationHeaderTitle title={'You Dashboard'} />
         ),
         headerLeft: () => (
             <NavigationHeaderLeft />
-        )
+        )*/
+        header: (props) => <NavigationHeaderComponent
+            titleComponent={<NavigationHeaderTitle title={'You Dashboard'} />}
+            leftComponent={ <NavigationHeaderLeft /> } {...props}
+        />
     }
 };
 
