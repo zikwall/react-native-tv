@@ -24,7 +24,7 @@ const UserMenuScreen = ({ navigation }) => {
 
     useEffect(() => {
         navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
-    }, [ theme.primaryColor ]);
+    }, [ theme.info.name ]);
 
     useEffect(() => {
         ThemeService.getAppThemeService().then((theme) => {
