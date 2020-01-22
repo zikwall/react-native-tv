@@ -1,12 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, StyleSheet, ScrollView, Text } from 'react-native';
-import Icon from "react-native-vector-icons/Feather";
 import { useDispatch, useSelector } from 'react-redux';
 import {
     MenuItemLine,
     Heading,
-    CellView,
-    CellViewSwitch,
     NavigationHeaderTitle,
     NavigationHeaderLeft,
     ThemePicker,
