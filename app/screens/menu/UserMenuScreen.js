@@ -50,15 +50,15 @@ const UserMenuScreen = ({ navigation }) => {
             <ScrollView>
                 <Heading icon={'target'} text={'Choose a color scheme that interests you'} color={theme.primaryColor} />
                 <ThemePicker />
-                <Heading icon={'server'} text={'The main'} color={theme.primaryColor} />
+                {/*<Heading icon={'server'} text={'The main'} color={theme.primaryColor} />*/}
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'bell'} name={'Notifications'} />
                 <MenuItemLine onPress={onMenuPress} to={'AccountScreen'} icon={'user-check'} name={'Account'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'lock'} name={'Security'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'eye'} name={'Privacy settings'} />
-                <Heading icon={'database'} text={'Content'} color={theme.primaryColor} />
+                {/*<Heading icon={'database'} text={'Content'} color={theme.primaryColor} />*/}
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'film'} name={'Your Videos'} />
                 <MenuItemLine onPress={onMenuPress} to={'UserStatisticScreen'} icon={'bar-chart-2'} name={'Your Analytics'} />
-                <Heading icon={'terminal'} text={'Developer Block'} color={theme.primaryColor} />
+                {/*<Heading icon={'terminal'} text={'Developer Block'} color={theme.primaryColor} />*/}
                 <MenuItemLine onPress={onMenuPress} to={'DebugVideoScreen'} icon={'video'} name={'Debug Video'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'edit-3'} name={'Write to developer'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={'Andrey, do you want a PlayHub team?'} />
