@@ -13,9 +13,9 @@ import {
     ChannelInfo,
     TVProgram,
     TVProgramNotItem,
-    IconWrap,
     NavigationHeaderTitle,
     NavigationHeaderLeft,
+    NavigationHeaderComponent,
 } from '../../components';
 import StaticModal from "./examples/StaticModal";
 import AbsoluteHeader, { renderHeader } from "./examples/AbsoluteHeader";
@@ -65,10 +65,6 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     const [ modalContent, setModalContent ] = useState(null);
     const [ epgContent, setEpgContent ] = useState(null);
     const [ activeTab, setActiveTab ] = useState(3);
-
-    useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
-    }, [ theme ]);
 
     useEffect(() => {
         console.log('MOUNT WATCH');
@@ -311,13 +307,10 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
 
 WatchScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
-        headerTitle: () => (
-            <NavigationHeaderTitle title={'Watch'} />
-        ),
-        headerLeft: () => (
-            <NavigationHeaderLeft />
-        )
+        header: (props) => <NavigationHeaderComponent
+            titleComponent={<NavigationHeaderTitle title={'Watch'} />}
+            leftComponent={ <NavigationHeaderLeft /> } {...props}
+        />
     }
 };
 

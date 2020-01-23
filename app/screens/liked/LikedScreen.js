@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
-import { NavigationHeaderRight } from '../../components';
+import { NavigationHeaderComponent, NavigationHeaderRight } from '../../components';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 
@@ -8,7 +8,7 @@ const LikedScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor, logo: theme.logo });
+        navigation.setParams({ logo: theme.logo });
     }, [ theme ]);
 
     return (
@@ -20,14 +20,19 @@ const LikedScreen = ({ navigation }) => {
 
 LikedScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
-        headerLeft: <Image
-            source = {navigation.getParam('logo')}
-            style = {{ height: 32, width: 98, marginLeft: 10, }}
-        />,
-        headerRight: (
-            <NavigationHeaderRight />
-        )
+        header: (props) =>
+            <NavigationHeaderComponent
+                rightComponent={
+                    <NavigationHeaderRight />
+                }
+                leftComponent={
+                    <Image
+                        source = {navigation.getParam('logo')}
+                        style = {{ height: 32, width: 98, marginLeft: 10, }}
+                    />
+                }
+                {...props}
+            />
     }
 };
 

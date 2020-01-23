@@ -3,7 +3,7 @@ import { Image } from "react-native";
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from "react-navigation";
 import Icon from 'react-native-vector-icons/Feather';
-import { NavigationHeaderLeft, NavigationHeaderRight } from '../../components';
+import {NavigationHeaderComponent, NavigationHeaderLeft, NavigationHeaderRight} from '../../components';
 import {
     PlayHubScreen,
     PlayHubRecommendedScreen,
@@ -98,9 +98,7 @@ const PlayhubNavigator = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
-        navigation.setParams({
-            backgroundColor: theme.primaryBackgroundColor, color: theme.primaryColor, logo: theme.logo
-        });
+        navigation.setParams({ logo: theme.logo });
     }, [ theme ]);
 
     return (
@@ -117,14 +115,19 @@ PlayhubNavigator.router = {
 
 PlayhubNavigator.navigationOptions = ({ navigation }) => {
     return {
-        headerStyle: {backgroundColor: navigation.getParam('backgroundColor')},
-        headerLeft: <Image
-            source = {navigation.getParam('logo')}
-            style = {{ height: 32, width: 98, marginLeft: 10, }}
-        />,
-        headerRight: (
-            <NavigationHeaderRight />
-        )
+        header: (props) =>
+            <NavigationHeaderComponent
+                rightComponent={
+                    <NavigationHeaderRight />
+                }
+                leftComponent={
+                    <Image
+                        source = {navigation.getParam('logo')}
+                        style = {{ height: 32, width: 98, marginLeft: 10, }}
+                    />
+                }
+                {...props}
+            />
     };
 };
 

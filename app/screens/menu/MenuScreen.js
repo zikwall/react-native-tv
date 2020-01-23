@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import {View, StyleSheet, ScrollView, Image} from 'react-native';
+import {View, ScrollView, Image} from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect, useSelector } from 'react-redux';
 
-import {MenuItemLine, Divider, NavigationHeaderRight} from '../../components';
+import { MenuItemLine, Divider, NavigationHeaderRight, NavigationHeaderComponent } from '../../components';
 import { UserHelper, Fake } from '../../utils';
 import MenuUserInfo from './MenuUserInfo';
 import { getAppTheme } from '../../redux/reducers';
@@ -12,7 +12,7 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor, logo: theme.logo });
+        navigation.setParams({ logo: theme.logo });
     }, [ theme ]);
 
     const handleSettingsPress = () => {
@@ -28,7 +28,7 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View>
             {
                 isAuthenticated && <MenuUserInfo
                     username={user.username}
@@ -62,14 +62,19 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
 
 MenuScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
-        headerLeft: <Image
-            source = {navigation.getParam('logo')}
-            style = {{ height: 32, width: 98, marginLeft: 10, }}
-        />,
-        headerRight: (
-            <NavigationHeaderRight />
-        )
+        header: (props) =>
+            <NavigationHeaderComponent
+                rightComponent={
+                    <NavigationHeaderRight />
+                }
+                leftComponent={
+                    <Image
+                        source = {navigation.getParam('logo')}
+                        style = {{ height: 32, width: 98, marginLeft: 10, }}
+                    />
+                }
+                {...props}
+            />
     }
 };
 
@@ -79,10 +84,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(withNavigation(MenuScreen));
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white'
-    }
-});
