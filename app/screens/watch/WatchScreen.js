@@ -15,7 +15,7 @@ import {
     TVProgramNotItem,
     NavigationHeaderTitle,
     NavigationHeaderLeft,
-    NavigationHeaderComponent,
+    NavigationHeaderComponent, NativeVideoView,
 } from '../../components';
 import StaticModal from "./examples/StaticModal";
 import AbsoluteHeader, { renderHeader } from "./examples/AbsoluteHeader";
@@ -248,6 +248,11 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
 
                         <MenuItem onPress={() => {
                             handleSelectPlayer(Players.ORIGIN_PLAYER);
+                        }}>
+                            Use Origin Player
+                        </MenuItem>
+                        <MenuItem onPress={() => {
+                            handleSelectPlayer(Players.NATIVE_PLAYER);
                         }}>
                             Use Native Player
                         </MenuItem>
