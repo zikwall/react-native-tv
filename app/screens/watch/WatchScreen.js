@@ -65,6 +65,7 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     const [ modalContent, setModalContent ] = useState(null);
     const [ epgContent, setEpgContent ] = useState(null);
     const [ activeTab, setActiveTab ] = useState(3);
+    let _menu = null;
 
     useEffect(() => {
         console.log('MOUNT WATCH');
@@ -117,8 +118,10 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     }, [ channel ]);
 
     const orientationHandleChange = (orientation) => {
+        const { height } = Dimensions.get('window');
+
         if (orientation === 'LANDSCAPE') {
-            setWebViewSize('100%');
+            setWebViewSize(height);
         } else {
             setWebViewSize(height * 0.3);
         }
@@ -152,8 +155,6 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
             setModalContent(null);
         }
     };
-
-    let _menu = null;
 
     const showMenu = () => {
         _menu.show();
@@ -195,6 +196,7 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
 
     const handleSelectPlayer = (playerId) => {
         selectPlayer(channel.epg_id, playerId);
+        hideMenu();
     };
 
     const ifImage = SafeValidator.getSafeChannelImage(channel.image ? channel.image : null);

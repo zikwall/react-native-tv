@@ -11,6 +11,7 @@ import {
 import { BackgroundContainer } from '../components';
 import { connect } from 'react-redux';
 import { getAppTheme } from '../../../redux/reducers';
+import Orientation from 'react-native-orientation';
 
 const PressTypes = {
   IN :'in',
@@ -29,6 +30,11 @@ class BottomBarComponent extends React.Component {
     activeFlexValue: 2,
     duration: 200,
     tabBarHeight: defaultTabBarHeight,
+    handleOrientation: true
+  };
+
+  state = {
+    isVisibleBottomBar: true,
   };
 
   //theme = null;
@@ -54,13 +60,39 @@ class BottomBarComponent extends React.Component {
     this.textAnimation = routes.map(() => new Animated.Value(state.index === 0 ? 1 : 0));
   }
 
-  shouldComponentUpdate(nextProps) {
+  componentDidMount(): void {
+    Orientation.addOrientationListener(this.orientationHandleChange);
+  }
+
+  componentWillUnmount(): void {
+    Orientation.removeOrientationListener(this.orientationHandleChange);
+  }
+
+  orientationHandleChange = (orientation) => {
+    if (!this.props.handleOrientation) {
+      return false;
+    }
+
+    if (orientation === 'LANDSCAPE') {
+      this.setState({ isVisibleBottomBar: false });
+    } else {
+      this.setState({ isVisibleBottomBar: true });
+    }
+  };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.isVisibleBottomBar !== nextState.isVisibleBottomBar) {
+      return true;
+    }
+
     return (nextProps.navigation.state.index !== this.props.navigation.state.index)
         || nextProps.theme.info.name !== this.props.theme.info.name;
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.navigation.state.index !== this.props.navigation.state.index
+  componentDidUpdate(prevProps, prevState) {
+    if ((
+        this.state.isVisibleBottomBar !== prevState.isVisibleBottomBar)
+        || prevProps.navigation.state.index !== this.props.navigation.state.index
         || prevProps.theme.info.name !== this.props.theme.info.name) {
       this.navigateAnimation(prevProps.navigation.state.index);
     }
@@ -220,6 +252,10 @@ class BottomBarComponent extends React.Component {
     const { navigation, onTabPress, style, tabBarHeight } = this.props;
     const { state } = navigation;
     const { routes } = state;
+
+    if (!this.state.isVisibleBottomBar) {
+      return null;
+    }
 
     return (
         <SafeAreaView style={[styles.container, style, { backgroundColor: this.props.theme.primaryBackgroundColor }]}>
