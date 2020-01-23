@@ -76,7 +76,7 @@
     - [x] TV program list
     - [x] Current TV program _(left server revision, [m3uparse](https://github.com/zikwall/m3uparse))_
 - [ ] Native Players
-    - [ ] ExoPlayer
+    - [x] ExoPlayer
     - [ ] JWPlayer SDK
 - [ ] Services
     - [x] Auth Primary Client (Login/Pass)
