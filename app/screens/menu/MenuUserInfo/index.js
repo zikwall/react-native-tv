@@ -10,7 +10,7 @@ import s from './styles';
 const MenuUserInfo = ({ username, displayName, avatarUrlMedium, onSettingsPress }) => {
     const theme = useSelector(state => getAppTheme(state));
     return (
-        <View style={[s.container, { backgroundColor: theme.primaryBackgroundColor, borderBottomWidth: 1, borderBottomColor: theme.secondaryColor }]}>
+        <View style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}>
             <View style={s.topContainer}>
                 <Avatar src={avatarUrlMedium} />
 
