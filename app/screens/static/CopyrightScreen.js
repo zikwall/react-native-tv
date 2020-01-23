@@ -6,7 +6,7 @@ import {
 } from "react-native-typography";
 
 import viewStyles from './styles';
-import {NavigationHeaderComponent, NavigationHeaderLeft, NavigationHeaderTitle} from "../../components";
+import { NavigationHeaderComponent, NavigationHeaderLeft, NavigationHeaderTitle } from "../../components";
 
 const CopyrightScreen = () => {
     return (

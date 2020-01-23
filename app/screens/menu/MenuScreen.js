@@ -1,9 +1,20 @@
 import React, { useEffect } from 'react';
-import {View, ScrollView, Image} from 'react-native';
+import {
+    View,
+    ScrollView,
+    Image
+} from 'react-native';
+
 import { withNavigation } from 'react-navigation';
 import { connect, useSelector } from 'react-redux';
 
-import { MenuItemLine, Divider, NavigationHeaderRight, NavigationHeaderComponent } from '../../components';
+import {
+    MenuItemLine,
+    Divider,
+    NavigationHeaderRight,
+    NavigationHeaderComponent
+} from '../../components';
+
 import { UserHelper, Fake } from '../../utils';
 import MenuUserInfo from './MenuUserInfo';
 import { getAppTheme } from '../../redux/reducers';

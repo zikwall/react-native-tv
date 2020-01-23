@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { human } from "react-native-typography"
-import { CellView, CellViewSwitch, NavigationHeaderLeft, NavigationHeaderTitle } from '../../components';
+import { CellView, CellViewSwitch } from '../../components';
 import { Environment } from '../../utils';
 import { useSelector } from "react-redux";
 import { getAppTheme, getChannels } from '../../redux/reducers';

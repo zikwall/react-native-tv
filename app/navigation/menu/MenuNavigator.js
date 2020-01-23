@@ -1,6 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "react-navigation";
-import { Image } from "react-native";
 import {
     AboutScreen,
     CopyrightScreen,
@@ -17,7 +16,6 @@ import {
 import {
     NavigationHeaderComponent,
     NavigationHeaderLeft,
-    NavigationHeaderRight,
     NavigationHeaderTitle
 } from "../../components";
 
