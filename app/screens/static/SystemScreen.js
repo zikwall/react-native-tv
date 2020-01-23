@@ -63,18 +63,6 @@ const SystemScreen = ({ navigation }) => {
     );
 };
 
-SystemScreen.navigationOptions = ({ navigation }) => {
-    return {
-        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
-        headerTitle: () => (
-            <NavigationHeaderTitle title={'System & App State'} />
-        ),
-        headerLeft: () => (
-            <NavigationHeaderLeft />
-        )
-    }
-};
-
 export default SystemScreen;
 
 const styles = StyleSheet.create({

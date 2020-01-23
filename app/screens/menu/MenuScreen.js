@@ -29,16 +29,17 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
 
     return (
         <View>
-            {
-                isAuthenticated && <MenuUserInfo
-                    username={user.username}
-                    displayName={UserHelper.buildUserId(user)}
-                    avatarUrlMedium={UserHelper.makeUserAvatar(user)}
-                    onSettingsPress={handleSettingsPress}
-                    onSearchPress={handleSearchPress}
-                />
-            }
             <ScrollView>
+                {
+                    isAuthenticated && <MenuUserInfo
+                        username={user.username}
+                        displayName={UserHelper.buildUserId(user)}
+                        avatarUrlMedium={UserHelper.makeUserAvatar(user)}
+                        onSettingsPress={handleSettingsPress}
+                        onSearchPress={handleSearchPress}
+                    />
+                }
+
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'user-check'} name={'Friends'} onLongPress={() => alert('Looong!')} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'message-square'} name={'Messages'} unreadItems={20} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'users'} name={'Communities'} />

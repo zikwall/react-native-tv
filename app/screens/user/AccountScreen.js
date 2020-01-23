@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import {
-    NavigationHeaderLeft,
-    NavigationHeaderTitle,
     TextInput,
     Form,
     ThemedView,
@@ -27,10 +25,6 @@ const AccountScreen = ({ navigation, updateAccount, token, user }) => {
         error: "Unexpected error",
         attributes: []
     });
-
-    useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
-    }, [ theme ]);
 
     const handleFormSubmit = async () => {
         if (success.has === true) {
@@ -90,18 +84,6 @@ const AccountScreen = ({ navigation, updateAccount, token, user }) => {
             </Form>
         </ThemedView>
     );
-};
-
-AccountScreen.navigationOptions = ({ navigation }) => {
-    return {
-        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
-        headerTitle: () => (
-            <NavigationHeaderTitle title={'Change Account'} />
-        ),
-        headerLeft: () => (
-            <NavigationHeaderLeft />
-        )
-    }
 };
 
 const mapStateToProps = (state) => ({

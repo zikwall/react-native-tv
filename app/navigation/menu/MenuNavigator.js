@@ -14,7 +14,12 @@ import {
     AccountScreen,
     DebugVideoScreen
 } from "../../screens";
-import { NavigationHeaderLeft, NavigationHeaderRight, NavigationHeaderTitle } from "../../components";
+import {
+    NavigationHeaderComponent,
+    NavigationHeaderLeft,
+    NavigationHeaderRight,
+    NavigationHeaderTitle
+} from "../../components";
 
 const MenuNavigator = createStackNavigator({
     MemuScreen: {
@@ -22,15 +27,33 @@ const MenuNavigator = createStackNavigator({
     },
     FaqScreen: {
         screen: FaqScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'FAQ'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
     },
     SystemScreen: {
         screen: SystemScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'System & App State'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
     },
     UserMenuScreen: {
         screen: UserMenuScreen,
     },
     AccountScreen: {
         screen: AccountScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Change Account'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
     },
     DebugVideoScreen: {
         screen: DebugVideoScreen,
@@ -38,61 +61,47 @@ const MenuNavigator = createStackNavigator({
     UserStatisticScreen: {
         screen: StatisticScreen,
         navigationOptions:{
-            headerTitle: () => (
-                <NavigationHeaderTitle title={'You Analytics'} />
-            ),
-            headerLeft: () => (
-                <NavigationHeaderLeft />
-            )
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Your Analytics'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
         }
     },
     CopyrightScreen: {
         screen: CopyrightScreen,
         navigationOptions:{
-            headerTitle: () => (
-                <NavigationHeaderTitle title={'Правообладателям'} />
-            ),
-            headerLeft: () => (
-                <NavigationHeaderLeft />
-            )
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Правообладателям'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
         }
     },
     TermsScreen: {
         screen: TermsScreen,
         navigationOptions:{
-            headerTitle: () => (
-                <NavigationHeaderTitle title={'Условия использования'} />
-            ),
-            headerLeft: () => (
-                <NavigationHeaderLeft />
-            )
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Условия использования'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
         }
     },
     PrivacyScreen: {
         screen: PrivacyScreen,
         navigationOptions:{
-            headerTitle: () => (
-                <NavigationHeaderTitle title={'Конфиденциальность'} />
-            ),
-            headerLeft: () => (
-                <NavigationHeaderLeft />
-            )
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Конфиденциальность'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
         }
     },
     AboutScreen: {
         screen: AboutScreen,
         navigationOptions:{
-            headerTitle: () => (
-                <NavigationHeaderTitle title={'О Проекте'} />
-            ),
-            headerLeft: () => (
-                <NavigationHeaderLeft />
-            )
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'О Проекте'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
         }
-    }
-}, {
-    defaultNavigationOptions: {
-        headerStyle: { backgroundColor: '#000'},
     }
 });
 

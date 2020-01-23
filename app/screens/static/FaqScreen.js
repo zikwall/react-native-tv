@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Bullets } from '@sarmad1995/react-native-content-loader';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { iOSUIKit} from 'react-native-typography';
 
 import viewStyles from './styles';
@@ -8,18 +8,13 @@ import { Accordion, _renderHeader, _renderContent} from '../../components/collap
 import { FAQ } from '../../services';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
-import {NavigationHeaderLeft, NavigationHeaderTitle} from '../../components';
 
-const {height, width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const FaqScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const [ activeSection, setActiveSection ] = useState([]);
     const [ faqContent, setFaqContent ] = useState(null);
-
-    useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
-    }, [ theme ]);
 
     useEffect(() => {
         async function initFAQ() {
@@ -73,18 +68,6 @@ const FaqScreen = ({ navigation }) => {
             </View>
         </View>
     );
-};
-
-FaqScreen.navigationOptions = ({ navigation }) => {
-    return {
-        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
-        headerTitle: () => (
-            <NavigationHeaderTitle title={'FAQ'} />
-        ),
-        headerLeft: () => (
-            <NavigationHeaderLeft />
-        )
-    }
 };
 
 export default FaqScreen;

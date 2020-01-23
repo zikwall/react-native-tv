@@ -6,6 +6,7 @@ import {
 } from "react-native-typography";
 
 import viewStyles from './styles';
+import {NavigationHeaderComponent, NavigationHeaderLeft, NavigationHeaderTitle} from "../../components";
 
 const CopyrightScreen = () => {
     return (
@@ -59,7 +60,10 @@ const CopyrightScreen = () => {
 };
 
 CopyrightScreen.navigationOptions = {
-    title: 'Правообладателям',
+    header: (props) => <NavigationHeaderComponent
+        titleComponent={<NavigationHeaderTitle title={'Правообладателям'} />}
+        leftComponent={ <NavigationHeaderLeft /> } {...props}
+    />
 };
 
 export default CopyrightScreen;

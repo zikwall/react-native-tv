@@ -2,7 +2,7 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from "react-navigation";
 import Icon from 'react-native-vector-icons/Feather';
-import { NavigationHeaderLeft, NavigationHeaderTitle } from '../../components';
+import { NavigationHeaderComponent, NavigationHeaderLeft, NavigationHeaderTitle } from '../../components';
 import { CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen } from '../../screens';
 
 const StaticNavigation = createMaterialTopTabNavigator({
@@ -86,9 +86,10 @@ StaticNavigator.router = {
 
 StaticNavigator.navigationOptions = ({ navigation }) => {
     return {
-        headerLeft: () => (
-            <NavigationHeaderLeft />
-        ),
+        header: (props) => <NavigationHeaderComponent
+            titleComponent={<NavigationHeaderTitle title={'Information'} />}
+            leftComponent={ <NavigationHeaderLeft /> } {...props}
+        />
     };
 };
 
