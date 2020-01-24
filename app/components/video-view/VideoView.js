@@ -2,13 +2,18 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { INJ_JS, Players } from '../../constants';
+import { Players } from '../../constants';
 import { getChannelsPending, getSelectChannel, getSelectPlayer } from '../../redux/reducers';
 import { initPlayer } from '../../redux/actions';
 import PureVideoWebView from './PureVideoWebView';
+import NativeVideoView from './NativeVideoView';
 
 const isNativeWebPlayer = (state) => {
     return state == 1;
+};
+
+const isNativePlayer = (player) => {
+    return player === Players.NATIVE_PLAYER
 };
 
 const resolveSelectedPlayer = (player, channel) => {
@@ -31,6 +36,10 @@ const VideoView = ({ channel, pending, player, selectPlayer }) => {
     useEffect(() => {
         selectPlayer(channel.epg_id);
     }, [ channel ]);
+
+    if (isNativePlayer(player)) {
+        return <NativeVideoView source={channel.url} />
+    }
 
     const source = isNativeWebPlayer(channel.use_origin) ?  channel.url : resolveSelectedPlayer(player, channel);
 

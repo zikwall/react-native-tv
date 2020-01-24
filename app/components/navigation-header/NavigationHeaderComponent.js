@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Header } from 'react-navigation';
 import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 import Back from "./Back";
+import Orientation from 'react-native-orientation';
 
 const NavigationHeaderComponent = ({ leftComponent, titleComponent, rightComponent }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const [ isVisibleHeader, setIsVisibleHeader ] = useState(true);
+
+    useEffect(() => {
+        Orientation.addOrientationListener(orientationHandleChange);
+
+        return () => {
+            Orientation.removeOrientationListener(orientationHandleChange);
+        };
+    }, []);
+
+    const orientationHandleChange = (orientation) => {
+        if (orientation === 'LANDSCAPE') {
+            setIsVisibleHeader(false);
+        } else {
+            setIsVisibleHeader(true);
+        }
+    };
+
+    if (!isVisibleHeader) {
+        return null;
+    }
 
     return (
         <View style={[styles.navBar, { backgroundColor: theme.primaryBackgroundColor }]}>

@@ -40,6 +40,7 @@
     "react-native-svg": "^9.13.6",
     "react-native-typography": "^1.4.1",
     "react-native-vector-icons": "^6.6.0",
+    "react-native-video": "^5.0.2",
     "react-native-webview": "^7.5.2",
     "react-navigation": "^3.13.0",
     "react-navigation-custom-bottom-tab-component": "^1.1.1",

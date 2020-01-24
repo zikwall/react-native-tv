@@ -45,3 +45,4 @@ export { default as PureVideoWebView } from './video-view/PureVideoWebView';
 export { default as ThemePicker } from './themepicker/Themepicker';
 export { default as FlatButton } from './ui/FlatButton';
 export { default as NavigationHeaderComponent } from './navigation-header/NavigationHeaderComponent';
+export { default as NativeVideoView } from './video-view/NativeVideoView';
