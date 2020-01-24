@@ -6,12 +6,10 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    View,
-    Dimensions
+    View
 } from 'react-native';
 
 import Video from 'react-native-video';
-import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
 
 export default class NativeVideoView extends Component {
 
@@ -26,7 +24,7 @@ export default class NativeVideoView extends Component {
         fullscreen: false
     };
 
-    video: Video;
+    video;
 
     onLoad = (data) => {
         this.setState({ duration: data.duration });
@@ -45,7 +43,7 @@ export default class NativeVideoView extends Component {
         this.setState({ paused: true })
     };
 
-    onAudioFocusChanged = (event: { hasAudioFocus: boolean }) => {
+    onAudioFocusChanged = (event) => {
         this.setState({ paused: !event.hasAudioFocus })
     };
 
@@ -115,7 +113,7 @@ export default class NativeVideoView extends Component {
                     onPress={() => this.setState({ paused: !this.state.paused })}
                 >
                     <Video
-                        ref={(ref: Video) => { this.video = ref }}
+                        ref={(ref) => { this.video = ref }}
                         /* For ExoPlayer */
                         //source={{ uri: 'http://www.youtube.com/api/manifest/dash/id/bf5bb2419360daf1/source/youtube?as=fmp4_audio_clear,fmp4_sd_hd_clear&sparams=ip,ipbits,expire,source,id,as&ip=0.0.0.0&ipbits=0&expire=19000000000&signature=51AF5F39AB0CEC3E5497CD9C900EBFEAECCCB5C7.8506521BFC350652163895D4C26DEE124209AA9E&key=ik0', type: 'mpd' }}
                         source={{ uri: this.props.source }}
