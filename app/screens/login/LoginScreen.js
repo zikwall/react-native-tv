@@ -4,7 +4,7 @@ import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
 
-import { NavigationHeaderLeft, NavigationHeaderTitle } from "../../components";
+import { NavigationHeaderComponent, NavigationHeaderLeft, NavigationHeaderTitle } from '../../components';
 import LoginScreenComponent from "./LoginScreenComponent";
 import { authenticate } from '../../redux/actions';
 import { Validator } from '../../utils';
@@ -18,10 +18,6 @@ const resetAction = StackActions.reset({
 
 const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
     const theme = useSelector(state => getAppTheme(state));
-
-    useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
-    }, [ theme ]);
 
     useEffect(() => {
         console.log('MOUNT LOGIN');
@@ -114,13 +110,10 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
 
 LoginScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
-        headerTitle: () => (
-            <NavigationHeaderTitle title={'Login'} />
-        ),
-        headerLeft: () => (
-            <NavigationHeaderLeft onHome={true}/>
-        ),
+        header: (props) => <NavigationHeaderComponent
+            titleComponent={<NavigationHeaderTitle title={'Login'} />}
+            leftComponent={ <NavigationHeaderLeft /> } {...props}
+        />
     };
 };
 

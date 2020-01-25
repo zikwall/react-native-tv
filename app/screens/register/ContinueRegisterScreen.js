@@ -5,20 +5,15 @@ import { connect, useSelector } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { NavigationHeaderLeft, NavigationHeaderTitle } from "../../components";
+import {NavigationHeaderComponent, NavigationHeaderLeft, NavigationHeaderTitle} from '../../components';
 import { registerFinished, setProfile } from '../../redux/actions';
 import { Validator, FormHelper } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_NAME } from '../../constants';
 import ContinueRegisterScreenComponent from './ContinueRegisterScreenComponent';
 import { getAppTheme } from '../../redux/reducers';
-import LoginScreenComponent from '../login/LoginScreenComponent';
 
 const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAuthenticated, token }) => {
     const theme = useSelector(state => getAppTheme(state));
-
-    useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
-    }, [ theme ]);
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -141,13 +136,10 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
 
 ContinueRegisterScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
-        headerTitle: () => (
-            <NavigationHeaderTitle title={'Login'} />
-        ),
-        headerLeft: () => (
-            <NavigationHeaderLeft />
-        ),
+        header: (props) => <NavigationHeaderComponent
+            titleComponent={<NavigationHeaderTitle title={'Login'} />}
+            leftComponent={ <NavigationHeaderLeft /> } {...props}
+        />
     };
 };
 

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { NavigationHeaderLeft, NavigationHeaderTitle } from "../../components";
+import { NavigationHeaderComponent, NavigationHeaderLeft, NavigationHeaderTitle } from '../../components';
 import { registration } from '../../redux/actions';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_USERNAME, ERROR_INVALID_PASSWORD } from '../../constants';
@@ -17,10 +17,6 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
     const [ email, setEmail ] = useState(null);
 
     const theme = useSelector(state => getAppTheme(state));
-
-    useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
-    }, [ theme ]);
 
     useEffect(() => {
         console.log('MOUNT REGISTER');
@@ -107,13 +103,10 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
 
 RegisterScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
-        headerTitle: () => (
-            <NavigationHeaderTitle title={'Login'} />
-        ),
-        headerLeft: () => (
-            <NavigationHeaderLeft />
-        ),
+        header: (props) => <NavigationHeaderComponent
+            titleComponent={<NavigationHeaderTitle title={'Login'} />}
+            leftComponent={ <NavigationHeaderLeft /> } {...props}
+        />
     };
 };
 

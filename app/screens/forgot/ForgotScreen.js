@@ -1,26 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { NavigationHeaderLeft, NavigationHeaderTitle } from "../../components";
+import { NavigationHeaderComponent, NavigationHeaderLeft, NavigationHeaderTitle } from '../../components';
 import { authenticate } from '../../redux/actions';
 import { apiFetch } from '../../services/api';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS } from '../../constants';
 import ForgotScreenComponent from "./ForgotScreenComponent";
 import { getAppTheme } from '../../redux/reducers';
-import RegisterScreenComponent from '../register/RegisterScreenComponent';
 
 const ForgotScreen = ({ navigation, auth, isAuthenticated }) => {
     const [ email, setEmail ] = useState(null);
     const [ message, setMessage ] = useState(null);
 
     const theme = useSelector(state => getAppTheme(state));
-
-    useEffect(() => {
-        navigation.setParams({ backgroundColor: theme.primaryBackgroundColor });
-    }, [ theme ]);
 
     const handleClickLoginText = () => {
         navigation.navigate('Login');
@@ -110,13 +105,10 @@ const ForgotScreen = ({ navigation, auth, isAuthenticated }) => {
 
 ForgotScreen.navigationOptions = ({ navigation }) => {
     return {
-        headerStyle: { backgroundColor: navigation.getParam('backgroundColor')},
-        headerTitle: () => (
-            <NavigationHeaderTitle title={'Forgot'} />
-        ),
-        headerLeft: () => (
-            <NavigationHeaderLeft />
-        ),
+        header: (props) => <NavigationHeaderComponent
+            titleComponent={<NavigationHeaderTitle title={'Login'} />}
+            leftComponent={ <NavigationHeaderLeft /> } {...props}
+        />
     };
 };
 
