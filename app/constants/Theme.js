@@ -19,6 +19,7 @@ const DefaultExtraScheme = {
     secondaryBackgroundColor: '#f0f1f4',
     extraColor: '#be2f79',
     extraBackgroundColor: '#802764',
+    linkColor: '#397aff'
 };
 
 const Theme = {
@@ -38,7 +39,8 @@ const Theme = {
         primaryColor: '#000',
         primaryBackgroundColor: '#fff',
         ...DefaultExtraScheme,
-        ...BlackImages
+        ...BlackImages,
+        ... {linkColor: '#fff'}
     },
     night: {
         info: {
@@ -67,6 +69,7 @@ const Theme = {
         ...DefaultExtraScheme,
         ...WhiteImages,
         ...{ secondaryBackgroundColor: '#dfe3ee'},
+        ...{ linkColor: '#397aff' }
     },
     cappuccino: {
         info: {
@@ -93,7 +96,8 @@ const Theme = {
         primaryColor: '#fff',
         primaryBackgroundColor: '#011f4b',
         ...DefaultExtraScheme,
-        ...WhiteImages
+        ...WhiteImages,
+        ...{ linkColor: '#397aff' }
     },
     yellow: {
         info: {
