@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar, View } from 'react-native';
-import {Provider, connect} from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
 import { PulseLoader } from './components';
