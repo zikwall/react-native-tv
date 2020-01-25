@@ -112,7 +112,7 @@ LoginScreen.navigationOptions = ({ navigation }) => {
     return {
         header: (props) => <NavigationHeaderComponent
             titleComponent={<NavigationHeaderTitle title={'Login'} />}
-            leftComponent={ <NavigationHeaderLeft /> } {...props}
+            leftComponent={ <NavigationHeaderLeft onHome /> } {...props}
         />
     };
 };
