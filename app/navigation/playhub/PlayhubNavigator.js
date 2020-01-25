@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
-import { Image } from "react-native";
+import React  from 'react';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from "react-navigation";
 import Icon from 'react-native-vector-icons/Feather';
-import {NavigationHeaderComponent, NavigationHeaderLeft, NavigationHeaderRight} from '../../components';
+import {
+    NavigationHeaderComponent,
+    NavigationHeaderLogo,
+    NavigationHeaderRight,
+} from '../../components';
 import {
     PlayHubScreen,
     PlayHubRecommendedScreen,
@@ -11,8 +14,6 @@ import {
     PlayHubCategoryScreen,
     PlayHubBestScreen
 } from '../../screens';
-import { useSelector } from 'react-redux';
-import { getAppTheme } from '../../redux/reducers';
 import TabBarComponent from '../../components/navigation-header/CustomTab';
 
 const StaticNavigation = createMaterialTopTabNavigator({
@@ -95,12 +96,6 @@ const StaticNavigation = createMaterialTopTabNavigator({
 });
 
 const PlayhubNavigator = ({ navigation }) => {
-    const theme = useSelector(state => getAppTheme(state));
-
-    useEffect(() => {
-        navigation.setParams({ logo: theme.logo });
-    }, [ theme ]);
-
     return (
         <StaticNavigation navigation={ navigation } />
     )
@@ -121,10 +116,7 @@ PlayhubNavigator.navigationOptions = ({ navigation }) => {
                     <NavigationHeaderRight />
                 }
                 leftComponent={
-                    <Image
-                        source = {navigation.getParam('logo')}
-                        style = {{ height: 32, width: 98, marginLeft: 10, }}
-                    />
+                    <NavigationHeaderLogo />
                 }
                 {...props}
             />

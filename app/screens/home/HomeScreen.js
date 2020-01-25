@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import {View, Text, Dimensions, Image} from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, Text, Dimensions} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { SectionGrid } from 'react-native-super-grid';
 
@@ -7,7 +7,8 @@ import {
     SearchBar,
     ChannelCard,
     NavigationHeaderRight,
-    NavigationHeaderComponent
+    NavigationHeaderComponent,
+    NavigationHeaderLogo,
 } from '../../components';
 import { getChannels, getAppTheme } from '../../redux/reducers';
 import { setChannel } from "../../redux/actions/channels";
@@ -21,10 +22,6 @@ const HomeScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const dispatch = useDispatch();
     const selectChannel = useCallback(channel => dispatch(setChannel(channel)), [ dispatch ]);
-
-    useEffect(() => {
-        navigation.setParams({ logo: theme.logo });
-    }, [ theme ]);
 
     const [ items, setItems ] = useState(channels);
     const [ cancelVisible, setCancelVisible ] = useState(false);
@@ -97,10 +94,7 @@ HomeScreen.navigationOptions = ({ navigation }) => {
                     <NavigationHeaderRight />
                 }
                 leftComponent={
-                    <Image
-                        source = {navigation.getParam('logo')}
-                        style = {{ height: 32, width: 98, marginLeft: 10, }}
-                    />
+                    <NavigationHeaderLogo />
                 }
                 {...props}
             />

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
     View,
     ScrollView,
@@ -6,26 +6,19 @@ import {
 } from 'react-native';
 
 import { withNavigation } from 'react-navigation';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 
 import {
     MenuItemLine,
-    Divider,
     NavigationHeaderRight,
-    NavigationHeaderComponent
+    NavigationHeaderComponent,
+    NavigationHeaderLogo,
 } from '../../components';
 
 import { UserHelper, Fake } from '../../utils';
 import MenuUserInfo from './MenuUserInfo';
-import { getAppTheme } from '../../redux/reducers';
 
 const MenuScreen = ({ navigation, user, isAuthenticated }) => {
-    const theme = useSelector(state => getAppTheme(state));
-
-    useEffect(() => {
-        navigation.setParams({ logo: theme.logo });
-    }, [ theme ]);
-
     const handleSettingsPress = () => {
         navigation.navigate('UserMenuScreen');
     };
@@ -80,10 +73,7 @@ MenuScreen.navigationOptions = ({ navigation }) => {
                     <NavigationHeaderRight />
                 }
                 leftComponent={
-                    <Image
-                        source = {navigation.getParam('logo')}
-                        style = {{ height: 32, width: 98, marginLeft: 10, }}
-                    />
+                    <NavigationHeaderLogo />
                 }
                 {...props}
             />

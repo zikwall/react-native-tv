@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
-import { NavigationHeaderComponent, NavigationHeaderRight } from '../../components';
+import { View, StyleSheet, Text } from 'react-native';
+import { NavigationHeaderComponent, NavigationHeaderLogo, NavigationHeaderRight } from '../../components';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 
 const LikedScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
-
-    useEffect(() => {
-        navigation.setParams({ logo: theme.logo });
-    }, [ theme ]);
+    const isAuthorized = useSelector(state => state.authentication.user);
 
     return (
         <View style={[styles.container, { backgroundColor: theme.primaryBackgroundColor }]}>
@@ -26,10 +23,7 @@ LikedScreen.navigationOptions = ({ navigation }) => {
                     <NavigationHeaderRight />
                 }
                 leftComponent={
-                    <Image
-                        source = {navigation.getParam('logo')}
-                        style = {{ height: 32, width: 98, marginLeft: 10, }}
-                    />
+                    <NavigationHeaderLogo />
                 }
                 {...props}
             />
