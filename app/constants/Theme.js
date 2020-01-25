@@ -30,7 +30,8 @@ const Theme = {
         primaryColor: '#fff',
         primaryBackgroundColor: '#000',
         ...DefaultExtraScheme,
-        ...WhiteImages
+        ...WhiteImages,
+        ... { linkColor: '#fff' }
     },
     light: {
         info: {
@@ -40,7 +41,6 @@ const Theme = {
         primaryBackgroundColor: '#fff',
         ...DefaultExtraScheme,
         ...BlackImages,
-        ... {linkColor: '#fff'}
     },
     night: {
         info: {

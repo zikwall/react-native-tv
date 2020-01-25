@@ -1,8 +1,10 @@
-import React  from 'react';
+import React, { useState }  from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from "react-navigation";
 import Icon from 'react-native-vector-icons/Feather';
 import {
+    IconWrap,
     NavigationHeaderComponent,
     NavigationHeaderLogo,
     NavigationHeaderRight,
@@ -15,6 +17,8 @@ import {
     PlayHubBestScreen
 } from '../../screens';
 import TabBarComponent from '../../components/navigation-header/CustomTab';
+import { useSelector } from 'react-redux';
+import {getAppTheme} from '../../redux/reducers';
 
 const StaticNavigation = createMaterialTopTabNavigator({
     PlayHubScreen: {
@@ -96,8 +100,35 @@ const StaticNavigation = createMaterialTopTabNavigator({
 });
 
 const PlayhubNavigator = ({ navigation }) => {
+    const theme = useSelector(state => getAppTheme(state));
+    const isAuthorized = useSelector(state => !!state.authentication.token);
+    const [ isVisibleNotify, setIsVisibleNotify ] = useState(true);
+
+    const handleCloseNotify = () => {
+        setIsVisibleNotify(false);
+    };
+
     return (
-        <StaticNavigation navigation={ navigation } />
+        <View style={{ flex: 1 }}>
+            {
+                (!isAuthorized && isVisibleNotify ) &&
+                <View style={{ backgroundColor: theme.primaryBackgroundColor, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start', }} >
+                        <IconWrap name={'info'} size={25} style={{ paddingLeft: 10 }} />
+                    </View>
+
+                    <Text style={{ color: theme.primaryColor, width: '80%', paddingHorizontal: 10 }}>
+                        У авторизированных пользователей больше возможностей!
+                    </Text>
+
+                    <TouchableOpacity onPress={handleCloseNotify} style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }} >
+                        <IconWrap name={'x-square'} size={25} style={{ paddingRight: 10 }} />
+                    </TouchableOpacity>
+                </View>
+            }
+
+            <StaticNavigation navigation={ navigation } />
+        </View>
     )
 };
 

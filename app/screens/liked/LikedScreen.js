@@ -14,7 +14,7 @@ const LikedScreen = ({ navigation }) => {
             <View style={[styles.container, { backgroundColor: theme.primaryBackgroundColor }]}>
                 <Text style={{ textAlign:"center", color: theme.primaryColor }}>Чтобы продолжить Вам нужно авторизироваться</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={[human.headline, { marginTop: 30, textAlign:"center", color: theme.linkColor }] }>Авторизация</Text>
+                    <Text style={[human.headline, { marginTop: 30, textAlign: "center", color: theme.linkColor }] }>Авторизация</Text>
                 </TouchableOpacity>
             </View>
         );
