@@ -54,7 +54,7 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
                 <MenuItemLine onPress={onMenuPress} to={'CopyrightScreen'} icon={'alert-circle'} name={'Copyright holders'} />
                 <MenuItemLine onPress={onMenuPress} to={'TermsScreen'} icon={'book'} name={'Terms of Use'} />
                 <MenuItemLine onPress={onMenuPress} to={'PrivacyScreen'} icon={'book-open'} name={'Privacy policy'} />
-                <MenuItemLine onPress={onMenuPress} to={''} icon={'at-sign'} name={'Contacts'} />
+                <MenuItemLine onPress={onMenuPress} to={'ContactsScreen'} icon={'at-sign'} name={'Contacts'} />
 
                 <MenuItemLine onPress={onMenuPress} to={'AboutScreen'} icon={'info'} name={'About the Project'} />
                 <MenuItemLine onPress={onMenuPress} to={'FaqScreen'} icon={'help-circle'} name={'FAQ'} />
