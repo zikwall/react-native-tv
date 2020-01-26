@@ -11,28 +11,16 @@ import { View } from "react-native";
 import { connect, useSelector } from 'react-redux';
 import Orientation from 'react-native-orientation';
 
-import { ProfileHomeScreen, FollowingScreen, FollowersScreen, ProfileChannelScreen } from "../../screens";
+import { FollowingScreen, FollowersScreen, ProfileChannelScreen } from "../../screens";
 import { NavigationHeaderLeft } from "../../components";
 import { UserHelper } from '../../utils';
 import { getAppTheme } from '../../redux/reducers';
 
 const ProfileTopNavStack = createMaterialTopTabNavigator({
-    ProfileHomeScreen: {
-        screen: ProfileHomeScreen,
-        navigationOptions:{
-            tabBarLabel: 'Activity',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <IconWrap
-                    reverse={focused}
-                    name={'activity'} size={20}
-                />
-            ),
-        }
-    },
     ProfileChannelScreen: {
         screen: ProfileChannelScreen,
         navigationOptions:{
-            tabBarLabel: 'Channel',
+            tabBarLabel: 'Студия',
             tabBarIcon: ({ tintColor, focused }) => (
                 <IconWrap
                     reverse={focused}
@@ -44,7 +32,7 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
     FollowersScreen: {
         screen: FollowersScreen,
         navigationOptions:{
-            tabBarLabel: 'Followers',
+            tabBarLabel: 'Подписчики',
             tabBarIcon: ({ tintColor, focused }) => (
                 <IconWrap
                     reverse={focused}
@@ -56,7 +44,7 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
     FollowingScreen: {
         screen: FollowingScreen,
         navigationOptions:{
-            tabBarLabel: 'Following',
+            tabBarLabel: 'Подписки',
             tabBarIcon: ({ tintColor, focused }) => (
                 <IconWrap
                     reverse={focused}
@@ -66,7 +54,7 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
         }
     },
 }, {
-    initialRouteName: 'ProfileHomeScreen',
+    initialRouteName: 'ProfileChannelScreen',
     tabBarComponent: BottomBarComponent,
     swipeEnabled: false,
     animationEnabled: true,

@@ -1,8 +1,6 @@
 import React from 'react';
 import {
-    View,
     ScrollView,
-    Image
 } from 'react-native';
 
 import { withNavigation } from 'react-navigation';
@@ -13,6 +11,7 @@ import {
     NavigationHeaderRight,
     NavigationHeaderComponent,
     NavigationHeaderLogo,
+    ThemedView,
 } from '../../components';
 
 import { UserHelper, Fake } from '../../utils';
@@ -32,7 +31,7 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
     };
 
     return (
-        <View>
+        <ThemedView>
             <ScrollView>
                 {
                     isAuthenticated && <MenuUserInfo
@@ -43,25 +42,18 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
                         onSearchPress={handleSearchPress}
                     />
                 }
+                <MenuItemLine onPress={onMenuPress} to={'CopyrightScreen'} icon={'alert-circle'} name={'Правообладателям'} />
+                <MenuItemLine onPress={onMenuPress} to={'TermsScreen'} icon={'book'} name={'Условия использования'} />
+                <MenuItemLine onPress={onMenuPress} to={'PrivacyScreen'} icon={'book-open'} name={'Политика конфиденциальности'} />
 
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'user-check'} name={'Friends'} onLongPress={() => alert('Looong!')} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'message-square'} name={'Messages'} unreadItems={20} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'users'} name={'Communities'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'star'} name={'Bookmarks'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} name={'Liked'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'shopping-bag'} name={'Purchases'} />
-
-                <MenuItemLine onPress={onMenuPress} to={'CopyrightScreen'} icon={'alert-circle'} name={'Copyright holders'} />
-                <MenuItemLine onPress={onMenuPress} to={'TermsScreen'} icon={'book'} name={'Terms of Use'} />
-                <MenuItemLine onPress={onMenuPress} to={'PrivacyScreen'} icon={'book-open'} name={'Privacy policy'} />
-                <MenuItemLine onPress={onMenuPress} to={'ContactsScreen'} icon={'at-sign'} name={'Contacts'} />
-
-                <MenuItemLine onPress={onMenuPress} to={'AboutScreen'} icon={'info'} name={'About the Project'} />
+                <MenuItemLine onPress={onMenuPress} to={'ContactsScreen'} icon={'at-sign'} name={'Контакты'} />
                 <MenuItemLine onPress={onMenuPress} to={'FaqScreen'} icon={'help-circle'} name={'FAQ'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'help-circle'} name={'Help'} />
-                <MenuItemLine onPress={onMenuPress} to={'SystemScreen'} icon={'layers'} name={'System & App State'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'help-circle'} name={'Помощь'} />
+
+                <MenuItemLine onPress={onMenuPress} to={'SystemScreen'} icon={'layers'} name={'Система & Сервис'} />
+                <MenuItemLine onPress={onMenuPress} to={'AboutScreen'} icon={'info'} name={'О Проекте'} />
             </ScrollView>
-        </View>
+        </ThemedView>
     );
 };
 

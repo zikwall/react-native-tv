@@ -24,7 +24,7 @@ const MenuUserInfo = ({ username, displayName, avatarUrlMedium, onSettingsPress 
                 onPress={onSettingsPress}
                 backgroundColor={theme.secondaryColor}
                 color={'#fff'}
-                text={'Go to Settings'}
+                text={'Перейти к настройкам'}
                 icon={'settings'}
             />
         </View>

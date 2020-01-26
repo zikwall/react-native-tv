@@ -48,20 +48,25 @@ const UserMenuScreen = ({ navigation }) => {
     return (
         <View style={ [styles.container, { backgroundColor: theme.primaryBackgroundColor }]}>
             <ScrollView>
-                <Heading icon={'target'} text={'Choose a color scheme that interests you'} color={theme.primaryColor} />
+                <Heading icon={'target'} text={'Выберите цветовую схему'} color={theme.primaryColor} />
                 <ThemePicker />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'user-check'} name={'Заявки в друзья'} onLongPress={() => alert('Looong!')} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'message-square'} name={'Сообщения'} unreadItems={20} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'users'} name={'Сообщества'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'star'} name={'Закладки'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'shopping-bag'} name={'Покупки'} />
                 {/*<Heading icon={'server'} text={'The main'} color={theme.primaryColor} />*/}
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'bell'} name={'Notifications'} />
-                <MenuItemLine onPress={onMenuPress} to={'AccountScreen'} icon={'user-check'} name={'Account'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'lock'} name={'Security'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'eye'} name={'Privacy settings'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'bell'} name={'Уведомления'} />
+                <MenuItemLine onPress={onMenuPress} to={'AccountScreen'} icon={'user-check'} name={'Аккаунт'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'lock'} name={'Безопасность'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'eye'} name={'Настройки приватности'} />
                 {/*<Heading icon={'database'} text={'Content'} color={theme.primaryColor} />*/}
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'film'} name={'Your Videos'} />
-                <MenuItemLine onPress={onMenuPress} to={'UserStatisticScreen'} icon={'bar-chart-2'} name={'Your Analytics'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'film'} name={'Творческая студия'} />
+                <MenuItemLine onPress={onMenuPress} to={'UserStatisticScreen'} icon={'bar-chart-2'} name={'Ваша аналитика'} />
                 {/*<Heading icon={'terminal'} text={'Developer Block'} color={theme.primaryColor} />*/}
-                <MenuItemLine onPress={onMenuPress} to={'DebugVideoScreen'} icon={'video'} name={'Debug Video'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'edit-3'} name={'Write to developer'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={'Andrey, do you want a PlayHub team?'} />
+                <MenuItemLine onPress={onMenuPress} to={'DebugVideoScreen'} icon={'video'} name={'Проверить контент'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'edit-3'} name={'Написать разработчику'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={'Andrey, хотите в команду PlayHub?'} />
             </ScrollView>
         </View>
     )
@@ -77,7 +82,7 @@ UserMenuScreen.navigationOptions = ({ navigation }) => {
             <NavigationHeaderLeft />
         )*/
         header: (props) => <NavigationHeaderComponent
-            titleComponent={<NavigationHeaderTitle title={'You Dashboard'} />}
+            titleComponent={<NavigationHeaderTitle title={'Панель управления'} />}
             leftComponent={ <NavigationHeaderLeft /> } {...props}
         />
     }
