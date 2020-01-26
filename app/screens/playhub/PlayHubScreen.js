@@ -1,25 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View, Text,
     ScrollView
 } from "react-native";
-
+import { connect } from 'react-redux';
 import { Fake } from '../../utils';
 import { CommonChannelListItem, FloatBottomButton, ContentModalize, FlatButton, OverlayLoader } from '../../components';
 import styles from './styles';
 import { useSelector } from 'react-redux';
-import { getAppTheme, getIsPremium } from '../../redux/reducers';
+import {
+    getAppTheme,
+    getContents,
+    getContentsError, getContentsPending,
+    getIsPremium,
+} from '../../redux/reducers';
 import { Modalize } from 'react-native-modalize';
 import { Content } from '../../constants';
+import { ContentService } from '../../services';
+import { bindActionCreators } from 'redux';
 
-const PlayHubScreen = ({ navigation }) => {
+const PlayHubScreen = ({ navigation, fetchContents }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const contents = useSelector(state => getContents(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
 
     const [ isVisibleFloatButton, setIsVisibleFloatButton ] = useState(true);
-    const [ content, setContent ] = useState(Fake.userPlaylist);
-    const [ isFetched, setIsFetched ] = useState(false);
+    const [ currentPage, setCurrentPage ] = useState(0);
+    const [ isEnd, setIsEnd ] = useState(false);
+    const [ isFetched, setIsFetched ] = useState(true);
+
+    useEffect(() => {
+        updateContent();
+
+        return () => {};
+    }, []);
+
+    const updateContent = () => {
+        if (isEnd) {
+            return true;
+        }
+
+        fetchContents(currentPage).then((res) => {
+            setIsFetched(false);
+            incCurrentPage();
+
+            if (res.end === true) {
+                setIsEnd(true);
+            }
+        });
+    };
+
+    const incCurrentPage = () => {
+        setCurrentPage(currentPage + 1);
+    };
 
     const defaultState = {
         image : {uri: ''},
@@ -101,12 +135,7 @@ const PlayHubScreen = ({ navigation }) => {
         }
 
         setIsFetched(true);
-
-        let timer = setTimeout(() => {
-            setContent([...content, ...Fake.userPlaylist]);
-            setIsFetched(false);
-            clearTimeout(timer);
-        }, 1000);
+        updateContent();
     };
 
     return (
@@ -115,22 +144,25 @@ const PlayHubScreen = ({ navigation }) => {
 
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{paddingTop: 10}}>
-                    {content.map((playlist, index) => (
+                    {contents.map((playlist, index) => (
                         <CommonChannelListItem
                             key={index}
-                            title={playlist.channel}
+                            title={playlist.name}
                             subtitle={playlist.category}
                             type={playlist.type}
-                            image={playlist.cover}
+                            image={{ uri: playlist.image }}
                             rating={playlist.rating}
                             visibility={playlist.visibility}
                             onPress={handleOnClickContent}
                         />
                     ))}
                 </View>
-                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <FlatButton onPress={handleLoadMorePress} text={'Загрузить еще'} backgroundColor={theme.secondaryBackgroundColor} style={{ borderRadius: 5, padding: 10 }}/>
-                </View>
+                {
+                    !isEnd &&
+                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                        <FlatButton onPress={handleLoadMorePress} text={'Загрузить еще'} backgroundColor={theme.secondaryBackgroundColor} style={{ borderRadius: 5, padding: 10 }}/>
+                    </View>
+                }
             </ScrollView>
             {
                 isVisibleFloatButton && <FloatBottomButton onPress={() => alert('Left')} onLongPress={() => setIsVisibleFloatButton(false) }/>
@@ -147,4 +179,13 @@ const PlayHubScreen = ({ navigation }) => {
     );
 };
 
-export default PlayHubScreen;
+const mapStateToProps = state => ({
+    error: getContentsError(state),
+    pending: getContentsPending(state),
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    fetchContents: ContentService.fetchContentsRedux,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayHubScreen);
