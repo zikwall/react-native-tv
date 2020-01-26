@@ -12,7 +12,8 @@ import {
     UserMenuScreen,
     AccountScreen,
     DebugVideoScreen,
-    ContactsScreen
+    ContactsScreen,
+    FriendshipRequestsScreen
 } from "../../screens";
 import {
     NavigationHeaderComponent,
@@ -44,6 +45,15 @@ const MenuNavigator = createStackNavigator({
     },
     UserMenuScreen: {
         screen: UserMenuScreen,
+    },
+    FriendshipRequestsScreen: {
+        screen: FriendshipRequestsScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Запросы в друзья'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
     },
     AccountScreen: {
         screen: AccountScreen,

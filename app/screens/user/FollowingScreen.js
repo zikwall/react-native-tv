@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { iOSColors, human } from 'react-native-typography';
 
-import { UserLineItem } from '../../components';
+import { UserLineItem, IconWrap } from '../../components';
 import { Fake } from '../../utils';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
@@ -23,9 +23,13 @@ const FollowingScreen = () => {
                         name={user.user}
                         username={user.userName}
                         image={user.avatar}
-                        moreOnPress={(id, name, username) => {
-                            alert(`Hi, my name is ${name}`)
-                        }}
+                        rightContent={
+                            <TouchableOpacity onPress={() => {
+                                alert(`Hi, my name is ${user.user}`)
+                            }} >
+                                <IconWrap name={'more-horizontal'} size={20} />
+                            </TouchableOpacity>
+                        }
                     />
                 })}
             </ScrollView>

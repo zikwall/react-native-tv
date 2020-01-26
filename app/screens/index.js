@@ -26,12 +26,13 @@ import LikedScreen from './liked/LikedScreen';
 import AccountScreen from './user/AccountScreen';
 import DebugVideoScreen from './menu/DebugVideoScreen';
 import ContactsScreen from './static/ContactsScreen';
+import FriendshipRequestsScreen from './user/FrinedshipRequestsScreen';
 
 export {
     // global
     HomeScreen, PlayHubScreen, WatchScreen, LikedScreen,
     // user
-    ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen, StatisticScreen, UserMenuScreen,
+    ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen, StatisticScreen, UserMenuScreen, FriendshipRequestsScreen,
     // auth
     LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen,
     // menu

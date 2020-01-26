@@ -50,7 +50,7 @@ const UserMenuScreen = ({ navigation }) => {
             <ScrollView>
                 <Heading icon={'target'} text={'Выберите цветовую схему'} color={theme.primaryColor} />
                 <ThemePicker />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'user-check'} name={'Заявки в друзья'} onLongPress={() => alert('Looong!')} />
+                <MenuItemLine onPress={onMenuPress} to={'FriendshipRequestsScreen'} icon={'user-check'} name={'Заявки в друзья'} onLongPress={() => alert('Looong!')} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'message-square'} name={'Сообщения'} unreadItems={20} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'users'} name={'Сообщества'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'star'} name={'Закладки'} />
