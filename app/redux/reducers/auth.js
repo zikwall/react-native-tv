@@ -3,6 +3,7 @@ import { AUTHENTICATE, DEAUTHENTICATE, SET_USER, UPDATE_USER } from '../types';
 const initialState = {
     token: null,
     user: {
+        is_premium: 0,
         profile: {
             name: null,
             public_email: null,
@@ -11,7 +12,7 @@ const initialState = {
     }
 };
 
-export default (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_USER:
             return {
@@ -31,3 +32,8 @@ export default (state = initialState, action) => {
             return state;
     }
 };
+
+export const getIsAuthorized = state => !!state.authReducer.token;
+export const getIsPremium = state => state.authReducer.user.is_premium === 1;
+
+export default authReducer;

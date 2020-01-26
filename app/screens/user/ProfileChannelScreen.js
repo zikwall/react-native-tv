@@ -23,6 +23,7 @@ import { Modalize } from 'react-native-modalize';
 const ProfileChannelScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
+    const isPremium = useSelector(state => state.authentication.user.is_premium);
 
     const defaultState = {
         image : {uri: ''},
@@ -52,7 +53,7 @@ const ProfileChannelScreen = ({ navigation }) => {
         let content = '';
         let button = '';
 
-        if (visibility === Content.VISIBILITY.PREMIUM) {
+        if (visibility === Content.VISIBILITY.PREMIUM && !isPremium) {
             content = 'К сожалению, по решению автора, данный контент доступен только для премиум пользователей.';
             button = 'Связаться с автором!';
         }
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
         backgroundColor: iOSColors.white
     },
     recentlyPlayedTitle: {
-        ...human.title2Object,
+        ...human.callout,
         ...systemWeights.bold
     },
     recentlyPlayed: {

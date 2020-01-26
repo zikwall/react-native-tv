@@ -15,6 +15,8 @@ import IconWrap from '../icon/IconWrap';
 
 const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating, visibility, type }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const isAuthorized = useSelector(state => !!state.authentication.token);
+    const isPremium = useSelector(state => state.authentication.user.is_premium);
 
     return (
         <Button
@@ -48,10 +50,10 @@ const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating
                     </View>
                 </View>
                 {
-                    visibility === Content.VISIBILITY.PREMIUM && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />
+                    visibility === Content.VISIBILITY.PREMIUM && !isPremium && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />
                 }
                 {
-                    visibility === Content.VISIBILITY.USERS && <IconWrap name={'key'} size={20} style={{ paddingRight: 10 }} />
+                    visibility === Content.VISIBILITY.USERS && !isAuthorized && <IconWrap name={'key'} size={20} style={{ paddingRight: 10 }} />
                 }
                 <Rating rating={rating} style={{ color: theme.primaryColor }} />
             </View>

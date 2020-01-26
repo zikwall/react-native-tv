@@ -33,6 +33,8 @@ export const TouchableRoundedImage = ({ style, width=80, height=80, ...props }) 
 
 const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight, size, rating, visibility, onPress }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const isAuthorized = useSelector(state => !!state.authentication.token);
+    const isPremium = useSelector(state => state.authentication.user.is_premium);
 
     return (
         <TouchableOpacity onPress={() => onPress(image, title, visibility)} style={[styles.channelCard, { height: size, width: size, borderColor: theme.primaryColor }]}>
@@ -40,10 +42,10 @@ const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight
                 <Avatar src={image} resizeMode="contain" width={imageWidth} height={imageHeight}/>
             </View>
             {
-                visibility === Content.VISIBILITY.PREMIUM && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />
+                (visibility === Content.VISIBILITY.PREMIUM && !isPremium) && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />
             }
             {
-                visibility === Content.VISIBILITY.USERS && <IconWrap name={'key'} size={20} style={{ paddingRight: 10 }} />
+                (visibility === Content.VISIBILITY.USERS && !isAuthorized) && <IconWrap name={'key'} size={20} style={{ paddingRight: 10 }} />
             }
             <Text numberOfLines={1} style={[ styles.title, { color: theme.primaryColor }]}>{title}</Text>
             <View style={{ flexDirection: 'row' }}>

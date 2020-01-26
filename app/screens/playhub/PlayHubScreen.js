@@ -8,13 +8,14 @@ import { Fake } from '../../utils';
 import { CommonChannelListItem, FloatBottomButton, ContentModalize } from '../../components';
 import styles from './styles';
 import { useSelector } from 'react-redux';
-import { getAppTheme } from '../../redux/reducers';
+import { getAppTheme, getIsPremium } from '../../redux/reducers';
 import { Modalize } from 'react-native-modalize';
 import { Content } from '../../constants';
 
 const PlayHubScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
+    const isPremium = useSelector(state => state.authentication.user.is_premium);
 
     const [ isVisibleFloatButton, setIsVisibleFloatButton ] = useState(true);
     const defaultState = {
@@ -76,7 +77,7 @@ const PlayHubScreen = ({ navigation }) => {
         let content = '';
         let button = '';
 
-        if (visibility === Content.VISIBILITY.PREMIUM) {
+        if (visibility === Content.VISIBILITY.PREMIUM && !isPremium) {
             content = 'К сожалению, по решению автора, данный контент доступен только для премиум пользователей.';
             button = 'Связаться с автором!';
         }
