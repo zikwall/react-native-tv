@@ -10,13 +10,15 @@ import Rating from '../rating';
 import { Avatar } from '../avatar';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
+import { Content } from './../../constants';
+import IconWrap from '../icon/IconWrap';
 
-const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating }) => {
+const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating, visibility }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
         <Button
-            onPress={onPress}
+            onPress={() => onPress(image, title, visibility)}
             style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}
         >
             <View style={ s.leftContainer }>
@@ -40,6 +42,9 @@ const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating
                         { subtitle }
                     </Text>
                 </View>
+                {
+                    visibility === Content.VISIBILITY.PREMIUM && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />
+                }
                 <Rating rating={rating} style={{ color: theme.primaryColor }} />
             </View>
         </Button>

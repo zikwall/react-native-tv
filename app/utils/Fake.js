@@ -297,54 +297,69 @@ export const contributingData = [
     { date: "2020-01-02" }
 ];
 
+const VISIBILITY = {
+    PUBLIC: 10,
+    PRIVATE: 20,
+    OWNER: 30,
+    PREMIUM: 40
+};
+
 export const userPlaylist = [
     {
         channel: "Кинопремьера",
         category: "Кино",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/Кинопремьера.png'},
         rating: '4,4',
+        visibility: VISIBILITY.PUBLIC
     },
     {
         channel: "Fox",
         category: "Развлекательное",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/FOX.png'},
         rating: '4,2',
+        visibility: VISIBILITY.PREMIUM
     },
     {
         channel: "Матч ТВ",
         category: "Спорт",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
         rating: '3,1',
+        visibility: VISIBILITY.PUBLIC
     },
     {
         channel: "Cartoon Network",
         category: "Развлекательное",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/Cartoon Network.png'},
         rating: '4,9',
+        visibility: VISIBILITY.PUBLIC
     },
     {
         channel: "Amedia premium HD",
         category: "Премиум",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/Amedia premium HD.png'},
         rating: '4,3',
+        visibility: VISIBILITY.PUBLIC
     },
     {
         channel: "National Geographic",
         category: "Позвновательное",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/National Geographic.png'},
         rating: '2',
+        visibility: VISIBILITY.PUBLIC
     },
     {
         channel: "Матч ТВ",
         category: "Спорт",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
         rating: '4,4',
+        visibility: VISIBILITY.PUBLIC
     },
     {
         channel: "Матч ТВ",
         category: "Спорт",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
         rating: '4,4',
+        visibility: VISIBILITY.PUBLIC
     }
 ];
 
