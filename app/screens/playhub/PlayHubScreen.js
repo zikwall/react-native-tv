@@ -5,18 +5,26 @@ import {
 } from "react-native";
 
 import { Fake } from '../../utils';
-import { CommonChannelListItem, FloatBottomButton } from '../../components';
+import { CommonChannelListItem, FloatBottomButton, ContentModalize } from '../../components';
 import styles from './styles';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import { Modalize } from 'react-native-modalize';
-import PremiumModal from './components/PremiumModal';
 import { Content } from '../../constants';
 
-const PlayHubScreen = () => {
+const PlayHubScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const isAuthorized = useSelector(state => !!state.authentication.token);
+
     const [ isVisibleFloatButton, setIsVisibleFloatButton ] = useState(true);
-    const [ modalContent, setModalContent ] = useState(null);
+    const defaultState = {
+        image : {uri: ''},
+        title: '',
+        visibility: 0,
+        content: '',
+        button: ''
+    };
+    const [ modalContent, setModalContent ] = useState(defaultState);
 
     const modal = React.createRef();
 
@@ -51,19 +59,35 @@ const PlayHubScreen = () => {
         }
     };
 
-    const handleOpenPremium = (image, title) => {
-        setModalContent({image, title});
+    const handleOpenPremium = (image, title, visibility, content, button) => {
+        setModalContent({image, title, visibility, content, button});
         openModal();
     };
 
-    const handleClosePremium = () => {
-        setModalContent(null);
+    const handleClosePremium = (visibility) => {
         closeModal();
+
+        if (visibility === Content.VISIBILITY.USERS) {
+            navigation.navigate('Login');
+        }
     };
 
     const handleOnClickContent = (image, title, visibility) => {
+        let content = '';
+        let button = '';
+
         if (visibility === Content.VISIBILITY.PREMIUM) {
-            handleOpenPremium(image, title);
+            content = 'К сожалению, по решению автора, данный контент доступен только для премиум пользователей.';
+            button = 'Связаться с автором!';
+        }
+
+        if (visibility === Content.VISIBILITY.USERS && !isAuthorized) {
+            content = 'Для просомотра требуется авторизация.';
+            button = 'Авторизироваться!';
+        }
+
+        if (content && button) {
+            handleOpenPremium(image, title, visibility, content, button);
         }
     };
 
@@ -74,9 +98,9 @@ const PlayHubScreen = () => {
                     {Fake.userPlaylist.map((playlist, index) => (
                         <CommonChannelListItem
                             key={index}
-                            number={index + 1}
                             title={playlist.channel}
                             subtitle={playlist.category}
+                            type={playlist.type}
                             image={playlist.cover}
                             rating={playlist.rating}
                             visibility={playlist.visibility}
@@ -86,9 +110,9 @@ const PlayHubScreen = () => {
                     {Fake.userPlaylist.map((playlist, index) => (
                         <CommonChannelListItem
                             key={index}
-                            number={index + 1}
                             title={playlist.channel}
                             subtitle={playlist.category}
+                            type={playlist.type}
                             image={playlist.cover}
                             rating={playlist.rating}
                             visibility={playlist.visibility}
@@ -98,9 +122,9 @@ const PlayHubScreen = () => {
                     {Fake.userPlaylist.map((playlist, index) => (
                         <CommonChannelListItem
                             key={index}
-                            number={index + 1}
                             title={playlist.channel}
                             subtitle={playlist.category}
+                            type={playlist.type}
                             image={playlist.cover}
                             rating={playlist.rating}
                             visibility={playlist.visibility}
@@ -119,7 +143,7 @@ const PlayHubScreen = () => {
                     showsVerticalScrollIndicator: false
                 }}
             >
-                <PremiumModal {...modalContent} onCloseModal={handleClosePremium}/>
+                <ContentModalize {...modalContent} onCloseModal={handleClosePremium}/>
             </Modalize>
         </View>
     );

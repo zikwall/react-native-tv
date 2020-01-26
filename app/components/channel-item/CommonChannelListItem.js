@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     View,
-    Text,
+    Text, TouchableOpacity,
 } from 'react-native';
 
 import Button from '../button/index.android';
@@ -13,7 +13,7 @@ import { getAppTheme } from '../../redux/reducers';
 import { Content } from './../../constants';
 import IconWrap from '../icon/IconWrap';
 
-const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating, visibility }) => {
+const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating, visibility, type }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
@@ -35,20 +35,32 @@ const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating
                         style={[s.title, { color: theme.primaryColor }]}>
                         { title }
                     </Text>
-                    <Text
-                        numberOfLines={ 1 }
-                        ellipsizeMode="tail"
-                        style={[s.subtitle, { color: theme.secondaryColor }]}>
-                        { subtitle }
-                    </Text>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text numberOfLines={ 1 } style={[s.subtitle, { color: theme.secondaryColor }]}>
+                            { type }
+                        </Text>
+                        <Text numberOfLines={ 1 } style={[s.subtitle, { color: theme.secondaryColor }]}>
+                             /
+                        </Text>
+                        <Text numberOfLines={ 1 } style={[s.subtitle, { color: theme.secondaryColor }]}>
+                            { subtitle }
+                        </Text>
+                    </View>
                 </View>
                 {
                     visibility === Content.VISIBILITY.PREMIUM && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />
+                }
+                {
+                    visibility === Content.VISIBILITY.USERS && <IconWrap name={'key'} size={20} style={{ paddingRight: 10 }} />
                 }
                 <Rating rating={rating} style={{ color: theme.primaryColor }} />
             </View>
         </Button>
     )
+};
+
+CommonChannelListItem.defaultProps = {
+    onPress: () => {}
 };
 
 export default CommonChannelListItem;

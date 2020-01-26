@@ -15,6 +15,8 @@ import {
 import { Avatar } from '../avatar';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
+import {Content} from '../../constants';
+import IconWrap from '../icon/IconWrap';
 
 const { height, width } = Dimensions.get('window');
 
@@ -29,14 +31,20 @@ export const TouchableRoundedImage = ({ style, width=80, height=80, ...props }) 
     </TouchableOpacity>
 );
 
-const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight, size, rating }) => {
+const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight, size, rating, visibility, onPress }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
-        <TouchableOpacity style={[styles.channelCard, { height: size, width: size, borderColor: theme.primaryColor }]}>
+        <TouchableOpacity onPress={() => onPress(image, title, visibility)} style={[styles.channelCard, { height: size, width: size, borderColor: theme.primaryColor }]}>
             <View style={{ flex: 1, alignItems: 'center' }}>
                 <Avatar src={image} resizeMode="contain" width={imageWidth} height={imageHeight}/>
             </View>
+            {
+                visibility === Content.VISIBILITY.PREMIUM && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />
+            }
+            {
+                visibility === Content.VISIBILITY.USERS && <IconWrap name={'key'} size={20} style={{ paddingRight: 10 }} />
+            }
             <Text numberOfLines={1} style={[ styles.title, { color: theme.primaryColor }]}>{title}</Text>
             <View style={{ flexDirection: 'row' }}>
                 <Text style={[styles.subtitle, { color: theme.secondaryColor }]}>
@@ -52,7 +60,10 @@ export default CommonChannelCardItem;
 CommonChannelCardItem.defaultProps = {
     imageWidth: 70,
     imageHeight: 70,
-    size: height * 0.1
+    size: height * 0.1,
+    onPress: () => {},
+    button: 'Кнопочка',
+    content: 'Какой-то текст'
 };
 
 const styles = StyleSheet.create({

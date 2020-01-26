@@ -48,3 +48,4 @@ export { default as NavigationHeaderComponent } from './navigation-header/Naviga
 export { default as NativeVideoView } from './video-view/NativeVideoView';
 export { default as NavigationHeaderLogo } from './navigation-header/NavigationHeaderLogo';
 export { default as FloatBottomButton } from './ui/FloatBottomButton';
+export { default as ContentModalize } from './modalize/ContentModalize';

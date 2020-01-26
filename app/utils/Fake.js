@@ -1,4 +1,5 @@
 import faker from 'faker';
+import { Content } from './../constants';
 
 export const onComingSoonFeaturePress = () => {
     alert('Coming Soon');
@@ -297,69 +298,114 @@ export const contributingData = [
     { date: "2020-01-02" }
 ];
 
-const VISIBILITY = {
-    PUBLIC: 10,
-    PRIVATE: 20,
-    OWNER: 30,
-    PREMIUM: 40
-};
-
 export const userPlaylist = [
     {
         channel: "Кинопремьера",
         category: "Кино",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/Кинопремьера.png'},
         rating: '4,4',
-        visibility: VISIBILITY.PUBLIC
+        visibility: Content.VISIBILITY.USERS,
+        pinned: Content.PINNED.NO,
+        type: 'Телеканал'
+    },
+    {
+        channel: "Побег из шоушенка (1994)",
+        category: "Кино",
+        cover: {uri: 'https://upload.wikimedia.org/wikipedia/ru/thumb/d/de/Movie_poster_the_shawshank_redemption.jpg/240px-Movie_poster_the_shawshank_redemption.jpg'},
+        rating: '5,5',
+        visibility: Content.VISIBILITY.PUBLIC,
+        pinned: Content.PINNED.NO,
+        type: 'Фильм'
     },
     {
         channel: "Fox",
         category: "Развлекательное",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/FOX.png'},
         rating: '4,2',
-        visibility: VISIBILITY.PREMIUM
+        visibility: Content.VISIBILITY.PREMIUM,
+        pinned: Content.PINNED.YES,
+        type: 'Телеканал'
     },
     {
         channel: "Матч ТВ",
         category: "Спорт",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
         rating: '3,1',
-        visibility: VISIBILITY.PUBLIC
+        visibility: Content.VISIBILITY.PUBLIC,
+        pinned: Content.PINNED.NO,
+        type: 'Телеканал'
     },
     {
         channel: "Cartoon Network",
         category: "Развлекательное",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/Cartoon Network.png'},
         rating: '4,9',
-        visibility: VISIBILITY.PUBLIC
+        visibility: Content.VISIBILITY.PUBLIC,
+        pinned: Content.PINNED.YES,
+        type: 'Телеканал'
     },
     {
         channel: "Amedia premium HD",
         category: "Премиум",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/Amedia premium HD.png'},
         rating: '4,3',
-        visibility: VISIBILITY.PUBLIC
+        visibility: Content.VISIBILITY.PREMIUM,
+        pinned: Content.PINNED.YES,
+        type: 'Телеканал'
     },
     {
         channel: "National Geographic",
         category: "Позвновательное",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/National Geographic.png'},
         rating: '2',
-        visibility: VISIBILITY.PUBLIC
+        visibility: Content.VISIBILITY.PUBLIC,
+        pinned: Content.PINNED.YES,
+        type: 'Телеканал'
     },
     {
         channel: "Матч ТВ",
         category: "Спорт",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
         rating: '4,4',
-        visibility: VISIBILITY.PUBLIC
+        visibility: Content.VISIBILITY.PUBLIC,
+        pinned: Content.PINNED.YES,
+        type: 'Телеканал'
     },
     {
         channel: "Матч ТВ",
         category: "Спорт",
         cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
         rating: '4,4',
-        visibility: VISIBILITY.PUBLIC
+        visibility: Content.VISIBILITY.PUBLIC,
+        pinned: Content.PINNED.NO,
+        type: 'Телеканал'
+    },
+    {
+        channel: "Матч ТВ",
+        category: "Спорт",
+        cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
+        rating: '4,4',
+        visibility: Content.VISIBILITY.PUBLIC,
+        pinned: Content.PINNED.NO,
+        type: 'Телеканал'
+    },
+    {
+        channel: "Матч ТВ",
+        category: "Спорт",
+        cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
+        rating: '4,4',
+        visibility: Content.VISIBILITY.PUBLIC,
+        pinned: Content.PINNED.NO,
+        type: 'Телеканал'
+    },
+    {
+        channel: "Матч ТВ",
+        category: "Спорт",
+        cover: {uri: 'http://tv.zikwall.ru/images/logo/%D0%9C%D0%B0%D1%82%D1%87%20%D0%A2%D0%92.png'},
+        rating: '4,4',
+        visibility: Content.VISIBILITY.PUBLIC,
+        pinned: Content.PINNED.NO,
+        type: 'Телеканал'
     }
 ];
 
