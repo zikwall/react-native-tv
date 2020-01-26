@@ -105,7 +105,7 @@ const FriendshipRequestsScreen = () => {
                             image={user.avatar}
                             rightContent={
                                 <TouchableOpacity onPress={() => {console.log(`closed request ${user.user}`)}}>
-                                    <IconWrap name={'x'} size={25} />
+                                    <IconWrap name={'x-square'} size={25} />
                                 </TouchableOpacity>
                             }
                         />
