@@ -13,14 +13,14 @@ import { getAppTheme } from '../../redux/reducers';
 import { Content } from './../../constants';
 import IconWrap from '../icon/IconWrap';
 
-const CommonChannelListItem = ({ image, title, subtitle, onPress, number, rating, visibility, type }) => {
+const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, number, rating, visibility, type }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
 
     return (
         <Button
-            onPress={() => onPress(image, title, visibility)}
+            onPress={() => onPress(playlist, image, title, visibility)}
             style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}
         >
             <View style={ s.leftContainer }>

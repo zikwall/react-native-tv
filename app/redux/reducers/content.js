@@ -1,5 +1,5 @@
 import {
-    FETCH_CONTENT_ERROR, FETCH_CONTENT_PENDING, FETCH_CONTENT_SUCCESS, ACTION_CONTENT_SET
+    FETCH_CONTENT_ERROR, FETCH_CONTENT_PENDING, FETCH_CONTENT_SUCCESS, ACTION_CONTENT_SET, ACTION_CONTENT_SET_CURRENT,
 } from '../types';
 
 const initialState = {
@@ -7,7 +7,8 @@ const initialState = {
     count_pages: 0,
     end: false,
     contents: [],
-    error: null
+    error: null,
+    current: 0
 };
 
 const contentFetchReducer = (state = initialState, action) => {
@@ -69,6 +70,12 @@ export const contentActionReducer = (state = actionInitialState, action) => {
                 ...state,
                 content: action.content
             };
+        case ACTION_CONTENT_SET_CURRENT:
+
+            return {
+                ...state,
+                current: action.current
+            };
         default:
             return state;
     }
@@ -80,3 +87,4 @@ export const getContents = state => state.contentFetchReducer.contents;
 export const getContentsPending = state => state.contentFetchReducer.pending;
 export const getContentsError = state => state.contentFetchReducer.error;
 export const getActiveContent = state => state.contentActionReducer.content;
+export const getCurrentPage = state => state.contentActionReducer.current;

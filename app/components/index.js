@@ -50,3 +50,4 @@ export { default as NavigationHeaderLogo } from './navigation-header/NavigationH
 export { default as FloatBottomButton } from './ui/FloatBottomButton';
 export { default as ContentModalize } from './modalize/ContentModalize';
 export { default as OverlayLoader } from './spinner/Overlay';
+export { default as VideoViewContent } from './video-view/VideoViewContent';

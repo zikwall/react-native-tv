@@ -4,7 +4,7 @@ import channelsFetchReducer, {
 } from "./channels";
 
 import contentFetchReducer , {
-    contentActionReducer, getActiveContent, getContentsError, getContentsPending, getContents
+    contentActionReducer, getActiveContent, getContentsError, getContentsPending, getContents, getCurrentPage
 } from "./content";
 
 import authentication, { getIsAuthorized, getIsPremium } from './auth';
@@ -17,14 +17,15 @@ const rootReducer = combineReducers({
     authentication,
     playerActionReducer,
     themeActionReducer,
-    contentFetchReducer
+    contentFetchReducer,
+    contentActionReducer
 });
 
 export default rootReducer;
 
 export {
     getChannelsPending, getChannelsError, getChannels, getSelectChannel,
-    contentActionReducer, getActiveContent, getContentsError, getContentsPending, getContents,
+    contentActionReducer, getActiveContent, getContentsError, getContentsPending, getContents, getCurrentPage,
     authentication, getIsAuthorized, getIsPremium,
     getSelectPlayer,
     getAppTheme

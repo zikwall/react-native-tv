@@ -3,6 +3,7 @@ import {
     fetchContentsSuccess,
     fetchContentsPending,
     fetchContentssError,
+    setCurrentPage,
 } from '../../redux/actions';
 
 export const fetchContentsRedux = (offset = 0) => {
@@ -16,6 +17,7 @@ export const fetchContentsRedux = (offset = 0) => {
                 }
 
                 dispatch(fetchContentsSuccess(res.response.contents, res.response.count_pages, res.response.end));
+                dispatch(setCurrentPage(offset + 1));
 
                 return {
                     end: res.response.end,

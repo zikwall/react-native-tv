@@ -11,27 +11,33 @@ import { useSelector } from 'react-redux';
 import {
     getAppTheme,
     getContents,
-    getContentsError, getContentsPending,
+    getContentsError,
+    getContentsPending,
+    getCurrentPage,
     getIsPremium,
 } from '../../redux/reducers';
 import { Modalize } from 'react-native-modalize';
 import { Content } from '../../constants';
 import { ContentService } from '../../services';
 import { bindActionCreators } from 'redux';
+import { setContent } from '../../redux/actions';
 
-const PlayHubScreen = ({ navigation, fetchContents }) => {
+const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
     const theme = useSelector(state => getAppTheme(state));
     const contents = useSelector(state => getContents(state));
+    const currentPage = useSelector(state => getCurrentPage(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
 
     const [ isVisibleFloatButton, setIsVisibleFloatButton ] = useState(true);
-    const [ currentPage, setCurrentPage ] = useState(0);
     const [ isEnd, setIsEnd ] = useState(false);
-    const [ isFetched, setIsFetched ] = useState(true);
+    const [ isFetched, setIsFetched ] = useState(false);
 
     useEffect(() => {
-        updateContent();
+        if (!currentPage) {
+            setIsFetched(true);
+            updateContent();
+        }
 
         return () => {};
     }, []);
@@ -43,16 +49,11 @@ const PlayHubScreen = ({ navigation, fetchContents }) => {
 
         fetchContents(currentPage).then((res) => {
             setIsFetched(false);
-            incCurrentPage();
 
             if (res.end === true) {
                 setIsEnd(true);
             }
         });
-    };
-
-    const incCurrentPage = () => {
-        setCurrentPage(currentPage + 1);
     };
 
     const defaultState = {
@@ -110,9 +111,9 @@ const PlayHubScreen = ({ navigation, fetchContents }) => {
         }
     };
 
-    const handleOnClickContent = (image, title, visibility) => {
-        let content = '';
-        let button = '';
+    const handleOnClickContent = (playlist, image, title, visibility) => {
+        let content = null;
+        let button = null;
 
         if (visibility === Content.VISIBILITY.PREMIUM && !isPremium) {
             content = 'К сожалению, по решению автора, данный контент доступен только для премиум пользователей.';
@@ -124,9 +125,14 @@ const PlayHubScreen = ({ navigation, fetchContents }) => {
             button = 'Авторизироваться!';
         }
 
-        if (content && button) {
+        if (!!content && !!button) {
+            console.log('AAAAA');
             handleOpenPremium(image, title, visibility, content, button);
+            return true;
         }
+
+        selectContent(playlist);
+        navigation.navigate('Watch');
     };
 
     const handleLoadMorePress = () => {
@@ -153,6 +159,7 @@ const PlayHubScreen = ({ navigation, fetchContents }) => {
                             image={{ uri: playlist.image }}
                             rating={playlist.rating}
                             visibility={playlist.visibility}
+                            playlist={playlist}
                             onPress={handleOnClickContent}
                         />
                     ))}
@@ -186,6 +193,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     fetchContents: ContentService.fetchContentsRedux,
+    selectContent: setContent
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayHubScreen);

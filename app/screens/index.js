@@ -27,10 +27,11 @@ import AccountScreen from './user/AccountScreen';
 import DebugVideoScreen from './menu/DebugVideoScreen';
 import ContactsScreen from './static/ContactsScreen';
 import FriendshipRequestsScreen from './user/FrinedshipRequestsScreen';
+import ContentWatch from './watch/ContentWatch';
 
 export {
     // global
-    HomeScreen, PlayHubScreen, WatchScreen, LikedScreen,
+    HomeScreen, PlayHubScreen, WatchScreen, LikedScreen, ContentWatch,
     // user
     ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen, StatisticScreen, UserMenuScreen, FriendshipRequestsScreen,
     // auth

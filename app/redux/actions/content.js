@@ -6,12 +6,13 @@ export const fetchContentsPending = () => {
     }
 };
 
-export const fetchContentsSuccess = (contents, count_pages, end) => {
+export const fetchContentsSuccess = (contents, count_pages, end, current) => {
     return {
         type: types.FETCH_CONTENT_SUCCESS,
         contents: contents,
         count_pages: count_pages,
-        end: end
+        end: end,
+        current: current
     }
 };
 
@@ -27,5 +28,12 @@ export const setContent = (content) => {
         type: types.ACTION_CONTENT_SET,
         content: content,
         pending: false
+    }
+};
+
+export const setCurrentPage = (current) => {
+    return {
+        type: types.ACTION_CONTENT_SET_CURRENT,
+        current: current,
     }
 };

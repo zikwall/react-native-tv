@@ -3,12 +3,14 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import MainTabNavigator from './MainTabNavigator';
 import ProfileNavigator, { ProfileStackNavigator } from "./profile/ProfileNavigator";
 import AuthNavigator from "./auth/AuthNavigator";
+import GlobalWatchNavigator from './watch/GlobalWatchNavigator';
 
 const MainStack = createStackNavigator({
     // You could add another route here for authentication.
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
     Main: MainTabNavigator,
     Auth: AuthNavigator,
+    Watch: GlobalWatchNavigator,
     Profile: createStackNavigator({ProfileNavigator}),
 }, {
     headerMode: 'none',
