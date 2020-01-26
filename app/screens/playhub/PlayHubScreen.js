@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import {
-    View,
+    View, Text,
     ScrollView
 } from "react-native";
 
 import { Fake } from '../../utils';
-import { CommonChannelListItem, FloatBottomButton, ContentModalize } from '../../components';
+import { CommonChannelListItem, FloatBottomButton, ContentModalize, FlatButton, OverlayLoader } from '../../components';
 import styles from './styles';
 import { useSelector } from 'react-redux';
 import { getAppTheme, getIsPremium } from '../../redux/reducers';
@@ -18,6 +18,9 @@ const PlayHubScreen = ({ navigation }) => {
     const isPremium = useSelector(state => state.authentication.user.is_premium);
 
     const [ isVisibleFloatButton, setIsVisibleFloatButton ] = useState(true);
+    const [ content, setContent ] = useState(Fake.userPlaylist);
+    const [ isFetched, setIsFetched ] = useState(false);
+
     const defaultState = {
         image : {uri: ''},
         title: '',
@@ -92,35 +95,27 @@ const PlayHubScreen = ({ navigation }) => {
         }
     };
 
+    const handleLoadMorePress = () => {
+        if (isFetched) {
+            return true;
+        }
+
+        setIsFetched(true);
+
+        let timer = setTimeout(() => {
+            setContent([...content, ...Fake.userPlaylist]);
+            setIsFetched(false);
+            clearTimeout(timer);
+        }, 1000);
+    };
+
     return (
         <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroundColor }]}>
+            <OverlayLoader visible={isFetched} />
+
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{paddingTop: 10}}>
-                    {Fake.userPlaylist.map((playlist, index) => (
-                        <CommonChannelListItem
-                            key={index}
-                            title={playlist.channel}
-                            subtitle={playlist.category}
-                            type={playlist.type}
-                            image={playlist.cover}
-                            rating={playlist.rating}
-                            visibility={playlist.visibility}
-                            onPress={handleOnClickContent}
-                        />
-                    ))}
-                    {Fake.userPlaylist.map((playlist, index) => (
-                        <CommonChannelListItem
-                            key={index}
-                            title={playlist.channel}
-                            subtitle={playlist.category}
-                            type={playlist.type}
-                            image={playlist.cover}
-                            rating={playlist.rating}
-                            visibility={playlist.visibility}
-                            onPress={handleOnClickContent}
-                        />
-                    ))}
-                    {Fake.userPlaylist.map((playlist, index) => (
+                    {content.map((playlist, index) => (
                         <CommonChannelListItem
                             key={index}
                             title={playlist.channel}
@@ -133,11 +128,13 @@ const PlayHubScreen = ({ navigation }) => {
                         />
                     ))}
                 </View>
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <FlatButton onPress={handleLoadMorePress} text={'Загрузить еще'} backgroundColor={theme.secondaryBackgroundColor} style={{ borderRadius: 5, padding: 10 }}/>
+                </View>
             </ScrollView>
             {
                 isVisibleFloatButton && <FloatBottomButton onPress={() => alert('Left')} onLongPress={() => setIsVisibleFloatButton(false) }/>
             }
-
             <Modalize
                 ref={modal}
                 adjustToContentHeight={{
