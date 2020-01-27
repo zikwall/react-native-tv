@@ -58,7 +58,8 @@ const UserMenuScreen = ({ navigation }) => {
                 {/*<Heading icon={'server'} text={'The main'} color={theme.primaryColor} />*/}
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'bell'} name={'Уведомления'} />
                 <MenuItemLine onPress={onMenuPress} to={'AccountScreen'} icon={'user-check'} name={'Аккаунт'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'lock'} name={'Безопасность'} />
+                <MenuItemLine onPress={onMenuPress} to={'SecurityScreen'} icon={'lock'} name={'Безопасность'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'shield'} name={'Родительский контроль'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'eye'} name={'Настройки приватности'} />
                 {/*<Heading icon={'database'} text={'Content'} color={theme.primaryColor} />*/}
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'film'} name={'Творческая студия'} />

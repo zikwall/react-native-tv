@@ -15,7 +15,8 @@ import {
     ContactsScreen,
     FriendshipRequestsScreen,
     PremiumScreen,
-    WriteDeveloperScreen
+    WriteDeveloperScreen,
+    SecurityScreen
 } from "../../screens";
 import {
     NavigationHeaderComponent,
@@ -62,6 +63,15 @@ const MenuNavigator = createStackNavigator({
         navigationOptions:{
             header: (props) => <NavigationHeaderComponent
                 titleComponent={<NavigationHeaderTitle title={'Change Account'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
+    },
+    SecurityScreen: {
+        screen: SecurityScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Security'} />}
                 leftComponent={ <NavigationHeaderLeft /> } {...props}
             />
         }

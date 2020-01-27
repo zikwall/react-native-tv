@@ -30,6 +30,7 @@ import FriendshipRequestsScreen from './user/FrinedshipRequestsScreen';
 import ContentWatch from './watch/ContentWatch';
 import PremiumScreen from "./user/PremiumScreen";
 import WriteDeveloperScreen from "./user/WriteDeveloperScreen";
+import SecurityScreen from "./user/SecurityScreen";
 
 export {
     // global
@@ -41,7 +42,7 @@ export {
     LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen,
     // menu
     MenuScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen, SystemScreen, AccountScreen,
-    DebugVideoScreen, ContactsScreen, PremiumScreen, WriteDeveloperScreen,
+    DebugVideoScreen, ContactsScreen, PremiumScreen, WriteDeveloperScreen, SecurityScreen,
     // playhub
     PlayHubBestScreen, PlayHubCategoryScreen, PlayHubForFamilyScreen, PlayHubRecommendedScreen
 }
