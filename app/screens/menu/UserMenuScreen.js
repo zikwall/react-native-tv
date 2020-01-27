@@ -65,7 +65,8 @@ const UserMenuScreen = ({ navigation }) => {
                 <MenuItemLine onPress={onMenuPress} to={'UserStatisticScreen'} icon={'bar-chart-2'} name={'Ваша аналитика'} />
                 {/*<Heading icon={'terminal'} text={'Developer Block'} color={theme.primaryColor} />*/}
                 <MenuItemLine onPress={onMenuPress} to={'DebugVideoScreen'} icon={'video'} name={'Проверить контент'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'edit-3'} name={'Написать разработчику'} />
+                <MenuItemLine onPress={onMenuPress} to={'WriteDeveloperScreen'} icon={'edit-3'} name={'Написать разработчику'} />
+                <MenuItemLine onPress={onMenuPress} to={'PremiumScreen'} icon={'gift'} iconColor={'#DC143C'} name={'Активировать премиум'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={'Andrey, хотите в команду PlayHub?'} />
             </ScrollView>
         </View>

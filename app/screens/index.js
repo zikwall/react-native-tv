@@ -28,16 +28,20 @@ import DebugVideoScreen from './menu/DebugVideoScreen';
 import ContactsScreen from './static/ContactsScreen';
 import FriendshipRequestsScreen from './user/FrinedshipRequestsScreen';
 import ContentWatch from './watch/ContentWatch';
+import PremiumScreen from "./user/PremiumScreen";
+import WriteDeveloperScreen from "./user/WriteDeveloperScreen";
 
 export {
     // global
     HomeScreen, PlayHubScreen, WatchScreen, LikedScreen, ContentWatch,
     // user
-    ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen, StatisticScreen, UserMenuScreen, FriendshipRequestsScreen,
+    ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen, StatisticScreen, UserMenuScreen,
+    FriendshipRequestsScreen,
     // auth
     LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen,
     // menu
-    MenuScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen, SystemScreen, AccountScreen, DebugVideoScreen, ContactsScreen,
+    MenuScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen, SystemScreen, AccountScreen,
+    DebugVideoScreen, ContactsScreen, PremiumScreen, WriteDeveloperScreen,
     // playhub
     PlayHubBestScreen, PlayHubCategoryScreen, PlayHubForFamilyScreen, PlayHubRecommendedScreen
 }
