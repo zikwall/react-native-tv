@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar, View } from 'react-native';
+import {StatusBar, Text, View} from 'react-native';
 import { Provider, connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
-import { PulseLoader } from './components';
+import { PulseLoader, Advice } from './components';
 import { fetchChannelsRedux } from "./services/channels";
 import { appStore } from './redux/Store';
 import { getChannelsError, getChannelsPending, getAppTheme } from './redux/reducers';
@@ -11,6 +11,7 @@ import { handleJWTMiddleware } from './services/auth';
 import { changeTheme } from "./redux/actions";
 import { ThemeService } from './services'
 import AppNavigator from './navigation/AppNavigator';
+import { ArrayHelper, Environment, Fake } from './utils';
 
 const mapStateToProps = state => ({
     error: getChannelsError(state),
@@ -28,8 +29,11 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
     StatusBar.setHidden(true);
 
     const [ spinner, setSpinner ] = useState(true);
+    const [ advice, setAdvice ] = useState(null);
 
     useEffect(() => {
+        setAdvice(ArrayHelper.random(Fake.advices));
+
         let interval = setTimeout(() => {
             setSpinner(false);
         }, 6000);
@@ -64,6 +68,16 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
                     borderColor={theme.primaryColor}
                     avatar={ theme.image }
                 />
+
+                {
+                    advice && <Advice advice={advice} />
+                }
+
+                {/*<View style={{ paddingBottom: 20, alignItems: 'center'}}>
+                    <Text style={[ human.caption1, { color: theme.primaryColor }]}>
+                        Powered by PlayHub Service { Environment.isDev() ? '(dev)' : '' }
+                    </Text>
+                </View>*/}
             </View>
         );
     }

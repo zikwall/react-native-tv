@@ -1,8 +1,6 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, Animated, Easing, Text } from 'react-native';
-import { human } from 'react-native-typography';
+import { View, Image, TouchableOpacity, Animated, Easing } from 'react-native';
 import Pulse from './Pulse';
-import { Environment } from '../../utils';
 
 // need Review
 export default class LocationPulseLoader extends React.Component {
@@ -107,12 +105,6 @@ export default class LocationPulseLoader extends React.Component {
                             }}
                         />
                     </TouchableOpacity>
-                </View>
-
-                <View style={{ paddingBottom: 10, alignItems: 'center'}}>
-                    <Text style={[ human.caption1, { color: this.props.borderColor }]}>
-                        Powered by PlayHub Service { Environment.isDev() ? '(dev)' : '' }
-                    </Text>
                 </View>
             </>
         );
