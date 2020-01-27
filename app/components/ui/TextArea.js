@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import Heading from '../heading';
 
-const ExtendedTextArea = ({ lineNumbers, inputname, label, labelIcon, customErrors, ...props }) => {
+const ExtendedTextArea = ({ maxLength, lineNumbers, inputname, label, labelIcon, customErrors, ...props }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     const _markAsError = () => {
@@ -20,9 +20,12 @@ const ExtendedTextArea = ({ lineNumbers, inputname, label, labelIcon, customErro
                 label && <Heading text={label} styles={{ paddingLeft: 0 }} color={theme.primaryColor} icon={labelIcon} />
             }
             <TextInput
-                {...props} placeholderTextColor={theme.primaryColor}
+                {...props}
+                placeholderTextColor={theme.primaryColor}
                 multiline={true}
                 numberOfLines={lineNumbers}
+                textAlignVertical={'top'}
+                maxLength={maxLength}
                 style={[
                 {
                     borderColor: theme.primaryColor,
@@ -40,7 +43,8 @@ ExtendedTextArea.defaultProps = {
     label: undefined,
     labelIcon: undefined,
     customErrors: [],
-    lineNumbers: 4
+    lineNumbers: 4,
+    maxLength: 1000
 };
 
 export default ExtendedTextArea;
