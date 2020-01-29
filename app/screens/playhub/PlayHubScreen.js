@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-    View, Text,
+    View, FlatList,
     ScrollView
 } from "react-native";
 import { connect } from 'react-redux';
@@ -148,29 +148,28 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
         <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroundColor }]}>
             <OverlayLoader visible={isFetched} />
 
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{paddingTop: 10}}>
-                    {contents.map((playlist, index) => (
-                        <CommonChannelListItem
-                            key={index}
-                            title={playlist.name}
-                            subtitle={playlist.category}
-                            type={playlist.type}
-                            image={{ uri: playlist.image }}
-                            rating={playlist.rating}
-                            visibility={playlist.visibility}
-                            playlist={playlist}
-                            onPress={handleOnClickContent}
-                        />
-                    ))}
-                </View>
-                {
+            <FlatList
+                data={contents}
+                renderItem={({ item, index }) => <CommonChannelListItem
+                    key={index}
+                    title={item.name}
+                    subtitle={item.category}
+                    type={item.type}
+                    image={{ uri: item.image }}
+                    rating={item.rating}
+                    visibility={item.visibility}
+                    playlist={item}
+                    onPress={handleOnClickContent}
+                />}
+                ListFooterComponent={
                     !isEnd &&
                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                         <FlatButton onPress={handleLoadMorePress} text={'Загрузить еще'} backgroundColor={theme.secondaryBackgroundColor} style={{ borderRadius: 5, padding: 10 }}/>
                     </View>
                 }
-            </ScrollView>
+                keyExtractor={item => item.id}
+            />
+
             {
                 isVisibleFloatButton && <FloatBottomButton onPress={() => alert('Left')} onLongPress={() => setIsVisibleFloatButton(false) }/>
             }

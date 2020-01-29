@@ -31,13 +31,14 @@ import ContentWatch from './watch/ContentWatch';
 import PremiumScreen from "./user/PremiumScreen";
 import WriteDeveloperScreen from "./user/WriteDeveloperScreen";
 import SecurityScreen from "./user/SecurityScreen";
+import ParentControlScreen from "./user/ParentControlScreen";
 
 export {
     // global
     HomeScreen, PlayHubScreen, WatchScreen, LikedScreen, ContentWatch,
     // user
     ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen, StatisticScreen, UserMenuScreen,
-    FriendshipRequestsScreen,
+    FriendshipRequestsScreen, ParentControlScreen,
     // auth
     LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen,
     // menu

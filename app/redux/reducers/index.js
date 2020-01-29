@@ -10,6 +10,7 @@ import contentFetchReducer , {
 import authentication, { getIsAuthorized, getIsPremium } from './auth';
 import { playerActionReducer, getSelectPlayer } from './player';
 import { getAppTheme, themeActionReducer }  from './theme';
+import { getAppParentControl, parentControlActionReducer } from "./parent-control";
 
 const rootReducer = combineReducers({
     channelsFetchReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     playerActionReducer,
     themeActionReducer,
     contentFetchReducer,
-    contentActionReducer
+    contentActionReducer,
+    parentControlActionReducer
 });
 
 export default rootReducer;
@@ -28,5 +30,6 @@ export {
     contentActionReducer, getActiveContent, getContentsError, getContentsPending, getContents, getCurrentPage,
     authentication, getIsAuthorized, getIsPremium,
     getSelectPlayer,
-    getAppTheme
+    getAppTheme,
+    getAppParentControl
 }
