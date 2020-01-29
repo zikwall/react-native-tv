@@ -8,8 +8,8 @@ import { fetchChannelsRedux } from "./services/channels";
 import { appStore } from './redux/Store';
 import { getChannelsError, getChannelsPending, getAppTheme } from './redux/reducers';
 import { handleJWTMiddleware } from './services/auth';
-import { changeTheme } from "./redux/actions";
-import { ThemeService } from './services'
+import { changeTheme, changeParentControlMode } from "./redux/actions";
+import { ThemeService, ParentControlService } from './services'
 import AppNavigator from './navigation/AppNavigator';
 import { ArrayHelper, Environment, Fake } from './utils';
 
@@ -22,6 +22,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
     fetchChannels: fetchChannelsRedux,
     selectTheme: changeTheme,
+    initParentControlMode: changeParentControlMode,
     handleJWTMiddleware
 }, dispatch);
 
@@ -47,6 +48,14 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
         ThemeService.getAppThemeService().then((theme) => {
             props.selectTheme(theme);
         });
+    }, []);
+
+    useEffect(() => {
+        ParentControlService.getParentControlMode().then((controlOptions) => {
+            if (!!controlOptions) {
+                props.initParentControlMode(controlOptions);
+            }
+        })
     }, []);
 
     useEffect(() => {
