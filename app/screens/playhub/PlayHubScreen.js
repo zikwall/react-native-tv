@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import {
-    View, FlatList,
-    ScrollView
+    View,
+    FlatList
 } from "react-native";
 import { connect } from 'react-redux';
-import { Fake } from '../../utils';
-import { CommonChannelListItem, FloatBottomButton, ContentModalize, FlatButton, OverlayLoader } from '../../components';
+import {
+    CommonChannelListItem,
+    FloatBottomButton,
+    ContentModalize,
+    FlatButton,
+    OverlayLoader, FilterBar
+} from '../../components';
 import styles from './styles';
 import { useSelector } from 'react-redux';
 import {
@@ -13,8 +18,7 @@ import {
     getContents,
     getContentsError,
     getContentsPending,
-    getCurrentPage,
-    getIsPremium,
+    getCurrentPage
 } from '../../redux/reducers';
 import { Modalize } from 'react-native-modalize';
 import { Content } from '../../constants';
@@ -126,7 +130,6 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
         }
 
         if (!!content && !!button) {
-            console.log('AAAAA');
             handleOpenPremium(image, title, visibility, content, button);
             return true;
         }
@@ -147,7 +150,7 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
     return (
         <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroundColor }]}>
             <OverlayLoader visible={isFetched} />
-
+            {/*<FilterBar onSearch={(text) => {}}/>*/}
             <FlatList
                 data={contents}
                 renderItem={({ item, index }) => <CommonChannelListItem
