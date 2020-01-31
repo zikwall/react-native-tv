@@ -7,7 +7,7 @@ import { getAppTheme } from '../../redux/reducers';
 const NavigationHeaderTitle = ({ title }) => {
     const theme = useSelector(state => getAppTheme(state));
     return (
-        <Text style={[ human.callout, { color: theme.primaryColor } ]}>
+        <Text numberOfLines={1} ellipsizeMode='tail' style={[ human.callout, { color: theme.primaryColor, flex:1 } ]}>
             { title }
         </Text>
     )

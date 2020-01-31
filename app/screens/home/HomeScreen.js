@@ -47,7 +47,7 @@ const HomeScreen = ({ navigation }) => {
             <View style={ [styles.container, { backgroundColor: theme.primaryBackgroundColor }] }>
                 <SearchBar
                     height={ height * 0.06 + width * 0.005 }
-                    placeholder="Channel search here"
+                    placeholder="Поиск"
                     fontColor={theme.primaryColor}
                     iconColor={theme.primaryColor}
                     cancelIconColor={theme.primaryColor}
