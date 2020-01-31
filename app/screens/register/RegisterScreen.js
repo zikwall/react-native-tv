@@ -10,6 +10,7 @@ import { Validator } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_USERNAME, ERROR_INVALID_PASSWORD } from '../../constants';
 import RegisterScreenComponent from './RegisterScreenComponent';
 import { getAppTheme } from '../../redux/reducers';
+import DeviceInfo from 'react-native-device-info';
 
 const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
     const [ username, setProfilename ] = useState(null);
@@ -17,6 +18,7 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
     const [ email, setEmail ] = useState(null);
 
     const theme = useSelector(state => getAppTheme(state));
+    const uniqueId = DeviceInfo.getUniqueId();
 
     useEffect(() => {
         console.log('MOUNT REGISTER');
@@ -63,7 +65,7 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
             return false;
         }
 
-        const status = await register({username: username, email: email, password: password}, 'token_by_register');
+        const status = await register({username: username, email: email, password: password, deviceId: uniqueId}, 'token_by_register');
 
         if (status.state === true) {
             navigation.navigate('ContinueRegister');
@@ -84,7 +86,7 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
                 onRegister={ handleOnRegister }
                 loginButtonBackgroundColor={theme.primaryColor}
                 loginBackgorundColor={theme.primaryBackgroundColor}
-                loginText="Already have a Play account? OK, let's go!"
+                loginText="У Вас уже есть Play аккаунт? OK, пошли!"
                 emailIconComponent={
                     <Icon
                         size={ 30 }

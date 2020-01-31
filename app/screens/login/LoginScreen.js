@@ -90,8 +90,8 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
                 onLogin={ handleOnLogin }
                 loginButtonBackgroundColor={theme.primaryColor}
                 loginBackgorundColor={theme.primaryBackgroundColor}
-                loginText="Don't have a Play account yet? Create now!"
-                forgotText="Forgot your password? No problems!"
+                loginText="Еще нет Play аккаунта? Создайте сейчас!"
+                forgotText="Забыли пароль? Нет проблем!"
                 loginButtonTextStyle={{ color: theme.primaryColor }}
                 onSwitchValueChange={switchValue => {
                     setSwitchValue(switchValue);

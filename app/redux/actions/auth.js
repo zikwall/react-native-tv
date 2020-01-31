@@ -52,14 +52,15 @@ export const registerFinished = ({ name, publicEmail }, token) => {
     }
 };
 
-export const registration = ({ username, email, password }, token) => {
+export const registration = ({ username, email, password, deviceId }, token) => {
     return (dispatch) => {
         return apiFetch('/vktv/auth/signup', {
             method: 'POST',
             body: JSON.stringify({
                 username,
                 email,
-                password
+                password,
+                deviceId
             })
         }).then((response) => {
 

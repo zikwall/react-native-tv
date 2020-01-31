@@ -114,8 +114,8 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
                 onContinueLater={handleOnContinueLater}
                 loginButtonBackgroundColor={theme.primaryColor}
                 loginBackgorundColor={theme.primaryBackgroundColor}
-                nameTitle={'Your Name'}
-                publicEmailTitle={'Your Public Email'}
+                nameTitle={'Ваше имя'}
+                publicEmailTitle={'Публичный email'}
                 publicEmailPlaceholder={'my.public@mail.my'}
                 publicEmailIconComponent={
                     <Icon
@@ -137,7 +137,7 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
 ContinueRegisterScreen.navigationOptions = ({ navigation }) => {
     return {
         header: (props) => <NavigationHeaderComponent
-            titleComponent={<NavigationHeaderTitle title={'Login'} />}
+            titleComponent={<NavigationHeaderTitle title={'Последний шаг'} />}
             leftComponent={ <NavigationHeaderLeft /> } {...props}
         />
     };

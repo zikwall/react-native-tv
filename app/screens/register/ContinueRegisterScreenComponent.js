@@ -30,10 +30,10 @@ const ContinueRegisterScreenComponent = props => {
     const renderLoginButton = () => (
         <View style={styles.continueButtonsContainerStyle}>
             <TouchableOpacity onPress={ onContinue }>
-                <Text style={[ss.button, styles.continueButtonStyle]}>Continue</Text>
+                <Text style={[ss.button, styles.continueButtonStyle]}>Завершить!</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={ onContinueLater }>
-                <Text style={[ss.button, styles.continueButtonStyle]}>Then I will do it!!</Text>
+                <Text style={[ss.button, styles.continueButtonStyle]}>Ха, я сделаю это позже!!</Text>
             </TouchableOpacity>
         </View>
     );

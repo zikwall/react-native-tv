@@ -93,7 +93,7 @@ const ForgotScreen = ({ navigation, auth, isAuthenticated }) => {
                 onLogin={ handleOnForgot }
                 loginButtonBackgroundColor={theme.primaryColor}
                 loginBackgorundColor={theme.primaryBackgroundColor}
-                loginText="Did you suddenly remember the password ?? OK!"
+                loginText="Вы внезапно вспомнили свой пароль?? OK!"
                 loginButtonTextStyle={{ color: theme.primaryColor }}
                 emailOnChangeText={username => setEmail(username)}
             >
