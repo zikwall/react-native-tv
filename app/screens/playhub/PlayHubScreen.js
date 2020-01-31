@@ -11,6 +11,7 @@ import {
     FlatButton,
     OverlayLoader,
     FilterBar,
+    AdmobBanner,
 } from '../../components';
 import styles from './styles';
 import { useSelector } from 'react-redux';
@@ -198,17 +199,22 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
             />
             <FlatList
                 data={items}
-                renderItem={({ item, index }) => <CommonChannelListItem
-                    key={index}
-                    title={item.name}
-                    subtitle={item.category}
-                    type={item.type}
-                    image={{ uri: item.image }}
-                    rating={item.rating}
-                    visibility={item.visibility}
-                    playlist={item}
-                    onPress={handleOnClickContent}
-                />}
+                renderItem={({ item, index }) => typeof item.is_banner !== "undefined"
+                    ?
+                    <AdmobBanner />
+                    :
+                    <CommonChannelListItem
+                        key={index}
+                        title={item.name}
+                        subtitle={item.category}
+                        type={item.type}
+                        image={{ uri: item.image }}
+                        rating={item.rating}
+                        visibility={item.visibility}
+                        playlist={item}
+                        onPress={handleOnClickContent}
+                    />
+                }
                 ListFooterComponent={
                     !isEnd &&
                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
