@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import {
-    View, FlatList,
-    ScrollView
+    View,
+    FlatList
 } from "react-native";
 import { connect } from 'react-redux';
-import { Fake } from '../../utils';
-import { CommonChannelListItem, FloatBottomButton, ContentModalize, FlatButton, OverlayLoader } from '../../components';
+import {
+    CommonChannelListItem,
+    FloatBottomButton,
+    ContentModalize,
+    FlatButton,
+    OverlayLoader,
+    FilterBar,
+    AdmobBanner,
+} from '../../components';
 import styles from './styles';
 import { useSelector } from 'react-redux';
 import {
@@ -13,8 +20,7 @@ import {
     getContents,
     getContentsError,
     getContentsPending,
-    getCurrentPage,
-    getIsPremium,
+    getCurrentPage
 } from '../../redux/reducers';
 import { Modalize } from 'react-native-modalize';
 import { Content } from '../../constants';
@@ -32,6 +38,8 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
     const [ isVisibleFloatButton, setIsVisibleFloatButton ] = useState(true);
     const [ isEnd, setIsEnd ] = useState(false);
     const [ isFetched, setIsFetched ] = useState(false);
+    const [ items, setItems ] = useState(contents);
+    const [ cancelVisible, setCancelVisible ] = useState(false);
 
     useEffect(() => {
         if (!currentPage) {
@@ -41,6 +49,10 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
 
         return () => {};
     }, []);
+
+    useEffect(() => {
+        setItems(contents);
+    }, [ contents ]);
 
     const updateContent = () => {
         if (isEnd) {
@@ -126,7 +138,6 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
         }
 
         if (!!content && !!button) {
-            console.log('AAAAA');
             handleOpenPremium(image, title, visibility, content, button);
             return true;
         }
@@ -144,23 +155,66 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
         updateContent();
     };
 
+    const handleFilterAccept = (useChannels, useMovies, useAdults) => {
+        let includeTypes = [];
+
+        if (useChannels) {
+            includeTypes.push('Телеканал')
+        }
+
+        if (useMovies) {
+            includeTypes.push('Фильм')
+        }
+
+        setItems(contents.filter((item) => {
+            if (includeTypes.includes(item.type)) {
+                if (!useAdults) {
+                    return item.age_limit !== 50;
+                }
+
+                return true;
+            }
+
+            return false;
+        }))
+    };
+
+    const searchHandle = (text) => {
+        setItems(contents.filter((item) => item.name.toLowerCase().includes(text.toLowerCase())));
+
+        if (text === '') {
+            setCancelVisible(false);
+        } else {
+            setCancelVisible(true);
+        }
+    };
+
     return (
         <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroundColor }]}>
             <OverlayLoader visible={isFetched} />
-
+            <FilterBar
+                onSearch={searchHandle}
+                onAccept={handleFilterAccept}
+                visibleSearchCancel={cancelVisible}
+            />
             <FlatList
-                data={contents}
-                renderItem={({ item, index }) => <CommonChannelListItem
-                    key={index}
-                    title={item.name}
-                    subtitle={item.category}
-                    type={item.type}
-                    image={{ uri: item.image }}
-                    rating={item.rating}
-                    visibility={item.visibility}
-                    playlist={item}
-                    onPress={handleOnClickContent}
-                />}
+                data={items}
+                renderItem={({ item, index }) => typeof item.is_banner !== "undefined"
+                    ?
+                    <AdmobBanner />
+                    :
+                    <CommonChannelListItem
+                        key={index}
+                        title={item.name}
+                        subtitle={item.category}
+                        type={item.type}
+                        image={{ uri: item.image }}
+                        rating={item.rating}
+                        visibility={item.visibility}
+                        playlist={item}
+                        onPress={handleOnClickContent}
+                    />
+                }
                 ListFooterComponent={
                     !isEnd &&
                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
