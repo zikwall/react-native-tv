@@ -6,10 +6,9 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import {
     NavigationHeaderComponent,
     NavigationHeaderLeft,
-    NavigationHeaderTitle,
     ThemedView,
     VideoViewContent,
-    Row, IconWrap, Heading, Avatar, Tag, UserLineItem, Ratings, AntIconWrap, Review,
+    Row, IconWrap, Heading, Avatar, Tag, Ratings, AntIconWrap, Review, NavigationHeaderTitleContent, Verified
 } from '../../components';
 import { getActiveContent, getAppTheme } from '../../redux/reducers';
 import { human } from "react-native-typography";
@@ -74,13 +73,21 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                 <VideoViewContent content={content} />
             </View>
             <Row style={{ padding: 10, alignItems: 'center' }}>
-                <View>
-                    <Text style={[human.callout, { color: theme.primaryColor }]}>
-                        Опубликовал
-                    </Text>
-                    <Text style={{ color: theme.secondaryColor }}>
-                        zikwall
-                    </Text>
+                <View style={{ flexDirection: 'row' }}>
+                    <Avatar
+                        src={{ uri: 'https://avatars2.githubusercontent.com/u/23422968?s=460&v=4' }}
+                        badgeRight={
+                            <Verified />
+                        }
+                    />
+                    <View style={{ marginLeft: 10 }}>
+                        <Text style={[human.callout, { color: theme.primaryColor }]}>
+                            Опубликовал
+                        </Text>
+                        <Text style={{ color: theme.secondaryColor }}>
+                            zikwall
+                        </Text>
+                    </View>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                     <AntIconWrap name={'hearto'} size={25} />
@@ -191,7 +198,7 @@ ContentWatch.navigationOptions = ({ navigation }) => {
                     <View style={{ marginRight: 10 }}>
                         <Avatar src={{ uri: navigation.getParam('image') }} size={ 40 } resizeMode="contain" />
                     </View>
-                    <NavigationHeaderTitle title={navigation.getParam('title')} />
+                    <NavigationHeaderTitleContent title={navigation.getParam('title')} />
                 </>
             }
             leftComponent={ <NavigationHeaderLeft onHome /> } {...props}

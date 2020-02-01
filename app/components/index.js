@@ -60,3 +60,5 @@ export { default as ChannelAvatar } from './avatar/ChannelAvatar';
 export { default as AntIconWrap } from './icon/AntIconWrap';
 export { default as Ratings } from './rating/Ratings';
 export { default as Review } from './rating/Review';
+export { default as NavigationHeaderTitleContent } from './navigation-header/NavigationHeaderTitleContent';
+export { default as Verified } from './ui/Verified';

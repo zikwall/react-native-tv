@@ -4,13 +4,13 @@ import { human } from "react-native-typography";
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 
-const NavigationHeaderTitle = ({ title }) => {
+const NavigationHeaderTitleContent = ({ title }) => {
     const theme = useSelector(state => getAppTheme(state));
     return (
-        <Text style={[ human.callout, { color: theme.primaryColor } ]}>
+        <Text numberOfLines={1} ellipsizeMode='tail' style={[ human.callout, { color: theme.primaryColor, flex:1 } ]}>
             { title }
         </Text>
     )
 };
 
-export default NavigationHeaderTitle;
+export default NavigationHeaderTitleContent;
