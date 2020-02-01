@@ -6,7 +6,7 @@ import { getAppTheme } from '../../redux/reducers';
 
 const ChannelCard = ({ name, epg_id, image, onSelectHandle }) => {
     const theme = useSelector(state => getAppTheme(state));
-    const ifImage = SafeValidator.getSafeChannelImage(image);
+    const ifImage = SafeValidator.isTrustImage(image) ? { uri: image } : theme.channelPlaceholder;
 
     return (
         <View style={[styles.itemContainer, { borderColor: theme.primaryColor }]}>

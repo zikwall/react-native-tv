@@ -14,6 +14,10 @@ export const isTrustImage = (image) => {
     return image !== '' && image !== null;
 };
 
+export const isTrustSrc = (src) => {
+    return src && src.uri !== '' && src.uri !== null;
+};
+
 export const getSafeChannelImage = (image) => {
     return isTrustImage(image) ? { uri: image } : require('../assets/images/blank_channel.png');
 };

@@ -7,11 +7,11 @@ import {
 import Button from '../button/index.android';
 import s from './styles-list';
 import Rating from '../rating';
-import { Avatar } from '../avatar';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import { Content } from './../../constants';
 import IconWrap from '../icon/IconWrap';
+import ChannelAvatar from '../avatar/ChannelAvatar';
 
 const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, number, rating, visibility, type }) => {
     const theme = useSelector(state => getAppTheme(state));
@@ -28,7 +28,7 @@ const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, numb
                     { number }
                 </Text>}
 
-                <Avatar src={image} resizeMode="contain" />
+                <ChannelAvatar src={image} resizeMode="contain" />
 
                 <View style={ s.headingContainer }>
                     <Text

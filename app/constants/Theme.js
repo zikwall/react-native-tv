@@ -4,14 +4,16 @@ const WhiteImages = {
     image: require('../assets/images/Play_650_Light.png'),
     logo: require('../assets/images/PlayHubLogoLight.png'),
     playHubFull: require('../assets/images/PlayHubFullLight.png'),
-    playHubCommunity: require('../assets/images/PlayHubFullCommunityLight.png')
+    playHubCommunity: require('../assets/images/PlayHubFullCommunityLight.png'),
+    channelPlaceholder: require('../assets/images/PlayHub_200_200_white.png')
 };
 
 const BlackImages = {
     image: require('../assets/images/Play_650.png'),
     logo: require('../assets/images/PlayHubLogo.png'),
     playHubFull: require('../assets/images/PlayHubFull.png'),
-    playHubCommunity: require('../assets/images/PlayHubFullCommunity.png')
+    playHubCommunity: require('../assets/images/PlayHubFullCommunity.png'),
+    channelPlaceholder: require('../assets/images/PlayHub_200_200.png')
 };
 
 const DefaultExtraScheme = {
