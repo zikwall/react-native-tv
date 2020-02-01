@@ -7,14 +7,7 @@ import { getChannelsPending, getSelectChannel, getSelectPlayer } from '../../red
 import { initPlayer } from '../../redux/actions';
 import PureVideoWebView from './PureVideoWebView';
 import NativeVideoView from './NativeVideoView';
-
-const isNativeWebPlayer = (state) => {
-    return state == 1;
-};
-
-const isNativePlayer = (player) => {
-    return player === Players.NATIVE_PLAYER
-};
+import { SafeValidator } from '../../utils';
 
 const resolveSelectedPlayer = (player, channel) => {
     if (player === Players.ORIGIN_PLAYER) {
@@ -37,11 +30,11 @@ const VideoView = ({ channel, pending, player, selectPlayer }) => {
         selectPlayer(channel.epg_id);
     }, [ channel ]);
 
-    if (isNativePlayer(player)) {
+    if (SafeValidator.isNativePlayer(player)) {
         return <NativeVideoView source={channel.url} />
     }
 
-    const source = isNativeWebPlayer(channel.use_origin) ?  channel.url : resolveSelectedPlayer(player, channel);
+    const source = SafeValidator.isNativeWebPlayer(channel.use_origin) ?  channel.url : resolveSelectedPlayer(player, channel);
 
     return (
         <PureVideoWebView source={source} />

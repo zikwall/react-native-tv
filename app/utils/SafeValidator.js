@@ -1,3 +1,5 @@
+import { Players } from '../constants';
+
 export const isSuccessResponse = (response) => {
     return response && response.status === 200;
 };
@@ -20,4 +22,12 @@ export const isTrustSrc = (src) => {
 
 export const getSafeChannelImage = (image) => {
     return isTrustImage(image) ? { uri: image } : require('../assets/images/blank_channel.png');
+};
+
+export const isNativeWebPlayer = (state) => {
+    return state == 1;
+};
+
+export const isNativePlayer = (player) => {
+    return player === Players.NATIVE_PLAYER
 };

@@ -57,3 +57,6 @@ export { default as FilterBar } from './search/FilterBar';
 export { default as Row } from './ui/Row';
 export { default as Tag } from './ui/Tag';
 export { default as ChannelAvatar } from './avatar/ChannelAvatar';
+export { default as AntIconWrap } from './icon/AntIconWrap';
+export { default as Ratings } from './rating/Ratings';
+export { default as Review } from './rating/Review';

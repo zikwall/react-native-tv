@@ -4,16 +4,16 @@ import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import { human } from 'react-native-typography';
 
-const Tag = ({ id, label, style, onSelect }) => {
+const Tag = ({ id, label, style, onSelect, borderColor }) => {
     const theme = useSelector(state => getAppTheme(state));
-
+    const customBorderColor = borderColor ? borderColor : theme.primaryColor;
     return (
         <TouchableOpacity onPress={() => onSelect(id)} style={{
             height: 30,
             marginRight: 5,
             borderRadius: 30,
             borderWidth: 1,
-            borderColor: theme.primaryColor,
+            borderColor: customBorderColor,
             alignItems: 'center',
             justifyContent: 'center',
             ...style
@@ -28,7 +28,8 @@ const Tag = ({ id, label, style, onSelect }) => {
 Tag.defaultProps = {
     onSelect: () => {},
     id: 0,
-    label: 'unnamed'
+    label: 'unnamed',
+    customBorderColor: undefined
 };
 
 export default Tag;

@@ -1,18 +1,23 @@
 import React, { useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
-import { View, Text, ScrollView } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { setPlayhubPlayer } from '../../redux/actions';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import {
     NavigationHeaderComponent,
     NavigationHeaderLeft,
     NavigationHeaderTitle,
     ThemedView,
     VideoViewContent,
-    Row, IconWrap, Heading, Avatar, Tag, UserLineItem
+    Row, IconWrap, Heading, Avatar, Tag, UserLineItem, Ratings, AntIconWrap, Review,
 } from '../../components';
 import { getActiveContent, getAppTheme } from '../../redux/reducers';
 import { human } from "react-native-typography";
+import { Modalize } from 'react-native-modalize';
+import Menu, { MenuDivider, MenuItem } from 'react-native-material-menu';
+import { Players } from '../../constants';
 
-const ContentWatch = ({ navigation, content }) => {
+const ContentWatch = ({ navigation, content, selectPlayer }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
@@ -22,6 +27,46 @@ const ContentWatch = ({ navigation, content }) => {
             console.log('UNMOUNT CONTENT WATCH');
         }
     }, []);
+
+    const modal = React.createRef();
+    let menu = null;
+
+    const showMenu = () => {
+        //if (menu.current) {
+            menu.show();
+        //}
+    };
+
+    const hideMenu = () => {
+        //if (menu.current) {
+            menu.hide();
+        //}
+    };
+
+    const openModal = () => {
+        if (modal.current) {
+            modal.current.open();
+        }
+    };
+
+    const closeModal = () => {
+        if (modal.current) {
+            modal.current.close();
+        }
+    };
+
+    const handleOpenReportModal = () => {
+        openModal();
+    };
+
+    const handleCloseReportModal = () => {
+        closeModal();
+    };
+
+    const handleSelectPlayer = (playerId) => {
+        selectPlayer(content.id, playerId);
+        hideMenu();
+    };
 
     return (
         <ThemedView>
@@ -38,20 +83,51 @@ const ContentWatch = ({ navigation, content }) => {
                     </Text>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
-                    <IconWrap name={'heart'} size={25} />
+                    <AntIconWrap name={'hearto'} size={25} />
                     <View style={{ marginLeft: 15, marginRight: 15, borderLeftWidth: 1, borderLeftColor: theme.primaryColor }} />
                     <IconWrap name={'save'} size={25} />
                     <View style={{ marginLeft: 15, marginRight: 15, borderLeftWidth: 1, borderLeftColor: theme.primaryColor }} />
-                    <IconWrap name={'triangle'} size={25} />
+                    <Menu
+                        ref={(ref) => menu = ref }
+                        button={
+                            <TouchableOpacity onPress={showMenu}>
+                                <AntIconWrap name={'bars'} size={25} />
+                            </TouchableOpacity>
+                        }
+                    >
+                        <MenuItem onPress={() => {
+                            handleSelectPlayer('1');
+                        }}>
+                            Use Player 1
+                        </MenuItem>
+
+                        <MenuItem onPress={() => {
+                            handleSelectPlayer('2');
+                        }}>
+                            Use Player 2
+                        </MenuItem>
+
+                        <MenuItem onPress={() => {
+                            handleSelectPlayer(Players.ORIGIN_PLAYER);
+                        }}>
+                            Use Origin Player
+                        </MenuItem>
+                        <MenuItem onPress={() => {
+                            handleSelectPlayer(Players.NATIVE_PLAYER);
+                        }}>
+                            Use Native Player
+                        </MenuItem>
+                        <MenuDivider />
+                        <MenuItem onPress={ hideMenu }>Report</MenuItem>
+                        <MenuItem onPress={ hideMenu }>Block this Content</MenuItem>
+                    </Menu>
                 </View>
             </Row>
             <ScrollView>
                 <View>
                     <Heading color={theme.primaryColor} text={'Описание'} />
-                    <Text style={[ human.caption1, { paddingLeft: 15, paddingRight: 15, paddingTop: 0 } ]}>
-                        Описание контента! Описание контента! Описание контента!
-                        Описание контента!
-                        Описание контента! Описание контента! Описание контента!
+                    <Text style={[ human.caption1, { paddingLeft: 15, paddingRight: 15, paddingTop: 0, color: theme.primaryColor } ]}>
+                        Дорогой зритель, я нашел для вас контент, вы все его так ждали - встречайте!
                     </Text>
                 </View>
                 <View>
@@ -63,37 +139,46 @@ const ContentWatch = ({ navigation, content }) => {
                         </Row>
                     </ScrollView>
                     <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценить конент'} />
-                    <Row style={{ paddingHorizontal: 15 }}>
-                        <IconWrap name={'star'} size={25} />
-                        <IconWrap name={'star'} size={25} />
-                        <IconWrap name={'star'} size={25} />
-                        <IconWrap name={'star'} size={25} />
-                        <IconWrap name={'star'} size={25} />
-                    </Row>
+                    <View style={{ paddingHorizontal: 15 }}>
+                        <Ratings />
+                    </View>
                 </View>
                 <View style={{ paddingVertical: 15 }}>
-                    <View style={{ flexDirection: 'column' }}>
-                        <UserLineItem name={'AndreyKa'} username={'zikwall'} />
-                        <Text style={[ human.caption1, { paddingTop: 5, paddingLeft: 15, paddingRight: 15 } ]}>
-                            Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв!
-                        </Text>
-                    </View>
-                    <View style={{ flexDirection: 'column' }}>
-                        <UserLineItem name={'AndreyKa 2'} username={'zikwall'} />
-                        <Text style={[ human.caption1, { paddingTop: 5, paddingLeft: 15, paddingRight: 15 } ]}>
-                            Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв!
-                            Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв!
-                            Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв!
-                        </Text>
-                    </View>
-                    <View style={{ flexDirection: 'column' }}>
-                        <UserLineItem name={'AndreyKa 3'} username={'zikwall'} />
-                        <Text style={[ human.caption1, { paddingTop: 5, paddingLeft: 15, paddingRight: 15 } ]}>
-                            Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв! Отзыв!
-                        </Text>
-                    </View>
+                    <Review
+                        user={{
+                            name: 'Andrey Ka',
+                            username: 'zikwall'
+                        }}
+                        review={'Очень круто, давно искал этот контент, Автору огромный респект!!!'}
+                    />
+                    <Review
+                        usefulCount={5}
+                        isOwnUseful={false}
+                        user={{
+                            name: 'Destinator 1337',
+                            username: 'destinator'
+                        }}
+                        review={'Очень качественное вещание, автор действительно постарался, регулярные обновления, смотреть одно удовольствие. Подписался на него, чтобы получать качественный ковый контент, реклмендую всем!'}
+                    />
+                    <Review
+                        isOwnUseful
+                        user={{
+                            name: 'Свежеватель',
+                            username: 'huyar_svejevatel'
+                        }}
+                        review={'ЁЁ. Все круто. Спс.'}
+                    />
                 </View>
             </ScrollView>
+
+            <Modalize
+                ref={modal}
+                adjustToContentHeight={{
+                    showsVerticalScrollIndicator: false
+                }}
+            >
+
+            </Modalize>
         </ThemedView>
     );
 };
@@ -119,4 +204,8 @@ const mapStateToProps = state => ({
     content: getActiveContent(state),
 });
 
-export default connect(mapStateToProps)(ContentWatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+    selectPlayer: setPlayhubPlayer,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContentWatch);
