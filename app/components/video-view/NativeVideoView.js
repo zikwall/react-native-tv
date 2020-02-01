@@ -1,161 +1,166 @@
-import React, {
-    Component
-} from 'react';
+import React, { useEffect,  useState } from 'react';
 
 import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    View
+    View,
+    Dimensions
 } from 'react-native';
 
 import Video from 'react-native-video';
+import Orientation from 'react-native-orientation';
 
-export default class NativeVideoView extends Component {
+const NativeVideoView = ({ onFullscreen, ...props }) => {
 
-    state = {
-        rate: 1,
-        volume: 1,
-        muted: false,
-        resizeMode: 'contain',
-        //duration: 0.0,
-        //currentTime: 0.0,
-        paused: false,
-        fullscreen: false
+    const [ rate, setRate ] = useState(1);
+    const [ volume, setVoulem ] = useState(1);
+    const [ muted, setMuted ] = useState(false);
+    const [ resizeMode, setResizeMode ] = useState('contain');
+    const [ paused, setPaused ] = useState(false);
+    const [ fullscreen, setFullscreen ] = useState(false);
+
+    useEffect(() => {
+        Orientation.addOrientationListener(handleOrientation);
+
+        return () => {
+            Orientation.removeOrientationListener(handleOrientation);
+        };
+    }, []);
+
+    const handleOrientation = (orientation) => {
+        orientation === 'LANDSCAPE'
+            ? setFullscreen(true)
+            : setFullscreen(false)
     };
 
-    video;
+    let video;
 
-    onLoad = (data) => {
-        this.setState({ duration: data.duration });
+    const onLoad = (data) => {};
+    const onProgress = (data) => {};
+
+    const onEnd = () => {
+        setPaused(true);
+        video.seek(0)
     };
 
-    onProgress = (data) => {
-        this.setState({ currentTime: data.currentTime });
+    const onAudioBecomingNoisy = () => {
+        setPaused(true);
     };
 
-    onEnd = () => {
-        this.setState({ paused: true })
-        this.video.seek(0)
+    const onAudioFocusChanged = (event) => {
+        setPaused(!event.hasAudioFocus);
     };
 
-    onAudioBecomingNoisy = () => {
-        this.setState({ paused: true })
-    };
+    const getCurrentTimePercentage = () => {};
 
-    onAudioFocusChanged = (event) => {
-        this.setState({ paused: !event.hasAudioFocus })
-    };
-
-    getCurrentTimePercentage() {
-        if (this.state.currentTime > 0) {
-            return parseFloat(this.state.currentTime) / parseFloat(this.state.duration);
-        }
-        return 0;
-    };
-
-    renderRateControl(rate) {
-        const isSelected = (this.state.rate === rate);
+    const renderRateControl = (r) => {
+        const isSelected = (rate === r);
 
         return (
-            <TouchableOpacity onPress={() => { this.setState({ rate }) }}>
+            <TouchableOpacity onPress={() => { setRate(r) }}>
                 <Text style={[styles.controlOption, { fontWeight: isSelected ? 'bold' : 'normal' }]}>
-                    {rate}x
+                    {r}x
                 </Text>
             </TouchableOpacity>
         );
-    }
+    };
 
-    renderResizeModeControl(resizeMode) {
-        const isSelected = (this.state.resizeMode === resizeMode);
+    const renderResizeModeControl = (rzm) => {
+        const isSelected = (resizeMode === rzm);
 
         return (
-            <TouchableOpacity onPress={() => { this.setState({ resizeMode }) }}>
+            <TouchableOpacity onPress={() => { setResizeMode(rzm) }}>
                 <Text style={[styles.controlOption, { fontWeight: isSelected ? 'bold' : 'normal' }]}>
-                    {resizeMode}
+                    {rzm}
                 </Text>
             </TouchableOpacity>
         )
-    }
+    };
 
-    renderFullscreenControl() {
-        const isSelected = (this.state.fullscreen);
+    const handleFullscreen = (isSelected) => {
+        setFullscreen(!isSelected);
+        onFullscreen(isSelected);
+
+        fullscreen
+            ? Orientation.lockToPortrait()
+            : Orientation.lockToLandscape();
+    };
+
+    const renderFullscreenControl = () => {
+        const isSelected = fullscreen;
 
         return (
-            <TouchableOpacity onPress={() => { this.setState({ fullscreen: !isSelected }) }}>
+            <TouchableOpacity onPress={() => handleFullscreen(isSelected) }>
                 <Text style={[styles.controlOption, { fontWeight: isSelected ? 'bold' : 'normal' }]}>
                     fullscreen
                 </Text>
             </TouchableOpacity>
         )
-    }
+    };
 
-    renderVolumeControl(volume) {
-        const isSelected = (this.state.volume === volume);
+    const renderVolumeControl = (v) => {
+        const isSelected = (volume === v);
 
         return (
-            <TouchableOpacity onPress={() => { this.setState({ volume }) }}>
+            <TouchableOpacity onPress={() => { setVoulem(v) }}>
                 <Text style={[styles.controlOption, { fontWeight: isSelected ? 'bold' : 'normal' }]}>
-                    {volume * 100}%
+                    {v * 100}%
                 </Text>
             </TouchableOpacity>
         )
-    }
+    };
 
-    render() {
-        const flexCompleted = this.getCurrentTimePercentage() * 100;
-        const flexRemaining = (1 - this.getCurrentTimePercentage()) * 100;
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity
+                style={styles.fullScreen}
+                onPress={() => setPaused(!paused)}
+            >
+                <Video
+                    ref={(ref) => { video = ref }}
+                    /* For ExoPlayer */
+                    //source={{ uri: 'http://www.youtube.com/api/manifest/dash/id/bf5bb2419360daf1/source/youtube?as=fmp4_audio_clear,fmp4_sd_hd_clear&sparams=ip,ipbits,expire,source,id,as&ip=0.0.0.0&ipbits=0&expire=19000000000&signature=51AF5F39AB0CEC3E5497CD9C900EBFEAECCCB5C7.8506521BFC350652163895D4C26DEE124209AA9E&key=ik0', type: 'mpd' }}
+                    source={{ uri: props.source }}
+                    style={fullscreen ? styles.fullscreenVideo : styles.video}
+                    rate={rate}
+                    paused={paused}
+                    volume={volume}
+                    muted={muted}
+                    resizeMode={resizeMode}
+                    onLoad={onLoad}
+                    //onProgress={this.onProgress}
+                    //onEnd={this.onEnd}
+                    onAudioBecomingNoisy={onAudioBecomingNoisy}
+                    onAudioFocusChanged={onAudioFocusChanged}
+                    repeat={false}
+                    fullscreen={true}
+                />
+            </TouchableOpacity>
 
-        return (
-            <View style={styles.container}>
-                <TouchableOpacity
-                    style={styles.fullScreen}
-                    onPress={() => this.setState({ paused: !this.state.paused })}
-                >
-                    <Video
-                        ref={(ref) => { this.video = ref }}
-                        /* For ExoPlayer */
-                        //source={{ uri: 'http://www.youtube.com/api/manifest/dash/id/bf5bb2419360daf1/source/youtube?as=fmp4_audio_clear,fmp4_sd_hd_clear&sparams=ip,ipbits,expire,source,id,as&ip=0.0.0.0&ipbits=0&expire=19000000000&signature=51AF5F39AB0CEC3E5497CD9C900EBFEAECCCB5C7.8506521BFC350652163895D4C26DEE124209AA9E&key=ik0', type: 'mpd' }}
-                        source={{ uri: this.props.source }}
-                        style={styles.fullScreen}
-                        rate={this.state.rate}
-                        paused={this.state.paused}
-                        volume={this.state.volume}
-                        muted={this.state.muted}
-                        resizeMode={this.state.resizeMode}
-                        onLoad={this.onLoad}
-                        //onProgress={this.onProgress}
-                        //onEnd={this.onEnd}
-                        onAudioBecomingNoisy={this.onAudioBecomingNoisy}
-                        onAudioFocusChanged={this.onAudioFocusChanged}
-                        repeat={false}
-                        fullscreen={true}
-                    />
-                </TouchableOpacity>
+            <View style={[ styles.controls, { bottom: 5, left: 5, right: 5 } ]}>
+                <View style={styles.generalControls}>
+                    <View style={styles.rateControl}>
+                        {renderRateControl(0.25)}
+                        {renderRateControl(0.5)}
+                        {renderRateControl(1.0)}
+                        {renderRateControl(1.5)}
+                        {renderRateControl(2.0)}
+                    </View>
 
-                <View style={styles.controls}>
-                    <View style={styles.generalControls}>
-                        <View style={styles.rateControl}>
-                            {this.renderRateControl(0.25)}
-                            {this.renderRateControl(0.5)}
-                            {this.renderRateControl(1.0)}
-                            {this.renderRateControl(1.5)}
-                            {this.renderRateControl(2.0)}
-                        </View>
-
-                        <View style={styles.resizeModeControl}>
-                            {this.renderResizeModeControl('cover')}
-                            {this.renderResizeModeControl('contain')}
-                            {this.renderResizeModeControl('stretch')}
-                            {this.renderFullscreenControl()}
-                        </View>
+                    <View style={styles.resizeModeControl}>
+                        {renderResizeModeControl('cover')}
+                        {renderResizeModeControl('contain')}
+                        {renderResizeModeControl('stretch')}
+                        {renderFullscreenControl()}
                     </View>
                 </View>
             </View>
-        );
-    }
-}
+        </View>
+    );
+};
 
+export default NativeVideoView;
 
 const styles = StyleSheet.create({
     container: {
@@ -164,20 +169,29 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'black',
     },
+    video: {
+        height: Dimensions.get('window').width * (9 / 16),
+        width: Dimensions.get('window').width,
+        backgroundColor: 'black',
+    },
+    fullscreenVideo: {
+        height: Dimensions.get('window').width,
+        width: Dimensions.get('window').height,
+        backgroundColor: 'black',
+    },
     fullScreen: {
         position: 'absolute',
         top: 0,
         left: 0,
         bottom: 0,
         right: 0,
+        zIndex: 999
     },
     controls: {
         backgroundColor: 'transparent',
-        borderRadius: 5,
         position: 'absolute',
-        bottom: 20,
-        left: 10,
-        right: 20,
+        borderRadius: 5,
+        zIndex: 1000
     },
     innerProgressCompleted: {
         height: 20,
@@ -217,5 +231,15 @@ const styles = StyleSheet.create({
         paddingLeft: 2,
         paddingRight: 2,
         lineHeight: 12,
+    },
+    controlOverlay: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: '#000000c4',
+        justifyContent: 'space-between',
+        zIndex: 1000
     },
 });

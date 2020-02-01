@@ -12,6 +12,7 @@ import { changeTheme, changeParentControlMode } from "./redux/actions";
 import { ThemeService, ParentControlService } from './services'
 import AppNavigator from './navigation/AppNavigator';
 import { ArrayHelper, Environment, Fake } from './utils';
+import Orientation from 'react-native-orientation';
 
 const mapStateToProps = state => ({
     error: getChannelsError(state),
@@ -31,6 +32,10 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
 
     const [ spinner, setSpinner ] = useState(true);
     const [ advice, setAdvice ] = useState(null);
+
+    useEffect(() => {
+        Orientation.lockToPortrait();
+    });
 
     useEffect(() => {
         setAdvice(ArrayHelper.random(Fake.advices));

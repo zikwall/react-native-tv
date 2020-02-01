@@ -16,7 +16,7 @@ const resolveSelectedPlayer = (player, content) => {
     return `http://tv.zikwall.ru/vktv/embed/give-content?player=${player}&id=${content.id}`;
 };
 
-const VideoViewContent = ({ content, player, selectPlayer }) => {
+const VideoViewContent = ({ content, player, selectPlayer, onFullscreen }) => {
     if (!content) {
         return null;
     }
@@ -26,7 +26,7 @@ const VideoViewContent = ({ content, player, selectPlayer }) => {
     }, [ content ]);
 
     if (SafeValidator.isNativePlayer(player)) {
-        return <NativeVideoView source={content.url} />
+        return <NativeVideoView source={content.url} onFullscreen={onFullscreen}/>
     }
 
     const source = resolveSelectedPlayer(player, content);
