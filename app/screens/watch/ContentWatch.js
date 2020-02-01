@@ -8,16 +8,28 @@ import {
     NavigationHeaderLeft,
     ThemedView,
     VideoViewContent,
-    Row, IconWrap, Heading, Avatar, Tag, Ratings, AntIconWrap, Review, NavigationHeaderTitleContent, Verified
+    Row,
+    IconWrap,
+    Heading,
+    Avatar,
+    Tag,
+    Ratings,
+    AntIconWrap,
+    Review,
+    NavigationHeaderTitleContent,
+    Verified
 } from '../../components';
+
 import { getActiveContent, getAppTheme } from '../../redux/reducers';
 import { human } from "react-native-typography";
 import { Modalize } from 'react-native-modalize';
 import Menu, { MenuDivider, MenuItem } from 'react-native-material-menu';
 import { Players } from '../../constants';
+import Description from './components/Description';
 
 const ContentWatch = ({ navigation, content, selectPlayer }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const isAuthorized = useSelector(state => !!state.authentication.token);
 
     useEffect(() => {
         navigation.setParams({'title': content.name, image: content.image });
@@ -28,18 +40,18 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
     }, []);
 
     const modal = React.createRef();
-    let menu = null;
+    const menu = React.createRef();
 
     const showMenu = () => {
-        //if (menu.current) {
-            menu.show();
-        //}
+        if (menu.current) {
+            menu.current.show();
+        }
     };
 
     const hideMenu = () => {
-        //if (menu.current) {
-            menu.hide();
-        //}
+        if (menu.current) {
+            menu.current.hide();
+        }
     };
 
     const openModal = () => {
@@ -90,12 +102,17 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
-                    <AntIconWrap name={'hearto'} size={25} />
-                    <View style={{ marginLeft: 15, marginRight: 15, borderLeftWidth: 1, borderLeftColor: theme.primaryColor }} />
-                    <IconWrap name={'save'} size={25} />
-                    <View style={{ marginLeft: 15, marginRight: 15, borderLeftWidth: 1, borderLeftColor: theme.primaryColor }} />
+                    {
+                        isAuthorized && <>
+                            <AntIconWrap name={'hearto'} size={25} />
+                            <View style={{ marginLeft: 15, marginRight: 15, borderLeftWidth: 1, borderLeftColor: theme.primaryColor }} />
+                            <IconWrap name={'save'} size={25} />
+                            <View style={{ marginLeft: 15, marginRight: 15, borderLeftWidth: 1, borderLeftColor: theme.primaryColor }} />
+                        </>
+                    }
+
                     <Menu
-                        ref={(ref) => menu = ref }
+                        ref={(ref) => menu.current = ref }
                         button={
                             <TouchableOpacity onPress={showMenu}>
                                 <AntIconWrap name={'bars'} size={25} />
@@ -126,32 +143,27 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                         </MenuItem>
                         <MenuDivider />
                         <MenuItem onPress={ hideMenu }>Report</MenuItem>
-                        <MenuItem onPress={ hideMenu }>Block this Content</MenuItem>
                     </Menu>
                 </View>
             </Row>
             <ScrollView>
+                <Description
+                    description={'Дорогой зритель, я нашел для вас контент, вы все его так ждали - встречайте!'}
+                    tags={[
+                        {label: 'Социальные', id: 10},
+                        {label: 'Выбор редакции', id: 30},
+                        {label: 'Топ 100 лучших', id: 40},
+                    ]}
+                />
                 <View>
-                    <Heading color={theme.primaryColor} text={'Описание'} />
-                    <Text style={[ human.caption1, { paddingLeft: 15, paddingRight: 15, paddingTop: 0, color: theme.primaryColor } ]}>
-                        Дорогой зритель, я нашел для вас контент, вы все его так ждали - встречайте!
-                    </Text>
-                </View>
-                <View>
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                        <Row style={{ paddingLeft: 15, paddingTop: 14 }}>
-                            <Tag label={'Социальные'} id={10} />
-                            <Tag label={'Выбор редакции'} id={20} />
-                            <Tag label={'Топ бесплатных'} id={20} />
-                        </Row>
-                    </ScrollView>
-                    <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценить конент'} />
+                    <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценить контент'} />
                     <View style={{ paddingHorizontal: 15 }}>
-                        <Ratings />
+                        <Ratings size={25} full />
                     </View>
                 </View>
                 <View style={{ paddingVertical: 15 }}>
                     <Review
+                        date={'02.02.2020'}
                         user={{
                             name: 'Andrey Ka',
                             username: 'zikwall'
@@ -159,6 +171,7 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                         review={'Очень круто, давно искал этот контент, Автору огромный респект!!!'}
                     />
                     <Review
+                        date={'30.01.2020'}
                         usefulCount={5}
                         isOwnUseful={false}
                         user={{
@@ -168,6 +181,7 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                         review={'Очень качественное вещание, автор действительно постарался, регулярные обновления, смотреть одно удовольствие. Подписался на него, чтобы получать качественный ковый контент, реклмендую всем!'}
                     />
                     <Review
+                        date={'29.01.2020'}
                         isOwnUseful
                         user={{
                             name: 'Свежеватель',

@@ -2,14 +2,14 @@ import React from 'react';
 import AntIconWrap from '../icon/AntIconWrap';
 import Row from '../ui/Row';
 
-const Ratings = () => {
+const Ratings = ({ size, full }) => {
     return (
-        <Row>
-            <AntIconWrap name={'star'} size={25} />
-            <AntIconWrap name={'star'} size={25} />
-            <AntIconWrap name={'star'} size={25} />
-            <AntIconWrap name={'staro'} size={25} />
-            <AntIconWrap name={'staro'} size={25} />
+        <Row style={full ? {} : { justifyContent: 'flex-start' }}>
+            <AntIconWrap name={'star'} size={size} />
+            <AntIconWrap name={'star'} size={size} />
+            <AntIconWrap name={'star'} size={size} />
+            <AntIconWrap name={'staro'} size={size} />
+            <AntIconWrap name={'staro'} size={size} />
         </Row>
     )
 };

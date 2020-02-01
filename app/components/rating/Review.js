@@ -6,8 +6,9 @@ import Row from '../ui/Row';
 import Tag from '../ui/Tag';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
+import Ratings from './Ratings';
 
-const Review = ({ user, review, usefulCount, isOwnUseful }) => {
+const Review = ({ user, review, date, stars, usefulCount, isOwnUseful }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
@@ -16,6 +17,12 @@ const Review = ({ user, review, usefulCount, isOwnUseful }) => {
             <Text style={[ human.caption1, { paddingTop: 5, paddingLeft: 15, paddingRight: 15, color: theme.primaryColor } ]}>
                 { review }
             </Text>
+            <View style={{ flexDirection: 'row', marginLeft: 15, marginTop: 5, alignItems: 'center' }}>
+                <Ratings size={10} />
+                <Text style={[ human.caption1, { paddingLeft: 15, paddingRight: 15, color: theme.primaryColor } ]}>
+                    { date }
+                </Text>
+            </View>
             {
                 (usefulCount > 0) &&
                 <Text style={[ human.caption1, { paddingTop: 15, paddingLeft: 15, color: theme.primaryColor } ]}>
