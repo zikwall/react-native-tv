@@ -453,6 +453,7 @@ export const users = [
         user: "Stepanov Alexander",
         userName: "@stepa",
         avatar: { uri: faker.image.avatar() },
+        is_official: 1
     },
     {
         user: "Craig Griffin",
@@ -463,6 +464,7 @@ export const users = [
         user: "Sergey Tichonov",
         userName: "@tihon",
         avatar: require("../assets/avatar/user5.jpg"),
+        is_official: 1
     },
     {
         user: "Wyatt Fleming",

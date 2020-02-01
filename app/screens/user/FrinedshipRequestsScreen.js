@@ -83,6 +83,7 @@ const FriendshipRequestsScreen = () => {
                             name={user.user}
                             username={user.userName}
                             image={user.avatar}
+                            isOfficialUser={user.is_official}
                             rightContent={
                                <RequestActions
                                    id={index+1}
@@ -103,6 +104,7 @@ const FriendshipRequestsScreen = () => {
                             name={user.user}
                             username={user.userName}
                             image={user.avatar}
+                            isOfficialUser={user.is_official}
                             rightContent={
                                 <TouchableOpacity onPress={() => {console.log(`closed request ${user.user}`)}}>
                                     <IconWrap name={'x-square'} size={25} />

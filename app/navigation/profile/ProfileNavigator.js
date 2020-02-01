@@ -103,6 +103,7 @@ const ProfileNavigator = ({ navigation, user, isAuthenticated }) => {
                 username={user.username}
                 avatar={UserHelper.makeUserAvatar(user)}
                 onAvatarPress={() => alert('U press avatar')}
+                isOfficial={user.is_official}
             />}
 
             <View style={{ flex: 1, backgroundColor: theme.primaryBackgroundColor }}>

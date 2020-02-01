@@ -9,8 +9,9 @@ import s from './styles-list';
 import { Avatar } from '../avatar';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
+import Verified from '../ui/Verified';
 
-const UserLineItem = ({ id, image, name, username, onPress, moreOnPress, rightContent }) => {
+const UserLineItem = ({ id, image, name, username, onPress, moreOnPress, rightContent, isOfficialUser }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
@@ -19,7 +20,9 @@ const UserLineItem = ({ id, image, name, username, onPress, moreOnPress, rightCo
             style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}>
 
             <View style={ s.leftContainer }>
-                <Avatar src={image} />
+                <Avatar src={image} badgeRight={
+                    isOfficialUser && <Verified size={15} />
+                }/>
 
                 <View style={ s.headingContainer }>
                     <Text

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import Verified from '../ui/Verified';
 
-const UserTop = ({ displayName, username, avatar, onAvatarPress }) => {
+const UserTop = ({ displayName, username, avatar, onAvatarPress, isOfficial }) => {
     const theme = useSelector(state => getAppTheme(state));
     return (
         <View style={[ s.container, { backgroundColor: theme.primaryBackgroundColor }]}>
@@ -17,7 +17,7 @@ const UserTop = ({ displayName, username, avatar, onAvatarPress }) => {
                         src={avatar}
                         size={80}
                         badgeRight={
-                            <Verified />
+                            isOfficial && <Verified />
                         }
                     />
                     <Text style={[ s.displayName, { color: theme.primaryColor }]}>

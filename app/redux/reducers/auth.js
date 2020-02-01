@@ -4,6 +4,7 @@ const initialState = {
     token: null,
     user: {
         is_premium: 0,
+        is_official: 0,
         profile: {
             name: null,
             public_email: null,
