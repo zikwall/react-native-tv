@@ -5,7 +5,7 @@ import { View } from 'react-native';
 const Verified = ({ size }) => {
     return (
         <View style={{
-            backgroundColor: 'green',
+            backgroundColor: '#7cbb4f',
             height: size,
             width: size,
             borderRadius: size/2

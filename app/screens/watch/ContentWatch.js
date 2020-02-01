@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setPlayhubPlayer } from '../../redux/actions';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, FlatList } from 'react-native';
 import {
     NavigationHeaderComponent,
     NavigationHeaderLeft,
@@ -12,12 +12,13 @@ import {
     IconWrap,
     Heading,
     Avatar,
-    Tag,
     Ratings,
     AntIconWrap,
     Review,
     NavigationHeaderTitleContent,
-    Verified
+    Verified,
+    RatingOverView,
+    LoadMoreButton,
 } from '../../components';
 
 import { getActiveContent, getAppTheme } from '../../redux/reducers';
@@ -26,11 +27,13 @@ import { Modalize } from 'react-native-modalize';
 import Menu, { MenuDivider, MenuItem } from 'react-native-material-menu';
 import { Players } from '../../constants';
 import Description from './components/Description';
+import { Fake } from '../../utils';
 
 const ContentWatch = ({ navigation, content, selectPlayer }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const [ isVisiblePage, setIsVisiblePage ] = useState(true);
+    const [ reviews, setReviews ] = useState(Fake.reviews);
 
     useEffect(() => {
         navigation.setParams({'title': content.name, image: content.image });
@@ -39,6 +42,13 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
             console.log('UNMOUNT CONTENT WATCH');
         }
     }, []);
+
+    const loadReviews = () => {
+        setReviews([
+            ...reviews,
+            ...Fake.reviews
+        ]);
+    };
 
     const modal = React.createRef();
     const menu = React.createRef();
@@ -102,7 +112,7 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                                     }
                                 />
                                 <View style={{ marginLeft: 10 }}>
-                                    <Text style={[human.callout, { color: theme.primaryColor }]}>
+                                    <Text style={[human.callout, { color: theme.primaryColor, fontWeight: 'bold', fontSize: 14 }]}>
                                         Опубликовал
                                     </Text>
                                     <Text style={{ color: theme.secondaryColor }}>
@@ -155,52 +165,45 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                                 </Menu>
                             </View>
                         </Row>
-                        <ScrollView>
-                            <Description
-                                description={'Дорогой зритель, я нашел для вас контент, вы все его так ждали - встречайте!'}
-                                tags={[
-                                    {label: 'Социальные', id: 10},
-                                    {label: 'Выбор редакции', id: 30},
-                                    {label: 'Топ 100 лучших', id: 40},
-                                ]}
-                            />
-                            <View>
-                                <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценить контент'} />
-                                <View style={{ paddingHorizontal: 15 }}>
-                                    <Ratings size={25} full />
+
+                        <FlatList
+                            ListHeaderComponent={
+                                <View>
+                                    <Description
+                                        description={'Дорогой зритель, я нашел для вас контент, вы все его так ждали - встречайте!'}
+                                        tags={[
+                                            {label: 'Социальные', id: 10},
+                                            {label: 'Выбор редакции', id: 30},
+                                            {label: 'Топ 100 лучших', id: 40},
+                                        ]}
+                                    />
+                                    <View>
+                                        <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценить контент'} />
+                                        <View style={{ paddingHorizontal: 15 }}>
+                                            <Ratings size={25} full />
+                                        </View>
+                                    </View>
+                                    <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценки и отзывы'} />
+                                    <RatingOverView stars={reviews} />
                                 </View>
-                            </View>
-                            <View style={{ paddingVertical: 15 }}>
+                            }
+                            data={reviews}
+                            renderItem={({ item, index }) => (
                                 <Review
-                                    date={'02.02.2020'}
-                                    user={{
-                                        name: 'Andrey Ka',
-                                        username: 'zikwall'
-                                    }}
-                                    review={'Очень круто, давно искал этот контент, Автору огромный респект!!!'}
+                                    key={index}
+                                    stars={item.stars}
+                                    date={item.date}
+                                    user={item.user}
+                                    review={item.review}
+                                    isOwnUseful={item.isOwnUseful}
+                                    usefulCount={item.usefulCount}
                                 />
-                                <Review
-                                    date={'30.01.2020'}
-                                    usefulCount={5}
-                                    isOwnUseful={false}
-                                    user={{
-                                        name: 'Destinator 1337',
-                                        username: 'destinator'
-                                    }}
-                                    review={'Очень качественное вещание, автор действительно постарался, регулярные обновления, смотреть одно удовольствие. Подписался на него, чтобы получать качественный ковый контент, реклмендую всем!'}
-                                />
-                                <Review
-                                    date={'29.01.2020'}
-                                    usefulCount={1}
-                                    isOwnUseful
-                                    user={{
-                                        name: 'Свежеватель',
-                                        username: 'huyar_svejevatel'
-                                    }}
-                                    review={'ЁЁ. Все круто. Спс.'}
-                                />
-                            </View>
-                        </ScrollView>
+                            )}
+                            ListFooterComponent={
+                                <LoadMoreButton onLoadMorePress={() => loadReviews()} label={'Больше отзывов!'} />
+                            }
+                            keyExtractor={(item, index) => `__id${index}`}
+                        />
                     </>
             }
 

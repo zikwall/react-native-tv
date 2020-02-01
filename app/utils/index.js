@@ -7,6 +7,7 @@ import * as SafeValidator from './SafeValidator';
 import * as FormHelper from './Form';
 import * as Environment from './Environment';
 import * as DataHelper from './DataHelper';
+import * as MathHelper from './MathHelper';
 
 export {
     ArrayHelper,
@@ -17,5 +18,6 @@ export {
     SafeValidator,
     FormHelper,
     Environment,
-    DataHelper
+    DataHelper,
+    MathHelper
 }

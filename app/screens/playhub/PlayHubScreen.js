@@ -11,6 +11,7 @@ import {
     FlatButton,
     OverlayLoader,
     FilterBar,
+    LoadMoreButton
 } from '../../components';
 import styles from './styles';
 import { useSelector } from 'react-redux';
@@ -211,9 +212,7 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
                 />}
                 ListFooterComponent={
                     !isEnd &&
-                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                        <FlatButton onPress={handleLoadMorePress} text={'Загрузить еще'} backgroundColor={theme.secondaryBackgroundColor} style={{ borderRadius: 5, padding: 10 }}/>
-                    </View>
+                    <LoadMoreButton onLoadMorePress={handleLoadMorePress} />
                 }
                 keyExtractor={item => item.id}
             />

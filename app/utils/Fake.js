@@ -1,5 +1,6 @@
 import faker from 'faker';
 import { Content } from './../constants';
+import { random } from './Array';
 
 export const onComingSoonFeaturePress = () => {
     alert('Coming Soon');
@@ -477,5 +478,48 @@ export const users = [
         user: "Nikita Timurbulatov",
         userName: "@dawshak",
         avatar: { uri: faker.image.avatar() },
+    }
+];
+
+export const reviews = [
+    {
+        user: random(users),
+        review: 'Очень круто, давно искал этот контент, Автору огромный респект!!!',
+        stars: 3,
+        date: '02.02.2020',
+        usefulCount: 0,
+        isOwnUseful: false
+    },
+    {
+        user: random(users),
+        review: 'Очень круто, давно искал этот контент, Автору огромный респект!!!',
+        stars: 5,
+        date: '30.01.2020',
+        usefulCount: 5,
+        isOwnUseful: false
+    },
+    {
+        user: random(users),
+        review: 'Очень качественное вещание, автор действительно постарался, регулярные обновления, смотреть одно удовольствие. Подписался на него, чтобы получать качественный ковый контент, реклмендую всем!',
+        stars: 1,
+        date: '29.01.2020',
+        usefulCount: 1,
+        isOwnUseful: true
+    },
+    {
+        user: random(users),
+        review: 'Cool!, Very Cooool! Perfect! omg vaaahhh, krasota!',
+        stars: 5,
+        date: '28.01.2020',
+        usefulCount: 1,
+        isOwnUseful: true
+    },
+    {
+        user: random(users),
+        review: 'Спасибо этому приложению и божественному создателю, благослави тебя жизнь, ты супер, теперь я могу смотреть любимые передачи в любое время и в любом месте!! :)',
+        stars: 5,
+        date: '27.01.2020',
+        usefulCount: 1,
+        isOwnUseful: true
     }
 ];

@@ -22,19 +22,20 @@ const Review = ({ user, review, date, stars, usefulCount, isOwnUseful }) => {
 
         if (status === false && usefulStatus && usefulCountStatus) {
             setUsefulCountStatus(usefulCountStatus - 1);
-        } else {
+        }
+        if (status === true && !usefulCountStatus) {
             setUsefulCountStatus(usefulCountStatus + 1);
         }
     };
 
     return (
         <View style={{ flexDirection: 'column' }}>
-            <UserLineItem name={user.name} username={user.username} />
+            <UserLineItem name={user.user} username={user.userName} image={user.avatar} />
             <Text style={[ human.caption1, textStyle, { paddingTop: 5, color: theme.primaryColor } ]}>
                 { review }
             </Text>
             <View style={{ flexDirection: 'row', marginLeft: 15, marginTop: 5, alignItems: 'center' }}>
-                <Ratings size={10} />
+                <Ratings size={10} value={stars} disabled />
                 <Text style={[ human.caption1, textStyle ]}>
                     { date }
                 </Text>
