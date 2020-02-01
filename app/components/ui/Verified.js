@@ -10,7 +10,7 @@ const Verified = ({ size }) => {
             width: size,
             borderRadius: size/2
         }}>
-            <IconWrap name={'check-circle'} size={size} />
+            <IconWrap name={'check-circle'} size={size} color={'#fff'} />
         </View>
     )
 };
