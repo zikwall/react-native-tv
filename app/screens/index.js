@@ -32,18 +32,61 @@ import PremiumScreen from "./user/PremiumScreen";
 import WriteDeveloperScreen from "./user/WriteDeveloperScreen";
 import SecurityScreen from "./user/SecurityScreen";
 import ParentControlScreen from "./user/ParentControlScreen";
+import CreativeStudioScreen from './user/CreativeStudio';
 
 export {
-    // global
-    HomeScreen, PlayHubScreen, WatchScreen, LikedScreen, ContentWatch,
-    // user
-    ProfileHomeScreen, FollowersScreen, FollowingScreen, ProfileChannelScreen, StatisticScreen, UserMenuScreen,
-    FriendshipRequestsScreen, ParentControlScreen,
-    // auth
-    LoginScreen, RegisterScreen, ForgotScreen, ContinueRegisterScreen,
-    // menu
-    MenuScreen, CopyrightScreen, TermsScreen, PrivacyScreen, AboutScreen, FaqScreen, SystemScreen, AccountScreen,
-    DebugVideoScreen, ContactsScreen, PremiumScreen, WriteDeveloperScreen, SecurityScreen,
-    // playhub
-    PlayHubBestScreen, PlayHubCategoryScreen, PlayHubForFamilyScreen, PlayHubRecommendedScreen
+    /**
+     *  Global namespace
+     */
+    HomeScreen,
+    PlayHubScreen,
+    WatchScreen,
+    LikedScreen,
+    ContentWatch,
+
+    /**
+     *  User namespace
+     */
+    ProfileHomeScreen,
+    FollowersScreen,
+    FollowingScreen,
+    ProfileChannelScreen,
+    StatisticScreen,
+    UserMenuScreen,
+    FriendshipRequestsScreen,
+    ParentControlScreen,
+
+    /**
+     *  Authorization  namespace
+     */
+    LoginScreen,
+    RegisterScreen,
+    ForgotScreen,
+    ContinueRegisterScreen,
+
+    /**
+     *  Menu namespace
+     */
+    MenuScreen,
+    CopyrightScreen,
+    TermsScreen,
+    PrivacyScreen,
+    AboutScreen,
+    FaqScreen,
+    SystemScreen,
+    AccountScreen,
+    DebugVideoScreen,
+    ContactsScreen,
+    PremiumScreen,
+    WriteDeveloperScreen,
+    SecurityScreen,
+    CreativeStudioScreen,
+
+    /**
+     *  PlayHub service namespace
+     */
+    PlayHubBestScreen,
+    PlayHubCategoryScreen,
+    PlayHubForFamilyScreen,
+    PlayHubRecommendedScreen
 }

@@ -17,7 +17,8 @@ import {
     PremiumScreen,
     WriteDeveloperScreen,
     SecurityScreen,
-    ParentControlScreen
+    ParentControlScreen,
+    CreativeStudioScreen
 } from "../../screens";
 import {
     NavigationHeaderComponent,
@@ -100,6 +101,15 @@ const MenuNavigator = createStackNavigator({
         navigationOptions:{
             header: (props) => <NavigationHeaderComponent
                 titleComponent={<NavigationHeaderTitle title={'Write to Developer'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
+    },
+    CreativeStudioScreen: {
+        screen: CreativeStudioScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Creative Studio'} />}
                 leftComponent={ <NavigationHeaderLeft /> } {...props}
             />
         }
