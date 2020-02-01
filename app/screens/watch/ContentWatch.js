@@ -191,6 +191,7 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                                 />
                                 <Review
                                     date={'29.01.2020'}
+                                    usefulCount={1}
                                     isOwnUseful
                                     user={{
                                         name: 'Свежеватель',
