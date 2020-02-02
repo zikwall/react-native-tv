@@ -1,4 +1,4 @@
-package com.playhub;
+package com.zikwall.playhub;
 
 import android.app.Application;
 import android.content.Context;
