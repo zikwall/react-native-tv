@@ -26,6 +26,8 @@ import { EPG } from '../../services';
 import { SafeValidator } from '../../utils';
 import Icon from 'react-native-vector-icons/Feather';
 
+import { InterstitialAd, TestIds, AdEventType } from '@react-native-firebase/admob';
+
 const {height, width} = Dimensions.get('window');
 
 const defaultEpg = [
@@ -60,12 +62,29 @@ const defaultEpg = [
 ];
 
 const WatchScreen = ({ navigation, selectPlayer, channel }) => {
+    const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
+        requestNonPersonalizedAdsOnly: true,
+    });
+
+    interstitial.onAdEvent((type) => {
+        if (type === AdEventType.LOADED) {
+            interstitial.show();
+        }
+    });
+
+    interstitial.load();
+
     const theme = useSelector(state => getAppTheme(state));
     const [ webViewSize, setWebViewSize ] = useState(height * 0.275 + width * 0.03);
     const [ modalContent, setModalContent ] = useState(null);
     const [ epgContent, setEpgContent ] = useState(null);
     const [ activeTab, setActiveTab ] = useState(3);
     let _menu = null;
+
+    useEffect(() => {
+
+
+    }, []);
 
     useEffect(() => {
         console.log('MOUNT WATCH');

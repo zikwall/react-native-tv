@@ -9,6 +9,7 @@ import {
     NavigationHeaderRight,
     NavigationHeaderComponent,
     NavigationHeaderLogo,
+    AdmobBanner
 } from '../../components';
 import { getChannels, getAppTheme } from '../../redux/reducers';
 import { setChannel } from "../../redux/actions/channels";
@@ -62,6 +63,7 @@ const HomeScreen = ({ navigation }) => {
                     onPress={() => alert("onPressss")}
                     cancelVisible={ cancelVisible }
                 />
+                <AdmobBanner />
                 <SectionGrid
                     itemDimension={ height * 0.2 }
                     sections={ DataHelper.getGroupedChannels(items) }

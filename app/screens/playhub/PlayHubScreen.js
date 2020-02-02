@@ -11,7 +11,8 @@ import {
     FlatButton,
     OverlayLoader,
     FilterBar,
-    LoadMoreButton
+    LoadMoreButton,
+    AdmobBanner,
 } from '../../components';
 import styles from './styles';
 import { useSelector } from 'react-redux';
@@ -166,7 +167,15 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
             includeTypes.push('Фильм')
         }
 
+        let countBanners = 0;
+
         setItems(contents.filter((item) => {
+            // maximum two banner
+            if (countBanners < 2 && !item.hasOwnProperty('name')) {
+                countBanners++;
+                return true;
+            }
+
             if (includeTypes.includes(item.type)) {
                 if (!useAdults) {
                     return item.age_limit !== 50;
@@ -180,7 +189,13 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
     };
 
     const searchHandle = (text) => {
-        setItems(contents.filter((item) => item.name.toLowerCase().includes(text.toLowerCase())));
+        setItems(contents.filter((item) => {
+            if (!item.hasOwnProperty('name')) {
+                return true;
+            }
+
+            return item.name.toLowerCase().includes(text.toLowerCase())
+        }));
 
         if (text === '') {
             setCancelVisible(false);
@@ -199,17 +214,22 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
             />
             <FlatList
                 data={items}
-                renderItem={({ item, index }) => <CommonChannelListItem
-                    key={index}
-                    title={item.name}
-                    subtitle={item.category}
-                    type={item.type}
-                    image={{ uri: item.image }}
-                    rating={item.rating}
-                    visibility={item.visibility}
-                    playlist={item}
-                    onPress={handleOnClickContent}
-                />}
+                renderItem={({ item, index }) => typeof item.is_banner !== "undefined"
+                    ?
+                    <AdmobBanner />
+                    :
+                    <CommonChannelListItem
+                        key={index}
+                        title={item.name}
+                        subtitle={item.category}
+                        type={item.type}
+                        image={{ uri: item.image }}
+                        rating={item.rating}
+                        visibility={item.visibility}
+                        playlist={item}
+                        onPress={handleOnClickContent}
+                    />
+                }
                 ListFooterComponent={
                     !isEnd &&
                     <LoadMoreButton onLoadMorePress={handleLoadMorePress} />
