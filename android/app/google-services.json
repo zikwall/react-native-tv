@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:768528205826:android:fd0769fac3b659214cbf1b",
+        "mobilesdk_app_id": "1:768528205826:android:2f0ff1dcd8a5bbd94cbf1b",
         "android_client_info": {
-          "package_name": "com.playhub"
+          "package_name": "com.zikwall.playhub"
         }
       },
       "oauth_client": [

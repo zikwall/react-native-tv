@@ -20,7 +20,6 @@ import {
     RatingOverView,
     LoadMoreButton,
 } from '../../components';
-import { getActiveContent } from '../../redux/reducers';
 import { AdEventType, InterstitialAd, TestIds } from "@react-native-firebase/admob";
 
 import { getActiveContent, getAppTheme } from '../../redux/reducers';
@@ -38,7 +37,7 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
     const [ reviews, setReviews ] = useState(Fake.reviews);
 
     useEffect(() => {
-        const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL, {
+        const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
             requestNonPersonalizedAdsOnly: true,
         });
 

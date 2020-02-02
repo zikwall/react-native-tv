@@ -62,7 +62,7 @@ const defaultEpg = [
 ];
 
 const WatchScreen = ({ navigation, selectPlayer, channel }) => {
-    const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL, {
+    const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
         requestNonPersonalizedAdsOnly: true,
     });
 

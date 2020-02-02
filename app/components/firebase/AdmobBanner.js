@@ -6,7 +6,7 @@ const AdmobBanner = () => {
     return (
         <View style={{ alignItems: 'center', justifyContent: 'center', paddingVertical: 5 }}>
             <BannerAd
-                unitId={TestIds.BANNER}
+                unitId={'ca-app-pub-3049855368077051/1739765306'}
                 size={BannerAdSize.BANNER}
                 requestOptions={{
                     requestNonPersonalizedAdsOnly: true,
