@@ -1,17 +1,23 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
 import { Dimensions, TextInput } from 'react-native';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import Heading from '../heading';
 
-const ExtendedTextArea = ({ maxLength, lineNumbers, inputname, label, labelIcon, customErrors, ...props }) => {
+const ExtendedTextArea = ({ maxLength, lineNumbers, inputname, label, labelIcon, customErrors, onChangeText, ...props }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const [ length, setLength ] = useState(0);
 
     const _markAsError = () => {
         return !!customErrors && Array.isArray(customErrors) && customErrors.includes(inputname) ? {
             borderColor: 'red',
         } : {};
+    };
+
+    const handleOnChangeText = (text) => {
+        onChangeText(text);
+        setLength(text.length);
     };
 
     return (
@@ -21,6 +27,7 @@ const ExtendedTextArea = ({ maxLength, lineNumbers, inputname, label, labelIcon,
             }
             <TextInput
                 {...props}
+                onChangeText={handleOnChangeText}
                 placeholderTextColor={theme.primaryColor}
                 multiline={true}
                 numberOfLines={lineNumbers}
@@ -35,6 +42,11 @@ const ExtendedTextArea = ({ maxLength, lineNumbers, inputname, label, labelIcon,
                     padding: 10,
                 }, _markAsError()
             ]}/>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                <Text style={{ color: theme.primaryColor }}>
+                    {length}/{maxLength}
+                </Text>
+            </View>
         </View>
     )
 };
