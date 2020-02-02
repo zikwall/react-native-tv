@@ -181,7 +181,7 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
     };
 
     const searchHandle = (text) => {
-        setItems(contents.filter((item) => item.name.toLowerCase().includes(text.toLowerCase())));
+        setItems(contents.filter((item) => item.hasOwnProperty('name') && item.name.toLowerCase().includes(text.toLowerCase())));
 
         if (text === '') {
             setCancelVisible(false);
