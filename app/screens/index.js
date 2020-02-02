@@ -33,6 +33,7 @@ import WriteDeveloperScreen from "./user/WriteDeveloperScreen";
 import SecurityScreen from "./user/SecurityScreen";
 import ParentControlScreen from "./user/ParentControlScreen";
 import CreativeStudioScreen from './user/CreativeStudio';
+import CreateContentScreen from './user/CreateContent';
 
 export {
     /**
@@ -81,6 +82,7 @@ export {
     WriteDeveloperScreen,
     SecurityScreen,
     CreativeStudioScreen,
+    CreateContentScreen,
 
     /**
      *  PlayHub service namespace

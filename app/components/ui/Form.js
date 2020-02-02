@@ -25,7 +25,7 @@ const Form = ({ children, buttonEnd, buttonTitle, header, onSubmit, headerColor,
             }
 
             <View style={{ height: '83%' }}>
-                <ScrollView>
+                <ScrollView showsVerticalScrollIndicator={false}>
                     { children }
                 </ScrollView>
             </View>

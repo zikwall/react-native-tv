@@ -7,7 +7,7 @@ import {
     NavigationHeaderTitle,
     NavigationHeaderLeft,
     ThemePicker,
-    NavigationHeaderComponent
+    NavigationHeaderComponent, Divider,
 } from '../../components';
 import { changeTheme } from "../../redux/actions";
 import { ThemeService } from "../../services";
@@ -50,6 +50,7 @@ const UserMenuScreen = ({ navigation }) => {
             <ScrollView>
                 <Heading icon={'target'} text={'Выберите цветовую схему'} color={theme.primaryColor} />
                 <ThemePicker />
+                <MenuItemLine onPress={onMenuPress} to={'CreativeStudioScreen'} icon={'film'} name={'Творческая студия'} />
                 <MenuItemLine onPress={onMenuPress} to={'FriendshipRequestsScreen'} icon={'user-check'} name={'Заявки в друзья'} onLongPress={() => alert('Looong!')} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'message-square'} name={'Сообщения'} unreadItems={20} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'users'} name={'Сообщества'} />
@@ -62,7 +63,6 @@ const UserMenuScreen = ({ navigation }) => {
                 <MenuItemLine onPress={onMenuPress} to={'ParentControlScreen'} icon={'shield'} name={'Родительский контроль'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'eye'} name={'Настройки приватности'} />
                 {/*<Heading icon={'database'} text={'Content'} color={theme.primaryColor} />*/}
-                <MenuItemLine onPress={onMenuPress} to={'CreativeStudioScreen'} icon={'film'} name={'Творческая студия'} />
                 <MenuItemLine onPress={onMenuPress} to={'UserStatisticScreen'} icon={'bar-chart-2'} name={'Ваша аналитика'} />
                 {/*<Heading icon={'terminal'} text={'Developer Block'} color={theme.primaryColor} />*/}
                 <MenuItemLine onPress={onMenuPress} to={'DebugVideoScreen'} icon={'video'} name={'Проверить контент'} />

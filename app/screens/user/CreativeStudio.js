@@ -5,7 +5,7 @@ import { getAppTheme } from '../../redux/reducers';
 import { CommonChannelListItem, FlatButton, Heading, OverlayLoader, ThemedView } from '../../components';
 import { ContentService } from '../../services';
 
-const CreativeStudioScreen = () => {
+const CreativeStudioScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const token = useSelector(state => state.authentication.token);
     const user = useSelector(state => state.authentication.user);
@@ -17,6 +17,8 @@ const CreativeStudioScreen = () => {
         ContentService.fetchOwnContents(token).then((response) => {
             setOwnContent(response.response);
             setCompleteConfiguring(true);
+        }).catch(() => {
+            setCompleteConfiguring(true);
         });
     }, []);
 
@@ -26,7 +28,13 @@ const CreativeStudioScreen = () => {
                 <FlatList
                     ListHeaderComponent={
                         <View>
-                            <FlatButton text={'Добавить новый контент'} icon={'upload-cloud'} color={theme.primaryColor} />
+                            <FlatButton
+                                text={'Добавить новый контент'}
+                                icon={'upload-cloud'} color={theme.primaryColor}
+                                onPress={() => {
+                                    navigation.navigate('CreateContentScreen');
+                                }}
+                            />
                             <Heading text={'Ваши видео'} color={theme.primaryColor} />
                         </View>
                     }
