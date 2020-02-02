@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import Heading from '../heading';
 
-const ExtendedTextInput = ({ inputname, label, labelIcon, customErrors, ...props }) => {
+const ExtendedTextInput = ({ inputname, label, labelIcon, customErrors, inputStyles, description, ...props }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     const _markAsError = () => {
@@ -14,10 +14,12 @@ const ExtendedTextInput = ({ inputname, label, labelIcon, customErrors, ...props
         } : {};
     };
 
+    const customizeHeadingStyles = !!description ? { paddingBottom: 5 } : {};
+
     return (
-        <View>
+        <View style={inputStyles}>
             {
-                label && <Heading text={label} styles={{ paddingLeft: 0 }} color={theme.primaryColor} icon={labelIcon} />
+                label && <Heading text={label} styles={{ paddingLeft: 0, ...customizeHeadingStyles }} color={theme.primaryColor} icon={labelIcon} description={description} />
             }
             <TextInput {...props} placeholderTextColor={theme.primaryColor} style={[
                 {
@@ -25,7 +27,7 @@ const ExtendedTextInput = ({ inputname, label, labelIcon, customErrors, ...props
                     color: theme.primaryColor,
                     borderWidth: 1,
                     borderRadius: 10,
-                    padding: 10,
+                    padding: 10
                 }, _markAsError()
             ]}/>
         </View>
@@ -35,7 +37,8 @@ const ExtendedTextInput = ({ inputname, label, labelIcon, customErrors, ...props
 ExtendedTextInput.defaultProps = {
     label: undefined,
     labelIcon: undefined,
-    customErrors: []
+    customErrors: [],
+    inputStyles: {}
 };
 
 export default ExtendedTextInput;

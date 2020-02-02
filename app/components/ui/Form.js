@@ -10,7 +10,7 @@ const Form = ({ children, buttonEnd, buttonTitle, header, onSubmit, headerColor,
     return (
         <ThemedView style={{ margin: 10 }}>
             {
-                header && <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                header && <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
                     <Text style={[ human.headline, { color: headerColor } ]}>
                         { header }
                     </Text>
@@ -31,7 +31,7 @@ const Form = ({ children, buttonEnd, buttonTitle, header, onSubmit, headerColor,
             </View>
 
             <View style={{ position: 'absolute', left: 0, right: 0, bottom: 0 }}>
-                <ExtendedButton onPress={onSubmit} title={buttonTitle}/>
+                <ExtendedButton onPress={onSubmit} title={buttonTitle} />
             </View>
         </ThemedView>
     );
