@@ -20,6 +20,8 @@ import {
     RatingOverView,
     LoadMoreButton,
 } from '../../components';
+import { getActiveContent } from '../../redux/reducers';
+import { AdEventType, InterstitialAd, TestIds } from "@react-native-firebase/admob";
 
 import { getActiveContent, getAppTheme } from '../../redux/reducers';
 import { human } from "react-native-typography";
@@ -34,6 +36,20 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const [ isVisiblePage, setIsVisiblePage ] = useState(true);
     const [ reviews, setReviews ] = useState(Fake.reviews);
+
+    useEffect(() => {
+        const interstitial = InterstitialAd.createForAdRequest(TestIds.INTERSTITIAL, {
+            requestNonPersonalizedAdsOnly: true,
+        });
+
+        interstitial.onAdEvent((type) => {
+            if (type === AdEventType.LOADED) {
+                interstitial.show();
+            }
+        });
+
+        interstitial.load();
+    }, []);
 
     useEffect(() => {
         navigation.setParams({'title': content.name, image: content.image });
@@ -95,9 +111,9 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
     };
 
     return (
-        <ThemedView style={{ zIndex: 2 }}>
-            <View style={{ height: 200, backgroundColor: '#000' }}>
-                <VideoViewContent content={content} onFullscreen={onFullscreen} />
+        <ThemedView>
+            <View style={{ height: 200 }}>
+                <VideoViewContent content={content} />
             </View>
 
             {

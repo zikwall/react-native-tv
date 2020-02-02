@@ -21,6 +21,11 @@ const contentFetchReducer = (state = initialState, action) => {
             };
 
         case FETCH_CONTENT_SUCCESS:
+            action.contents.push({
+                id: "banner_" + state.contents.length + 1,
+                is_banner: true
+            });
+
             return {
                 ...state,
                 pending: false,
