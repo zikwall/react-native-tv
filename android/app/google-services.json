@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "768528205826",
+    "firebase_url": "https://playhub-bdd68.firebaseio.com",
+    "project_id": "playhub-bdd68",
+    "storage_bucket": "playhub-bdd68.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768528205826:android:2f0ff1dcd8a5bbd94cbf1b",
+        "android_client_info": {
+          "package_name": "com.zikwall.playhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768528205826-dibk9tfkncneifa3h4vbkvfjsnn8jpp4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-jujGEzSPF2LiQHn8X71hvf85CG1U7wg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768528205826-dibk9tfkncneifa3h4vbkvfjsnn8jpp4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
