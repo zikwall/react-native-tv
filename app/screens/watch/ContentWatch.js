@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setPlayhubPlayer } from '../../redux/actions';
-import { View, Text, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import {
     NavigationHeaderComponent,
     NavigationHeaderLeft,
@@ -30,6 +30,8 @@ import { Players } from '../../constants';
 import Description from './components/Description';
 import { Fake } from '../../utils';
 
+const { height, width } = Dimensions.get('window');
+
 const ContentWatch = ({ navigation, content, selectPlayer }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
@@ -43,7 +45,7 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
 
         interstitial.onAdEvent((type) => {
             if (type === AdEventType.LOADED) {
-                interstitial.show();
+                //interstitial.show();
             }
         });
 
@@ -111,8 +113,17 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
 
     return (
         <ThemedView>
-            <View style={{ height: 200 }}>
-                <VideoViewContent content={content} />
+            <View style={{ paddingTop: '56.25%' }}>
+                <View style={{
+                    position: 'absolute',
+                    left: 0,
+                    right:0,
+                    bottom: 0,
+                    top: 0,
+                    backgroundColor: theme.primaryBackgroundColor
+                }}>
+                    <VideoViewContent content={content} onFullscreen={onFullscreen}/>
+                </View>
             </View>
 
             {

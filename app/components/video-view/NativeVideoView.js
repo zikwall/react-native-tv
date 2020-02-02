@@ -138,7 +138,7 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
                 />
             </TouchableOpacity>
 
-            <View style={[ styles.controls, { bottom: 5, left: 5, right: 5 } ]}>
+            <View style={[ styles.controls ]}>
                 <View style={styles.generalControls}>
                     <View style={styles.rateControl}>
                         {renderRateControl(0.25)}
@@ -189,7 +189,11 @@ const styles = StyleSheet.create({
     },
     controls: {
         backgroundColor: 'transparent',
-        position: 'absolute',
+        //position: 'absolute',
+        //flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         borderRadius: 5,
         zIndex: 1000
     },
@@ -211,7 +215,7 @@ const styles = StyleSheet.create({
     rateControl: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
+        //justifyContent: 'center',
     },
     volumeControl: {
         flex: 1,
@@ -219,9 +223,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     resizeModeControl: {
-        flex: 1,
+        //flex: 1,
         flexDirection: 'row',
-        alignItems: 'center',
+        //alignItems: 'center',
         justifyContent: 'center',
     },
     controlOption: {
