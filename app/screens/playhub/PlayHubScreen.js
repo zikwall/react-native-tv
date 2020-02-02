@@ -167,7 +167,15 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
             includeTypes.push('Фильм')
         }
 
+        let countBanners = 0;
+
         setItems(contents.filter((item) => {
+            // maximum two banner
+            if (countBanners < 2 && !item.hasOwnProperty('name')) {
+                countBanners++;
+                return true;
+            }
+
             if (includeTypes.includes(item.type)) {
                 if (!useAdults) {
                     return item.age_limit !== 50;
@@ -181,7 +189,13 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
     };
 
     const searchHandle = (text) => {
-        setItems(contents.filter((item) => item.hasOwnProperty('name') && item.name.toLowerCase().includes(text.toLowerCase())));
+        setItems(contents.filter((item) => {
+            if (!item.hasOwnProperty('name')) {
+                return true;
+            }
+
+            return item.name.toLowerCase().includes(text.toLowerCase())
+        }));
 
         if (text === '') {
             setCancelVisible(false);
