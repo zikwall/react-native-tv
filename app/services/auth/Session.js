@@ -11,9 +11,7 @@ export default class Session {
         return !Session.isLogged();
     };
 
-    static isLogged = () => {
-        const token = Session.getToken();
-
+    static isLogged = (token) => {
         return !!token && !Session.isSessionExpired(token);
     };
 
@@ -22,6 +20,7 @@ export default class Session {
             const decoded = decode(accessToken);
             return (decoded.exp < Date.now() / 1000);
         } catch (err) {
+            console.log('Session expired!');
             return false;
         }
     };
