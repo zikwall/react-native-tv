@@ -189,9 +189,17 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
     };
 
     const searchHandle = (text) => {
+        let countBanners = 0;
+
+        // limit two banner items
         setItems(contents.filter((item) => {
-            if (!item.hasOwnProperty('name')) {
+            if (countBanners < 2 && !item.hasOwnProperty('name')) {
+                countBanners++;
                 return true;
+            }
+
+            if (countBanners >= 2 && !item.hasOwnProperty('name')) {
+                return false;
             }
 
             return item.name.toLowerCase().includes(text.toLowerCase())
