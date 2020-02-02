@@ -2,12 +2,12 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { MathHelper } from '../../utils';
 
-const Progress = ({ label, current, top }) => {
+const Progress = ({ label, current, top, labelColor }) => {
     const width = MathHelper.percentage(current, top);
 
     return (
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-            { label && <Text style={{ paddingRight: 5 }}>{label}</Text>}
+            { label && <Text style={{ paddingRight: 5, color: labelColor }}>{label}</Text>}
             <View style={styles.progressBar}>
                 <View style={[styles.overprogress, { width: `${width}%`, height: 15 } ]}/>
             </View>
@@ -18,6 +18,7 @@ const Progress = ({ label, current, top }) => {
 Progress.defaultProps = {
     current: 0,
     top: 0,
+    labelColor: '#000'
 };
 
 export default Progress;

@@ -47,7 +47,7 @@ const OverViewRating = ({ stars }) => {
     return (
         <View style={{ flexDirection: 'row' }}>
             <View style={{ alignItems: 'center', justifyContent: 'center', paddingHorizontal: 45 }}>
-                <Text style={{ fontSize: 50 }}>
+                <Text style={{ fontSize: 50, color: theme.primaryColor }}>
                     { commonState.averageValue || 0 }
                 </Text>
                 <Ratings size={15} disabled value={Math.round(parseFloat(commonState.averageValue))} />
@@ -58,7 +58,7 @@ const OverViewRating = ({ stars }) => {
             <View style={{ width: 150 }}>
                 {
                     Object.entries(commonState.stars).map(([key, value], index) => (
-                        <Progress key={index} label={key} current={value} top={commonState.totalCount} />
+                        <Progress key={index} label={key} labelColor={theme.primaryColor} current={value} top={commonState.totalCount} />
                     ))
                 }
             </View>

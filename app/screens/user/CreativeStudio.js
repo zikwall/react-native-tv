@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
-import { CommonChannelListItem, FlatButton, Heading, ThemedView } from '../../components';
+import { CommonChannelListItem, FlatButton, Heading, OverlayLoader, ThemedView } from '../../components';
 import { ContentService } from '../../services';
 
 const CreativeStudioScreen = () => {
@@ -10,26 +10,24 @@ const CreativeStudioScreen = () => {
     const token = useSelector(state => state.authentication.token);
     const user = useSelector(state => state.authentication.user);
 
-    const [ ownContent, setOwnContent ] = useState(null);
+    const [ ownContent, setOwnContent ] = useState([]);
+    const [ completeConfiguring, setCompleteConfiguring ] = useState(false);
 
     useEffect(() => {
         ContentService.fetchOwnContents(token).then((response) => {
             setOwnContent(response.response);
+            setCompleteConfiguring(true);
         });
     }, []);
 
     const Content = () => {
-        if (!ownContent) {
-            return null;
-        }
-
         return (
             <View>
                 <FlatList
                     ListHeaderComponent={
                         <View>
-                            <FlatButton text={'Добавить новый контент'} icon={'upload-cloud'} />
-                            <Heading text={'Ваши видео'} />
+                            <FlatButton text={'Добавить новый контент'} icon={'upload-cloud'} color={theme.primaryColor} />
+                            <Heading text={'Ваши видео'} color={theme.primaryColor} />
                         </View>
                     }
                     data={ownContent}
@@ -51,6 +49,7 @@ const CreativeStudioScreen = () => {
 
     return (
         <ThemedView>
+            <OverlayLoader visible={!completeConfiguring} />
             <Content />
         </ThemedView>
     );
