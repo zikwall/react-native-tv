@@ -45,7 +45,7 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
 
         interstitial.onAdEvent((type) => {
             if (type === AdEventType.LOADED) {
-                //interstitial.show();
+                interstitial.show();
             }
         });
 
