@@ -67,3 +67,5 @@ export { default as RatingOverView } from './rating/OverviewRating';
 export { default as LoadMoreButton } from './ui/LoadMoreButton';
 export { default as AdmobBanner } from './firebase/AdmobBanner';
 export { default as PickerInput } from './ui/Picker';
+export { default as TagPicker } from './ui/TagPicker';
+export { default as BigTag } from './ui/BigTag';
