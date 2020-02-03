@@ -1,5 +1,11 @@
 import {
-    FETCH_CONTENT_ERROR, FETCH_CONTENT_PENDING, FETCH_CONTENT_SUCCESS, ACTION_CONTENT_SET, ACTION_CONTENT_SET_CURRENT,
+    FETCH_CONTENT_ERROR,
+    FETCH_CONTENT_PENDING,
+    FETCH_CONTENT_SUCCESS,
+    ACTION_CONTENT_SET,
+    ACTION_CONTENT_SET_CURRENT,
+    ACTION_LOCAL_CONTENT_SET_CURRENT,
+    ACTION_LOCAL_CONTENT_SET
 } from '../types';
 
 const initialState = {
@@ -86,6 +92,19 @@ export const contentActionReducer = (state = actionInitialState, action) => {
     }
 };
 
+export const localContentActionReducer = (state = actionInitialState, action) => {
+    switch(action.type) {
+        case ACTION_LOCAL_CONTENT_SET:
+
+            return {
+                ...state,
+                localContent: action.localContent
+            };
+        default:
+            return state;
+    }
+};
+
 export default contentFetchReducer;
 
 export const getContents = state => state.contentFetchReducer.contents;
@@ -93,3 +112,4 @@ export const getContentsPending = state => state.contentFetchReducer.pending;
 export const getContentsError = state => state.contentFetchReducer.error;
 export const getActiveContent = state => state.contentActionReducer.content;
 export const getCurrentPage = state => state.contentActionReducer.current;
+export const getActiveLocalContent = state => state.localContentActionReducer.localContent;

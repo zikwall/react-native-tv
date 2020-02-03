@@ -7,6 +7,22 @@ import {
 } from '../../redux/actions';
 import {UserHelper} from '../../utils';
 
+export const fetchParsedContents = (url) => {
+    return apiFetch(`/vktv/parse/items?url=${url}`)
+        .then(res => {
+            if(res.error) {
+                throw(res.error);
+            }
+
+            return {
+                response: res.response,
+            };
+        })
+        .catch(error => {
+            new Error(error);
+        })
+};
+
 export const fetchOwnContents = (token) => {
     return apiFetch(`/vktv/content/own`, {}, {"Authorization": UserHelper.makeAuthorizationHeader(token)})
         .then(res => {

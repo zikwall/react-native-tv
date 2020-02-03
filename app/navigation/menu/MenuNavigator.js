@@ -19,7 +19,8 @@ import {
     SecurityScreen,
     ParentControlScreen,
     CreativeStudioScreen,
-    CreateContentScreen
+    CreateContentScreen,
+    IPTVScreen
 } from "../../screens";
 import {
     NavigationHeaderComponent,
@@ -126,6 +127,15 @@ const MenuNavigator = createStackNavigator({
     },
     DebugVideoScreen: {
         screen: DebugVideoScreen,
+    },
+    IPTVScreen: {
+        screen: IPTVScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'IPTV'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
     },
     UserStatisticScreen: {
         screen: StatisticScreen,

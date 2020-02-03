@@ -34,6 +34,8 @@ import SecurityScreen from "./user/SecurityScreen";
 import ParentControlScreen from "./user/ParentControlScreen";
 import CreativeStudioScreen from './user/CreativeStudio';
 import CreateContentScreen from './user/CreateContent';
+import IPTVScreen from "./menu/IPTVScreen";
+import LocalContentWatch from "./watch/LocalContentWatch";
 
 export {
     /**
@@ -44,6 +46,7 @@ export {
     WatchScreen,
     LikedScreen,
     ContentWatch,
+    LocalContentWatch,
 
     /**
      *  User namespace
@@ -83,6 +86,7 @@ export {
     SecurityScreen,
     CreativeStudioScreen,
     CreateContentScreen,
+    IPTVScreen,
 
     /**
      *  PlayHub service namespace

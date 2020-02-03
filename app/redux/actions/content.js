@@ -31,6 +31,13 @@ export const setContent = (content) => {
     }
 };
 
+export const setLocalContent = (localContent) => {
+    return {
+        type: types.ACTION_LOCAL_CONTENT_SET,
+        localContent: localContent,
+    }
+};
+
 export const setCurrentPage = (current) => {
     return {
         type: types.ACTION_CONTENT_SET_CURRENT,

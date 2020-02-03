@@ -4,6 +4,7 @@ import MainTabNavigator from './MainTabNavigator';
 import ProfileNavigator, { ProfileStackNavigator } from "./profile/ProfileNavigator";
 import AuthNavigator from "./auth/AuthNavigator";
 import GlobalWatchNavigator from './watch/GlobalWatchNavigator';
+import LocalWatchNavigator from "./watch/LocalWatchNavigator";
 
 const MainStack = createStackNavigator({
     // You could add another route here for authentication.
@@ -11,6 +12,7 @@ const MainStack = createStackNavigator({
     Main: MainTabNavigator,
     Auth: AuthNavigator,
     Watch: GlobalWatchNavigator,
+    LocalWatch: LocalWatchNavigator,
     Profile: createStackNavigator({ProfileNavigator}),
 }, {
     headerMode: 'none',
