@@ -24,7 +24,7 @@ const MenuUserInfo = ({ username, displayName, avatarUrlMedium, onSettingsPress 
                 onPress={onSettingsPress}
                 backgroundColor={theme.secondaryColor}
                 color={'#fff'}
-                text={'Перейти в личный кабинет'}
+                text={'Перейти в панель управления'}
                 icon={'settings'}
             />
         </View>

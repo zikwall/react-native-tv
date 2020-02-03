@@ -42,6 +42,7 @@ const MenuScreen = ({ navigation, user, isAuthenticated }) => {
                         onSearchPress={handleSearchPress}
                     />
                 }
+                <MenuItemLine onPress={onMenuPress} to={'CopyrightScreen'} icon={'book'} name={'Правила размещения контента'} />
                 <MenuItemLine onPress={onMenuPress} to={'CopyrightScreen'} icon={'alert-circle'} name={'Правообладателям'} />
                 <MenuItemLine onPress={onMenuPress} to={'TermsScreen'} icon={'book'} name={'Условия использования'} />
                 <MenuItemLine onPress={onMenuPress} to={'PrivacyScreen'} icon={'book-open'} name={'Политика конфиденциальности'} />
