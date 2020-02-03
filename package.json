@@ -29,7 +29,7 @@
     "react-native": "0.61.5",
     "react-native-chart-kit": "^4.4.1",
     "react-native-device-info": "^5.4.4",
-    "react-native-gesture-handler": "^1.5.3",
+    "react-native-gesture-handler": "^1.5.5",
     "react-native-image-picker": "^2.2.1",
     "react-native-improved-text-input": "0.0.1",
     "react-native-material-menu": "^1.0.0",
