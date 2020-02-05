@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import Heading from '../heading';
 
-const ExtendedTextInput = ({ inputname, label, labelIcon, customErrors, inputStyles, description, ...props }) => {
+const ExtendedTextInput = ({ inputname, label, labelIcon, customErrors, inputStyles, textInputStyles, description, headingColor, ...props }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const headColor = headingColor || theme.primaryColor;
 
     const _markAsError = () => {
         return !!customErrors && Array.isArray(customErrors) && customErrors.includes(inputname) ? {
@@ -19,7 +20,7 @@ const ExtendedTextInput = ({ inputname, label, labelIcon, customErrors, inputSty
     return (
         <View style={inputStyles}>
             {
-                label && <Heading text={label} styles={{ paddingLeft: 0, ...customizeHeadingStyles }} color={theme.primaryColor} icon={labelIcon} description={description} />
+                label && <Heading text={label} styles={{ paddingLeft: 0, ...customizeHeadingStyles }} color={headColor} icon={labelIcon} description={description} />
             }
             <TextInput {...props} placeholderTextColor={theme.primaryColor} style={[
                 {
@@ -28,7 +29,7 @@ const ExtendedTextInput = ({ inputname, label, labelIcon, customErrors, inputSty
                     borderWidth: 1,
                     borderRadius: 10,
                     padding: 10
-                }, _markAsError()
+                }, textInputStyles, _markAsError(),
             ]}/>
         </View>
     )
