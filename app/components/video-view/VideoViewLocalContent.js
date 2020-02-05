@@ -1,11 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PureVideoWebView from './PureVideoWebView';
-import NativeVideoView from './NativeVideoView';
-import { SafeValidator } from '../../utils';
-import { getActiveLocalContent, getSelectPlayhubPlayer } from '../../redux/reducers';
-import { initPlayhubPlayer } from '../../redux/actions';
+import { getActiveLocalContent } from '../../redux/reducers';
 import { Players } from '../../constants';
 
 const resolveSelectedPlayer = (url, player, content) => {
@@ -19,10 +15,6 @@ const resolveSelectedPlayer = (url, player, content) => {
 const VideoViewLocalContent = ({ localContent, player, onFullscreen }) => {
     if (!localContent) {
         return null;
-    }
-
-    if (SafeValidator.isNativePlayer(player)) {
-        return <NativeVideoView source={localContent.url} onFullscreen={onFullscreen}/>
     }
 
     const source = resolveSelectedPlayer(localContent.url, player, localContent);

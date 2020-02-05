@@ -5,7 +5,7 @@ import {
     FlatButton,
     CommonChannelListItem,
     TextArea,
-    Wheel, Heading
+    Wheel, Heading, OverlayLoader,
 } from '../../components';
 import { connect, useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
@@ -13,24 +13,17 @@ import { ContentService } from '../../services';
 import { bindActionCreators } from "redux";
 import { setLocalContent } from "../../redux/actions";
 import { human } from "react-native-typography";
+import { ArrayHelper, Fake } from '../../utils';
 
 const IPTVScreen = ({ navigation, selectLocalContent }) => {
+    const generateMessage = ArrayHelper.random(Fake.generateIPTVMessages);
+
     const theme = useSelector(state => getAppTheme(state));
     const [ iptvUrl, setIptvUrl ] = useState(null);
     const [ ownContent, setOwnContent ] = useState([]);
     const [ spinner, setSpinner ] = useState(true);
     const [ randomPlaylist, setRandomPlaylist ] = useState(null);
-
-    const [ success, setSuccess ] = useState({
-        has: false,
-        text: 'Unexpected text'
-    });
-
-    const [ error, setError ] = useState({
-        has: false,
-        error: "Unexpected error",
-        attributes: []
-    });
+    const [ isFetched, setIsFetched ] = useState(false);
 
     useEffect(() => {
         let interval = setTimeout(() => {
@@ -47,13 +40,15 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
     }, []);
 
     const handleOnScan = async () => {
+        setIsFetched(true);
+
         if (!iptvUrl) {
             return false;
         }
 
         ContentService.fetchParsedContents(iptvUrl).then((response) => {
-            console.log(response);
             setOwnContent(response.response);
+            setIsFetched(false);
         });
     };
 
@@ -64,7 +59,6 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
             setIptvUrl(content);
         }
     };
-
 
     const handleOnSelectContent = (content, image, title, visibility) => {
         selectLocalContent(content);
@@ -87,8 +81,8 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
                         duration={4000}
                         fullColor={'#7cbb4f'}
                     />
-                    <Text style={[ human.caption1, { paddingLeft: 20, flex: 1, flexWrap: 'wrap', } ]}>
-                        Подождите, мы генерирем вам случайный плейлист...
+                    <Text style={[ human.caption1, { paddingLeft: 20, flex: 1, flexWrap: 'wrap', color: theme.primaryColor } ]}>
+                        { generateMessage.message }
                     </Text>
                 </View>
             )
@@ -98,10 +92,10 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
             <View>
                 <Heading text={'Мы вам подобрали!'} color={theme.primaryColor} styles={{ padding: 0 }}/>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Text numberOfLines={1} style={[ human.caption1, { flex: 1, flexWrap: 'wrap', } ]}>
+                    <Text numberOfLines={1} style={[ human.caption1, { flex: 1, flexWrap: 'wrap', color: theme.primaryColor } ]}>
                         { randomPlaylist }
                     </Text>
-                    <FlatButton text={'Взглянуть!'} onPress={handleOnPasteGenerated} icon={'play'} />
+                    <FlatButton text={'Взглянуть!'} onPress={handleOnPasteGenerated} icon={'play'} color={theme.primaryColor} />
                 </View>
             </View>
         )
@@ -112,13 +106,13 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
             <FlatList
                 ListHeaderComponent={
                     <View style={{ padding: 15 }}>
+                        <OverlayLoader visible={isFetched} />
                         <RandomPlaylist />
 
                         <TextArea
                             disabled
                             value={iptvUrl}
                             onChangeText={(url) => setIptvUrl(url.trim())}
-                            customErrors={error.attributes}
                             placeholder={'Введите ссылку на IPTV плейлист'}
                             label={'Плейлист'}
                             inputname={'url'}
@@ -150,7 +144,7 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
                     <CommonChannelListItem
                         title={item.name}
                         subtitle={'Не определен'}
-                        image={item.image}
+                        image={{ uri: item.image }}
                         visibility={10}
                         type={'Не определен'}
                         rating={"0.0"}

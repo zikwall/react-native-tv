@@ -17,7 +17,7 @@ const LocalContentWatch = ({ navigation, localContent }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
-       const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
+        const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
             requestNonPersonalizedAdsOnly: true,
         });
 

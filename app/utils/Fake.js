@@ -6,6 +6,21 @@ export const onComingSoonFeaturePress = () => {
     alert('Coming Soon');
 };
 
+export const generateIPTVMessages = [
+    {
+        id: 1,
+        message: 'Подождите, мы генерируем Вам случайный плейлист.'
+    },
+    {
+        id: 2,
+        message: 'Сейчас мы Вам найдем интересный контент.'
+    },
+    {
+        id: 3,
+        message: 'Кручу, кручу, найти контент хочу!'
+    },
+];
+
 export const advices = [
     {
         id: 1,
