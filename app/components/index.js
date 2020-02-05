@@ -69,3 +69,5 @@ export { default as AdmobBanner } from './firebase/AdmobBanner';
 export { default as PickerInput } from './ui/Picker';
 export { default as TagPicker } from './ui/TagPicker';
 export { default as BigTag } from './ui/BigTag';
+export { default as Wheel } from './spinner/Wheel';
+export { default as VideoViewLocalContent } from './video-view/VideoViewLocalContent';
