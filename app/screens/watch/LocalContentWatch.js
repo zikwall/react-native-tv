@@ -5,7 +5,7 @@ import {
     NavigationHeaderComponent,
     NavigationHeaderLeft,
     ThemedView,
-    VideoViewContent,
+    VideoViewLocalContent,
     IconWrap,
     NavigationHeaderTitle,
 } from '../../components';
@@ -54,7 +54,7 @@ const LocalContentWatch = ({ navigation, localContent }) => {
                     top: 0,
                     backgroundColor: theme.primaryBackgroundColor
                 }}>
-                    <VideoViewContent content={localContent} onFullscreen={onFullscreen}/>
+                    <VideoViewLocalContent onFullscreen={onFullscreen}/>
                 </View>
             </View>
         </ThemedView>

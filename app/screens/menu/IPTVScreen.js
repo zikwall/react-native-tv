@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList, View, Text, Clipboard } from 'react-native';
 import {
     ThemedView,
     FlatButton,
     CommonChannelListItem,
-    TextArea
+    TextArea,
+    Wheel, Heading
 } from '../../components';
 import { connect, useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 import { ContentService } from '../../services';
 import { bindActionCreators } from "redux";
 import { setLocalContent } from "../../redux/actions";
+import { human } from "react-native-typography";
 
 const IPTVScreen = ({ navigation, selectLocalContent }) => {
     const theme = useSelector(state => getAppTheme(state));
     const [ iptvUrl, setIptvUrl ] = useState(null);
     const [ ownContent, setOwnContent ] = useState([]);
+    const [ spinner, setSpinner ] = useState(true);
+    const [ randomPlaylist, setRandomPlaylist ] = useState(null);
 
     const [ success, setSuccess ] = useState({
         has: false,
@@ -27,6 +31,20 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
         error: "Unexpected error",
         attributes: []
     });
+
+    useEffect(() => {
+        let interval = setTimeout(() => {
+            setSpinner(false);
+        }, 3000);
+
+        ContentService.fetchRandomPlaylist().then((response) => {
+            setRandomPlaylist(response.response);
+        });
+
+        return () => {
+            clearTimeout(interval);
+        };
+    }, []);
 
     const handleOnScan = async () => {
         if (!iptvUrl) {
@@ -53,19 +71,59 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
         navigation.navigate('LocalWatch');
     };
 
+    const handleOnPasteGenerated = () => {
+        setIptvUrl(randomPlaylist);
+    };
+
+    const RandomPlaylist = () => {
+        if (spinner) {
+            return (
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Wheel
+                        size={30}
+                        width={2}
+                        progress={100}
+                        animateFromValue={0}
+                        duration={4000}
+                        fullColor={'#7cbb4f'}
+                    />
+                    <Text style={[ human.caption1, { paddingLeft: 20, flex: 1, flexWrap: 'wrap', } ]}>
+                        Подождите, мы генерирем вам случайный плейлист...
+                    </Text>
+                </View>
+            )
+        }
+
+        return (
+            <View>
+                <Heading text={'Мы вам подобрали!'} color={theme.primaryColor} styles={{ padding: 0 }}/>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text numberOfLines={1} style={[ human.caption1, { flex: 1, flexWrap: 'wrap', } ]}>
+                        { randomPlaylist }
+                    </Text>
+                    <FlatButton text={'Взглянуть!'} onPress={handleOnPasteGenerated} icon={'play'} />
+                </View>
+            </View>
+        )
+    };
+
     return (
         <ThemedView>
             <FlatList
                 ListHeaderComponent={
                     <View style={{ padding: 15 }}>
+                        <RandomPlaylist />
+
                         <TextArea
+                            disabled
                             value={iptvUrl}
                             onChangeText={(url) => setIptvUrl(url.trim())}
                             customErrors={error.attributes}
                             placeholder={'Введите ссылку на IPTV плейлист'}
                             label={'Плейлист'}
                             inputname={'url'}
-                            selectTextOnFocues={true}
+                            editable={false} s
+                            electTextOnFocus={false}
                             contextMenuHidden={false}
                         />
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
