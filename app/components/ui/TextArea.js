@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import Heading from '../heading';
 
-const ExtendedTextArea = ({ maxLength, lineNumbers, inputname, label, labelIcon, customErrors, onChangeText, ...props }) => {
+const ExtendedTextArea = ({ maxLength, lineNumbers, inputname, label, labelIcon, customErrors, onChangeText, description, ...props }) => {
     const theme = useSelector(state => getAppTheme(state));
     const [ length, setLength ] = useState(0);
 
@@ -23,7 +23,7 @@ const ExtendedTextArea = ({ maxLength, lineNumbers, inputname, label, labelIcon,
     return (
         <View>
             {
-                label && <Heading text={label} styles={{ paddingLeft: 0 }} color={theme.primaryColor} icon={labelIcon} />
+                label && <Heading text={label} styles={{ paddingLeft: 0 }} color={theme.primaryColor} icon={labelIcon} description={description} />
             }
             <TextInput
                 {...props}

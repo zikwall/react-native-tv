@@ -110,6 +110,7 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
                         <RandomPlaylist />
 
                         <TextArea
+                            description={'Вы можете вставить ссылку на свой IPTV плейлист или на плейлист Вашего оператора. Наши умные алгоритмы автоматически разберут его на каналы и фильмы!'}
                             disabled
                             value={iptvUrl}
                             onChangeText={(url) => setIptvUrl(url.trim())}
