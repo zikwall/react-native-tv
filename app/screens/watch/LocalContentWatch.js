@@ -8,6 +8,7 @@ import {
     VideoViewLocalContent,
     IconWrap,
     NavigationHeaderTitle,
+    LargeAdmobBanner
 } from '../../components';
 import { AdEventType, InterstitialAd } from "@react-native-firebase/admob";
 
@@ -44,7 +45,7 @@ const LocalContentWatch = ({ navigation, localContent }) => {
     };
 
     return (
-        <ThemedView>
+        <ThemedView style={{ justifyContent: 'space-between' }}>
             <View style={{ paddingTop: '56.25%' }}>
                 <View style={{
                     position: 'absolute',
@@ -57,6 +58,7 @@ const LocalContentWatch = ({ navigation, localContent }) => {
                     <VideoViewLocalContent onFullscreen={onFullscreen}/>
                 </View>
             </View>
+            <LargeAdmobBanner />
         </ThemedView>
     );
 };

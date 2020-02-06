@@ -73,3 +73,4 @@ export { default as Wheel } from './spinner/Wheel';
 export { default as VideoViewLocalContent } from './video-view/VideoViewLocalContent';
 export { default as ModalizeWrapper } from './modalize/ModilizeWrapper';
 export { default as ParentControlModal } from './modalize/ParentControlModal';
+export { default as LargeAdmobBanner } from './firebase/LargeAdmobBanner';
