@@ -44,22 +44,26 @@ const ParentControlScreen = ({ navigation }) => {
             securityKey: securityKey
         };
 
-        ParentControlService.setParentControlMode(options).then(() => {
-            changeParentControl(options);
+        if (enabledControl) {
+            ParentControlService.setParentControlMode(options).then(() => {
+                changeParentControl(options);
 
-            setSuccess({
-                has: true,
-                text: `Вы успешно ${enabledControl ? 'включили' : 'выключили'} родительский контроль`
-            })
-        });
+                setSuccess({
+                    has: true,
+                    text: `Вы успешно ${enabledControl ? 'включили' : 'выключили'} родительский контроль`
+                })
+            });
+        }
     };
+
+    let buttonText = !enabledControl ? 'Включить защиту' : 'Выключить защиту';
 
     return (
         <ThemedView>
             <Form
                 onSubmit={handleFormSubmit}
                 header={'Активация родительского контроля'}
-                buttonTitle={'Включить защиту'}
+                buttonTitle={buttonText}
                 headerColor={theme.primaryColor}
                 hasError={error.has}
                 hasSuccess={success.has}

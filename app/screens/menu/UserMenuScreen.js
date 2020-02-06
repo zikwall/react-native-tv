@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import {View, StyleSheet, ScrollView, Text, TouchableOpacity} from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { useSelector } from 'react-redux';
 import {
     MenuItemLine,
     Heading,
@@ -8,61 +8,13 @@ import {
     NavigationHeaderLeft,
     ThemePicker,
     NavigationHeaderComponent,
-    ModalizeWrapper
+    ModalizeWrapper,
+    ParentControlModal
 } from '../../components';
 import { getAppTheme, getAppParentControl } from '../../redux/reducers';
 import { Fake } from '../../utils';
-import { TextInput, ErrorMessage } from '../../components';
-
-const ParentControlModal = ({ onCloseModal, onVerifyAccess, onSuccessVerify }) => {
-    const [ accessPassword, setAccessPassword ] = useState('');
-    const [ error, setError ] = useState({
-        has: false, message: null
-    });
-
-    const handleAccess = () => {
-        if (onVerifyAccess(accessPassword)) {
-            onSuccessVerify();
-
-            if (error.has) {
-                setError({
-                    has: false,
-                    message: null
-                });
-            }
-
-            return true;
-        }
-
-        setError({
-            has: true,
-            message: 'Не правильный ключ защиты!'
-        });
-    };
-
-    return (
-        <View style={styles.content}>
-            <Text style={styles.content__subheading}>{'Проверка'.toUpperCase()}</Text>
-            <ErrorMessage hasError={error.has} error={error.message} />
-            <View style={{ paddingBottom: 15}}>
-                <TextInput
-                    value={accessPassword}
-                    onChangeText={(key) => setAccessPassword(key)}
-                    placeholder={'Введите пароль для защиты'}
-                    label={'Безопасный ключ доступа'}
-                    inputname={'parent_control_password'}
-                    description={'Пожалуста, подтвердите доступ.'}
-                />
-            </View>
-            <TouchableOpacity style={styles.content__button} activeOpacity={0.9} onPress={handleAccess}>
-                <Text style={styles.content__buttonText}>Открыть доступ!</Text>
-            </TouchableOpacity>
-        </View>
-    )
-};
 
 const UserMenuScreen = ({ navigation }) => {
-    const dispatch = useDispatch();
     const theme = useSelector(state => getAppTheme(state));
     const parentControlMode = useSelector(state => getAppParentControl(state));
 
@@ -163,29 +115,5 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white'
-    },
-    content: {
-        padding: 20,
-    },
-    content__subheading: {
-        marginBottom: 10,
-
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#ccc',
-    },
-    content__button: {
-        paddingVertical: 15,
-
-        width: '100%',
-
-        backgroundColor: '#333',
-        borderRadius: 6,
-    },
-    content__buttonText: {
-        color: '#fff',
-        fontSize: 15,
-        fontWeight: '600',
-        textAlign: 'center',
-    },
+    }
 });

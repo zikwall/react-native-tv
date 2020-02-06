@@ -13,14 +13,14 @@ import { Content } from './../../constants';
 import IconWrap from '../icon/IconWrap';
 import ChannelAvatar from '../avatar/ChannelAvatar';
 
-const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, number, rating, visibility, type }) => {
+const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, number, rating, visibility, type, ageLimit }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
 
     return (
         <Button
-            onPress={() => onPress(playlist, image, title, visibility)}
+            onPress={() => onPress(playlist, image, title, visibility, ageLimit)}
             style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}
         >
             <View style={ s.leftContainer }>
@@ -49,6 +49,9 @@ const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, numb
                         </Text>
                     </View>
                 </View>
+                {
+                    ageLimit === 50 && <IconWrap name={'eye-off'} size={20} style={{ paddingRight: 10 }} />
+                }
                 {
                     visibility === Content.VISIBILITY.PREMIUM && !isPremium && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />
                 }

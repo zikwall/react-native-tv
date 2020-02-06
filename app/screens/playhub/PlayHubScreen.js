@@ -12,16 +12,17 @@ import {
     FilterBar,
     LoadMoreButton,
     AdmobBanner,
-    ModalizeWrapper
+    ModalizeWrapper, ParentControlModal,
 } from '../../components';
 import styles from './styles';
 import { useSelector } from 'react-redux';
 import {
+    getAppParentControl,
     getAppTheme,
     getContents,
     getContentsError,
     getContentsPending,
-    getCurrentPage
+    getCurrentPage,
 } from '../../redux/reducers';
 import { Content } from '../../constants';
 import { ContentService } from '../../services';
@@ -34,12 +35,14 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
     const currentPage = useSelector(state => getCurrentPage(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
+    const parentControlMode = useSelector(state => getAppParentControl(state));
 
-    const [ isVisibleFloatButton, setIsVisibleFloatButton ] = useState(true);
+    const [ isVisibleFloatButton, setIsVisibleFloatButton ] = useState(false);
     const [ isEnd, setIsEnd ] = useState(false);
     const [ isFetched, setIsFetched ] = useState(false);
     const [ items, setItems ] = useState(contents);
     const [ cancelVisible, setCancelVisible ] = useState(false);
+    const [ tmpPlaylist, setTmpPlaylist ] = useState(null);
 
     useEffect(() => {
         if (!currentPage) {
@@ -91,31 +94,45 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
         }
     };
 
-    let offset = 0;
-    const onScroll = (event) => {
-        let currentOffset = event.nativeEvent.contentOffset.y;
-        let direction = currentOffset > offset ? 'down' : 'up';
-        offset = currentOffset;
+    const ageLimitModal = React.createRef();
 
-        if (direction === 'down') {
-            if (isVisibleFloatButton === true) {
-                setIsVisibleFloatButton(false);
-            }
-        }
+    const handleOpenByAgeLimit = (playlist) => {
+        setTmpPlaylist(playlist);
+        openAgeModal();
+    };
 
-        if (direction === 'up') {
-            if (isVisibleFloatButton === false) {
-                setIsVisibleFloatButton(true);
-            }
+    const handleCloseByAgeLimit = () => {
+        closeAgeModal();
+    };
+
+    const openAgeModal = () => {
+        if (ageLimitModal.current) {
+            ageLimitModal.current.open();
         }
     };
 
-    const handleOpenPremium = (image, title, visibility, content, button) => {
+    const closeAgeModal = () => {
+        if (ageLimitModal.current) {
+            ageLimitModal.current.close();
+        }
+    };
+
+    const handleOnVerifyAccess = (accessPassword) => {
+        return accessPassword.trim() === parentControlMode.securityKey;
+    };
+
+    const handleOnSuccessVerify = () => {
+        closeAgeModal();
+        selectContent(tmpPlaylist);
+        navigation.navigate('Watch');
+    };
+
+    const handleOpenByVisibility = (image, title, visibility, content, button) => {
         setModalContent({image, title, visibility, content, button});
         openModal();
     };
 
-    const handleClosePremium = (visibility) => {
+    const handleCloseByVisibility = (visibility) => {
         closeModal();
 
         if (visibility === Content.VISIBILITY.USERS) {
@@ -123,9 +140,14 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
         }
     };
 
-    const handleOnClickContent = (playlist, image, title, visibility) => {
+    const handleOnClickContent = (playlist, image, title, visibility, ageLimit) => {
         let content = null;
         let button = null;
+
+        if (ageLimit === 50 && parentControlMode.enabled === true) {
+            handleOpenByAgeLimit(playlist);
+            return true;
+        }
 
         if (visibility === Content.VISIBILITY.PREMIUM && !isPremium) {
             content = 'К сожалению, по решению автора, данный контент доступен только для премиум пользователей.';
@@ -138,7 +160,7 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
         }
 
         if (!!content && !!button) {
-            handleOpenPremium(image, title, visibility, content, button);
+            handleOpenByVisibility(image, title, visibility, content, button);
             return true;
         }
 
@@ -233,6 +255,7 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
                         image={{ uri: item.image }}
                         rating={item.rating}
                         visibility={item.visibility}
+                        ageLimit={item.age_limit}
                         playlist={item}
                         onPress={handleOnClickContent}
                     />
@@ -248,12 +271,24 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
                 isVisibleFloatButton && <FloatBottomButton onPress={() => alert('Left')} onLongPress={() => setIsVisibleFloatButton(false) }/>
             }
             <ModalizeWrapper
+                referal={ageLimitModal}
+                adjustToContentHeight={{
+                    showsVerticalScrollIndicator: false
+                }}
+            >
+                <ParentControlModal
+                    onCloseModal={handleCloseByAgeLimit}
+                    onVerifyAccess={handleOnVerifyAccess}
+                    onSuccessVerify={handleOnSuccessVerify}
+                />
+            </ModalizeWrapper>
+            <ModalizeWrapper
                 referal={modal}
                 adjustToContentHeight={{
                     showsVerticalScrollIndicator: false
                 }}
             >
-                <ContentModalize {...modalContent} onCloseModal={handleClosePremium}/>
+                <ContentModalize {...modalContent} onCloseModal={handleCloseByVisibility}/>
             </ModalizeWrapper>
         </View>
     );
