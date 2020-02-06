@@ -74,7 +74,6 @@ const UserMenuScreen = ({ navigation }) => {
                 <MenuItemLine onPress={handleParentControlMenuItem} to={'ParentControlScreen'} icon={'shield'} name={'Родительский контроль'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'eye'} name={'Настройки приватности'} />
                 {/*<Heading icon={'database'} text={'Content'} color={theme.primaryColor} />*/}
-                <MenuItemLine onPress={onMenuPress} to={'UserStatisticScreen'} icon={'bar-chart-2'} name={'Ваша аналитика'} />
                 {/*<Heading icon={'terminal'} text={'Developer Block'} color={theme.primaryColor} />*/}
                 <MenuItemLine onPress={onMenuPress} to={'DebugVideoScreen'} icon={'video'} name={'Проверить контент'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={'DebugVideoScreen'} icon={'database'} name={'Локальная база данных'} />

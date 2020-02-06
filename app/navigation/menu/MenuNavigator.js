@@ -6,7 +6,6 @@ import {
     FaqScreen,
     MenuScreen,
     PrivacyScreen,
-    StatisticScreen,
     SystemScreen,
     TermsScreen,
     UserMenuScreen,
@@ -133,15 +132,6 @@ const MenuNavigator = createStackNavigator({
         navigationOptions:{
             header: (props) => <NavigationHeaderComponent
                 titleComponent={<NavigationHeaderTitle title={'IPTV'} />}
-                leftComponent={ <NavigationHeaderLeft /> } {...props}
-            />
-        }
-    },
-    UserStatisticScreen: {
-        screen: StatisticScreen,
-        navigationOptions:{
-            header: (props) => <NavigationHeaderComponent
-                titleComponent={<NavigationHeaderTitle title={'Your Analytics'} />}
                 leftComponent={ <NavigationHeaderLeft /> } {...props}
             />
         }

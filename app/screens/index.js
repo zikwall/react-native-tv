@@ -20,7 +20,6 @@ import PlayHubForFamilyScreen from './playhub/PlayHubForFamilyScreen';
 import PlayHubRecommendedScreen from './playhub/PlayHubRecommendedScreen';
 import ContinueRegisterScreen from './register/ContinueRegisterScreen';
 import SystemScreen from "./static/SystemScreen";
-import StatisticScreen from "./user/StatisticScreen";
 import UserMenuScreen from "./menu/UserMenuScreen";
 import LikedScreen from './liked/LikedScreen';
 import AccountScreen from './user/AccountScreen';
@@ -55,7 +54,6 @@ export {
     FollowersScreen,
     FollowingScreen,
     ProfileChannelScreen,
-    StatisticScreen,
     UserMenuScreen,
     FriendshipRequestsScreen,
     ParentControlScreen,
