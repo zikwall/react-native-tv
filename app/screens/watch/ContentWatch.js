@@ -134,7 +134,7 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                                 <Avatar
                                     src={{ uri: 'https://avatars2.githubusercontent.com/u/23422968?s=460&v=4' }}
                                     badgeRight={
-                                        <Verified />
+                                        <Verified size={15} />
                                     }
                                 />
                                 <View style={{ marginLeft: 10 }}>
