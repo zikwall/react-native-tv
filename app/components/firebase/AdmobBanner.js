@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { BannerAd, BannerAdSize, TestIds } from "@react-native-firebase/admob";
+import { BannerAd, BannerAdSize } from "@react-native-firebase/admob";
 
 const AdmobBanner = () => {
     const [ adOk, setAdOk ] = useState(true);
