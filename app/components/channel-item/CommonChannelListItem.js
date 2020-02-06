@@ -12,6 +12,7 @@ import { getAppTheme } from '../../redux/reducers';
 import { Content } from './../../constants';
 import IconWrap from '../icon/IconWrap';
 import ChannelAvatar from '../avatar/ChannelAvatar';
+import { human } from 'react-native-typography';
 
 const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, number, rating, visibility, type, ageLimit }) => {
     const theme = useSelector(state => getAppTheme(state));
@@ -34,17 +35,17 @@ const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, numb
                     <Text
                         numberOfLines={ 1 }
                         ellipsizeMode="tail"
-                        style={[s.title, { color: theme.primaryColor }]}>
+                        style={[human.footnote, { color: theme.primaryColor, paddingBottom: 5 }]}>
                         { title }
                     </Text>
                     <View style={{ flexDirection: 'row' }}>
-                        <Text numberOfLines={ 1 } style={[s.subtitle, { color: theme.secondaryColor }]}>
+                        <Text numberOfLines={ 1 } style={[human.caption2, { color: theme.secondaryColor }]}>
                             { type }
                         </Text>
-                        <Text numberOfLines={ 1 } style={[s.subtitle, { color: theme.secondaryColor }]}>
+                        <Text numberOfLines={ 1 } style={[human.caption2, { color: theme.secondaryColor }]}>
                              /
                         </Text>
-                        <Text numberOfLines={ 1 } style={[s.subtitle, { color: theme.secondaryColor }]}>
+                        <Text numberOfLines={ 1 } style={[human.caption2, { color: theme.secondaryColor }]}>
                             { subtitle }
                         </Text>
                     </View>

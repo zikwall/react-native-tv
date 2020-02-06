@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeValidator } from '../../utils';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
+import { human } from 'react-native-typography';
 
 const ChannelCard = ({ name, epg_id, image, onSelectHandle }) => {
     const theme = useSelector(state => getAppTheme(state));
@@ -24,8 +25,8 @@ const ChannelCard = ({ name, epg_id, image, onSelectHandle }) => {
                         source={ ifImage }
                     />
                 </View>
-                <Text style={ [styles.itemName, { color: theme.primaryColor }] }>{ name }</Text>
-                <Text style={ [styles.itemCode, { color: theme.primaryColor }] }>{ epg_id }</Text>
+                <Text style={ [human.footnote, styles.itemName, { color: theme.primaryColor, paddingBottom: 5 }] }>{ name }</Text>
+                <Text style={ [human.caption2, styles.itemCode, { color: theme.primaryColor }] }>{ epg_id }</Text>
             </TouchableOpacity>
         </View>
     );
@@ -43,13 +44,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     itemName: {
-        fontSize: 16,
+        //fontSize: 16,
         color: '#000',
         fontWeight: '600',
     },
     itemCode: {
         fontWeight: '600',
-        fontSize: 12,
+        //fontSize: 12,
         color: '#000',
     },
 });

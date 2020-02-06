@@ -47,9 +47,9 @@ const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight
             {
                 (visibility === Content.VISIBILITY.USERS && !isAuthorized) && <IconWrap name={'key'} size={20} style={{ paddingRight: 10 }} />
             }
-            <Text numberOfLines={1} style={[ styles.title, { color: theme.primaryColor }]}>{title}</Text>
+            <Text numberOfLines={1} style={[ human.footnote, { color: theme.primaryColor, paddingBottom: 5 }]}>{title}</Text>
             <View style={{ flexDirection: 'row' }}>
-                <Text style={[styles.subtitle, { color: theme.secondaryColor }]}>
+                <Text style={[human.caption2, { color: theme.secondaryColor }]}>
                     {subtitle}
                 </Text>
             </View>
