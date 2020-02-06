@@ -5,7 +5,7 @@ import { human } from 'react-native-typography';
 import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 
-const ContentModalize = ({ onCloseModal, image, title, content, visibility, button }) => {
+const ContentVisibilityModal = ({ onCloseModal, image, title, content, visibility, button }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
@@ -25,7 +25,7 @@ const ContentModalize = ({ onCloseModal, image, title, content, visibility, butt
     )
 };
 
-export default ContentModalize;
+export default ContentVisibilityModal;
 
 const s = StyleSheet.create({
     content: {

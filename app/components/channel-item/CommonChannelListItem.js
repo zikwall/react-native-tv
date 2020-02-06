@@ -21,7 +21,7 @@ const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, numb
 
     return (
         <Button
-            onPress={() => onPress(playlist, image, title, visibility, ageLimit)}
+            onPress={() => onPress(playlist)}
             style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}
         >
             <View style={ s.leftContainer }>

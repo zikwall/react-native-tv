@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import {
     CommonChannelListItem,
     FloatBottomButton,
-    ContentModalize,
+    ContentVisibilityModal,
     OverlayLoader,
     FilterBar,
     LoadMoreButton,
@@ -123,12 +123,20 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
 
     const handleOnSuccessVerify = () => {
         closeAgeModal();
-        selectContent(tmpPlaylist);
-        navigation.navigate('Watch');
+
+        handleOnClickContent({
+            ...tmpPlaylist,
+            ...{ age_limit: 0}
+        });
     };
 
-    const handleOpenByVisibility = (image, title, visibility, content, button) => {
-        setModalContent({image, title, visibility, content, button});
+    const handleOpenByVisibility = (playlist, content, button) => {
+        setModalContent({
+            image: { uri: playlist.image },
+            title: playlist.title,
+            visibility: playlist.visibility,
+            content, button
+        });
         openModal();
     };
 
@@ -140,27 +148,27 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
         }
     };
 
-    const handleOnClickContent = (playlist, image, title, visibility, ageLimit) => {
+    const handleOnClickContent = (playlist) => {
         let content = null;
         let button = null;
 
-        if (ageLimit === 50 && parentControlMode.enabled === true) {
+        if (playlist.age_limit === 50 && parentControlMode.enabled === true) {
             handleOpenByAgeLimit(playlist);
             return true;
         }
 
-        if (visibility === Content.VISIBILITY.PREMIUM && !isPremium) {
+        if (playlist.visibility === Content.VISIBILITY.PREMIUM && !isPremium) {
             content = 'К сожалению, по решению автора, данный контент доступен только для премиум пользователей.';
             button = 'Связаться с автором!';
         }
 
-        if (visibility === Content.VISIBILITY.USERS && !isAuthorized) {
+        if (playlist.visibility === Content.VISIBILITY.USERS && !isAuthorized) {
             content = 'Для просомотра требуется авторизация.';
             button = 'Авторизироваться!';
         }
 
         if (!!content && !!button) {
-            handleOpenByVisibility(image, title, visibility, content, button);
+            handleOpenByVisibility(playlist, content, button);
             return true;
         }
 
@@ -288,7 +296,7 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
                     showsVerticalScrollIndicator: false
                 }}
             >
-                <ContentModalize {...modalContent} onCloseModal={handleCloseByVisibility}/>
+                <ContentVisibilityModal {...modalContent} onCloseModal={handleCloseByVisibility}/>
             </ModalizeWrapper>
         </View>
     );

@@ -48,7 +48,7 @@ export { default as NavigationHeaderComponent } from './navigation-header/Naviga
 export { default as NativeVideoView } from './video-view/NativeVideoView';
 export { default as NavigationHeaderLogo } from './navigation-header/NavigationHeaderLogo';
 export { default as FloatBottomButton } from './ui/FloatBottomButton';
-export { default as ContentModalize } from './modalize/ContentModalize';
+export { default as ContentVisibilityModal } from './modalize/ContentVisibilityModal';
 export { default as OverlayLoader } from './spinner/Overlay';
 export { default as VideoViewContent } from './video-view/VideoViewContent';
 export { default as TextArea } from './ui/TextArea';
