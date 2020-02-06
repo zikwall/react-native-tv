@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import {View, StyleSheet, ScrollView, Text, TouchableOpacity} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -8,12 +8,10 @@ import {
     NavigationHeaderLeft,
     ThemePicker,
     NavigationHeaderComponent,
+    ModalizeWrapper
 } from '../../components';
-import { changeTheme } from "../../redux/actions";
-import { ThemeService } from "../../services";
 import { getAppTheme, getAppParentControl } from '../../redux/reducers';
 import { Fake } from '../../utils';
-import { Modalize } from 'react-native-modalize';
 import { TextInput, ErrorMessage } from '../../components';
 
 const ParentControlModal = ({ onCloseModal, onVerifyAccess, onSuccessVerify }) => {
@@ -48,8 +46,6 @@ const ParentControlModal = ({ onCloseModal, onVerifyAccess, onSuccessVerify }) =
             <ErrorMessage hasError={error.has} error={error.message} />
             <View style={{ paddingBottom: 15}}>
                 <TextInput
-                    headingColor={'#000'}
-                    textInputStyles={{ borderColor: '#000', color: '#000' }}
                     value={accessPassword}
                     onChangeText={(key) => setAccessPassword(key)}
                     placeholder={'Введите пароль для защиты'}
@@ -67,7 +63,6 @@ const ParentControlModal = ({ onCloseModal, onVerifyAccess, onSuccessVerify }) =
 
 const UserMenuScreen = ({ navigation }) => {
     const dispatch = useDispatch();
-    const selectTheme = useCallback(theme => dispatch(changeTheme(theme)), [ dispatch ]);
     const theme = useSelector(state => getAppTheme(state));
     const parentControlMode = useSelector(state => getAppParentControl(state));
 
@@ -84,12 +79,6 @@ const UserMenuScreen = ({ navigation }) => {
             modal.current.close();
         }
     };
-
-    useEffect(() => {
-        ThemeService.getAppThemeService().then((theme) => {
-            setThemeValue(theme === 'dark');
-        });
-    }, []);
 
     const onMenuPress = (to) => {
         if (to) {
@@ -143,8 +132,8 @@ const UserMenuScreen = ({ navigation }) => {
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={'Andrey, хотите в команду PlayHub?'} />
             </ScrollView>
 
-            <Modalize
-                ref={modal}
+            <ModalizeWrapper
+                referal={modal}
                 adjustToContentHeight={{
                     showsVerticalScrollIndicator: false
                 }}
@@ -154,7 +143,7 @@ const UserMenuScreen = ({ navigation }) => {
                     onVerifyAccess={handleOnVerifyAccess}
                     onSuccessVerify={handleOnSuccessVerify}
                 />
-            </Modalize>
+            </ModalizeWrapper>
         </View>
     )
 };

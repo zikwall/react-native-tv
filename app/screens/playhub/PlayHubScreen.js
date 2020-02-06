@@ -8,11 +8,11 @@ import {
     CommonChannelListItem,
     FloatBottomButton,
     ContentModalize,
-    FlatButton,
     OverlayLoader,
     FilterBar,
     LoadMoreButton,
     AdmobBanner,
+    ModalizeWrapper
 } from '../../components';
 import styles from './styles';
 import { useSelector } from 'react-redux';
@@ -23,7 +23,6 @@ import {
     getContentsPending,
     getCurrentPage
 } from '../../redux/reducers';
-import { Modalize } from 'react-native-modalize';
 import { Content } from '../../constants';
 import { ContentService } from '../../services';
 import { bindActionCreators } from 'redux';
@@ -248,14 +247,14 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
             {
                 isVisibleFloatButton && <FloatBottomButton onPress={() => alert('Left')} onLongPress={() => setIsVisibleFloatButton(false) }/>
             }
-            <Modalize
-                ref={modal}
+            <ModalizeWrapper
+                referal={modal}
                 adjustToContentHeight={{
                     showsVerticalScrollIndicator: false
                 }}
             >
                 <ContentModalize {...modalContent} onCloseModal={handleClosePremium}/>
-            </Modalize>
+            </ModalizeWrapper>
         </View>
     );
 };

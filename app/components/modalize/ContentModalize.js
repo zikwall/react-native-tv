@@ -2,16 +2,20 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Avatar } from '../index';
 import { human } from 'react-native-typography';
+import { useSelector } from "react-redux";
+import { getAppTheme } from "../../redux/reducers";
 
 const ContentModalize = ({ onCloseModal, image, title, content, visibility, button }) => {
+    const theme = useSelector(state => getAppTheme(state));
+
     return (
         <View style={s.content}>
             <Text style={s.content__subheading}>{'ОПАЧКИ'.toUpperCase()}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Avatar src={image} resizeMode="contain"/>
-                <Text style={[human.headline, {paddingLeft: 10}]}>Контент: {title}</Text>
+                <Text style={[human.headline, { paddingLeft: 10, color: theme.primaryColor }]}>Контент: {title}</Text>
             </View>
-            <Text style={[human.callout, { paddingBottom: 10, paddingTop: 10 }]}>
+            <Text style={[human.callout, { paddingBottom: 10, paddingTop: 10, color: theme.primaryColor }]}>
                 { content }
             </Text>
             <TouchableOpacity style={s.content__button} activeOpacity={0.9} onPress={() => onCloseModal(visibility)}>

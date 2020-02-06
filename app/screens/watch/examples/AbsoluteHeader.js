@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import { ChannelNotDescription } from '../../../components';
+import { ChannelNotDescription, IconWrap } from '../../../components';
+import { useSelector } from "react-redux";
+import { getAppTheme } from "../../../redux/reducers";
 
 export const renderHeader = (handleClose) => (
     <TouchableOpacity
@@ -10,28 +11,32 @@ export const renderHeader = (handleClose) => (
         onPress={handleClose}
         hitSlop={{ top: 15, right: 15, bottom: 15, left: 15 }}
     >
-        <Icon name={'x-square'} size={25} />
+        <IconWrap name={'x-square'} size={25} />
     </TouchableOpacity>
 );
 
-const renderContent = (title, description, time) => (
-    <View style={s.content}>
-        <ScrollView>
-            <Text style={s.content__heading}>{ title }</Text>
-            <Text style={s.content__subheading}>{ time }</Text>
-            {
-                renderDescription(description)
-            }
-        </ScrollView>
-    </View>
-);
+const renderContent = (title, description, time) => {
+    const theme = useSelector(state => getAppTheme(state));
 
-const renderDescription = (description) => {
+    return (
+        <View style={s.content}>
+            <ScrollView>
+                <Text style={[ s.content__heading, { color: theme.primaryColor } ]}>{ title }</Text>
+                <Text style={s.content__subheading}>{ time }</Text>
+                {
+                    renderDescription(description, color)
+                }
+            </ScrollView>
+        </View>
+    )
+};
+
+const renderDescription = (description, color) => {
     if (!description && description.length === 0) {
         return <ChannelNotDescription />;
     }
 
-    return <Text style={s.content__paragraph}>{ description }</Text>;
+    return <Text style={[ s.content__paragraph, { color: color } ]}>{ description }</Text>;
 };
 
 const AbsoluteHeader = ({ onCloseModal, title, description, time }) => {

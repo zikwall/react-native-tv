@@ -15,7 +15,9 @@ import {
     TVProgramNotItem,
     NavigationHeaderTitle,
     NavigationHeaderLeft,
-    NavigationHeaderComponent, NativeVideoView,
+    NavigationHeaderComponent,
+    NativeVideoView,
+    ModalizeWrapper
 } from '../../components';
 import StaticModal from "./examples/StaticModal";
 import AbsoluteHeader, { renderHeader } from "./examples/AbsoluteHeader";
@@ -62,18 +64,6 @@ const defaultEpg = [
 ];
 
 const WatchScreen = ({ navigation, selectPlayer, channel }) => {
-    const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
-        requestNonPersonalizedAdsOnly: true,
-    });
-
-    interstitial.onAdEvent((type) => {
-        if (type === AdEventType.LOADED) {
-            interstitial.show();
-        }
-    });
-
-    interstitial.load();
-
     const theme = useSelector(state => getAppTheme(state));
     const [ webViewSize, setWebViewSize ] = useState(height * 0.275 + width * 0.03);
     const [ modalContent, setModalContent ] = useState(null);
@@ -82,11 +72,18 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     let _menu = null;
 
     useEffect(() => {
+        const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
+            requestNonPersonalizedAdsOnly: true,
+        });
 
+        interstitial.onAdEvent((type) => {
+            if (type === AdEventType.LOADED) {
+                interstitial.show();
+            }
+        });
 
-    }, []);
+        interstitial.load();
 
-    useEffect(() => {
         console.log('MOUNT WATCH');
 
         return () => {
@@ -134,7 +131,7 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
 
             isMounted = false;
         };
-    }, [ channel ]);
+    }, [ channel.url ]);
 
     const orientationHandleChange = (orientation) => {
         const { height } = Dimensions.get('window');
@@ -306,8 +303,8 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
                 { ifRenderContent() }
             </ScrollableTabView>
 
-            <Modalize
-                ref={modal}
+            <ModalizeWrapper
+                referal={modal}
                 adjustToContentHeight={{
                     showsVerticalScrollIndicator: false
                 }}
@@ -316,17 +313,17 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
                 }
             >
                 {renderModalContent()}
-            </Modalize>
+            </ModalizeWrapper>
 
-            <Modalize
-                ref={absoluteModal}
+            <ModalizeWrapper
+                referal={absoluteModal}
                 snapPoint={450}
                 HeaderComponent={
                     renderHeader(closeAbsoluteModal)
                 }
             >
                 {renderModalContent()}
-            </Modalize>
+            </ModalizeWrapper>
         </View>
     );
 };

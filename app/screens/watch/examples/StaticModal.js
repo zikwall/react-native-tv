@@ -1,18 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import faker from 'faker';
+import {useSelector} from "react-redux";
+import {getAppTheme} from "../../../redux/reducers";
 
-const StaticModal = ({ onCloseModal }) => (
-    <View style={s.content}>
-        <Text style={s.content__subheading}>{'One step'.toUpperCase()}</Text>
-        <Text style={s.content__heading}>Share this TV program?</Text>
-        <Text style={s.content__description}>{faker.lorem.paragraph()}</Text>
+const StaticModal = ({ onCloseModal }) => {
+    const theme = useSelector(state => getAppTheme(state));
 
-        <TouchableOpacity style={s.content__button} activeOpacity={0.9} onPress={onCloseModal}>
-            <Text style={s.content__buttonText}>{'Share'.toUpperCase()}</Text>
-        </TouchableOpacity>
-    </View>
-);
+    return (
+        <View style={s.content}>
+            <Text style={s.content__subheading}>{'One step'.toUpperCase()}</Text>
+            <Text style={[ s.content__heading, { color: theme.primaryColor } ]}>Share this TV program?</Text>
+            <Text style={[ s.content__description, { color: theme.primaryColor } ]}>{faker.lorem.paragraph()}</Text>
+
+            <TouchableOpacity style={s.content__button} activeOpacity={0.9} onPress={onCloseModal}>
+                <Text style={s.content__buttonText}>{'Share'.toUpperCase()}</Text>
+            </TouchableOpacity>
+        </View>
+    );
+};
 
 export default StaticModal;
 

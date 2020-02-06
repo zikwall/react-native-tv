@@ -71,3 +71,4 @@ export { default as TagPicker } from './ui/TagPicker';
 export { default as BigTag } from './ui/BigTag';
 export { default as Wheel } from './spinner/Wheel';
 export { default as VideoViewLocalContent } from './video-view/VideoViewLocalContent';
+export { default as ModalizeWrapper } from './modalize/ModilizeWrapper';
