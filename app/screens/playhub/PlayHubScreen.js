@@ -152,7 +152,7 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
         let content = null;
         let button = null;
 
-        if (playlist.age_limit === 50 && parentControlMode.enabled === true) {
+        if (Content.is18YearOld(playlist.age_limit) && parentControlMode.enabled === true) {
             handleOpenByAgeLimit(playlist);
             return true;
         }

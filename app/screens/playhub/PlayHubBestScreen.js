@@ -19,7 +19,7 @@ const PlayHubBestScreen = ({ navigation, setDetailed }) => {
     };
 
     return (
-        <ThemedView>
+        <ThemedView style={{ paddingLeft: 5}}>
             <ScrollView>
                 <ChannelsLine titlePress={handleOnTitlePress} title={'Новостные'} items={Fake.userPlaylist} />
                 <ChannelsLine titlePress={handleOnTitlePress} title={'Развлекательные'} items={[...Fake.userPlaylist, ...Fake.userPlaylist]} />

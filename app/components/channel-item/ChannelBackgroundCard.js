@@ -27,7 +27,7 @@ const ChannelBackgroundCard = ({ type, name, image, onPress, playlist }) => {
             </Text>
             <View style={{ flexDirection: 'row' }}>
                 {
-                    playlist.ageLimit === 50 && <IconWrap name={'eye-off'} size={10} style={{ paddingLeft: 5, paddingRight: 5 }} />
+                    Content.is18YearOld(playlist.ageLimit) && <IconWrap name={'eye-off'} size={10} style={{ paddingLeft: 5, paddingRight: 5 }} />
                 }
                 {
                     (playlist.visibility === Content.VISIBILITY.PREMIUM && !isPremium) && <IconWrap name={'lock'} size={10} style={{ paddingLeft: 5, paddingRight: 5, color: '#FFD700' }} />

@@ -51,7 +51,7 @@ const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, numb
                     </View>
                 </View>
                 {
-                    ageLimit === 50 && <IconWrap name={'eye-off'} size={20} style={{ paddingRight: 10 }} />
+                    Content.is18YearOld(ageLimit) && <IconWrap name={'eye-off'} size={20} style={{ paddingRight: 10 }} />
                 }
                 {
                     visibility === Content.VISIBILITY.PREMIUM && !isPremium && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />
