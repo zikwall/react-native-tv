@@ -13,14 +13,13 @@ import {
     Heading,
     IconWrap,
     Row,
-    Tag,
     TagPicker,
 } from '../index';
 import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 import SearchBar from "./SearchBar";
 import { human } from 'react-native-typography';
-import {Content} from '../../constants';
+import { Content } from '../../constants';
 
 const { width, height } = Dimensions.get('window');
 
@@ -31,7 +30,7 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
     const [ isSelectedChannels, setIsSelectedChannels ] = useState(true);
     const [ isSelectedMovies, setIsSelectedMovies ]     = useState(true);
     const [ isSelectedAdults, setIsSelectedAdults ]     = useState(true);
-    const [ categories, setCategories ] = useState(null);
+    const [ categories, setCategories ] = useState([]);
 
     const handleCloseEvent = (reset = true) => {
         setVisibleFilterBar(false);
