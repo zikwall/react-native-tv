@@ -43,6 +43,7 @@ const StaticNavigation = createMaterialTopTabNavigator({
                     name={'hexagon'} size={20} style={{ color: tintColor}}
                 />
             ),
+            swipeEnabled: false
         }
     },
     PlayHubRecommendedScreen: {

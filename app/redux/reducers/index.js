@@ -18,6 +18,7 @@ import authentication, { getIsAuthorized, getIsPremium } from './auth';
 import { playerActionReducer, getSelectPlayer, getSelectPlayhubPlayer, playhubPlayerActionReducer } from './player';
 import { getAppTheme, themeActionReducer }  from './theme';
 import { getAppParentControl, parentControlActionReducer } from "./parent-control";
+import { getPlayhubDetailed, playhubDetailedActionReducer } from './detailed-playhub';
 
 const rootReducer = combineReducers({
     channelsFetchReducer,
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
     contentActionReducer,
     parentControlActionReducer,
     playhubPlayerActionReducer,
-    localContentActionReducer
+    localContentActionReducer,
+    playhubDetailedActionReducer
 });
 
 export default rootReducer;
@@ -40,5 +42,6 @@ export {
     authentication, getIsAuthorized, getIsPremium,
     getSelectPlayer, getSelectPlayhubPlayer,
     getAppTheme,
-    getAppParentControl
+    getAppParentControl,
+    getPlayhubDetailed
 }

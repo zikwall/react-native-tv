@@ -36,6 +36,7 @@ import CreateContentScreen from './user/CreateContent';
 import IPTVScreen from "./menu/IPTVScreen";
 import LocalContentWatch from "./watch/LocalContentWatch";
 import ContentPostingRules from './static/ContentPostingRules';
+import DetailedPlayhubScreen from './playhub/DetailedScreen';
 
 export {
     /**
@@ -94,5 +95,6 @@ export {
     PlayHubBestScreen,
     PlayHubCategoryScreen,
     PlayHubForFamilyScreen,
-    PlayHubRecommendedScreen
+    PlayHubRecommendedScreen,
+    DetailedPlayhubScreen
 }

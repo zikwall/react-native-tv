@@ -353,7 +353,8 @@ export const userPlaylist = [
         rating: '4,4',
         visibility: Content.VISIBILITY.USERS,
         pinned: Content.PINNED.NO,
-        type: 'Телеканал'
+        type: 'Телеканал',
+        ageLimit: 50
     },
     {
         channel: "Побег из шоушенка (1994)",
@@ -371,7 +372,7 @@ export const userPlaylist = [
         rating: '4,2',
         visibility: Content.VISIBILITY.PREMIUM,
         pinned: Content.PINNED.YES,
-        type: 'Телеканал'
+        type: 'Телеканал',
     },
     {
         channel: "Матч ТВ",

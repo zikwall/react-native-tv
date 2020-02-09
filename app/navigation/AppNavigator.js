@@ -5,6 +5,7 @@ import ProfileNavigator, { ProfileStackNavigator } from "./profile/ProfileNaviga
 import AuthNavigator from "./auth/AuthNavigator";
 import GlobalWatchNavigator from './watch/GlobalWatchNavigator';
 import LocalWatchNavigator from "./watch/LocalWatchNavigator";
+import PlayhubDetailedNavigator from './playhub/PlayhubDetailedNavigator';
 
 const MainStack = createStackNavigator({
     // You could add another route here for authentication.
@@ -14,6 +15,7 @@ const MainStack = createStackNavigator({
     Watch: GlobalWatchNavigator,
     LocalWatch: LocalWatchNavigator,
     Profile: createStackNavigator({ProfileNavigator}),
+    PlayhubDetailed: PlayhubDetailedNavigator
 }, {
     headerMode: 'none',
     navigationOptions: {

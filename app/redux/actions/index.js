@@ -4,6 +4,7 @@ import { authenticate, reauthenticate, deauthenticate, registration, registerFin
 import { initPlayer, setPlayer, initPlayhubPlayer, setPlayhubPlayer } from './player';
 import { changeTheme, initTheme } from './theme';
 import { changeParentControlMode } from "./parent-control";
+import { setPlayhubDetailed } from './detailed-playhub';
 
 export {
     fetchChannelsPending, fetchChannelsSuccess, fetchChannelsError, setChannel,
@@ -11,5 +12,6 @@ export {
     authenticate, reauthenticate, deauthenticate, registration, registerFinished, setProfile, updateAccount,
     initPlayer, setPlayer, initPlayhubPlayer, setPlayhubPlayer,
     changeTheme, initTheme,
-    changeParentControlMode
+    changeParentControlMode,
+    setPlayhubDetailed
 }

@@ -1,29 +1,37 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
-import { useSelector } from 'react-redux';
+import { ScrollView } from 'react-native';
+import { connect, useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
+import { ChannelsLine, ThemedView } from '../../components';
+import { Fake } from '../../utils';
+import { bindActionCreators } from 'redux';
+import { setPlayhubDetailed } from '../../redux/actions';
 
-const PlayHubBestScreen = () => {
+const PlayHubBestScreen = ({ navigation, setDetailed }) => {
     const theme = useSelector(state => getAppTheme(state));
 
-    return (
-        <View style={[styles.container, { backgroundColor: theme.primaryBackgroundColor }]}>
-            <View style={{ alignItems: 'center' }}>
-                <Image style={{ resizeMode: 'contain', height: 250, width: 250 }} source={ theme.playHubFull }/>
-            </View>
+    const handleOnTitlePress = (title, items) => {
+        setDetailed({
+            title: title,
+            items: items
+        });
+        navigation.navigate('PlayhubDetailed');
+    };
 
-            <Text style={{ textAlign:"center", color:"#000" }}>Coming Soon...</Text>
-        </View>
+    return (
+        <ThemedView>
+            <ScrollView>
+                <ChannelsLine titlePress={handleOnTitlePress} title={'Новостные'} items={Fake.userPlaylist} />
+                <ChannelsLine titlePress={handleOnTitlePress} title={'Развлекательные'} items={[...Fake.userPlaylist, ...Fake.userPlaylist]} />
+                <ChannelsLine titlePress={handleOnTitlePress} title={'Кино и фильмы'} items={Fake.userPlaylist} />
+                <ChannelsLine titlePress={handleOnTitlePress} title={'Спортивные'} items={Fake.userPlaylist} />
+            </ScrollView>
+        </ThemedView>
     );
 };
 
-export default PlayHubBestScreen;
+const mapDispatchToProps = dispatch => bindActionCreators({
+    setDetailed: setPlayhubDetailed,
+}, dispatch);
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        paddingTop: 15,
-        justifyContent: "center",
-    },
-});
+export default connect(state => state, mapDispatchToProps)(PlayHubBestScreen);

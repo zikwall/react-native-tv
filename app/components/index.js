@@ -74,3 +74,5 @@ export { default as VideoViewLocalContent } from './video-view/VideoViewLocalCon
 export { default as ModalizeWrapper } from './modalize/ModilizeWrapper';
 export { default as ParentControlModal } from './modalize/ParentControlModal';
 export { default as LargeAdmobBanner } from './firebase/LargeAdmobBanner';
+export { default as ChannelBackgroundCard } from './channel-item/ChannelBackgroundCard';
+export { default as ChannelsLine } from './channel-item/ChannelsLine';
