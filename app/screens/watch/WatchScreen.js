@@ -3,7 +3,6 @@ import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {View, Dimensions} from 'react-native';
 import Orientation from 'react-native-orientation';
-import { Modalize } from 'react-native-modalize';
 import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import ContentLoader, { Bullets } from '@sarmad1995/react-native-content-loader';
@@ -16,8 +15,7 @@ import {
     NavigationHeaderTitle,
     NavigationHeaderLeft,
     NavigationHeaderComponent,
-    NativeVideoView,
-    ModalizeWrapper
+    ModalizeWrapper,
 } from '../../components';
 import StaticModal from "./examples/StaticModal";
 import AbsoluteHeader, { renderHeader } from "./examples/AbsoluteHeader";
@@ -65,7 +63,6 @@ const defaultEpg = [
 
 const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     const theme = useSelector(state => getAppTheme(state));
-    const [ webViewSize, setWebViewSize ] = useState(height * 0.275 + width * 0.03);
     const [ modalContent, setModalContent ] = useState(null);
     const [ epgContent, setEpgContent ] = useState(null);
     const [ activeTab, setActiveTab ] = useState(3);
@@ -134,13 +131,7 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     }, [ channel.url ]);
 
     const orientationHandleChange = (orientation) => {
-        const { height } = Dimensions.get('window');
 
-        if (orientation === 'LANDSCAPE') {
-            setWebViewSize(height);
-        } else {
-            setWebViewSize(height * 0.3);
-        }
     };
 
     const modal = React.createRef();
@@ -235,8 +226,17 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
 
     return (
         <View style={{ flex: 2, backgroundColor: theme.primaryBackgroundColor}}>
-            <View style={{ height: webViewSize }}>
-                <VideoView />
+            <View style={{ paddingTop: '56.25%' }}>
+                <View style={{
+                    position: 'absolute',
+                    left: 0,
+                    right:0,
+                    bottom: 0,
+                    top: 0,
+                    backgroundColor: theme.primaryBackgroundColor
+                }}>
+                    <VideoView />
+                </View>
             </View>
             <ChannelInfo
                 onLongPress={() => {
