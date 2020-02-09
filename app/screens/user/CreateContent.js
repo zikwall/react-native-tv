@@ -106,14 +106,6 @@ const CreateContentScreen = ({ navigation }) => {
                     multiple
                     tags={Object.values(Content.TYPES)}
                 />
-                {/*<PickerInput
-                    label={'Тип'}
-                    customErrors={error.attributes}
-                    inputname={'type'}
-                    items={types}
-                    selectedValue={type}
-                    onSelect={(t) => setType(t)}
-                />*/}
                 <TextArea
                     lineNumbers={10}
                     value={desc}
