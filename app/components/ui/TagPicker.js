@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import Tag from './Tag';
 
-const TagPicker = ({ small, label, labelIcon, tags, onSelect, multiple, selectedItems }) => {
+const TagPicker = ({ small, label, labelIcon, tags, onSelect, multiple, selectedItems, headingColor }) => {
     const theme = useSelector(state => getAppTheme(state));
     const [ selectItems, setSelectItems ] = useState(selectedItems);
 
@@ -30,7 +30,7 @@ const TagPicker = ({ small, label, labelIcon, tags, onSelect, multiple, selected
     return (
         <View>
             {
-                label && <Heading text={label} styles={{ paddingLeft: 0 }} color={theme.primaryColor} icon={labelIcon} />
+                label && <Heading text={label} styles={{ paddingLeft: 0 }} color={headingColor ? headingColor : theme.primaryColor} icon={labelIcon} />
             }
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {
