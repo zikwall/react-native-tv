@@ -7,6 +7,27 @@ import {
 } from '../../redux/actions';
 import {UserHelper} from '../../utils';
 
+export const createContent = (fields, token) => {
+    return apiFetch(`/vktv/content/create`, {
+        method: 'POST',
+        body: JSON.stringify(fields)
+    }, {"Authorization": UserHelper.makeAuthorizationHeader(token)})
+        .then(res => {
+            if(res.error) {
+                throw(res.error);
+            }
+
+            return {
+                code: res.code,
+                response: res.response || res.message,
+                attributes: res.attributes || []
+            };
+        })
+        .catch(error => {
+            new Error(error);
+        })
+};
+
 export const fetchRandomPlaylist = () => {
     return apiFetch(`/vktv/parse/random`)
         .then(res => {

@@ -27,6 +27,19 @@ export const AUTH_REQUIRED = {
     YES: 1
 };
 
+export const YEARS = {
+    10: '0+',
+    20: '6+',
+    30: '12+',
+    40: '16+',
+    50: '18+'
+};
+
+export const is18YearOld = (status) => {
+    // 50 это 18 лет
+    return status === 50;
+};
+
 export const CATEGORIES = {
     10: {
         id: 10,
