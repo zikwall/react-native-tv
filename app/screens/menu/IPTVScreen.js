@@ -22,8 +22,8 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
     const [ iptvUrl, setIptvUrl ] = useState(null);
     const [ ownContent, setOwnContent ] = useState([]);
     const [ spinner, setSpinner ] = useState(true);
-    const [ randomPlaylist, setRandomPlaylist ] = useState(null);
     const [ isFetched, setIsFetched ] = useState(false);
+    const [ secretPlaylist, setSecretPlaylist ] = useState(null);
 
     useEffect(() => {
         let interval = setTimeout(() => {
@@ -31,7 +31,7 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
         }, 3000);
 
         ContentService.fetchRandomPlaylist().then((response) => {
-            setRandomPlaylist(response.response);
+            setSecretPlaylist(response.response);
         });
 
         return () => {
@@ -39,14 +39,10 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
         };
     }, []);
 
-    const handleOnScan = async () => {
+    const handleOnScan = async (url) => {
         setIsFetched(true);
 
-        if (!iptvUrl) {
-            return false;
-        }
-
-        ContentService.fetchParsedContents(iptvUrl).then((response) => {
+        ContentService.fetchParsedContents(url).then((response) => {
             setOwnContent(response.response);
             setIsFetched(false);
         });
@@ -63,10 +59,6 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
     const handleOnSelectContent = (content, image, title, visibility) => {
         selectLocalContent(content);
         navigation.navigate('LocalWatch');
-    };
-
-    const handleOnPasteGenerated = () => {
-        setIptvUrl(randomPlaylist);
     };
 
     const RandomPlaylist = () => {
@@ -93,9 +85,9 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
                 <Heading text={'Мы вам подобрали!'} color={theme.primaryColor} styles={{ padding: 0 }}/>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text numberOfLines={1} style={[ human.caption1, { flex: 1, flexWrap: 'wrap', color: theme.primaryColor } ]}>
-                        { randomPlaylist }
+                        Секретный плейлист готов!
                     </Text>
-                    <FlatButton text={'Взглянуть!'} onPress={handleOnPasteGenerated} icon={'play'} color={theme.primaryColor} />
+                    <FlatButton text={'Взглянуть!'} onPress={() => handleOnScan(secretPlaylist)} icon={'play'} color={theme.primaryColor} />
                 </View>
             </View>
         )
@@ -130,7 +122,7 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
                             <FlatButton
                                 text={'Сканировать'}
                                 icon={'download-cloud'} color={theme.primaryColor}
-                                onPress={handleOnScan}
+                                onPress={() => handleOnScan(iptvUrl)}
                             />
                         </View>
 
