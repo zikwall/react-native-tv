@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     ScrollView,
 } from 'react-native';
@@ -13,8 +13,17 @@ import {
 } from '../../components';
 import { UserHelper, Fake } from '../../utils';
 import MenuUserInfo from './MenuUserInfo';
+import { bindActionCreators } from 'redux';
+import { handleJWTMiddleware } from '../../services/auth';
 
-const MenuScreen = ({ navigation, user, isAuthenticated }) => {
+const MenuScreen = ({ navigation, user, isAuthenticated, checkAuth }) => {
+    useEffect(() => {
+        async function handleAuth() {
+            checkAuth();
+        }
+
+        handleAuth();
+    }, []);
 
     const handleSettingsPress = () => {
         navigation.navigate('UserMenuScreen');
@@ -76,4 +85,8 @@ const mapStateToProps = (state) => ({
     user: state.authentication.user
 });
 
-export default connect(mapStateToProps)(withNavigation(MenuScreen));
+const mapDispatchToProps = dispatch => bindActionCreators({
+    checkAuth: handleJWTMiddleware
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(MenuScreen));

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import {
@@ -14,9 +14,16 @@ import {
 import { getAppTheme, getAppParentControl } from '../../redux/reducers';
 import { Fake } from '../../utils';
 
-const UserMenuScreen = ({ navigation }) => {
+const UserMenuScreen = ({ navigation, checkAuth }) => {
     const theme = useSelector(state => getAppTheme(state));
     const parentControlMode = useSelector(state => getAppParentControl(state));
+    const isAuthorized = useSelector(state => !!state.authentication.token);
+
+    useEffect(() => {
+        if (!isAuthorized) {
+            navigation.goBack();
+        }
+    }, [ isAuthorized ]);
 
     const modal = React.createRef();
 
