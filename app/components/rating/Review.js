@@ -23,7 +23,8 @@ const Review = ({ user, review, date, stars, usefulCount, isOwnUseful }) => {
         if (status === false && usefulStatus && usefulCountStatus) {
             setUsefulCountStatus(usefulCountStatus - 1);
         }
-        if (status === true && !usefulCountStatus) {
+
+        if (status === true && !usefulStatus) {
             setUsefulCountStatus(usefulCountStatus + 1);
         }
     };
