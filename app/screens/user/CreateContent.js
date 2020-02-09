@@ -4,11 +4,14 @@ import {
     TextArea,
     Form,
     ThemedView,
-    PickerInput, Heading, CellViewSwitch, TagPicker,
+    Heading,
+    CellViewSwitch,
+    TagPicker,
 } from '../../components';
 import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 import { View } from 'react-native';
+import {Content} from '../../constants';
 
 const CreateContentScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
@@ -101,24 +104,7 @@ const CreateContentScreen = ({ navigation }) => {
                     }}
                     label={'Тип'}
                     multiple
-                    tags={[
-                        {
-                            id: 10,
-                            title: 'Телеканал',
-                            description: 'Выберите данный тип контента, если он является, как ни странно, телеканалом :)'
-                        },
-                        {
-                            id: 20,
-                            title: 'Кино и фильмы',
-                            description: 'В данный тип контента входит пратически все: Фильмы, сериалы, анимационные фильмы и т.д.'
-                        },
-                        {
-                            id: 30,
-                            title: 'VR контент',
-                            description: 'Вы сможете погрузиться в дополненную реальность прямо в вашем телефоне!',
-                            disabled: true
-                        },
-                    ]}
+                    tags={Object.values(Content.TYPES)}
                 />
                 {/*<PickerInput
                     label={'Тип'}
@@ -143,53 +129,7 @@ const CreateContentScreen = ({ navigation }) => {
                     }}
                     label={'Категория'}
                     multiple={false}
-                    tags={[
-                        {
-                            id: 10,
-                            title: 'Кино и фильмы',
-                            description: 'Конент для настоящих киноманов! Про сериалы тоже не забываем.'
-                        },
-                        {
-                            id: 20,
-                            title: 'Позновательное',
-                            description: 'Будет интересно как детям, так и взрослым.'
-                        },
-                        {
-                            id: 30,
-                            title: 'Новостные',
-                            description: 'Ооо! Серьезный контент подкатил. Обходим, обходим стороной!',
-                        },
-                        {
-                            id: 40,
-                            title: 'Спортивные',
-                            description: 'Все мы любим мяч погонять или хотя бы посмотреть на это))',
-                        },
-                        {
-                            id: 50,
-                            title: 'Детские',
-                            description: 'Тут все сказано, контент для самых маленьких.',
-                        },
-                        {
-                            id: 60,
-                            title: 'Хобби',
-                            description: 'Друзья и зрители наверняка оценят ваши старания!',
-                        },
-                        {
-                            id: 70,
-                            title: 'Развлекательное',
-                            description: 'Ну тут самый сок, гоу развлечемся.',
-                        },
-                        {
-                            id: 80,
-                            title: 'Музыкальные',
-                            description: 'Все мы в душе меломаны, просто не знаем этого...',
-                        },
-                        {
-                            id: 90,
-                            title: 'Общие',
-                            description: 'Вы долистали до сюда? Ну у вас и выдержка! Не знаете что бырать - выбирайте общие!',
-                        },
-                    ]}
+                    tags={Object.values(Content.CATEGORIES)}
                 />
                 <Heading styles={{ paddingLeft: 0, justifyContent: 'center' }} color={theme.primaryColor} text={'Ой сколько галочек, без паники!'} />
                 <Heading

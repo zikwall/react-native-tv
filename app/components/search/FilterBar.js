@@ -13,12 +13,14 @@ import {
     Heading,
     IconWrap,
     Row,
-    Tag
+    Tag,
+    TagPicker,
 } from '../index';
 import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 import SearchBar from "./SearchBar";
 import { human } from 'react-native-typography';
+import {Content} from '../../constants';
 
 const { width, height } = Dimensions.get('window');
 
@@ -29,6 +31,7 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
     const [ isSelectedChannels, setIsSelectedChannels ] = useState(true);
     const [ isSelectedMovies, setIsSelectedMovies ]     = useState(true);
     const [ isSelectedAdults, setIsSelectedAdults ]     = useState(true);
+    const [ categories, setCategories ] = useState(null);
 
     const handleCloseEvent = (reset = true) => {
         setVisibleFilterBar(false);
@@ -51,7 +54,7 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
     };
 
     const handleOnPressAccept = () => {
-        onAccept(isSelectedChannels, isSelectedMovies, isSelectedAdults);
+        onAccept(isSelectedChannels, isSelectedMovies, isSelectedAdults, categories);
 
         handleCloseEvent(false)
     };
@@ -132,17 +135,18 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
                             </Text>
                         </View>
                         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                            <Row style={{ paddingLeft: 15, paddingTop: 14 }}>
-                                <Tag label={'Кино и фильмы'} id={10} />
-                                <Tag label={'Позновательные'} id={20} />
-                                <Tag label={'Новостные'} id={30} />
-                                <Tag label={'Спортивные'} id={40} />
-                                <Tag label={'Детские'} id={50} />
-                                <Tag label={'Хобби'} id={60} />
-                                <Tag label={'Развлекательные'} id={70} />
-                                <Tag label={'Музыкальные'} id={80} />
-                                <Tag label={'Общие'} id={90} />
-                            </Row>
+                            <View style={{ paddingHorizontal: 15, paddingTop: 14 }}>
+                                <TagPicker
+                                    selectedItems={categories}
+                                    small
+                                    onSelect={(items) => {
+                                        console.log(items);
+                                        setCategories(items);
+                                    }}
+                                    multiple={true}
+                                    tags={Object.values(Content.CATEGORIES)}
+                                />
+                            </View>
                         </ScrollView>
                         <FlatButton
                             onPress={handleOnPressAccept}

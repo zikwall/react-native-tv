@@ -4,10 +4,11 @@ import BigTag from '../ui/BigTag';
 import Heading from '../heading';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
+import Tag from './Tag';
 
-const TagPicker = ({ label, labelIcon, tags, onSelect, multiple }) => {
+const TagPicker = ({ small, label, labelIcon, tags, onSelect, multiple, selectedItems }) => {
     const theme = useSelector(state => getAppTheme(state));
-    const [ selectItems, setSelectItems ] = useState([]);
+    const [ selectItems, setSelectItems ] = useState(selectedItems);
 
     const handleOnSelect = (id, isSelected) => {
         let selected = [];
@@ -34,6 +35,17 @@ const TagPicker = ({ label, labelIcon, tags, onSelect, multiple }) => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {
                     tags.map((tag, index) => {
+                        if (small) {
+                            return <Tag
+                                key={index}
+                                isSelected={selectItems.includes(tag.id)}
+                                id={tag.id}
+                                label={tag.title}
+                                disabled={tag.disabled}
+                                onSelect={handleOnSelect}
+                            />
+                        }
+
                         return (
                             <BigTag
                                 isSelected={selectItems.includes(tag.id)}
@@ -55,7 +67,9 @@ const TagPicker = ({ label, labelIcon, tags, onSelect, multiple }) => {
 TagPicker.defaultProps = {
     multiple: false,
     onSelect: () => {},
-    tags: []
+    tags: [],
+    small: false,
+    selectedItems: []
 };
 
 export default TagPicker;

@@ -4,11 +4,23 @@ import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import { human } from 'react-native-typography';
 
-const Tag = ({ id, label, style, onSelect, borderColor }) => {
+const Tag = ({ id, label, style, disabled, onSelect, borderColor, isSelected }) => {
     const theme = useSelector(state => getAppTheme(state));
-    const customBorderColor = borderColor ? borderColor : theme.primaryColor;
+    const customBorderColor = borderColor
+        ? borderColor
+        : (isSelected ? '#7cbb4f' : disabled ? theme.secondaryBackgroundColor : theme.primaryColor);
+
+    const handleOnSelect = () => {
+        if (disabled) {
+            alert(`Хрен вам а не ${label}`);
+            return true;
+        }
+
+        onSelect(id, !isSelected);
+    };
+
     return (
-        <TouchableOpacity onPress={() => onSelect(id)} style={{
+        <TouchableOpacity onPress={handleOnSelect} style={{
             height: 30,
             marginRight: 5,
             borderRadius: 30,
@@ -27,6 +39,7 @@ const Tag = ({ id, label, style, onSelect, borderColor }) => {
 
 Tag.defaultProps = {
     onSelect: () => {},
+    isSelected: false,
     id: 0,
     label: 'unnamed',
     customBorderColor: undefined

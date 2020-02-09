@@ -17,8 +17,6 @@ const BigTag = ({ id, title, description, onSelect, disabled, isSelected }) => {
         onSelect(id, !isSelected);
     };
 
-    const borderColor = disabled ? theme.secondaryBackgroundColor : theme.primaryColor;
-
     return (
         <TouchableOpacity
             onPress={handleOnSelect}

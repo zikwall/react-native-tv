@@ -185,8 +185,10 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
         updateContent();
     };
 
-    const handleFilterAccept = (useChannels, useMovies, useAdults) => {
+    const handleFilterAccept = (useChannels, useMovies, useAdults, categories) => {
         let includeTypes = [];
+        let includeCategories = [];
+        let useCategories = false;
 
         if (useChannels) {
             includeTypes.push('Телеканал')
@@ -194,6 +196,11 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
 
         if (useMovies) {
             includeTypes.push('Фильм')
+        }
+
+        if (typeof categories != 'undefined' && categories.length > 0) {
+            useCategories = true;
+            includeCategories = categories.map((category) => Content.CATEGORIES[category].title);
         }
 
         let countBanners = 0;
@@ -208,6 +215,10 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
             if (includeTypes.includes(item.type)) {
                 if (!useAdults) {
                     return item.age_limit !== 50;
+                }
+
+                if (useCategories && !includeCategories.includes(item.category)) {
+                    return false;
                 }
 
                 return true;
