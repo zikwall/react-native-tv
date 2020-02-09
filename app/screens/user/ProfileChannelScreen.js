@@ -13,7 +13,7 @@ import {
     systemWeights
 } from "react-native-typography";
 
-import { CommonChannelCardItem, CommonChannelListItem, ContentModalize } from '../../components';
+import { CommonChannelCardItem, CommonChannelListItem, ContentVisibilityModal } from '../../components';
 import { Fake } from '../../utils';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
@@ -136,7 +136,7 @@ const ProfileChannelScreen = ({ navigation }) => {
                     showsVerticalScrollIndicator: false
                 }}
             >
-                <ContentModalize {...modalContent} onCloseModal={handleClosePremium}/>
+                <ContentVisibilityModal {...modalContent} onCloseModal={handleClosePremium}/>
             </Modalize>
         </View>
     );
