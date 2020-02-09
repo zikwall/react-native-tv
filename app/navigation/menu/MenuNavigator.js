@@ -19,7 +19,8 @@ import {
     ParentControlScreen,
     CreativeStudioScreen,
     CreateContentScreen,
-    IPTVScreen
+    IPTVScreen,
+    ContentPostingRules
 } from "../../screens";
 import {
     NavigationHeaderComponent,
@@ -141,6 +142,15 @@ const MenuNavigator = createStackNavigator({
         navigationOptions:{
             header: (props) => <NavigationHeaderComponent
                 titleComponent={<NavigationHeaderTitle title={'Правообладателям'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
+    },
+    ContentPostingRules: {
+        screen: ContentPostingRules,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Правила размещения контента'} />}
                 leftComponent={ <NavigationHeaderLeft /> } {...props}
             />
         }

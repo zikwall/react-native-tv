@@ -35,6 +35,7 @@ import CreativeStudioScreen from './user/CreativeStudio';
 import CreateContentScreen from './user/CreateContent';
 import IPTVScreen from "./menu/IPTVScreen";
 import LocalContentWatch from "./watch/LocalContentWatch";
+import ContentPostingRules from './static/ContentPostingRules';
 
 export {
     /**
@@ -85,6 +86,7 @@ export {
     CreativeStudioScreen,
     CreateContentScreen,
     IPTVScreen,
+    ContentPostingRules,
 
     /**
      *  PlayHub service namespace
