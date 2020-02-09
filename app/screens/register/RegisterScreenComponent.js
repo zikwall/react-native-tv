@@ -11,6 +11,8 @@ import {
 import { AppLogo, ErrorMessage } from "../../components";
 import styles, { container } from "./style";
 import BottomContainer from "./components/BottomContainer/BottomContainer";
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../redux/reducers';
 
 const RegisterScreenComponent = props => {
     const {
@@ -21,13 +23,17 @@ const RegisterScreenComponent = props => {
         loginBackgorundColor
     } = props;
 
-    function renderLoginButton() {
+    const renderLoginButton = () => {
+        const theme = useSelector(state => getAppTheme(state));
+
         return (
             <TouchableOpacity style={styles.loginButtonStyle} onPress={ onRegister }>
-                <Text style={ss.button}>Register Now!</Text>
+                <Text style={[ ss.button , { backgroundColor: theme.primaryBackgroundColor, color: theme.primaryColor, borderColor: theme.primaryColor }]}>
+                    Register Now!
+                </Text>
             </TouchableOpacity>
         );
-    }
+    };
 
     return (
         <KeyboardAvoidingView

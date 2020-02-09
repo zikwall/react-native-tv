@@ -111,7 +111,7 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
 LoginScreen.navigationOptions = ({ navigation }) => {
     return {
         header: (props) => <NavigationHeaderComponent
-            titleComponent={<NavigationHeaderTitle title={'Login'} />}
+            titleComponent={<NavigationHeaderTitle title={'Вход'} />}
             leftComponent={ <NavigationHeaderLeft onHome /> } {...props}
         />
     };

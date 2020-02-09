@@ -9,8 +9,12 @@ import {
 } from 'react-native';
 import { CardInput } from "../../../../components";
 import styles, { container } from "./BottomContainer.style";
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../../../redux/reducers';
 
 const BottomContainer = props => {
+    const theme = useSelector(state => getAppTheme(state));
+
     const {
         onLogin,
         switchText,
@@ -64,7 +68,7 @@ const BottomContainer = props => {
             <View style={styles.footerContainer}>
                 <TouchableOpacity onPress={onLogin}>
                     <View style={ss.leftContainer}>
-                        <Text style={ ss.button }>Login</Text>
+                        <Text style={[ ss.button , { backgroundColor: theme.primaryBackgroundColor, color: theme.primaryColor, borderColor: theme.primaryColor }]}>Login</Text>
                     </View>
                 </TouchableOpacity>
                 <Text style={switchTextStyle || styles.switchTextStyle}>

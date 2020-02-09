@@ -10,10 +10,14 @@ import {
 
 import { CardInput } from "../../../../components";
 import styles, { container } from "./BottomContainer.style";
+import { useSelector } from 'react-redux';
+import { getAppTheme } from '../../../../redux/reducers';
 
 const { width } = Dimensions.get('window');
 
 const BottomContainer = props => {
+    const theme = useSelector(state => getAppTheme(state));
+
     const {
         onLogin,
         emailTitle,
@@ -41,7 +45,9 @@ const BottomContainer = props => {
 
             <View style={{ paddingHorizontal: 10, width: width * 0.9, marginTop: 15 }}>
                 <TouchableOpacity onPress={ onLogin }>
-                    <Text style={ss.button}>Forgot!</Text>
+                    <Text style={[ ss.button , { backgroundColor: theme.primaryBackgroundColor, color: theme.primaryColor, borderColor: theme.primaryColor }]}>
+                        Forgot!
+                    </Text>
                 </TouchableOpacity>
             </View>
         </View>

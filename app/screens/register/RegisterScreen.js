@@ -91,7 +91,7 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
                     <Icon
                         size={ 30 }
                         name="at-sign"
-                        color="black"
+                        color={theme.primaryColor}
                     />
                 }
                 loginButtonTextStyle={{ color: theme.primaryColor }}
@@ -106,7 +106,7 @@ const RegisterScreen = ({ navigation, register, isAuthenticated }) => {
 RegisterScreen.navigationOptions = ({ navigation }) => {
     return {
         header: (props) => <NavigationHeaderComponent
-            titleComponent={<NavigationHeaderTitle title={'Login'} />}
+            titleComponent={<NavigationHeaderTitle title={'Регистрация'} />}
             leftComponent={ <NavigationHeaderLeft /> } {...props}
         />
     };

@@ -106,7 +106,7 @@ const ForgotScreen = ({ navigation, auth, isAuthenticated }) => {
 ForgotScreen.navigationOptions = ({ navigation }) => {
     return {
         header: (props) => <NavigationHeaderComponent
-            titleComponent={<NavigationHeaderTitle title={'Login'} />}
+            titleComponent={<NavigationHeaderTitle title={'Восстановление доступа'} />}
             leftComponent={ <NavigationHeaderLeft /> } {...props}
         />
     };

@@ -15,7 +15,7 @@ const AuthNavigator = createStackNavigator({
 }, {
     defaultNavigationOptions: {
         headerTitle: () => (
-            <NavigationHeaderTitle title={'Watch'} />
+            <NavigationHeaderTitle title={'Login'} />
         ),
         headerLeft: () => (
             <NavigationHeaderLeft onHome={true}/>
