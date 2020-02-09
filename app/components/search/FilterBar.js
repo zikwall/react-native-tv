@@ -139,7 +139,6 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
                                     selectedItems={categories}
                                     small
                                     onSelect={(items) => {
-                                        console.log(items);
                                         setCategories(items);
                                     }}
                                     multiple={true}
