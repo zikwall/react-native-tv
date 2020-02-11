@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Animated } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeTheme } from '../../redux/actions';
 import { getAppTheme } from '../../redux/reducers';
@@ -7,19 +7,37 @@ import { human, iOSColors } from 'react-native-typography';
 import { Theme } from '../../constants';
 import { ThemeService } from '../../services';
 
-const ThemeItem = ({ colorScheme, colorName, textColor, onSelect, name }) => {
+const ThemeItem = ({ colorScheme, colorName, textColor, onSelect, name, delayed }) => {
     const theme = useSelector(state => getAppTheme(state));
 
+    const Animation = useRef(new Animated.Value(0)).current;
+    const translationX = Animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [350, 0]
+    });
+
+    useEffect(() => {
+        Animated.timing(Animation, {
+            delay: 100 + delayed,
+            toValue: 1,
+            duration: 200,
+            useNativeDriver: true
+        }).start();
+    }, []);
+
     return (
-        <TouchableOpacity onPress={() => onSelect(name)} style={[styles.channelCard, { height: 80, width: 80, borderColor: theme.primaryColor, backgroundColor: colorScheme }]}>
-            <Text numberOfLines={1} style={[ styles.title, { color: textColor }]}>{ colorName }</Text>
-        </TouchableOpacity>
+        <Animated.View style={{ transform: [{ translateX: translationX }] }}>
+            <TouchableOpacity onPress={() => onSelect(name)} style={[styles.channelCard, { height: 80, width: 80, borderColor: theme.primaryColor, backgroundColor: colorScheme }]}>
+                <Text numberOfLines={1} style={[ styles.title, { color: textColor }]}>{ colorName }</Text>
+            </TouchableOpacity>
+        </Animated.View>
     )
 };
 
 ThemeItem.defaultProps = {
     colorScheme: '#fff',
-    textColor: '#000'
+    textColor: '#000',
+    delayed: 100
 };
 
 const ThemePicker = () => {
@@ -42,6 +60,7 @@ const ThemePicker = () => {
                                       colorScheme={theme.primaryBackgroundColor}
                                       textColor={theme.primaryColor}
                                       onSelect={handleSelectTheme}
+                                      delayed={index * 200 + 10}
                     />
                 })}
             </ScrollView>
