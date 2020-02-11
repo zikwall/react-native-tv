@@ -7,7 +7,7 @@ import { human, iOSColors } from 'react-native-typography';
 import { Theme } from '../../constants';
 import { ThemeService } from '../../services';
 
-const ThemeItem = ({ colorScheme, colorName, textColor, onSelect, name, delayed }) => {
+const ThemeItem = ({ colorScheme, colorName, textColor, onSelect, name, animationDelay }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     const Animation = useRef(new Animated.Value(0)).current;
@@ -18,7 +18,7 @@ const ThemeItem = ({ colorScheme, colorName, textColor, onSelect, name, delayed 
 
     useEffect(() => {
         Animated.timing(Animation, {
-            delay: 100 + delayed,
+            delay: 100 + animationDelay,
             toValue: 1,
             duration: 200,
             useNativeDriver: true
@@ -37,7 +37,7 @@ const ThemeItem = ({ colorScheme, colorName, textColor, onSelect, name, delayed 
 ThemeItem.defaultProps = {
     colorScheme: '#fff',
     textColor: '#000',
-    delayed: 100
+    animationDelay: 100
 };
 
 const ThemePicker = () => {
@@ -60,7 +60,7 @@ const ThemePicker = () => {
                                       colorScheme={theme.primaryBackgroundColor}
                                       textColor={theme.primaryColor}
                                       onSelect={handleSelectTheme}
-                                      delayed={index * 200 + 10}
+                                      animationDelay={index * 200 + 10}
                     />
                 })}
             </ScrollView>
