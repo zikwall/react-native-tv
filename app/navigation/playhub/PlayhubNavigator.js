@@ -1,5 +1,5 @@
-import React, { useState }  from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useRef, useEffect }  from 'react';
+import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from "react-navigation";
 import Icon from 'react-native-vector-icons/Feather';
@@ -105,15 +105,41 @@ const PlayhubNavigator = ({ navigation }) => {
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const [ isVisibleNotify, setIsVisibleNotify ] = useState(true);
 
+    const animation = useRef(new Animated.Value(0)).current;
+    const translationY = animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [-100, 0]
+    });
+
+    useEffect(() => {
+        Animated.timing(animation, {
+            toValue: 1,
+            duration: 900,
+            useNativeDriver: true
+        }).start();
+    }, []);
+
     const handleCloseNotify = () => {
-        setIsVisibleNotify(false);
+        Animated.timing(animation, {
+            toValue: 0,
+            duration: 600,
+            useNativeDriver: true
+        }).start(() => {
+            setIsVisibleNotify(false);
+        });
     };
 
     return (
         <View style={{ flex: 1 }}>
             {
                 (!isAuthorized && isVisibleNotify ) &&
-                <View style={{ backgroundColor: theme.primaryBackgroundColor, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Animated.View style={{
+                    transform: [{ translateY: translationY }],
+                    backgroundColor: theme.primaryBackgroundColor,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-start', }} >
                         <IconWrap name={'info'} size={25} style={{ paddingLeft: 10 }} />
                     </View>
@@ -125,7 +151,7 @@ const PlayhubNavigator = ({ navigation }) => {
                     <TouchableOpacity onPress={handleCloseNotify} style={{ flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }} >
                         <IconWrap name={'x-square'} size={25} style={{ paddingRight: 10 }} />
                     </TouchableOpacity>
-                </View>
+                </Animated.View>
             }
 
             <StaticNavigation navigation={ navigation } />

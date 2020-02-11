@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
     Dimensions,
     View,
     TouchableOpacity,
     Text,
     StyleSheet,
-    ScrollView
+    ScrollView,
+    Animated
 } from "react-native";
 import {
     CellViewSwitch,
@@ -32,18 +33,66 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
     const [ isSelectedAdults, setIsSelectedAdults ]     = useState(true);
     const [ categories, setCategories ] = useState([]);
 
-    const handleCloseEvent = (reset = true) => {
-        setVisibleFilterBar(false);
+    const Animation = useRef(new Animated.Value(0)).current;
+    const AnimationOverlay = useRef(new Animated.Value(0)).current;
 
+    const translationY = Animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [-400, 0]
+    });
+
+    const handleCloseEvent = (reset = true) => {
         if (reset) {
             setIsSelectedChannels(false);
             setIsSelectedMovies(false);
             setIsSelectedAdults(false);
         }
+
+        Animated.parallel([
+            Animated.timing(Animation, {
+                toValue: 0,
+                duration: 300,
+                useNativeDriver: true
+            }),
+            Animated.timing(AnimationOverlay, {
+                toValue: 0,
+                duration: 300,
+                useNativeDriver: true
+            })
+        ]).start(() => {
+            setVisibleFilterBar(false);
+        });
+
+        /*Animated.timing(Animation, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: true
+        }).start(() => {
+            setVisibleFilterBar(false);
+        });*/
     };
 
     const handleOnPressFilter = () => {
         setVisibleFilterBar(true);
+
+        Animated.parallel([
+            Animated.timing(Animation, {
+                toValue: 1,
+                duration: 300,
+                useNativeDriver: true
+            }),
+            Animated.timing(AnimationOverlay, {
+                toValue: 0.9,
+                duration: 300,
+                useNativeDriver: true
+            })
+        ]).start();
+
+        /*Animated.timing(Animation, {
+            toValue: 1,
+            duration: 300,
+            useNativeDriver: true
+        }).start();*/
 
         onPressFilter();
     };
@@ -55,7 +104,7 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
     const handleOnPressAccept = () => {
         onAccept(isSelectedChannels, isSelectedMovies, isSelectedAdults, categories);
 
-        handleCloseEvent(false)
+        handleCloseEvent(false);
     };
 
     return (
@@ -91,8 +140,10 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
 
             {
                 visibleFilterBar && <>
-                    <View style={[
-                        styles.overlay, {
+                    <Animated.View style={[
+                        styles.overlay,
+                        {
+                            transform: [{ translateY: translationY }],
                             width: width - 10,
                             margin: 5,
                             height: 300,
@@ -152,12 +203,12 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
                             style={{ marginTop: 10, borderColor: theme.primaryColor, borderWidth: 1, borderRadius: 10, padding: 10 }}
                             color={theme.primaryColor}
                         />
-                    </View>
-                    <View style={[styles.overlay, {
+                    </Animated.View>
+                    <Animated.View style={[styles.overlay, {
                         zIndex: 1,
                         width: width,
                         height: height,
-                        opacity: 0.9,
+                        opacity: AnimationOverlay,
                         backgroundColor: theme.primaryBackgroundColor,
                     }]}/>
                 </>
