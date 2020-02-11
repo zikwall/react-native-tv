@@ -22,6 +22,12 @@ const CreativeStudioScreen = ({ navigation }) => {
         });
     }, []);
 
+    const onPressContentHandle = ({ id }) => {
+        navigation.navigate('EditContentScreen', {
+            contentId: id
+        });
+    };
+
     const Content = () => {
         return (
             <View>
@@ -48,6 +54,7 @@ const CreativeStudioScreen = ({ navigation }) => {
                         rating={item.rating}
                         visibility={item.visibility}
                         playlist={item}
+                        onPress={onPressContentHandle}
                     />}
                     keyExtractor={item => item.id}
                 />

@@ -7,6 +7,21 @@ import {
 } from '../../redux/actions';
 import {UserHelper} from '../../utils';
 
+export const editContentInfo = (id, token) => {
+    return apiFetch(`/vktv/content/edit?id=${id}`, {
+        method: 'GET',
+    }, {"Authorization": UserHelper.makeAuthorizationHeader(token)})
+        .then(res => {
+            return {
+                code: res.code,
+                response: res.response || res.message,
+            };
+        })
+        .catch(error => {
+            new Error(error);
+        })
+};
+
 export const createContent = (fields, token) => {
     return apiFetch(`/vktv/content/create`, {
         method: 'POST',

@@ -20,7 +20,8 @@ import {
     CreativeStudioScreen,
     CreateContentScreen,
     IPTVScreen,
-    ContentPostingRules
+    ContentPostingRules,
+    EditContentScreen
 } from "../../screens";
 import {
     NavigationHeaderComponent,
@@ -121,6 +122,15 @@ const MenuNavigator = createStackNavigator({
         navigationOptions:{
             header: (props) => <NavigationHeaderComponent
                 titleComponent={<NavigationHeaderTitle title={'Create content'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
+    },
+    EditContentScreen: {
+        screen: EditContentScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Edit content'} />}
                 leftComponent={ <NavigationHeaderLeft /> } {...props}
             />
         }
