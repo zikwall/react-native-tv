@@ -56,20 +56,12 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
             }),
             Animated.timing(AnimationOverlay, {
                 toValue: 0,
-                duration: 300,
+                duration: 200,
                 useNativeDriver: true
             })
         ]).start(() => {
             setVisibleFilterBar(false);
         });
-
-        /*Animated.timing(Animation, {
-            toValue: 0,
-            duration: 300,
-            useNativeDriver: true
-        }).start(() => {
-            setVisibleFilterBar(false);
-        });*/
     };
 
     const handleOnPressFilter = () => {
@@ -79,20 +71,14 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
             Animated.timing(Animation, {
                 toValue: 1,
                 duration: 300,
-                useNativeDriver: true
+                useNativeDriver: true,
             }),
             Animated.timing(AnimationOverlay, {
                 toValue: 0.9,
-                duration: 300,
+                duration: 200,
                 useNativeDriver: true
             })
         ]).start();
-
-        /*Animated.timing(Animation, {
-            toValue: 1,
-            duration: 300,
-            useNativeDriver: true
-        }).start();*/
 
         onPressFilter();
     };
