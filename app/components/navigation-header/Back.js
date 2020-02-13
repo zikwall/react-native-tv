@@ -4,13 +4,8 @@ import { withNavigation } from 'react-navigation';
 import Icon from "react-native-vector-icons/Feather";
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
-import { NavigationActions } from 'react-navigation'
 
-const backAction = NavigationActions.back({
-    key: null
-});
-
-const Back = ({ navigation, onHome, icon, on }) => {
+const Back = ({ navigation, onHome, icon, outside }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
@@ -20,10 +15,10 @@ const Back = ({ navigation, onHome, icon, on }) => {
                   color={theme.primaryColor}
                   onPress={() => {
                       if (onHome) {
-                          navigation.navigate('Main')
+                          navigation.goBack(null);
                       } else {
-                          if (!!on) {
-                              navigation.navigate(on);
+                          if (outside) {
+                              navigation.goBack(null);
                               return true;
                           }
 
@@ -38,7 +33,7 @@ const Back = ({ navigation, onHome, icon, on }) => {
 Back.defaultProps = {
     onHome: false,
     icon: 'arrow-left',
-    on: null
+    outside: false
 };
 
 export default withNavigation(Back);

@@ -69,7 +69,7 @@ ReviewScreen.navigationOptions = ({ navigation }) => {
                     <NavigationHeaderTitleContent title={title} />
                 </>
             }
-            leftComponent={ <NavigationHeaderLeft on={'ContentWatch'} icon={'x'} /> } {...props}
+            leftComponent={ <NavigationHeaderLeft outside icon={'x'} /> } {...props}
         />
     }
 };
