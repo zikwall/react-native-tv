@@ -4,7 +4,7 @@ import {
     Avatar,
     NavigationHeaderComponent,
     NavigationHeaderLeft,
-    NavigationHeaderTitleContent,
+    NavigationHeaderTitleContent, TextInput,
     ThemedView,
 } from '../../components';
 import ExtendedTextArea from '../../components/ui/TextArea';
@@ -38,6 +38,7 @@ const ReviewScreen = ({ navigation }) => {
                     onChangeText={text => setReviewContent(text)}
                     lineNumbers={10}
                     maxLength={500}
+                    placeholder={'Поделитесь впечатлениями'}
                 />
                 <TagPicker
                     multiple
