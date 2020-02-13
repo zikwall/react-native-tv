@@ -19,13 +19,13 @@ import {
     Verified,
     RatingOverView,
     LoadMoreButton,
-    ModalReview
+    ModalizeWrapper,
+    WriteReview,
 } from '../../components';
 import { AdEventType, InterstitialAd, TestIds } from "@react-native-firebase/admob";
 
 import { getActiveContent, getAppTheme } from '../../redux/reducers';
 import { human } from "react-native-typography";
-import { Modalize } from 'react-native-modalize';
 import Menu, { MenuDivider, MenuItem } from 'react-native-material-menu';
 import { Players } from '../../constants';
 import Description from './components/Description';
@@ -36,7 +36,6 @@ const { height, width } = Dimensions.get('window');
 const ContentWatch = ({ navigation, content, selectPlayer }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
-    const [ visibleReviewModal, setVisibleReviewModal ] = useState(false);
     const [ isVisiblePage, setIsVisiblePage ] = useState(true);
     const [ reviews, setReviews ] = useState(Fake.reviews);
     const [ star, setStar ] = useState(0);
@@ -97,14 +96,6 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
         }
     };
 
-    const handleOpenReportModal = () => {
-        openModal();
-    };
-
-    const handleCloseReportModal = () => {
-        closeModal();
-    };
-
     const handleSelectPlayer = (playerId) => {
         selectPlayer(content.id, playerId);
         hideMenu();
@@ -114,32 +105,31 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
         setIsVisiblePage(isFullscreen);
     };
 
-    const onPressWriteReview = () => {
-        setVisibleReviewModal(true);
+    const onPressWriteReview = (star) => {
+        //openModal();
+        navigation.navigate('PlayhubReview', {
+            id: content.id,
+            value: star,
+            title: content.name,
+            image: content.image
+        });
     };
 
     const onCancelWriteReview = () => {
-        setVisibleReviewModal(false);
+        //closeModal();
     };
 
-    const onWriteReview = () => {
-        setVisibleReviewModal(false);
+    const onSubmitReview = () => {
+        //closeModal();
     };
 
     const onSelectStar = (star) => {
         setStar(star);
-        onPressWriteReview();
+        onPressWriteReview(star);
     };
 
     return (
         <ThemedView>
-            <ModalReview
-                visible={visibleReviewModal}
-                value={star}
-                onClose={onCancelWriteReview}
-                onOpen={onPressWriteReview}
-                onWrite={onWriteReview}
-            />
             <View style={{ paddingTop: '56.25%' }}>
                 <View style={{
                     position: 'absolute',
@@ -260,14 +250,15 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                     </>
             }
 
-            <Modalize
-                ref={modal}
+            <ModalizeWrapper
+                referal={modal}
+                closeOnOverlayTap={false}
                 adjustToContentHeight={{
                     showsVerticalScrollIndicator: false
                 }}
             >
-
-            </Modalize>
+                <WriteReview value={star} onSubmit={onSubmitReview} onCancel={onCancelWriteReview}/>
+            </ModalizeWrapper>
         </ThemedView>
     );
 };

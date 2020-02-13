@@ -38,6 +38,7 @@ import LocalContentWatch from "./watch/LocalContentWatch";
 import ContentPostingRules from './static/ContentPostingRules';
 import DetailedPlayhubScreen from './playhub/DetailedScreen';
 import EditContentScreen from "./user/EditContent";
+import ReviewScreen from './playhub/ReviewScreen';
 
 export {
     /**
@@ -98,5 +99,6 @@ export {
     PlayHubCategoryScreen,
     PlayHubForFamilyScreen,
     PlayHubRecommendedScreen,
-    DetailedPlayhubScreen
+    DetailedPlayhubScreen,
+    ReviewScreen
 }

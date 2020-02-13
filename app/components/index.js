@@ -77,3 +77,5 @@ export { default as LargeAdmobBanner } from './firebase/LargeAdmobBanner';
 export { default as ChannelBackgroundCard } from './channel-item/ChannelBackgroundCard';
 export { default as ChannelsLine } from './channel-item/ChannelsLine';
 export { default as ModalReview } from './rating/ModalReview';
+export { default as WriteReview } from './rating/WriteReview';
+export { default as ModalizeCloseHeader} from './modalize/ModalizeCloseHeader';
