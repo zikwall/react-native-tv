@@ -76,3 +76,4 @@ export { default as ParentControlModal } from './modalize/ParentControlModal';
 export { default as LargeAdmobBanner } from './firebase/LargeAdmobBanner';
 export { default as ChannelBackgroundCard } from './channel-item/ChannelBackgroundCard';
 export { default as ChannelsLine } from './channel-item/ChannelsLine';
+export { default as ModalReview } from './rating/ModalReview';

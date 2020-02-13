@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import AntIconWrap from '../icon/AntIconWrap';
 import Row from '../ui/Row';
 
-const Ratings = ({ size, full, value, disabled }) => {
+const Ratings = ({ size, full, value, disabled, onSelect }) => {
     const [ stars, setStars ] = useState(value);
 
     const handleOnSelectStar = (star) => {
@@ -12,6 +12,7 @@ const Ratings = ({ size, full, value, disabled }) => {
         }
 
         setStars(star);
+        onSelect(star);
     };
 
     const renderStars = () => {

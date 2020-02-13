@@ -19,6 +19,7 @@ import {
     Verified,
     RatingOverView,
     LoadMoreButton,
+    ModalReview
 } from '../../components';
 import { AdEventType, InterstitialAd, TestIds } from "@react-native-firebase/admob";
 
@@ -35,8 +36,10 @@ const { height, width } = Dimensions.get('window');
 const ContentWatch = ({ navigation, content, selectPlayer }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
+    const [ visibleReviewModal, setVisibleReviewModal ] = useState(false);
     const [ isVisiblePage, setIsVisiblePage ] = useState(true);
     const [ reviews, setReviews ] = useState(Fake.reviews);
+    const [ star, setStar ] = useState(0);
 
     useEffect(() => {
         const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
@@ -111,8 +114,32 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
         setIsVisiblePage(isFullscreen);
     };
 
+    const onPressWriteReview = () => {
+        setVisibleReviewModal(true);
+    };
+
+    const onCancelWriteReview = () => {
+        setVisibleReviewModal(false);
+    };
+
+    const onWriteReview = () => {
+        setVisibleReviewModal(false);
+    };
+
+    const onSelectStar = (star) => {
+        setStar(star);
+        onPressWriteReview();
+    };
+
     return (
         <ThemedView>
+            <ModalReview
+                visible={visibleReviewModal}
+                value={star}
+                onClose={onCancelWriteReview}
+                onOpen={onPressWriteReview}
+                onWrite={onWriteReview}
+            />
             <View style={{ paddingTop: '56.25%' }}>
                 <View style={{
                     position: 'absolute',
@@ -206,7 +233,7 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                                     <View>
                                         <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценить контент'} />
                                         <View style={{ paddingHorizontal: 15 }}>
-                                            <Ratings size={25} full />
+                                            <Ratings size={25} full onSelect={onSelectStar}/>
                                         </View>
                                     </View>
                                     <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценки и отзывы'} />
