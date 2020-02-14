@@ -130,7 +130,7 @@ const PlayhubNavigator = ({ navigation }) => {
     };
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: theme.primaryBackgroundColor }}>
             {
                 (!isAuthorized && isVisibleNotify ) &&
                 <Animated.View style={{
