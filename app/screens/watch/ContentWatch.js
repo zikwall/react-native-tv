@@ -21,6 +21,7 @@ import {
     LoadMoreButton,
     ModalizeWrapper,
     WriteReview,
+    ReviewMaker
 } from '../../components';
 import { AdEventType, InterstitialAd, TestIds } from "@react-native-firebase/admob";
 
@@ -222,9 +223,7 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                                     />
                                     <View>
                                         <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценить контент'} />
-                                        <View style={{ paddingHorizontal: 15 }}>
-                                            <Ratings size={25} full onSelect={onSelectStar}/>
-                                        </View>
+                                        <ReviewMaker onSelectStar={onSelectStar} />
                                     </View>
                                     <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценки и отзывы'} />
                                     <RatingOverView stars={reviews} />
