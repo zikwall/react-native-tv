@@ -70,7 +70,7 @@ const LoginScreen = ({ navigation, auth, isAuthenticated }) => {
 
         if (status.state === true) {
             //navigation.navigate('Profile');
-            navigation.dispatch(resetAction);
+            navigation.goBack(null);
             return true;
         }
 
