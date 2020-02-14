@@ -14,14 +14,14 @@ import Form from '../../components/ui/Form';
 import TagPicker from '../../components/ui/TagPicker';
 import Ratings from '../../components/rating/Ratings';
 
-const ReviewScreen = ({ navigation, heading }) => {
+const ReviewScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const [ reviewContent, setReviewContent ] = useState('');
-    const { id, value } = navigation.state.params;
     const [ extraTags, setExtraTags ] = useState([]);
+    const { user, id, value } = navigation.state.params;
 
     const onSendReview = () => {
-        //
+        alert(`User is ${user.id}`);
     };
 
     return (
@@ -33,7 +33,7 @@ const ReviewScreen = ({ navigation, heading }) => {
                 headerColor={theme.primaryColor}
                 header={'Оставьте свой нереальный отзыв!'}
                 buttonTitle={'Оставить отзыв!'}
-                onSubmit={() => alert('Ok ok!')}
+                onSubmit={onSendReview}
             >
                 <ExtendedTextArea
                     onChangeText={text => setReviewContent(text)}

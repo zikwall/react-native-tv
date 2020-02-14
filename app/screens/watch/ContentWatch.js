@@ -37,6 +37,8 @@ const { height, width } = Dimensions.get('window');
 const ContentWatch = ({ navigation, content, selectPlayer }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
+    const user = useSelector(state => state.authentication.user);
+
     const [ isVisiblePage, setIsVisiblePage ] = useState(true);
     const [ reviews, setReviews ] = useState(Fake.reviews);
     const [ star, setStar ] = useState(0);
@@ -110,6 +112,7 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
         //openModal();
         navigation.navigate('PlayhubReview', {
             id: content.id,
+            user: user,
             value: star,
             title: content.name,
             image: content.image
