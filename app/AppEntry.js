@@ -35,7 +35,7 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
 
     useEffect(() => {
         Orientation.lockToPortrait();
-    });
+    }, []);
 
     useEffect(() => {
         setAdvice(ArrayHelper.random(Fake.advices));
@@ -86,12 +86,6 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
                 {
                     advice && <Advice advice={advice} />
                 }
-
-                {/*<View style={{ paddingBottom: 20, alignItems: 'center'}}>
-                    <Text style={[ human.caption1, { color: theme.primaryColor }]}>
-                        Powered by PlayHub Service { Environment.isDev() ? '(dev)' : '' }
-                    </Text>
-                </View>*/}
             </View>
         );
     }
