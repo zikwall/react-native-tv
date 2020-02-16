@@ -74,7 +74,6 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
         ]);
     };
 
-    const modal = React.createRef();
     const menu = React.createRef();
 
     const showMenu = () => {
@@ -86,18 +85,6 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
     const hideMenu = () => {
         if (menu.current) {
             menu.current.hide();
-        }
-    };
-
-    const openModal = () => {
-        if (modal.current) {
-            modal.current.open();
-        }
-    };
-
-    const closeModal = () => {
-        if (modal.current) {
-            modal.current.close();
         }
     };
 
@@ -119,14 +106,6 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
             title: content.name,
             image: content.image
         });
-    };
-
-    const onCancelWriteReview = () => {
-        //closeModal();
-    };
-
-    const onSubmitReview = () => {
-        //closeModal();
     };
 
     const onSelectStar = (star) => {
@@ -257,16 +236,6 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                         />
                     </>
             }
-
-            <ModalizeWrapper
-                referal={modal}
-                closeOnOverlayTap={false}
-                adjustToContentHeight={{
-                    showsVerticalScrollIndicator: false
-                }}
-            >
-                <WriteReview value={star} onSubmit={onSubmitReview} onCancel={onCancelWriteReview}/>
-            </ModalizeWrapper>
         </ThemedView>
     );
 };
