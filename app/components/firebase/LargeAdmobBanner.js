@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { BannerAd, BannerAdSize } from "@react-native-firebase/admob";
 
-const LargeAdmobBanner = () => {
+const LargeAdmobBanner = ({ style }) => {
     const [ adOk, setAdOk ] = useState(true);
 
     if (!adOk) {
@@ -10,7 +10,7 @@ const LargeAdmobBanner = () => {
     }
 
     return (
-        <View style={{ alignItems: 'center' }}>
+        <View style={{ alignItems: 'center', ...style }}>
             <BannerAd
                 unitId={'ca-app-pub-3049855368077051/1128427189'}
                 size={BannerAdSize.MEDIUM_RECTANGLE}

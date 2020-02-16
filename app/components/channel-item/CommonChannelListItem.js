@@ -59,14 +59,17 @@ const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, numb
                 {
                     visibility === Content.VISIBILITY.USERS && !isAuthorized && <IconWrap name={'key'} size={20} style={{ paddingRight: 10 }} />
                 }
-                <Rating rating={rating} style={{ color: theme.primaryColor }} />
+                {
+                    rating && <Rating rating={rating} style={{ color: theme.primaryColor }} />
+                }
             </View>
         </Button>
     )
 };
 
 CommonChannelListItem.defaultProps = {
-    onPress: () => {}
+    onPress: () => {},
+    rating: '0.0'
 };
 
 export default CommonChannelListItem;

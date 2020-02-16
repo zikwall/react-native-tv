@@ -19,6 +19,7 @@ import { playerActionReducer, getSelectPlayer, getSelectPlayhubPlayer, playhubPl
 import { getAppTheme, themeActionReducer }  from './theme';
 import { getAppParentControl, parentControlActionReducer } from "./parent-control";
 import { getPlayhubDetailed, playhubDetailedActionReducer } from './detailed-playhub';
+import { localDatabaseActionReducer, getCurrentDatabase } from './local-database';
 
 const rootReducer = combineReducers({
     channelsFetchReducer,
@@ -31,7 +32,8 @@ const rootReducer = combineReducers({
     parentControlActionReducer,
     playhubPlayerActionReducer,
     localContentActionReducer,
-    playhubDetailedActionReducer
+    playhubDetailedActionReducer,
+    localDatabaseActionReducer
 });
 
 export default rootReducer;
@@ -43,5 +45,6 @@ export {
     getSelectPlayer, getSelectPlayhubPlayer,
     getAppTheme,
     getAppParentControl,
-    getPlayhubDetailed
+    getPlayhubDetailed,
+    getCurrentDatabase
 }

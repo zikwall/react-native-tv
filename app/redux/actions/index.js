@@ -5,6 +5,7 @@ import { initPlayer, setPlayer, initPlayhubPlayer, setPlayhubPlayer } from './pl
 import { changeTheme, initTheme } from './theme';
 import { changeParentControlMode } from "./parent-control";
 import { setPlayhubDetailed } from './detailed-playhub';
+import { appendDatabaseRedux, initDatabaseRedux } from './local-database';
 
 export {
     fetchChannelsPending, fetchChannelsSuccess, fetchChannelsError, setChannel,
@@ -13,5 +14,6 @@ export {
     initPlayer, setPlayer, initPlayhubPlayer, setPlayhubPlayer,
     changeTheme, initTheme,
     changeParentControlMode,
-    setPlayhubDetailed
+    setPlayhubDetailed,
+    appendDatabaseRedux, initDatabaseRedux
 }

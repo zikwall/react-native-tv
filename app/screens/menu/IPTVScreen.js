@@ -57,7 +57,13 @@ const IPTVScreen = ({ navigation, selectLocalContent }) => {
     };
 
     const handleOnSelectContent = (content, image, title, visibility) => {
-        selectLocalContent(content);
+        selectLocalContent({...content,
+            ...{
+                fromIPTV: true,
+                id: content.name,
+                category: content.category || 'Не определен',
+                type: content.type || 'Не определен'
+        }});
         navigation.navigate('LocalWatch');
     };
 

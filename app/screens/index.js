@@ -39,6 +39,7 @@ import ContentPostingRules from './static/ContentPostingRules';
 import DetailedPlayhubScreen from './playhub/DetailedScreen';
 import EditContentScreen from "./user/EditContent";
 import ReviewScreen from './playhub/ReviewScreen';
+import LocalDatabaseScreen from './user/LocalDatabaseScreen';
 
 export {
     /**
@@ -91,6 +92,7 @@ export {
     IPTVScreen,
     ContentPostingRules,
     EditContentScreen,
+    LocalDatabaseScreen,
 
     /**
      *  PlayHub service namespace

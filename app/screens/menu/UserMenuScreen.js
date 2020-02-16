@@ -83,7 +83,7 @@ const UserMenuScreen = ({ navigation, checkAuth }) => {
                 {/*<Heading icon={'database'} text={'Content'} color={theme.primaryColor} />*/}
                 {/*<Heading icon={'terminal'} text={'Developer Block'} color={theme.primaryColor} />*/}
                 <MenuItemLine onPress={onMenuPress} to={'DebugVideoScreen'} icon={'video'} name={'Проверить контент'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={'DebugVideoScreen'} icon={'database'} name={'Локальная база данных'} />
+                <MenuItemLine onPress={onMenuPress} to={'LocalDatabaseScreen'} icon={'database'} name={'Локальная база данных'} />
                 <MenuItemLine onPress={onMenuPress} to={'IPTVScreen'} icon={'tv'} name={'IPTV'} />
                 <MenuItemLine onPress={onMenuPress} to={'WriteDeveloperScreen'} icon={'edit-3'} name={'Написать разработчику'} />
                 <MenuItemLine onPress={onMenuPress} to={'PremiumScreen'} icon={'gift'} iconColor={'#DC143C'} name={'Активировать премиум'} />

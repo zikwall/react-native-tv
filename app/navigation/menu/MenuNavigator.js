@@ -21,7 +21,8 @@ import {
     CreateContentScreen,
     IPTVScreen,
     ContentPostingRules,
-    EditContentScreen
+    EditContentScreen,
+    LocalDatabaseScreen
 } from "../../screens";
 import {
     NavigationHeaderComponent,
@@ -131,6 +132,15 @@ const MenuNavigator = createStackNavigator({
         navigationOptions:{
             header: (props) => <NavigationHeaderComponent
                 titleComponent={<NavigationHeaderTitle title={'Edit content'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
+    },
+    LocalDatabaseScreen: {
+        screen: LocalDatabaseScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Local Database'} />}
                 leftComponent={ <NavigationHeaderLeft /> } {...props}
             />
         }

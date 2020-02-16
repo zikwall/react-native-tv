@@ -1,0 +1,1 @@
+export const LOCAL_CONTENT_KEY = 'LOCAL_CONTENT_KEY';

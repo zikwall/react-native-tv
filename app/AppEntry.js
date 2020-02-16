@@ -8,8 +8,8 @@ import { fetchChannelsRedux } from "./services/channels";
 import { appStore } from './redux/Store';
 import { getChannelsError, getChannelsPending, getAppTheme } from './redux/reducers';
 import { handleJWTMiddleware } from './services/auth';
-import { changeTheme, changeParentControlMode } from "./redux/actions";
-import { ThemeService, ParentControlService } from './services'
+import { changeTheme, changeParentControlMode, initDatabaseRedux } from "./redux/actions";
+import { ThemeService, ParentControlService, LocalDatabase } from './services'
 import AppNavigator from './navigation/AppNavigator';
 import { ArrayHelper, Environment, Fake } from './utils';
 import Orientation from 'react-native-orientation';
@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     fetchChannels: fetchChannelsRedux,
     selectTheme: changeTheme,
     initParentControlMode: changeParentControlMode,
+    initLocalDatabase: initDatabaseRedux,
     handleJWTMiddleware
 }, dispatch);
 
@@ -70,6 +71,12 @@ const App = connect(mapStateToProps, mapDispatchToProps)((props) => {
         }
 
         init();
+    }, []);
+
+    useEffect(() => {
+        LocalDatabase.get().then((items) => {
+            props.initLocalDatabase(items);
+        });
     }, []);
 
     const theme = props.theme;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setPlayhubPlayer } from '../../redux/actions';
+import { setPlayhubPlayer, appendDatabaseRedux } from '../../redux/actions';
 import { View, Text, ScrollView, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import {
     NavigationHeaderComponent,
@@ -25,25 +25,38 @@ import {
 } from '../../components';
 import { AdEventType, InterstitialAd, TestIds } from "@react-native-firebase/admob";
 
-import { getActiveContent, getAppTheme } from '../../redux/reducers';
+import { getActiveContent, getAppTheme, getCurrentDatabase } from '../../redux/reducers';
 import { human } from "react-native-typography";
 import Menu, { MenuDivider, MenuItem } from 'react-native-material-menu';
 import { Players } from '../../constants';
 import Description from './components/Description';
 import { Fake, DataHelper } from '../../utils';
+import { appendRedux, removeRedux } from '../../services/content/LocalDatabase';
 
 const { height, width } = Dimensions.get('window');
 
-const ContentWatch = ({ navigation, content, selectPlayer }) => {
+const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDatabase }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const currentDatabase = useSelector(state => getCurrentDatabase(state));
+
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const user = useSelector(state => state.authentication.user);
 
     const [ isVisiblePage, setIsVisiblePage ] = useState(true);
     const [ reviews, setReviews ] = useState(Fake.reviews);
     const [ star, setStar ] = useState(0);
+    const [ hasInDatabase, setHasInDatabase ] = useState(false);
 
     const hasOwnPlayer = DataHelper.hasOwnPlayer(content);
+
+    useEffect(() => {
+        let has = currentDatabase.find((item) => content.id === item.id);
+        console.log(['aaaa', !!has, currentDatabase]);
+
+        if (!!has) {
+            setHasInDatabase(true);
+        }
+    }, []);
 
     useEffect(() => {
         const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
@@ -113,6 +126,17 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
         onPressWriteReview(star);
     };
 
+    const onChangeLocalSave = () => {
+        if (hasInDatabase) {
+            removeDatabase(content.id);
+            setHasInDatabase(false);
+            return true;
+        }
+
+        toDatabase(content.id, content);
+        setHasInDatabase(true);
+    };
+
     return (
         <ThemedView>
             <View style={{ paddingTop: '56.25%' }}>
@@ -153,7 +177,9 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                                     isAuthorized && <>
                                         <AntIconWrap name={'hearto'} size={25} />
                                         <View style={{ marginLeft: 15, marginRight: 15, borderLeftWidth: 1, borderLeftColor: theme.primaryColor }} />
-                                        <IconWrap name={'save'} size={25} />
+                                        <TouchableOpacity onPress={onChangeLocalSave}>
+                                            <IconWrap name={hasInDatabase ? 'trash-2' : 'save'} size={25} />
+                                        </TouchableOpacity>
                                         <View style={{ marginLeft: 15, marginRight: 15, borderLeftWidth: 1, borderLeftColor: theme.primaryColor }} />
                                     </>
                                 }
@@ -263,6 +289,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     selectPlayer: setPlayhubPlayer,
+    toDatabase: appendRedux,
+    removeDatabase: removeRedux
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentWatch);
