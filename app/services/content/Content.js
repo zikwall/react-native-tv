@@ -91,7 +91,6 @@ export const fetchOwnContents = (token) => {
         })
 };
 
-
 export const fetchContentsRedux = (offset = 0) => {
     return dispatch => {
         dispatch(fetchContentsPending());

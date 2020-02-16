@@ -9,7 +9,7 @@ import { getAppTheme } from '../../redux/reducers';
 
 const { width } = Dimensions.get('window');
 
-const Right = ({ isAuthenticated, logout, navigation }) => {
+const Right = ({ isAuthenticated, logout, navigation, user }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     const handlePress = async () => {
@@ -37,12 +37,16 @@ const Right = ({ isAuthenticated, logout, navigation }) => {
                     color={theme.primaryColor}
                     onPress={() => {
                         let route = 'Login';
+                        let params = {};
 
                         if (isAuthenticated) {
                             route = 'Profile';
+                            params = {
+                                id: user.id
+                            }
                         }
 
-                        navigation.navigate(route)
+                        navigation.navigate(route, params)
                     }}
                 />
             </TouchableOpacity>
@@ -51,7 +55,8 @@ const Right = ({ isAuthenticated, logout, navigation }) => {
 };
 
 const mapStateToProps = (state) => ({
-    isAuthenticated: !!state.authentication.token
+    isAuthenticated: !!state.authentication.token,
+    user: state.authentication.user
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

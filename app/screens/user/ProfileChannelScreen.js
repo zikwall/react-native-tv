@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     View,
     ScrollView,
-    Text,
-} from "react-native";
+    Text, FlatList,
+} from 'react-native';
 
 import {
     iOSColors,
@@ -13,17 +13,35 @@ import {
     systemWeights
 } from "react-native-typography";
 
-import { CommonChannelCardItem, CommonChannelListItem, ContentVisibilityModal } from '../../components';
+import {
+    AdmobBanner,
+    CommonChannelCardItem,
+    CommonChannelListItem,
+    ContentVisibilityModal, LoadMoreButton,
+    OverlayLoader,
+} from '../../components';
 import { Fake } from '../../utils';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import { Content } from '../../constants';
 import { Modalize } from 'react-native-modalize';
+import { User } from '../../services';
 
-const ProfileChannelScreen = ({ navigation }) => {
+const ProfileChannelScreen = ({ navigation, screenProps }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
+    const [ isFetched, setIsFetched ] = useState(true);
+    const [ userContent, setUserContent ] = useState([]);
+
+    const { id } = screenProps;
+
+    useEffect(() => {
+        User.fetchUserContent(id).then(({ response }) => {
+            setUserContent(response);
+            setIsFetched(false);
+        });
+    }, []);
 
     const defaultState = {
         image : {uri: ''},
@@ -84,50 +102,56 @@ const ProfileChannelScreen = ({ navigation }) => {
     return (
         <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroundColor }]}>
             <View style={styles.recentlyPlayed}>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    <View style={styles.recentlyPlayedTitleBar}>
-                        <Text style={[ styles.recentlyPlayedTitle, { color: theme.primaryColor }]}>Закрепленные</Text>
-                    </View>
-                    <View style={{ flexDirection: 'column' }}>
-                        <ScrollView
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                            contentContainerStyle={styles.recentlyPlayedSongList}
-                        >
-                            {Fake.userPlaylist.filter((playlist) => playlist.pinned === 1).map((playlist, index) => (
-                                <CommonChannelCardItem
-                                    key={index}
-                                    title={playlist.channel}
-                                    type={playlist.type}
-                                    subtitle={playlist.category}
-                                    image={playlist.cover}
-                                    size={130}
-                                    visibility={playlist.visibility}
-                                    onPress={handleOnClickContent}
-                                />
-                            ))}
-                        </ScrollView>
-                    </View>
-                    <View style={{ marginTop: 10 }}>
-                        <View style={styles.recentlyPlayedTitleBar}>
-                            <Text style={[ styles.recentlyPlayedTitle, { color: theme.primaryColor }]}>Все</Text>
-                        </View>
-                        <View style={{ paddingTop: 10 }}>
-                            {Fake.userPlaylist.filter((playlist) => playlist.pinned === 0).map((playlist, index) => (
-                                <CommonChannelListItem
-                                    key={index}
-                                    title={playlist.channel}
-                                    type={playlist.type}
-                                    subtitle={playlist.category}
-                                    image={playlist.cover}
-                                    rating={playlist.rating}
-                                    visibility={playlist.visibility}
-                                    onPress={handleOnClickContent}
-                                />
-                            ))}
-                        </View>
-                    </View>
-                </ScrollView>
+                <View style={{ marginTop: 10 }}>
+                    <FlatList
+                        ListHeaderComponent={
+                            <View>
+                                <View style={styles.recentlyPlayedTitleBar}>
+                                    <Text style={[ styles.recentlyPlayedTitle, { color: theme.primaryColor }]}>Закрепленные</Text>
+                                </View>
+                                <View style={{ flexDirection: 'column' }}>
+                                    <ScrollView
+                                        horizontal
+                                        showsHorizontalScrollIndicator={false}
+                                        contentContainerStyle={styles.recentlyPlayedSongList}
+                                    >
+                                        {userContent.filter((playlist) => playlist.pinned === 1).map((playlist, index) => (
+                                            <CommonChannelCardItem
+                                                key={index}
+                                                title={playlist.name}
+                                                type={playlist.type}
+                                                subtitle={playlist.category}
+                                                image={{ uri: playlist.image }}
+                                                size={130}
+                                                visibility={playlist.visibility}
+                                                onPress={handleOnClickContent}
+                                            />
+                                        ))}
+                                    </ScrollView>
+                                </View>
+                                <View style={styles.recentlyPlayedTitleBar}>
+                                    <Text style={[ styles.recentlyPlayedTitle, { color: theme.primaryColor }]}>Все</Text>
+                                </View>
+                            </View>
+                        }
+                        data={userContent.filter((playlist) => playlist.pinned === 0)}
+                        renderItem={({ item, index }) =>
+                            <CommonChannelListItem
+                                key={index}
+                                title={item.name}
+                                subtitle={item.category}
+                                type={item.type}
+                                image={{ uri: item.image }}
+                                rating={item.rating}
+                                visibility={item.visibility}
+                                ageLimit={item.age_limit}
+                                playlist={item}
+                                onPress={handleOnClickContent}
+                            />
+                        }
+                        keyExtractor={item => item.id}
+                    />
+                </View>
             </View>
 
             <Modalize
@@ -160,7 +184,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        paddingBottom: 10
     },
     seeAll: {
         ...iOSUIKit.bodyEmphasizedObject,

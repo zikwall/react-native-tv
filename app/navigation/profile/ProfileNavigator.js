@@ -5,7 +5,7 @@ import {
     NavigationHeaderTitle,
     UserTop,
     BottomBarComponent,
-    NavigationHeaderComponent
+    NavigationHeaderComponent, OverlayLoader,
 } from '../../components';
 import { View } from "react-native";
 import { connect, useSelector } from 'react-redux';
@@ -15,6 +15,7 @@ import { FollowingScreen, FollowersScreen, ProfileChannelScreen } from "../../sc
 import { NavigationHeaderLeft } from "../../components";
 import { UserHelper } from '../../utils';
 import { getAppTheme } from '../../redux/reducers';
+import { User } from '../../services';
 
 const ProfileTopNavStack = createMaterialTopTabNavigator({
     ProfileChannelScreen: {
@@ -68,15 +69,45 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
     },
 });
 
-const ProfileNavigator = ({ navigation, user, isAuthenticated }) => {
-    const [ visibleUserTop, setVisibleUserTop ] = useState(true);
+const ProfileNavigator = ({ navigation, isAuthenticated }) => {
     const theme = useSelector(state => getAppTheme(state));
 
-    useEffect(() => {
-        if(!isAuthenticated) {
-            navigation.navigate('Login');
+    const [ visibleUserTop, setVisibleUserTop ] = useState(true);
+    const [ isFetched, setIsFetched ] = useState(true);
+    const [ user, setUser ] = useState({
+        id: 0,
+        username: 'Loading...',
+        profile: {
+            name: 'Loading...',
         }
     });
+
+    const { id } = navigation.state.params;
+
+    useEffect(() => {
+        navigation.setParams({ id: id });
+
+        User.fetchUserProfile(id).then(({ response }) => {
+            setUser({
+                id: response.id,
+                username: response.username,
+                profile: {
+                    name: response.name,
+                    avatar: response.avatar,
+                    public_email: response.public_email
+                }
+            });
+
+            if (isFetched === true) {
+                setIsFetched(false);
+            }
+        });
+
+        return () => {
+            console.log('UNMOUNT PROFILE STACK NAVIGATION');
+        }
+
+    }, []);
 
     useEffect(() => {
         Orientation.addOrientationListener(orientationHandleChange);
@@ -84,7 +115,7 @@ const ProfileNavigator = ({ navigation, user, isAuthenticated }) => {
         return () => {
             Orientation.removeOrientationListener(orientationHandleChange);
         };
-    });
+    }, []);
 
     const orientationHandleChange = (orientation) => {
         if (orientation === 'LANDSCAPE') {
@@ -98,16 +129,18 @@ const ProfileNavigator = ({ navigation, user, isAuthenticated }) => {
 
     return (
         <View style={{ flex: 1 }}>
+            <OverlayLoader visible={isFetched} />
+
             {visibleUserTop && <UserTop
                 displayName={UserHelper.buildUserId(user)}
                 username={user.username}
                 avatar={UserHelper.makeUserAvatar(user)}
-                onAvatarPress={() => alert('U press avatar')}
+                onAvatarPress={() => alert('Вы подумали можете открыть Аватарку? Ха-ха!')}
                 isOfficial={user.is_official}
             />}
 
             <View style={{ flex: 1, backgroundColor: theme.primaryBackgroundColor }}>
-                <ProfileTopNavStack navigation={ navigation } />
+                <ProfileTopNavStack navigation={ navigation } screenProps={{ id: id }}/>
             </View>
 
         </View>

@@ -10,9 +10,11 @@ import { Avatar } from '../avatar';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import Verified from '../ui/Verified';
+import { SafeValidator } from '../../utils';
 
 const UserLineItem = ({ id, image, name, username, onPress, moreOnPress, rightContent, isOfficialUser }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const ifImage = SafeValidator.isTrustSrc(image) ? image : theme.userAvatarPlaceholder;
 
     return (
         <Button
@@ -20,7 +22,7 @@ const UserLineItem = ({ id, image, name, username, onPress, moreOnPress, rightCo
             style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}>
 
             <View style={ s.leftContainer }>
-                <Avatar src={image} badgeRight={
+                <Avatar src={ifImage} badgeRight={
                     isOfficialUser && <Verified size={15} />
                 }/>
 

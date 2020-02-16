@@ -19,16 +19,16 @@ import { getAppTheme } from '../../redux/reducers';
 
 const { width } = Dimensions.get('window');
 
-const ProfileHomeScreen = () => {
+const ProfileHomeScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     useEffect(() => {
-       console.log('MOUNT PROFILE');
+        console.log('MOUNT PROFILE');
 
-       return () => {
-           console.log('UNMOUNT PROFILE');
-       }
-    });
+        return () => {
+            console.log('UNMOUNT PROFILE');
+        }
+    }, []);
 
     return (
         <View style={[ styles.container, { backgroundColor: theme.primaryBackgroundColor }]}>

@@ -5,7 +5,8 @@ const WhiteImages = {
     logo: require('../assets/images/PlayHubLogoLight.png'),
     playHubFull: require('../assets/images/PlayHubFullLight.png'),
     playHubCommunity: require('../assets/images/PlayHubFullCommunityLight.png'),
-    channelPlaceholder: require('../assets/images/PlayHub_200_200_white.png')
+    channelPlaceholder: require('../assets/images/PlayHub_200_200_white.png'),
+    userAvatarPlaceholder: require('../assets/images/placeholders/EwORTurDS_k.jpg'),
 };
 
 const BlackImages = {
@@ -13,7 +14,8 @@ const BlackImages = {
     logo: require('../assets/images/PlayHubLogo.png'),
     playHubFull: require('../assets/images/PlayHubFull.png'),
     playHubCommunity: require('../assets/images/PlayHubFullCommunity.png'),
-    channelPlaceholder: require('../assets/images/PlayHub_200_200.png')
+    channelPlaceholder: require('../assets/images/PlayHub_200_200.png'),
+    userAvatarPlaceholder: require('../assets/images/placeholders/EwORTurDS_k.jpg'),
 };
 
 const DefaultExtraScheme = {
