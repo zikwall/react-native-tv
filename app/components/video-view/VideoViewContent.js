@@ -7,8 +7,17 @@ import { SafeValidator } from '../../utils';
 import { getSelectPlayhubPlayer } from '../../redux/reducers';
 import { initPlayhubPlayer } from '../../redux/actions';
 import { Players } from '../../constants';
+import { DataHelper } from '../../utils';
 
 const resolveSelectedPlayer = (player, content) => {
+    if (DataHelper.hasOwnPlayer(content)) {
+        return content.own_player_url;
+    }
+
+    if (!!content.default_player && !player) {
+        return `http://tv.zikwall.ru/vktv/embed/give-content?player=${content.default_player}&id=${content.id}`;
+    }
+
     if (player === Players.ORIGIN_PLAYER) {
         return content.url;
     }

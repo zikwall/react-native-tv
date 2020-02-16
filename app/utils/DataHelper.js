@@ -31,3 +31,7 @@ export const getGroupedChannels = (items) => {
 
     return sections;
 };
+
+export const hasOwnPlayer = (content) => {
+    return !!content.use_own_player_url && !!content.own_player_url;
+};

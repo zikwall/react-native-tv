@@ -69,7 +69,13 @@ const actionInitialState = {
         is_auth_required: 0,
         visibility: 0,
         pinned: 0,
-        archived: 0
+        archived: 0,
+        default_player: '1',
+        in_main: 0,
+        use_origin: 0,
+        ad_url: '',
+        use_own_player_url: 0,
+        own_player_url: ''
     },
 };
 

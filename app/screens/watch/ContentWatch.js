@@ -30,7 +30,7 @@ import { human } from "react-native-typography";
 import Menu, { MenuDivider, MenuItem } from 'react-native-material-menu';
 import { Players } from '../../constants';
 import Description from './components/Description';
-import { Fake } from '../../utils';
+import { Fake, DataHelper } from '../../utils';
 
 const { height, width } = Dimensions.get('window');
 
@@ -42,6 +42,8 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
     const [ isVisiblePage, setIsVisiblePage ] = useState(true);
     const [ reviews, setReviews ] = useState(Fake.reviews);
     const [ star, setStar ] = useState(0);
+
+    const hasOwnPlayer = DataHelper.hasOwnPlayer(content);
 
     useEffect(() => {
         const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
@@ -185,28 +187,32 @@ const ContentWatch = ({ navigation, content, selectPlayer }) => {
                                         </TouchableOpacity>
                                     }
                                 >
-                                    <MenuItem onPress={() => {
+                                    <MenuItem disabled={hasOwnPlayer} onPress={() => {
                                         handleSelectPlayer('1');
                                     }}>
                                         Use Player 1
                                     </MenuItem>
 
-                                    <MenuItem onPress={() => {
+                                    <MenuItem disabled={hasOwnPlayer} onPress={() => {
                                         handleSelectPlayer('2');
                                     }}>
                                         Use Player 2
                                     </MenuItem>
 
-                                    <MenuItem onPress={() => {
-                                        handleSelectPlayer(Players.ORIGIN_PLAYER);
-                                    }}>
-                                        Use Origin Player
-                                    </MenuItem>
-                                    <MenuItem onPress={() => {
-                                        handleSelectPlayer(Players.NATIVE_PLAYER);
-                                    }}>
-                                        Use Native Player
-                                    </MenuItem>
+                                    {
+                                        !!content.use_origin &&  <MenuItem disabled={hasOwnPlayer} onPress={() => {
+                                            handleSelectPlayer(Players.ORIGIN_PLAYER);
+                                        }}>
+                                            Use Origin Player
+                                        </MenuItem>
+                                    }
+                                    {
+                                        !!content.use_origin &&  <MenuItem disabled={hasOwnPlayer} onPress={() => {
+                                            handleSelectPlayer(Players.NATIVE_PLAYER);
+                                        }}>
+                                            Use Native Player
+                                        </MenuItem>
+                                    }
                                     <MenuDivider />
                                     <MenuItem onPress={ hideMenu }>Report</MenuItem>
                                 </Menu>

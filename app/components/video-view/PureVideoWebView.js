@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { WebView } from 'react-native-webview';
 import { Alert, Linking } from 'react-native';
+import { StringHelper } from '../../utils';
 
 const PureVideoWebView = ({ source, onNavigationStateChange }) => {
     const [ canGoBack, setCanGoBack ] = useState(false);
+
     let webView = null;
 
     /*useEffect(() => {
@@ -58,14 +60,21 @@ const PureVideoWebView = ({ source, onNavigationStateChange }) => {
             style={{ backgroundColor: 'transparent' }}
             // TODO PREMIUM just past channel.url for use native web player
             // without AD and blocking by ORIGIN
-            source={{ uri: source }}
+            source={{ uri: source, headers: {"Origin": StringHelper.extractHostname(source)} }}
             javaScriptEnabled={ true }
             domStorageEnabled={ true }
             thirdPartyCookiesEnabled={ true }
             sharedCookiesEnabled={ true }
             geolocationEnabled={ true }
             cacheEnabled={ true }
-            origin="http://tv.zikwall.ru"
+            origin={StringHelper.extractHostname(source)}
+            originWhitelist={['*']}
+            allowFileAccess={true}
+            allowUniversalAccessFromFileURLs={true}
+            onError={syntheticEvent => {
+                const { nativeEvent } = syntheticEvent;
+                console.warn('WebView error: ', nativeEvent);
+            }}
             automaticallyAdjustContentInsets={ false }
             mixedContentMode="always"
             userAgent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36"
