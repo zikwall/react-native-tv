@@ -8,9 +8,12 @@ import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 import { Validator } from "../../utils";
 import { ERROR_INVALID_PASSWORD } from "../../constants";
+import { User } from '../../services';
 
 const SecurityScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const token = useSelector(state => state.authentication.token);
+
     const [ password, setPassword] = useState(null);
     const [ newPassword, setNewPassword] = useState(null);
     const [ newPasswordCheck, setNewPasswordCheck] = useState(null);
@@ -55,7 +58,18 @@ const SecurityScreen = ({ navigation }) => {
             return false;
         }
 
-        setSuccessState();
+        User.changeSecuritySettings(token, {
+            password: password,
+            password_new: newPassword,
+            password_new_check: newPasswordCheck
+        }).then(({ code, message, attributes }) => {
+            if (code === 200) {
+                setSuccessState(message);
+                return true;
+            }
+
+            setErrorState(message, attributes);
+        });
     };
 
     const setErrorState = (message, attributes) => {
@@ -71,10 +85,10 @@ const SecurityScreen = ({ navigation }) => {
         });
     };
 
-    const setSuccessState = () => {
+    const setSuccessState = (message) => {
         setSuccess({
             has: true,
-            text: 'Вы успешно сменили пароль!'
+            text: message
         });
 
         setError({
