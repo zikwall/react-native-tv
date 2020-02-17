@@ -41,6 +41,7 @@ import ReviewScreen from './playhub/ReviewScreen';
 import LocalDatabaseScreen from './user/LocalDatabaseScreen';
 import FriendsIncomingScreen from "./user/FriendsIncomingScreen";
 import FriendsOutcomingScreen from "./user/FriendsOutcomingScreen";
+import UsersScreen from "./user/UsersScreen";
 
 export {
     /**
@@ -95,6 +96,7 @@ export {
     ContentPostingRules,
     EditContentScreen,
     LocalDatabaseScreen,
+    UsersScreen,
 
     /**
      *  PlayHub service namespace

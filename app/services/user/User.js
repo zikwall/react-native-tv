@@ -96,6 +96,19 @@ export const changeSecuritySettings = (token, attributes) => {
 };
 
 
+export const fetchUsers = () => {
+    return apiFetch(`/vktv/user/list`)
+        .then(res => {
+            return {
+                code: res.code,
+                response: res.response,
+            };
+        })
+        .catch(error => {
+            new Error(error);
+        })
+};
+
 export const fetchUserFriends = (id) => {
     return apiFetch(`/vktv/friends-request/list?userId=${id}`)
         .then(res => {

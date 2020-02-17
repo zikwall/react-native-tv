@@ -27,7 +27,7 @@ const FriendsIncomingScreen = () => {
     const token = useSelector(state => state.authentication.token);
 
     const [ inputRequests, setInputRequests ] = useState([]);
-    const [ completeFetched, setCompleteFetched ] = useState(true);
+    const [ completeFetched, setCompleteFetched ] = useState(false);
 
     useEffect(() => {
         User.fetchIncomingFriendsRequest(token).then(({ code, requests }) => {
