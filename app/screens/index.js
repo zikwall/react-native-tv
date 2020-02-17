@@ -25,7 +25,6 @@ import LikedScreen from './liked/LikedScreen';
 import AccountScreen from './user/AccountScreen';
 import DebugVideoScreen from './menu/DebugVideoScreen';
 import ContactsScreen from './static/ContactsScreen';
-import FriendshipRequestsScreen from './user/FrinedshipRequestsScreen';
 import ContentWatch from './watch/ContentWatch';
 import PremiumScreen from "./user/PremiumScreen";
 import WriteDeveloperScreen from "./user/WriteDeveloperScreen";
@@ -40,6 +39,8 @@ import DetailedPlayhubScreen from './playhub/DetailedScreen';
 import EditContentScreen from "./user/EditContent";
 import ReviewScreen from './playhub/ReviewScreen';
 import LocalDatabaseScreen from './user/LocalDatabaseScreen';
+import FriendsIncomingScreen from "./user/FriendsIncomingScreen";
+import FriendsOutcomingScreen from "./user/FriendsOutcomingScreen";
 
 export {
     /**
@@ -60,8 +61,9 @@ export {
     FollowingScreen,
     ProfileChannelScreen,
     UserMenuScreen,
-    FriendshipRequestsScreen,
     ParentControlScreen,
+    FriendsIncomingScreen,
+    FriendsOutcomingScreen,
 
     /**
      *  Authorization  namespace

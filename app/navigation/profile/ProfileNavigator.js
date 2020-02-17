@@ -11,7 +11,7 @@ import { View } from "react-native";
 import { connect, useSelector } from 'react-redux';
 import Orientation from 'react-native-orientation';
 
-import { FollowingScreen, FollowersScreen, ProfileChannelScreen } from "../../screens";
+import { FollowersScreen, ProfileChannelScreen } from "../../screens";
 import { NavigationHeaderLeft } from "../../components";
 import { UserHelper } from '../../utils';
 import { getAppTheme } from '../../redux/reducers';
@@ -33,19 +33,7 @@ const ProfileTopNavStack = createMaterialTopTabNavigator({
     FollowersScreen: {
         screen: FollowersScreen,
         navigationOptions:{
-            tabBarLabel: 'Подписчики',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <IconWrap
-                    reverse={focused}
-                    name={'user-check'} size={20}
-                />
-            ),
-        }
-    },
-    FollowingScreen: {
-        screen: FollowingScreen,
-        navigationOptions:{
-            tabBarLabel: 'Подписки',
+            tabBarLabel: 'Друзья',
             tabBarIcon: ({ tintColor, focused }) => (
                 <IconWrap
                     reverse={focused}

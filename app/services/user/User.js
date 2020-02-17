@@ -5,7 +5,7 @@ export const cancelRequest = (token, userId) => {
     return apiFetch(`/vktv/friends-request/delete`, {
             method: 'POST',
             body: JSON.stringify({
-                userId: userId
+                user_id: userId
             })
         },
         {
@@ -27,7 +27,7 @@ export const acceptRequest = (token, userId) => {
     return apiFetch(`/vktv/friends-request/add`, {
             method: 'POST',
             body: JSON.stringify({
-                userId: userId
+                user_id: userId
             })
         },
         {

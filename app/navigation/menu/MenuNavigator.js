@@ -1,5 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "react-navigation";
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import {
     AboutScreen,
     CopyrightScreen,
@@ -12,7 +13,6 @@ import {
     AccountScreen,
     DebugVideoScreen,
     ContactsScreen,
-    FriendshipRequestsScreen,
     PremiumScreen,
     WriteDeveloperScreen,
     SecurityScreen,
@@ -22,13 +22,37 @@ import {
     IPTVScreen,
     ContentPostingRules,
     EditContentScreen,
-    LocalDatabaseScreen
+    LocalDatabaseScreen,
+    FriendsIncomingScreen,
+    FriendsOutcomingScreen,
 } from "../../screens";
 import {
     NavigationHeaderComponent,
     NavigationHeaderLeft,
     NavigationHeaderTitle
 } from "../../components";
+import TabBarComponent from "../../components/navigation-header/CustomTab";
+
+const FriendshipNavigator = createMaterialTopTabNavigator({
+    FriendsIncomingScreen: {
+        screen: FriendsIncomingScreen,
+        navigationOptions:{
+            tabBarLabel: 'Входящие',
+        }
+    },
+    FriendsOutcomingScreen: {
+        screen: FriendsOutcomingScreen,
+        navigationOptions:{
+            tabBarLabel: 'Исходящие',
+        }
+    },
+}, {
+    tabBarOptions: {
+        scrollEnabled: true,
+    },
+    tabBarComponent: (props) => <TabBarComponent {...props} />
+});
+
 
 const MenuNavigator = createStackNavigator({
     MemuScreen: {
@@ -56,10 +80,10 @@ const MenuNavigator = createStackNavigator({
         screen: UserMenuScreen,
     },
     FriendshipRequestsScreen: {
-        screen: FriendshipRequestsScreen,
+        screen: FriendshipNavigator,
         navigationOptions:{
             header: (props) => <NavigationHeaderComponent
-                titleComponent={<NavigationHeaderTitle title={'Запросы в друзья'} />}
+                titleComponent={<NavigationHeaderTitle title={'Заявки в друзья'} />}
                 leftComponent={ <NavigationHeaderLeft /> } {...props}
             />
         }

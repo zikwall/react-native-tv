@@ -42,7 +42,7 @@ const FollowersScreen = ({ screenProps, navigation }) => {
                             image={{ uri: item.avatar }}
                             isOfficialUser={item.is_official == 1}
                             onPress={() => {
-                                navigation.navigate('Profile', {
+                                navigation.push('Profile', {
                                     id: item.id
                                 })
                             }}
