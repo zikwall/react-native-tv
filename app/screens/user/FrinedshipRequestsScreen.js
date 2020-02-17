@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { iOSColors } from 'react-native-typography';
 
 import { IconWrap, UserLineItem } from '../../components';
-import { Fake } from '../../utils';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import ContentLoader from '@sarmad1995/react-native-content-loader';
+import { User } from '../../services';
 
 const defaultContent = <ScrollView style={{ paddingTop: 10 }}>
     <View>
@@ -68,58 +68,74 @@ const RequestActions = ({ id, onAccept, onCancel }) => {
 
 const FriendshipRequestsScreen = () => {
     const theme = useSelector(state => getAppTheme(state));
+    const token = useSelector(state => state.authentication.token);
 
     const [ inputRequests, setInputRequests ] = useState(defaultContent);
     const [ outputRequests, setOutputRequests ] = useState(defaultContent);
 
+    const onAcceptRequest = () => {
+
+    };
+    
+    const onCancelRequest = () => {
+
+    };
+
     useEffect(() => {
-        let interval = setTimeout(() => {
-            setInputRequests(
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    {Fake.users.map((user, index) => {
-                        return <UserLineItem
-                            key={index}
-                            id={index + 1}
-                            name={user.user}
-                            username={user.userName}
-                            image={user.avatar}
-                            isOfficialUser={user.is_official}
-                            rightContent={
-                               <RequestActions
-                                   id={index+1}
-                                   onAccept={(id) => console.log(`accept ${id}`)}
-                                   onCancel={(id) => console.log(`cancel ${id}`)}
-                               />
-                            }
-                        />
-                    })}
-                </ScrollView>
-            );
-            setOutputRequests(
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    {Fake.users.map((user, index) => {
-                        return <UserLineItem
-                            key={index}
-                            id={index + 1}
-                            name={user.user}
-                            username={user.userName}
-                            image={user.avatar}
-                            isOfficialUser={user.is_official}
-                            rightContent={
-                                <TouchableOpacity onPress={() => {console.log(`closed request ${user.user}`)}}>
-                                    <IconWrap name={'x-square'} size={25} />
-                                </TouchableOpacity>
-                            }
-                        />
-                    })}
-                </ScrollView>
-            );
-        }, 500);
+        User.fetchIncomingFriendsRequest(token).then(({ code, requests }) => {
+            if (code === 200) {
+                setInputRequests(
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        {requests.map((user, index) => {
+                            return <UserLineItem
+                                key={index}
+                                id={user.id}
+                                name={user.name}
+                                username={user.username}
+                                image={{ uri: user.avatar }}
+                                isOfficialUser={user.is_official == 1}
+                                rightContent={
+                                    <RequestActions
+                                        id={index+1}
+                                        onAccept={(id) => console.log(`accept ${id}`)}
+                                        onCancel={(id) => console.log(`cancel ${id}`)}
+                                    />
+                                }
+                            />
+                        })}
+                    </ScrollView>
+                );
+            }
+        });
+
+        User.fetchOutcomingFriendsRequest(token).then(({ code, requests }) => {
+            if (code === 200) {
+                setOutputRequests(
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        {requests.map((user, index) => {
+                            return <UserLineItem
+                                key={index}
+                                id={user.id}
+                                name={user.name}
+                                username={user.username}
+                                image={{ uri: user.avatar }}
+                                isOfficialUser={user.is_official == 1}
+                                rightContent={
+                                    <TouchableOpacity onPress={() => {console.log(`closed request ${user.name}`)}}>
+                                        <IconWrap name={'x-square'} size={25} />
+                                    </TouchableOpacity>
+                                }
+                            />
+                        })}
+                    </ScrollView>
+                );
+            }
+        });
 
         return () => {
-            clearTimeout(interval);
+
         };
-    });
+    }, []);
 
     return (
         <View style={[ styles.screenContainer, { backgroundColor: theme.primaryBackgroundColor } ]}>
