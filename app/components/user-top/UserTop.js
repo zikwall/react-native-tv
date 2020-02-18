@@ -10,7 +10,6 @@ import { human } from "react-native-typography";
 
 const UserTop = ({ displayName, username, avatar, onAvatarPress, isOfficial }) => {
     const theme = useSelector(state => getAppTheme(state));
-    const user = useSelector(state => state.authentication.user);
 
     return (
         <View style={{ flexDirection: 'row', paddingBottom: 5, marginHorizontal: 10, backgroundColor: theme.primaryBackgroundColor }}>
