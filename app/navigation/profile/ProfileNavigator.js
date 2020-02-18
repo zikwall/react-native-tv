@@ -120,6 +120,7 @@ const ProfileNavigator = ({ navigation, isAuthenticated }) => {
             <OverlayLoader visible={isFetched} />
 
             {visibleUserTop && <UserTop
+                id={id}
                 displayName={UserHelper.buildUserId(user)}
                 username={user.username}
                 avatar={UserHelper.makeUserAvatar(user)}

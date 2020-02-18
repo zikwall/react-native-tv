@@ -1,16 +1,20 @@
-import { AUTHENTICATE, DEAUTHENTICATE, SET_USER, UPDATE_USER } from '../types';
+import { AUTHENTICATE, DEAUTHENTICATE, SET_USER, UPDATE_USER, UPDATE_FRIENDS } from '../types';
 
 const initialState = {
     token: null,
     user: {
+        id: 0,
         is_premium: 0,
         is_official: 0,
+        username: 'Не определен',
+        email: 'Не определн',
         profile: {
             name: null,
             public_email: null,
             avatar: null
         }
-    }
+    },
+    friends: []
 };
 
 const authReducer = (state = initialState, action) => {
@@ -23,7 +27,12 @@ const authReducer = (state = initialState, action) => {
         case UPDATE_USER:
             return {
                 ...state,
-                user: {...state.user, ...action.user}
+                user: { ...state.user, ...action.user }
+            };
+        case UPDATE_FRIENDS:
+            return {
+                ...state,
+                friends: action.friends
             };
         case AUTHENTICATE:
             return { token: action.token, user: action.user };
