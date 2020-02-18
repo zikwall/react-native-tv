@@ -5,7 +5,7 @@ import { human } from 'react-native-typography';
 import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 
-const ContentVisibilityModal = ({ onCloseModal, image, title, content, visibility, button }) => {
+const ContentVisibilityModal = ({ onCloseModal, image, title, content, visibility, button, owner_id }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     return (
@@ -18,7 +18,7 @@ const ContentVisibilityModal = ({ onCloseModal, image, title, content, visibilit
             <Text style={[human.callout, { paddingBottom: 10, paddingTop: 10, color: theme.primaryColor }]}>
                 { content }
             </Text>
-            <TouchableOpacity style={s.content__button} activeOpacity={0.9} onPress={() => onCloseModal(visibility)}>
+            <TouchableOpacity style={s.content__button} activeOpacity={0.9} onPress={() => onCloseModal(visibility, owner_id)}>
                 <Text style={s.content__buttonText}>{button.toUpperCase()}</Text>
             </TouchableOpacity>
         </View>

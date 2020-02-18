@@ -14,14 +14,44 @@ import IconWrap from '../icon/IconWrap';
 import ChannelAvatar from '../avatar/ChannelAvatar';
 import { human } from 'react-native-typography';
 
+const VisibilityMap = {
+    40: {
+        icon: 'lock',
+        color: '#FFD700'
+    },
+    50: {
+        icon: 'key',
+        color: null
+    },
+    60: {
+        icon: 'users',
+        color: null
+    }
+};
+
+const hasFriend = (isAuth, users, user_id) => {
+    if (!users) {
+        return false;
+    }
+
+    return isAuth && users.map((user) => parseInt(user.id)).includes(user_id);
+};
+
 const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, number, rating, visibility, type, ageLimit }) => {
     const theme = useSelector(state => getAppTheme(state));
-    const isAuthorized = useSelector(state => !!state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
+    const isAuthorized = useSelector(state => !!state.authentication.token);
+    const user = useSelector(state => state.authentication.user);
+
+    let hasIsMyFriend = false;
+
+    if (visibility === Content.VISIBILITY.FRIENDS) {
+        hasIsMyFriend = hasFriend(isAuthorized, user.friends, playlist.user_id);
+    }
 
     return (
         <Button
-            onPress={() => onPress(playlist)}
+            onPress={() => onPress(playlist, hasIsMyFriend)}
             style={[s.container, { backgroundColor: theme.primaryBackgroundColor }]}
         >
             <View style={ s.leftContainer }>
@@ -52,6 +82,9 @@ const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, numb
                 </View>
                 {
                     Content.is18YearOld(ageLimit) && <IconWrap name={'eye-off'} size={20} style={{ paddingRight: 10 }} />
+                }
+                {
+                    visibility === Content.VISIBILITY.FRIENDS && !hasIsMyFriend && <IconWrap name={'users'} size={20} style={{ paddingRight: 10 }} />
                 }
                 {
                     visibility === Content.VISIBILITY.PREMIUM && !isPremium && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />

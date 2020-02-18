@@ -135,26 +135,44 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
             image: { uri: playlist.image },
             title: playlist.title,
             visibility: playlist.visibility,
-            content, button
+            content, button,
+            owner_id: playlist.user_id
         });
         openModal();
     };
 
-    const handleCloseByVisibility = (visibility) => {
+    const handleCloseByVisibility = (visibility, owner_id) => {
         closeModal();
 
         if (visibility === Content.VISIBILITY.USERS) {
             navigation.navigate('Login');
+            return true;
+        }
+
+        if (visibility === Content.VISIBILITY.FRIENDS) {
+            if (!isAuthorized) {
+                navigation.navigate('Login');
+                return true;
+            }
+
+            navigation.navigate('Profile', {
+                id: owner_id
+            })
         }
     };
 
-    const handleOnClickContent = (playlist) => {
+    const handleOnClickContent = (playlist, isMyFriend) => {
         let content = null;
         let button = null;
 
         if (Content.is18YearOld(playlist.age_limit) && parentControlMode.enabled === true) {
             handleOpenByAgeLimit(playlist);
             return true;
+        }
+
+        if (playlist.visibility === Content.VISIBILITY.FRIENDS && !isMyFriend) {
+            content = 'Данный контент доступен только друзьям автора.';
+            button = 'Перейти на страницу автора.';
         }
 
         if (playlist.visibility === Content.VISIBILITY.PREMIUM && !isPremium) {

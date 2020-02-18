@@ -28,7 +28,7 @@ const UserTop = ({ id, displayName, username, avatar, onAvatarPress, isOfficial 
 
                     dispatch({
                         type: UPDATE_FRIENDS,
-                        friends: user.friends.filter((friend) => friend.id !== id)
+                        friends: user.friends.filter((friend) => parseInt(friend.id) !== parseInt(id))
                     });
                 }
             });
