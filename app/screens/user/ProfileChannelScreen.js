@@ -14,25 +14,26 @@ import {
 } from "react-native-typography";
 
 import {
-    AdmobBanner,
     CommonChannelCardItem,
     CommonChannelListItem,
-    ContentVisibilityModal, LoadMoreButton,
-    OverlayLoader,
+    ContentVisibilityModal,
+    ModalizeWrapper,
+    ParentControlModal,
 } from '../../components';
-import { Fake } from '../../utils';
-import { useSelector } from 'react-redux';
-import { getAppTheme } from '../../redux/reducers';
+import { useSelector, connect } from 'react-redux';
+import { getAppParentControl, getAppTheme } from '../../redux/reducers';
 import { Content } from '../../constants';
-import { Modalize } from 'react-native-modalize';
 import { User } from '../../services';
+import { bindActionCreators } from 'redux';
+import { setContent } from '../../redux/actions';
 
-const ProfileChannelScreen = ({ navigation, screenProps }) => {
+const ProfileChannelScreen = ({ navigation, screenProps, selectContent }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
     const [ isFetched, setIsFetched ] = useState(true);
     const [ userContent, setUserContent ] = useState([]);
+    const parentControlMode = useSelector(state => getAppParentControl(state));
 
     const { id } = screenProps;
 
@@ -52,7 +53,7 @@ const ProfileChannelScreen = ({ navigation, screenProps }) => {
     };
 
     const [ modalContent, setModalContent ] = useState(defaultState);
-
+    const [ tmpPlaylist, setTmpPlaylist ] = useState(null);
     const modal = React.createRef();
 
     const openModal = () => {
@@ -67,31 +68,81 @@ const ProfileChannelScreen = ({ navigation, screenProps }) => {
         }
     };
 
-    const handleOnClickContent = (image, title, visibility) => {
-        let content = '';
-        let button = '';
+    const ageLimitModal = React.createRef();
 
-        if (visibility === Content.VISIBILITY.PREMIUM && !isPremium) {
+    const handleOpenByAgeLimit = (playlist) => {
+        setTmpPlaylist(playlist);
+        openAgeModal();
+    };
+
+    const handleCloseByAgeLimit = () => {
+        closeAgeModal();
+    };
+
+    const openAgeModal = () => {
+        if (ageLimitModal.current) {
+            ageLimitModal.current.open();
+        }
+    };
+
+    const closeAgeModal = () => {
+        if (ageLimitModal.current) {
+            ageLimitModal.current.close();
+        }
+    };
+
+    const handleOnVerifyAccess = (accessPassword) => {
+        return accessPassword.trim() === parentControlMode.securityKey;
+    };
+
+    const handleOnSuccessVerify = () => {
+        closeAgeModal();
+
+        handleOnClickContent({
+            ...tmpPlaylist,
+            ...{ age_limit: 0}
+        });
+    };
+
+    const handleOnClickContent = (playlist) => {
+        let content = null;
+        let button = null;
+
+        if (Content.is18YearOld(playlist.age_limit) && parentControlMode.enabled === true) {
+            handleOpenByAgeLimit(playlist);
+            return true;
+        }
+
+        if (playlist.visibility === Content.VISIBILITY.PREMIUM && !isPremium) {
             content = 'К сожалению, по решению автора, данный контент доступен только для премиум пользователей.';
             button = 'Связаться с автором!';
         }
 
-        if (visibility === Content.VISIBILITY.USERS && !isAuthorized) {
+        if (playlist.visibility === Content.VISIBILITY.USERS && !isAuthorized) {
             content = 'Для просомотра требуется авторизация.';
             button = 'Авторизироваться!';
         }
 
-        if (content && button) {
-            handleOpenPremium(image, title, visibility, content, button);
+        if (!!content && !!button) {
+            handleOpenByVisibility(playlist, content, button);
+            return true;
         }
+
+        selectContent(playlist);
+        navigation.navigate('Watch');
     };
 
-    const handleOpenPremium = (image, title, visibility, content, button) => {
-        setModalContent({image, title, visibility, content, button});
+    const handleOpenByVisibility = (playlist, content, button) => {
+        setModalContent({
+            image: { uri: playlist.image },
+            title: playlist.title,
+            visibility: playlist.visibility,
+            content, button
+        });
         openModal();
     };
 
-    const handleClosePremium = (visibility) => {
+    const handleCloseByVisibility = (visibility) => {
         closeModal();
 
         if (visibility === Content.VISIBILITY.USERS) {
@@ -124,6 +175,7 @@ const ProfileChannelScreen = ({ navigation, screenProps }) => {
                                                 image={{ uri: playlist.image }}
                                                 size={130}
                                                 visibility={playlist.visibility}
+                                                playlist={playlist}
                                                 onPress={handleOnClickContent}
                                             />
                                         ))}
@@ -154,19 +206,35 @@ const ProfileChannelScreen = ({ navigation, screenProps }) => {
                 </View>
             </View>
 
-            <Modalize
-                ref={modal}
+            <ModalizeWrapper
+                referal={ageLimitModal}
                 adjustToContentHeight={{
                     showsVerticalScrollIndicator: false
                 }}
             >
-                <ContentVisibilityModal {...modalContent} onCloseModal={handleClosePremium}/>
-            </Modalize>
+                <ParentControlModal
+                    onCloseModal={handleCloseByAgeLimit}
+                    onVerifyAccess={handleOnVerifyAccess}
+                    onSuccessVerify={handleOnSuccessVerify}
+                />
+            </ModalizeWrapper>
+            <ModalizeWrapper
+                referal={modal}
+                adjustToContentHeight={{
+                    showsVerticalScrollIndicator: false
+                }}
+            >
+                <ContentVisibilityModal {...modalContent} onCloseModal={handleCloseByVisibility}/>
+            </ModalizeWrapper>
         </View>
     );
 };
 
-export default ProfileChannelScreen;
+const mapDispatchToProps = dispatch => bindActionCreators({
+    selectContent: setContent
+}, dispatch);
+
+export default connect(state => state, mapDispatchToProps)(ProfileChannelScreen);
 
 const styles = StyleSheet.create({
     screenContainer: {

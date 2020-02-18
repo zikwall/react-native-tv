@@ -31,16 +31,19 @@ export const TouchableRoundedImage = ({ style, width=80, height=80, ...props }) 
     </TouchableOpacity>
 );
 
-const CommonChannelCardItem = ({ title, subtitle, image, imageWidth, imageHeight, size, rating, visibility, onPress }) => {
+const CommonChannelCardItem = ({ playlist, title, subtitle, image, imageWidth, imageHeight, size, rating, visibility, onPress }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
 
     return (
-        <TouchableOpacity onPress={() => onPress(image, title, visibility)} style={[styles.channelCard, { height: size, width: size, borderColor: theme.primaryColor }]}>
+        <TouchableOpacity onPress={() => onPress(playlist)} style={[styles.channelCard, { height: size, width: size, borderColor: theme.primaryColor }]}>
             <View style={{ flex: 1, alignItems: 'center' }}>
                 <Avatar src={image} resizeMode="contain" width={imageWidth} height={imageHeight}/>
             </View>
+            {
+                Content.is18YearOld(playlist.ageLimit) && <IconWrap name={'eye-off'} size={20} style={{ paddingRight: 10 }} />
+            }
             {
                 (visibility === Content.VISIBILITY.PREMIUM && !isPremium) && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />
             }
