@@ -3,24 +3,27 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
-        alignItems: 'center',
+        paddingLeft: 15,
+        flexDirection: 'row'
+        //alignItems: 'center',
         //borderBottomColor: '#f0f1f4',
         //borderBottomWidth: 1
     },
     avatarWrapper: {
-        marginVertical: 20,
+        //marginVertical: 20,
+        //marginBottom: 10,
         justifyContent: 'center',
-        alignItems: 'center'
+        //alignItems: 'center'
     },
     displayNameWapper: {
         // flex: 1,
-        paddingHorizontal: 30,
+        //paddingHorizontal: 30,
         alignItems: 'center',
-        justifyContent: 'center',
+        //justifyContent: 'center',
         marginBottom: 15,
     },
     displayName: {
-        textAlign: 'center',
+        //textAlign: 'center',
         color: 'black',
         fontSize: 24,
         fontWeight: 'bold'
