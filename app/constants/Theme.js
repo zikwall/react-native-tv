@@ -1,12 +1,16 @@
 export const THEME_STORAGE_KEY = 'app_theme';
 
+const commonImages = {
+    userAvatarPlaceholder: require('../assets/images/creative-zebra-avatar.png'),
+};
+
 const WhiteImages = {
     image: require('../assets/images/Play_650_Light.png'),
     logo: require('../assets/images/PlayHubLogoLight.png'),
     playHubFull: require('../assets/images/PlayHubFullLight.png'),
     playHubCommunity: require('../assets/images/PlayHubFullCommunityLight.png'),
     channelPlaceholder: require('../assets/images/PlayHub_200_200_white.png'),
-    userAvatarPlaceholder: require('../assets/images/placeholders/EwORTurDS_k.jpg'),
+    ...commonImages
 };
 
 const BlackImages = {
@@ -15,7 +19,7 @@ const BlackImages = {
     playHubFull: require('../assets/images/PlayHubFull.png'),
     playHubCommunity: require('../assets/images/PlayHubFullCommunity.png'),
     channelPlaceholder: require('../assets/images/PlayHub_200_200.png'),
-    userAvatarPlaceholder: require('../assets/images/placeholders/EwORTurDS_k.jpg'),
+    ...commonImages
 };
 
 const DefaultExtraScheme = {

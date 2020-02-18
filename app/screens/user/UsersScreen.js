@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import {OverlayLoader, ThemedView, UserLineItem} from "../../components";
+import { FlatList } from "react-native";
+import {
+    OverlayLoader,
+    ThemedView,
+    UserLineItem,
+} from "../../components";
 import { User } from '../../services';
 
-const UsersScreen = () => {
+const UsersScreen = ({ navigation }) => {
     const [ users, setUsers ] = useState([]);
     const [ completeFetched, setCompleteFetched ] = useState(false);
 
@@ -17,16 +22,23 @@ const UsersScreen = () => {
         <ThemedView>
             <OverlayLoader visible={!completeFetched} />
 
-            {users.map((user, index) => {
-                return <UserLineItem
+            <FlatList
+                data={users}
+                renderItem={({ item, index }) => <UserLineItem
                     key={index}
-                    id={user.id}
-                    name={user.name}
-                    username={user.username}
-                    image={{ uri: user.avatar }}
-                    isOfficialUser={user.is_official == 1}
-                />
-            })}
+                    id={item.id}
+                    name={item.name}
+                    username={item.username}
+                    image={{ uri: item.avatar }}
+                    isOfficialUser={item.is_official == 1}
+                    onPress={() => {
+                        navigation.navigate('Profile', {
+                            id: item.id
+                        })
+                    }}
+                />}
+                keyExtractor={item => item.id}
+            />
         </ThemedView>
     )
 };
