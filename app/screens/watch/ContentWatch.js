@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setPlayhubPlayer, appendDatabaseRedux } from '../../redux/actions';
-import { View, Text, ScrollView, TouchableOpacity, FlatList, Dimensions } from 'react-native';
+import { setPlayhubPlayer } from '../../redux/actions';
+import { View, Text, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import {
     NavigationHeaderComponent,
     NavigationHeaderLeft,
@@ -12,18 +12,15 @@ import {
     IconWrap,
     Heading,
     Avatar,
-    Ratings,
     AntIconWrap,
     Review,
     NavigationHeaderTitleContent,
     Verified,
     RatingOverView,
     LoadMoreButton,
-    ModalizeWrapper,
-    WriteReview,
     ReviewMaker
 } from '../../components';
-import { AdEventType, InterstitialAd, TestIds } from "@react-native-firebase/admob";
+import { AdEventType, InterstitialAd } from "@react-native-firebase/admob";
 
 import { getActiveContent, getAppTheme, getCurrentDatabase } from '../../redux/reducers';
 import { human } from "react-native-typography";
@@ -32,8 +29,7 @@ import { Players } from '../../constants';
 import Description from './components/Description';
 import { Fake, DataHelper } from '../../utils';
 import { appendRedux, removeRedux } from '../../services/content/LocalDatabase';
-
-const { height, width } = Dimensions.get('window');
+import { User } from '../../services';
 
 const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDatabase }) => {
     const theme = useSelector(state => getAppTheme(state));
@@ -46,12 +42,26 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
     const [ reviews, setReviews ] = useState(Fake.reviews);
     const [ star, setStar ] = useState(0);
     const [ hasInDatabase, setHasInDatabase ] = useState(false);
+    const [ ownerInfo, setOwnerInfo ] = useState({
+        name: 'Loading..',
+        username: 'loading',
+        image: theme.userAvatarPlaceholder
+    });
 
     const hasOwnPlayer = DataHelper.hasOwnPlayer(content);
 
     useEffect(() => {
+        User.fetchUserProfile(content.user_id).then(({ response }) => {
+            setOwnerInfo({
+                name: response.name,
+                username: response.username,
+                image: !!response.avatar ? { uri: response.avatar } : theme.userAvatarPlaceholder
+            });
+        });
+    }, []);
+
+    useEffect(() => {
         let has = currentDatabase.find((item) => content.id === item.id);
-        console.log(['aaaa', !!has, currentDatabase]);
 
         if (!!has) {
             setHasInDatabase(true);
@@ -137,6 +147,17 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
         setHasInDatabase(true);
     };
 
+    const onPressUser = () => {
+        if (!isAuthorized) {
+            navigation.navigate('Login');
+            return true;
+        }
+
+        navigation.navigate('Profile', {
+            id: content.user_id
+        });
+    };
+
     return (
         <ThemedView>
             <View style={{ paddingTop: '56.25%' }}>
@@ -156,22 +177,24 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
                 isVisiblePage &&
                     <>
                         <Row style={{ padding: 10, alignItems: 'center' }}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Avatar
-                                    src={{ uri: 'https://avatars2.githubusercontent.com/u/23422968?s=460&v=4' }}
-                                    badgeRight={
-                                        <Verified size={15} />
-                                    }
-                                />
-                                <View style={{ marginLeft: 10 }}>
-                                    <Text style={[human.callout, { color: theme.primaryColor, fontWeight: 'bold', fontSize: 14 }]}>
-                                        Опубликовал
-                                    </Text>
-                                    <Text style={{ color: theme.secondaryColor }}>
-                                        zikwall
-                                    </Text>
+                            <TouchableOpacity onPress={onPressUser}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Avatar
+                                        src={ownerInfo.image}
+                                        badgeRight={
+                                            <Verified size={15} />
+                                        }
+                                    />
+                                    <View style={{ marginLeft: 10 }}>
+                                        <Text style={[human.callout, { color: theme.primaryColor, fontWeight: 'bold', fontSize: 14 }]}>
+                                            Опубликовал
+                                        </Text>
+                                        <Text style={{ color: theme.secondaryColor }}>
+                                            { ownerInfo.username }
+                                        </Text>
+                                    </View>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                             <View style={{ flexDirection: 'row' }}>
                                 {
                                     isAuthorized && <>

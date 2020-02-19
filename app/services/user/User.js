@@ -147,3 +147,18 @@ export const fetchUserProfile = (id) => {
             new Error(error);
         })
 };
+
+export const getStateForUser = (token, id) => {
+    return apiFetch(`/vktv/friends-request/get-state?userId=${id}`, {}, {
+        "Authorization": UserHelper.makeAuthorizationHeader(token)
+    })
+        .then(res => {
+            return {
+                code: res.code,
+                response: res.response,
+            };
+        })
+        .catch(error => {
+            new Error(error);
+        })
+};

@@ -158,6 +158,7 @@ const DetailedScreen = ({ navigation }) => {
                     name={item.name}
                     type={item.type}
                     image={{ uri: item.image }}
+                    ageLimit={item.age_limit}
                     playlist={item}
                     onPress={onContentPress}
                 />}

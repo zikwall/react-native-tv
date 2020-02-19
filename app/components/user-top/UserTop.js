@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Avatar } from "../avatar";
@@ -9,6 +9,7 @@ import FlatButton from "../ui/FlatButton";
 import { human } from "react-native-typography";
 import { User } from "../../services";
 import { UPDATE_FRIENDS } from "../../redux/types";
+import { User as UserConstants } from '../../constants';
 
 const UserTop = ({ id, displayName, username, avatar, onAvatarPress, isOfficial }) => {
     const theme = useSelector(state => getAppTheme(state));
@@ -16,14 +17,32 @@ const UserTop = ({ id, displayName, username, avatar, onAvatarPress, isOfficial 
     const token = useSelector(state => state.authentication.token);
     const dispatch = useDispatch();
 
-    const [ fiendStatus, setFiendStatus ] = useState(user.friends.map(friend => friend.id).includes(id));
+    const [ fiendStatus, setFiendStatus ] = useState(0);
     const [ buttonMessage, setButtonMessage ] = useState('Добавить в друзья');
 
+    useEffect(() => {
+        if (id !== user.id) {
+            User.getStateForUser(token, id).then(({ response }) => {
+                setFiendStatus(response);
+
+                if (response === UserConstants.FRIENDS_STATE_FRIEND) {
+                    setButtonMessage("Удалить из друзей")
+                } else if (response === UserConstants.FRIENDS_STATE_NONE) {
+                    setButtonMessage("Добавить в друзья")
+                } else if (response === UserConstants.FRIENDS_STATE_REQUEST_RECEIVED) {
+                    setButtonMessage("Принять заявку")
+                } else if (response === UserConstants.FRINEDS_STATE_REQUEST_SENT) {
+                    setButtonMessage("Отменить заявку")
+                }
+            });
+        }
+    }, []);
+
     const onPressFriendButton = () => {
-        if (fiendStatus) {
+        if ([UserConstants.FRIENDS_STATE_FRIEND, UserConstants.FRINEDS_STATE_REQUEST_SENT].includes(fiendStatus)) {
             User.cancelRequest(token, id).then(({ code, message }) => {
                 if (code === 200) {
-                    setFiendStatus(false);
+                    setFiendStatus(UserConstants.FRIENDS_STATE_NONE);
                     setButtonMessage('Добавить в друзья');
 
                     dispatch({
@@ -38,8 +57,17 @@ const UserTop = ({ id, displayName, username, avatar, onAvatarPress, isOfficial 
 
         User.acceptRequest(token, id).then(({ code, message }) => {
             if (code === 200) {
-               setFiendStatus(true);
-               setButtonMessage('Запрос отправлен');
+
+                if (fiendStatus === UserConstants.FRIENDS_STATE_NONE) {
+                    setButtonMessage("Отменить заявку");
+                    setFiendStatus(UserConstants.FRINEDS_STATE_REQUEST_SENT);
+                } else if (fiendStatus === UserConstants.FRIENDS_STATE_REQUEST_RECEIVED) {
+                    setButtonMessage("Удалить из друзей");
+                    setFiendStatus(UserConstants.FRIENDS_STATE_FRIEND);
+                } else if (fiendStatus === UserConstants.FRINEDS_STATE_REQUEST_SENT) {
+                    setButtonMessage("Заявка уже отправлена");
+                    setFiendStatus(UserConstants.FRINEDS_STATE_REQUEST_SENT);
+                }
             }
         });
     };
@@ -65,9 +93,9 @@ const UserTop = ({ id, displayName, username, avatar, onAvatarPress, isOfficial 
                 {
                     id !== user.id && <FlatButton
                         onPress={onPressFriendButton}
-                        text={fiendStatus ? 'Удалить из друзей' : buttonMessage}
-                        color={fiendStatus ? theme.primaryBackgroundColor : theme.primaryColor}
-                        backgroundColor={fiendStatus ? theme.extraBackgroundColor : theme.secondaryBackgroundColor}
+                        text={buttonMessage}
+                        color={!fiendStatus ? theme.primaryBackgroundColor : theme.primaryColor}
+                        backgroundColor={!fiendStatus ? theme.extraBackgroundColor : theme.secondaryBackgroundColor}
                         containerStyle={{ marginVertical: 0, marginHorizontal: 0, padding: 0, justifyContent: 'flex-end' }}
                     />
                 }

@@ -8,6 +8,7 @@ import Theme, { THEME_STORAGE_KEY } from "./Theme";
 import * as Content from './Content';
 import * as ParentControl from './ParentControl';
 import * as LocalDatabaseConstants from './LocalDatabase';
+import * as User from './User';
 
 export {
     API_DOMAIN,
@@ -18,5 +19,6 @@ export {
     Players, Theme, THEME_STORAGE_KEY, Content,
     SESSION_TOKEN_KEY, IDENTITY_STORAGE_KEY,
     ParentControl,
-    LocalDatabaseConstants
+    LocalDatabaseConstants,
+    User
 }

@@ -104,13 +104,18 @@ const ProfileChannelScreen = ({ navigation, screenProps, selectContent }) => {
         });
     };
 
-    const handleOnClickContent = (playlist) => {
+    const handleOnClickContent = (playlist, isMyFriend) => {
         let content = null;
         let button = null;
 
         if (Content.is18YearOld(playlist.age_limit) && parentControlMode.enabled === true) {
             handleOpenByAgeLimit(playlist);
             return true;
+        }
+
+        if (playlist.visibility === Content.VISIBILITY.FRIENDS && !isMyFriend) {
+            content = 'Данный контент доступен только друзьям автора.';
+            button = 'Ок, я понял!';
         }
 
         if (playlist.visibility === Content.VISIBILITY.PREMIUM && !isPremium) {

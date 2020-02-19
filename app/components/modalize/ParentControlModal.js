@@ -30,23 +30,24 @@ const ParentControlModal = ({ onCloseModal, onVerifyAccess, onSuccessVerify }) =
     };
 
     return (
-        <View style={styles.content}>
-            <Text style={styles.content__subheading}>{'Проверка'.toUpperCase()}</Text>
-            <ErrorText hasError={error.has} error={error.message} />
-            <View style={{ paddingBottom: 15}}>
-                <ExtendedTextInput
-                    value={accessPassword}
-                    onChangeText={(key) => setAccessPassword(key)}
-                    placeholder={'Введите пароль для защиты'}
-                    label={'Безопасный ключ доступа'}
-                    inputname={'parent_control_password'}
-                    description={'Пожалуста, подтвердите доступ.'}
-                />
+
+            <View style={styles.content}>
+                <Text style={styles.content__subheading}>{'Проверка'.toUpperCase()}</Text>
+                <ErrorText hasError={error.has} error={error.message} />
+                <View style={{ paddingBottom: 15}}>
+                    <ExtendedTextInput
+                        value={accessPassword}
+                        onChangeText={(key) => setAccessPassword(key)}
+                        placeholder={'Введите пароль для защиты'}
+                        label={'Безопасный ключ доступа'}
+                        inputname={'parent_control_password'}
+                        description={'Пожалуста, подтвердите доступ.'}
+                    />
+                </View>
+                <TouchableOpacity style={styles.content__button} activeOpacity={0.9} onPress={handleAccess}>
+                    <Text style={styles.content__buttonText}>Открыть доступ!</Text>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.content__button} activeOpacity={0.9} onPress={handleAccess}>
-                <Text style={styles.content__buttonText}>Открыть доступ!</Text>
-            </TouchableOpacity>
-        </View>
     )
 };
 

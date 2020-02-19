@@ -18,31 +18,39 @@ import { getAppTheme } from '../../redux/reducers';
 import {Content} from '../../constants';
 import IconWrap from '../icon/IconWrap';
 
-const { height, width } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
-export const TouchableRoundedImage = ({ style, width=80, height=80, ...props }) => (
-    <TouchableOpacity style={style}>
-        <Image
-            borderRadius={6}
-            resizeMode="contain"
-            style={{ height: height, width: width }}
-            {...props}
-        />
-    </TouchableOpacity>
-);
+const hasFriend = (isAuth, users, user_id) => {
+    if (!users) {
+        return false;
+    }
+
+    return isAuth && users.map((user) => parseInt(user.id)).includes(user_id);
+};
 
 const CommonChannelCardItem = ({ playlist, title, subtitle, image, imageWidth, imageHeight, size, rating, visibility, onPress }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
 
+    const user = useSelector(state => state.authentication.user);
+
+    let hasIsMyFriend = false;
+
+    if (visibility === Content.VISIBILITY.FRIENDS) {
+        hasIsMyFriend = hasFriend(isAuthorized, user.friends, playlist.user_id);
+    }
+
     return (
-        <TouchableOpacity onPress={() => onPress(playlist)} style={[styles.channelCard, { height: size, width: size, borderColor: theme.primaryColor }]}>
+        <TouchableOpacity onPress={() => onPress(playlist, hasIsMyFriend)} style={[styles.channelCard, { height: size, width: size, borderColor: theme.primaryColor }]}>
             <View style={{ flex: 1, alignItems: 'center' }}>
                 <Avatar src={image} resizeMode="contain" width={imageWidth} height={imageHeight}/>
             </View>
             {
                 Content.is18YearOld(playlist.ageLimit) && <IconWrap name={'eye-off'} size={20} style={{ paddingRight: 10 }} />
+            }
+            {
+                visibility === Content.VISIBILITY.FRIENDS && !hasIsMyFriend && <IconWrap name={'users'} size={20} style={{ paddingRight: 10 }} />
             }
             {
                 (visibility === Content.VISIBILITY.PREMIUM && !isPremium) && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />

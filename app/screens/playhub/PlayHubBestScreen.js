@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {ScrollView, View} from 'react-native';
+import { ScrollView, FlatList } from 'react-native';
 import { connect, useSelector } from 'react-redux';
 import {getAppParentControl, getAppTheme} from '../../redux/reducers';
 import {
@@ -166,21 +166,21 @@ const PlayHubBestScreen = ({ navigation, setDetailed, selectContent }) => {
     };
 
     return (
-        <ThemedView style={{ paddingLeft: 5}}>
-            <OverlayLoader visible={!isFetched} />
-            <ScrollView>
-               {
-                    Object.values(bestContent).map((best, index) => {
-                        return <ChannelsLine
-                            key={index}
+        <ThemedView>
+            <FlatList
+                data={Object.values(bestContent)}
+                renderItem={({ item, index }) => {
+                    return (
+                        <ChannelsLine
                             titlePress={handleOnTitlePress}
-                            title={best.name}
-                            items={best.items}
+                            title={item.name}
+                            items={item.items}
                             onContentPress={onContentPress}
                         />
-                    })
-               }
-            </ScrollView>
+                    )
+                }}
+                keyExtractor={(item, index) => `__line${index}`}
+            />
             <ModalizeWrapper
                 referal={ageLimitModal}
                 adjustToContentHeight={{
@@ -198,6 +198,7 @@ const PlayHubBestScreen = ({ navigation, setDetailed, selectContent }) => {
                 adjustToContentHeight={{
                     showsVerticalScrollIndicator: false
                 }}
+                keyboardAvoidingBehavior={'padding'}
             >
                 <ContentVisibilityModal {...modalContent} onCloseModal={handleCloseByVisibility}/>
             </ModalizeWrapper>
