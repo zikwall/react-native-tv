@@ -7,7 +7,7 @@ import { iOSUIKit } from 'react-native-typography';
 import IconWrap from '../icon/IconWrap';
 import Row from '../ui/Row';
 
-const ChannelsLine = ({ title, titlePress, items }) => {
+const ChannelsLine = ({ title, titlePress, items, onContentPress }) => {
     const theme = useSelector(state => getAppTheme(state));
 
     const handleTitlePress = () => {
@@ -29,7 +29,14 @@ const ChannelsLine = ({ title, titlePress, items }) => {
                 <View style={{ flexDirection: 'row' }}>
                     {
                         items.map((item, i) => {
-                            return <ChannelBackgroundCard key={i} type={item.type} name={item.channel} image={item.cover} playlist={item} />
+                            return <ChannelBackgroundCard
+                                key={i}
+                                type={item.type}
+                                name={item.name}
+                                image={{ uri: item.image }}
+                                playlist={item}
+                                onPress={onContentPress}
+                            />
                         })
                     }
                 </View>

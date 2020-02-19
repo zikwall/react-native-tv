@@ -7,6 +7,20 @@ import {
 } from '../../redux/actions';
 import {UserHelper} from '../../utils';
 
+export const fetchBestContent = () => {
+    return apiFetch(`/vktv/api/best`)
+        .then(res => {
+
+            return {
+                code: res.code,
+                response: res.response,
+            };
+        })
+        .catch(error => {
+            new Error(error);
+        })
+};
+
 export const editContentInfo = (id, token) => {
     return apiFetch(`/vktv/content/edit?id=${id}`, {
         method: 'GET',
