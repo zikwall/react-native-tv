@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FlatList } from 'react-native';
 import {
     ChannelBackgroundCard,
@@ -13,10 +13,6 @@ import { getPlayhubDetailed } from '../../redux/reducers';
 
 const DetailedScreen = ({ navigation }) => {
     const detailed = useSelector(state => getPlayhubDetailed(state));
-
-    useEffect(() => {
-        navigation.setParams({ title: detailed.title });
-    }, []);
 
     return (
         <ThemedView>
@@ -40,7 +36,7 @@ const DetailedScreen = ({ navigation }) => {
 };
 
 DetailedScreen.navigationOptions = ({ navigation }) => {
-    const title = navigation.getParam('title');
+    const { title } = navigation.state.params;
 
     return {
         header: (props) => <NavigationHeaderComponent

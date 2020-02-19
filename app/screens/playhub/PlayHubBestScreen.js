@@ -15,7 +15,9 @@ const PlayHubBestScreen = ({ navigation, setDetailed }) => {
             title: title,
             items: items
         });
-        navigation.navigate('PlayhubDetailed');
+        navigation.navigate('PlayhubDetailed', {
+            title: title
+        });
     };
 
     return (
