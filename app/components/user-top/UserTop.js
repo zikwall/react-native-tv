@@ -11,7 +11,7 @@ import { User } from "../../services";
 import { UPDATE_FRIENDS } from "../../redux/types";
 import { User as UserConstants } from '../../constants';
 
-const UserTop = ({ id, displayName, username, avatar, onAvatarPress, isOfficial }) => {
+const UserTop = ({ id, owner, displayName, username, avatar, onAvatarPress, isOfficial }) => {
     const theme = useSelector(state => getAppTheme(state));
     const user = useSelector(state => state.authentication.user);
     const token = useSelector(state => state.authentication.token);
@@ -64,6 +64,12 @@ const UserTop = ({ id, displayName, username, avatar, onAvatarPress, isOfficial 
                 } else if (fiendStatus === UserConstants.FRIENDS_STATE_REQUEST_RECEIVED) {
                     setButtonMessage("Удалить из друзей");
                     setFiendStatus(UserConstants.FRIENDS_STATE_FRIEND);
+
+                    dispatch({
+                        type: UPDATE_FRIENDS,
+                        friends: [...user.friends, owner]
+                    });
+
                 } else if (fiendStatus === UserConstants.FRINEDS_STATE_REQUEST_SENT) {
                     setButtonMessage("Заявка уже отправлена");
                     setFiendStatus(UserConstants.FRINEDS_STATE_REQUEST_SENT);

@@ -121,6 +121,7 @@ const ProfileNavigator = ({ navigation, isAuthenticated }) => {
 
             {visibleUserTop && <UserTop
                 id={id}
+                owner={user}
                 displayName={UserHelper.buildUserId(user)}
                 username={user.username}
                 avatar={UserHelper.makeUserAvatar(user)}
