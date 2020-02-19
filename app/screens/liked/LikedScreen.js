@@ -22,7 +22,7 @@ const LikedScreen = ({ navigation }) => {
 
     return (
         <View style={[styles.container, { backgroundColor: theme.primaryBackgroundColor }]}>
-            <Text style={{ textAlign:"center", color: theme.primaryColor }}>Liked...</Text>
+            <Text style={{ textAlign:"center", color: theme.primaryColor }}>We are working on a service...</Text>
         </View>
     );
 };
