@@ -9,7 +9,7 @@ import {
     ThemePicker,
     NavigationHeaderComponent,
     ModalizeWrapper,
-    ParentControlModal
+    ParentControlModal,
 } from '../../components';
 import { getAppTheme, getAppParentControl } from '../../redux/reducers';
 import { Fake } from '../../utils';
@@ -87,6 +87,7 @@ const UserMenuScreen = ({ navigation, checkAuth }) => {
                 <MenuItemLine onPress={onMenuPress} to={'IPTVScreen'} icon={'tv'} name={'IPTV'} />
                 <MenuItemLine onPress={onMenuPress} to={'WriteDeveloperScreen'} icon={'edit-3'} name={'Написать разработчику'} />
                 <MenuItemLine onPress={onMenuPress} to={'PremiumScreen'} icon={'gift'} iconColor={'#DC143C'} name={'Активировать премиум'} />
+                <MenuItemLine onPress={onMenuPress} to={'AuthorsScreen'} icon={'code'} name={'Авторы'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={'Andrey, хотите в команду PlayHub?'} />
             </ScrollView>
 

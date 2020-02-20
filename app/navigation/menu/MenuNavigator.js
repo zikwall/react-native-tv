@@ -25,7 +25,8 @@ import {
     LocalDatabaseScreen,
     FriendsIncomingScreen,
     FriendsOutcomingScreen,
-    UsersScreen
+    UsersScreen,
+    AuthorsScreen
 } from "../../screens";
 import {
     NavigationHeaderComponent,
@@ -73,6 +74,15 @@ const MenuNavigator = createStackNavigator({
         navigationOptions:{
             header: (props) => <NavigationHeaderComponent
                 titleComponent={<NavigationHeaderTitle title={'System & App State'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
+    },
+    AuthorsScreen: {
+        screen: AuthorsScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Authors'} />}
                 leftComponent={ <NavigationHeaderLeft /> } {...props}
             />
         }
