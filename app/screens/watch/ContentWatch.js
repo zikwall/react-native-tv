@@ -47,7 +47,10 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
 
     const [ star, setStar ] = useState(0);
     const [ isAlreadyExistReview, setIsAlreadyExistReview ] = useState(false);
-    const [ existReview, setExistReview ] = useState({});
+    const [ existReview, setExistReview ] = useState({
+        id: 0,
+        content: ''
+    });
     const [ hasInDatabase, setHasInDatabase ] = useState(false);
     const [ ownerInfo, setOwnerInfo ] = useState({
         name: 'Loading..',
@@ -107,10 +110,9 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
                 id: content.id
             }).then(({ code, exist, review }) => {
                 if (exist === 1) {
-                    console.log(review, exist);
-                    setIsAlreadyExistReview(true);
                     setExistReview(review);
                     setStar(review.value);
+                    setIsAlreadyExistReview(true);
                 }
             })
         }
@@ -296,7 +298,7 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
                                     />
                                     <View>
                                         <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценить контент'} />
-                                        <ReviewMaker star={star} onSelectStar={onSelectStar} />
+                                        <ReviewMaker star={star} onSelectStar={onSelectStar} exist={isAlreadyExistReview} existReview={existReview} />
                                     </View>
                                     <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценки и отзывы'} />
                                     <RatingOverView stars={content.rating_groups} totalCount={content.votes} rating={content.rating} />

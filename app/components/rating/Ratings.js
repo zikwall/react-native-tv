@@ -16,10 +16,12 @@ const Ratings = ({ size, full, value, disabled, onSelect }) => {
     };
 
     const renderStars = () => {
+        const staars = stars || value;
+
         return [...new Array(5)].map((current, index) => {
             let icon = 'staro';
 
-            if (!disabled && stars >= index + 1) {
+            if (!disabled && staars >= index + 1) {
                 icon = 'star';
             }
 
@@ -47,7 +49,7 @@ const Ratings = ({ size, full, value, disabled, onSelect }) => {
 };
 
 Ratings.defaultProps = {
-    value: 0
+    value: 5
 };
 
 export default Ratings;

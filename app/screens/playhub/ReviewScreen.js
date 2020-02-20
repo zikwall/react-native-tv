@@ -4,7 +4,7 @@ import {
     Avatar,
     NavigationHeaderComponent,
     NavigationHeaderLeft,
-    NavigationHeaderTitleContent, TextInput,
+    NavigationHeaderTitleContent,
     ThemedView,
 } from '../../components';
 import ExtendedTextArea from '../../components/ui/TextArea';
@@ -20,7 +20,7 @@ const ReviewScreen = ({ navigation }) => {
     const token = useSelector(state => state.authentication.token);
 
     const { user, id, value, existReview } = navigation.state.params;
-    const [ reviewContent, setReviewContent ] = useState('');
+    const [ reviewContent, setReviewContent ] = useState(!!existReview.exist ? existReview.review.content : '');
     const [ extraTags, setExtraTags ] = useState([]);
 
     const [ success, setSuccess ] = useState({
@@ -67,6 +67,28 @@ const ReviewScreen = ({ navigation }) => {
     };
 
     const onSendReview = () => {
+        if (!!existReview.exist) {
+            let attributes = {
+                id: existReview.review.id,
+                content_id: id,
+                content: reviewContent,
+                value: value,
+
+            };
+
+            Review.editReview(token, attributes).then(({ code, message, attributes }) => {
+                if (code === 200) {
+                    markAsSuccess(message);
+
+                    return true;
+                }
+
+                markAsError(message, attributes);
+            });
+
+            return true;
+        }
+
         let attributes = {
             id: id,
             content: reviewContent,
@@ -99,6 +121,7 @@ const ReviewScreen = ({ navigation }) => {
                 flashText={error.has ? error.error : (success.has ? success.text : '')}
             >
                 <ExtendedTextArea
+                    value={reviewContent}
                     onChangeText={text => setReviewContent(text)}
                     lineNumbers={10}
                     maxLength={500}

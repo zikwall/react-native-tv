@@ -7,8 +7,9 @@ import { human } from "react-native-typography";
 import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 import { withNavigation } from 'react-navigation';
+import { Heading } from '../index';
 
-const ReviewMaker = ({ navigation, onSelectStar, star }) => {
+const ReviewMaker = ({ navigation, onSelectStar, star, existReview, exist }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
 
@@ -31,9 +32,22 @@ const ReviewMaker = ({ navigation, onSelectStar, star }) => {
     }
 
     return (
-        <View style={{ paddingHorizontal: 15 }}>
-            <Ratings value={star} size={25} full onSelect={onSelectStar} />
-        </View>
+        <>
+            <View style={{ paddingHorizontal: 15 }}>
+                <Ratings value={star} size={25} full onSelect={onSelectStar} />
+            </View>
+            {
+                isAuthorized && exist &&
+                <>
+                    <Heading text={'Ваш отзыв'} />
+                    <View style={{ margin: 15, marginTop: 0 }}>
+                        <Text style={human.caption1}>
+                            { existReview.content }
+                        </Text>
+                    </View>
+                </>
+            }
+        </>
     )
 };
 
