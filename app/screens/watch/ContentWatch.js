@@ -37,6 +37,7 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
 
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const user = useSelector(state => state.authentication.user);
+    const token = useSelector(state => state.authentication.token);
 
     const [ isVisiblePage, setIsVisiblePage ] = useState(true);
     const [ reviews, setReviews ] = useState([]);
@@ -45,6 +46,8 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
     const [ currentReviewPage, setCurrentReviewPage ] = useState(0);
 
     const [ star, setStar ] = useState(0);
+    const [ isAlreadyExistReview, setIsAlreadyExistReview ] = useState(false);
+    const [ existReview, setExistReview ] = useState({});
     const [ hasInDatabase, setHasInDatabase ] = useState(false);
     const [ ownerInfo, setOwnerInfo ] = useState({
         name: 'Loading..',
@@ -98,6 +101,21 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
         loadReviews();
     }, []);
 
+    useEffect(() => {
+        if (isAuthorized) {
+            ReviewService.existReview(token, {
+                id: content.id
+            }).then(({ code, exist, review }) => {
+                if (exist === 1) {
+                    console.log(review, exist);
+                    setIsAlreadyExistReview(true);
+                    setExistReview(review);
+                    setStar(review.value);
+                }
+            })
+        }
+    }, []);
+
     const loadReviews = () => {
         setIsFetchedReviews(true);
         ReviewService.fetchReviews(content.id, currentReviewPage).then((res) => {
@@ -145,7 +163,11 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
             user: user,
             value: star,
             title: content.name,
-            image: content.image
+            image: content.image,
+            existReview: {
+                exist: isAlreadyExistReview,
+                review: existReview
+            }
         });
     };
 
@@ -274,7 +296,7 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
                                     />
                                     <View>
                                         <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценить контент'} />
-                                        <ReviewMaker onSelectStar={onSelectStar} />
+                                        <ReviewMaker star={star} onSelectStar={onSelectStar} />
                                     </View>
                                     <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценки и отзывы'} />
                                     <RatingOverView stars={content.rating_groups} totalCount={content.votes} rating={content.rating} />

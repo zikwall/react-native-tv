@@ -13,15 +13,75 @@ import { getAppTheme } from '../../redux/reducers';
 import Form from '../../components/ui/Form';
 import TagPicker from '../../components/ui/TagPicker';
 import Ratings from '../../components/rating/Ratings';
+import { Review } from '../../services';
 
 const ReviewScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const token = useSelector(state => state.authentication.token);
+
+    const { user, id, value, existReview } = navigation.state.params;
     const [ reviewContent, setReviewContent ] = useState('');
     const [ extraTags, setExtraTags ] = useState([]);
-    const { user, id, value } = navigation.state.params;
+
+    const [ success, setSuccess ] = useState({
+        has: false,
+        text: 'Unexpected text',
+    });
+
+    const [ error, setError ] = useState({
+        has: false,
+        error: "Unexpected error",
+        attributes: [
+            ''
+        ]
+    });
+
+    const markAsError = (text, attributes) => {
+        if (success) {
+            setSuccess({
+                has: false,
+                text: 'Unexpected text',
+            })
+        }
+
+        setError({
+            has: true,
+            error: text,
+            attributes: attributes
+        });
+    };
+
+    const markAsSuccess = (text) => {
+        if (error.has) {
+            setError({
+                has: false,
+                error: "Unexpected error",
+                attributes: []
+            })
+        }
+
+        setSuccess({
+            has: true,
+            text: text
+        })
+    };
 
     const onSendReview = () => {
-        alert(`User is ${user.id}`);
+        let attributes = {
+            id: id,
+            content: reviewContent,
+            value: value
+        };
+
+        Review.addReview(token, attributes).then(({ code, message, attributes }) => {
+            if (code === 200) {
+                markAsSuccess(message);
+
+                return true;
+            }
+
+            markAsError(message, attributes);
+        });
     };
 
     return (
@@ -34,6 +94,9 @@ const ReviewScreen = ({ navigation }) => {
                 header={'Оставьте свой нереальный отзыв!'}
                 buttonTitle={'Оставить отзыв!'}
                 onSubmit={onSendReview}
+                hasError={error.has}
+                hasSuccess={success.has}
+                flashText={error.has ? error.error : (success.has ? success.text : '')}
             >
                 <ExtendedTextArea
                     onChangeText={text => setReviewContent(text)}

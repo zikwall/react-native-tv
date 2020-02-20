@@ -18,7 +18,7 @@ const Form = ({ children, buttonEnd, buttonTitle, header, onSubmit, headerColor,
             }
 
             {
-                (hasError || hasSuccess) && <View style={{ marginTop: 10 }}>
+                (hasError || hasSuccess) && <View style={{ marginTop: 10, marginBottom: 10 }}>
                     <ErrorMessage hasError={hasError} error={flashText} />
                     <SuccessText hasMessage={hasSuccess} message={flashText} />
                 </View>
