@@ -39,9 +39,9 @@ const ReviewMaker = ({ navigation, onSelectStar, star, existReview, exist }) => 
             {
                 isAuthorized && exist &&
                 <>
-                    <Heading text={'Ваш отзыв'} />
+                    <Heading text={'Ваш отзыв'} color={theme.primaryColor}/>
                     <View style={{ margin: 15, marginTop: 0 }}>
-                        <Text style={human.caption1}>
+                        <Text style={[ human.caption1, { color: theme.primaryColor } ]}>
                             { existReview.content }
                         </Text>
                     </View>
