@@ -29,7 +29,7 @@ import { Players } from '../../constants';
 import Description from './components/Description';
 import { Fake, DataHelper } from '../../utils';
 import { appendRedux, removeRedux } from '../../services/content/LocalDatabase';
-import { User } from '../../services';
+import { User, Review as ReviewService } from '../../services';
 
 const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDatabase }) => {
     const theme = useSelector(state => getAppTheme(state));
@@ -39,7 +39,11 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
     const user = useSelector(state => state.authentication.user);
 
     const [ isVisiblePage, setIsVisiblePage ] = useState(true);
-    const [ reviews, setReviews ] = useState(Fake.reviews);
+    const [ reviews, setReviews ] = useState([]);
+    const [ isEnd, setIsEnd ] = useState(true);
+    const [ isFetchedReviews, setIsFetchedReviews ] = useState(false);
+    const [ currentReviewPage, setCurrentReviewPage ] = useState(0);
+
     const [ star, setStar ] = useState(0);
     const [ hasInDatabase, setHasInDatabase ] = useState(false);
     const [ ownerInfo, setOwnerInfo ] = useState({
@@ -49,24 +53,6 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
     });
 
     const hasOwnPlayer = DataHelper.hasOwnPlayer(content);
-
-    useEffect(() => {
-        User.fetchUserProfile(content.user_id).then(({ response }) => {
-            setOwnerInfo({
-                name: response.name,
-                username: response.username,
-                image: !!response.avatar ? { uri: response.avatar } : theme.userAvatarPlaceholder
-            });
-        });
-    }, []);
-
-    useEffect(() => {
-        let has = currentDatabase.find((item) => content.id === item.id);
-
-        if (!!has) {
-            setHasInDatabase(true);
-        }
-    }, []);
 
     useEffect(() => {
         const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
@@ -90,11 +76,43 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
         }
     }, []);
 
+    useEffect(() => {
+        User.fetchUserProfile(content.user_id).then(({ response }) => {
+            setOwnerInfo({
+                name: response.name,
+                username: response.username,
+                image: !!response.avatar ? { uri: response.avatar } : theme.userAvatarPlaceholder
+            });
+        });
+    }, []);
+
+    useEffect(() => {
+        let has = currentDatabase.find((item) => content.id === item.id);
+
+        if (!!has) {
+            setHasInDatabase(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        loadReviews();
+    }, []);
+
     const loadReviews = () => {
-        setReviews([
-            ...reviews,
-            ...Fake.reviews
-        ]);
+        setIsFetchedReviews(true);
+        ReviewService.fetchReviews(content.id, currentReviewPage).then((res) => {
+            setIsFetchedReviews(false);
+            setCurrentReviewPage(currentReviewPage + 1);
+
+            setReviews([
+                ...reviews,
+                ...res.reviews
+            ]);
+
+            if (res.end === true) {
+                setIsEnd(true);
+            }
+        });
     };
 
     const menu = React.createRef();
@@ -251,34 +269,31 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
                             ListHeaderComponent={
                                 <View>
                                     <Description
-                                        description={'Дорогой зритель, я нашел для вас контент, вы все его так ждали - встречайте!'}
-                                        tags={[
-                                            {label: 'Социальные', id: 10},
-                                            {label: 'Выбор редакции', id: 30},
-                                            {label: 'Топ 100 лучших', id: 40},
-                                        ]}
+                                        description={content.desc}
+                                        tags={content.tags}
                                     />
                                     <View>
                                         <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценить контент'} />
                                         <ReviewMaker onSelectStar={onSelectStar} />
                                     </View>
                                     <Heading style={{ padding: 0 }} color={theme.primaryColor} text={'Оценки и отзывы'} />
-                                    <RatingOverView stars={reviews} />
+                                    <RatingOverView stars={content.rating_groups} totalCount={content.votes} rating={content.rating} />
                                 </View>
                             }
                             data={reviews}
                             renderItem={({ item, index }) => (
                                 <Review
                                     key={index}
-                                    stars={item.stars}
+                                    stars={item.value}
                                     date={item.date}
                                     user={item.user}
-                                    review={item.review}
+                                    review={item.content}
                                     isOwnUseful={item.isOwnUseful}
                                     usefulCount={item.usefulCount}
                                 />
                             )}
                             ListFooterComponent={
+                                !isEnd &&
                                 <LoadMoreButton onLoadMorePress={() => loadReviews()} label={'Больше отзывов!'} />
                             }
                             keyExtractor={(item, index) => `__id${index}`}

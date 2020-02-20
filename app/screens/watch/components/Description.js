@@ -7,12 +7,12 @@ import { getAppTheme } from '../../../redux/reducers';
 
 const Description = ({ description, tags }) => {
     const theme = useSelector(state => getAppTheme(state));
-
+    const desc = !!description && typeof description == 'string' ? description : 'Описание отсутствует';
     return (
         <View>
             <Heading color={theme.primaryColor} text={'Описание'} />
             <Text style={[ human.caption1, { paddingLeft: 15, paddingRight: 15, paddingTop: 0, color: theme.primaryColor } ]}>
-                { description }
+                { desc }
             </Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 <Row style={{ paddingLeft: 15, paddingTop: 14 }}>

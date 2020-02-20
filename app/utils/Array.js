@@ -3,3 +3,7 @@ export const random = (arr) => {
 
     return rand;
 };
+
+export function emptyObject(obj) {
+    Object.entries(obj).length === 0 && obj.constructor === Object
+}

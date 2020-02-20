@@ -31,7 +31,7 @@ const Review = ({ user, review, date, stars, usefulCount, isOwnUseful }) => {
 
     return (
         <View style={{ flexDirection: 'column' }}>
-            <UserLineItem name={user.user} username={user.userName} image={user.avatar} />
+            <UserLineItem name={user.name} username={user.username} image={{ uri: user.avatar }} />
             <Text style={[ human.caption1, textStyle, { paddingTop: 5, color: theme.primaryColor } ]}>
                 { review }
             </Text>

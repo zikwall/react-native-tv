@@ -63,6 +63,8 @@ const actionInitialState = {
         image: '',
         desc: '',
         rating: 0,
+        votes: 0,
+        rating_groups: '{}',
         age_limit: 0,
         created_at: 0,
         updated_at: 0,
@@ -75,7 +77,8 @@ const actionInitialState = {
         use_origin: 0,
         ad_url: '',
         use_own_player_url: 0,
-        own_player_url: ''
+        own_player_url: '',
+        tags: null
     },
 };
 
