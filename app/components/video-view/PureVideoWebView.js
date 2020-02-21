@@ -5,7 +5,6 @@ import { StringHelper } from '../../utils';
 
 const PureVideoWebView = ({ source, onNavigationStateChange }) => {
     const [ canGoBack, setCanGoBack ] = useState(false);
-
     let webView = null;
 
     /*useEffect(() => {

@@ -1,7 +1,8 @@
 import { ACTION_PLAYER_SET, ACTION_INIT_PLAYER, ACTION_PLAYHUB_INIT_PLAYER, ACTION_PLAYHUB_PLAYER_SET } from '../types';
+import { Players } from '../../constants';
 
 const actionInitialState = {
-    player: '1'
+    player: Players.NATIVE_PLAYER
 };
 
 export const playerActionReducer = (state = actionInitialState, action) => {
@@ -22,7 +23,7 @@ export const playerActionReducer = (state = actionInitialState, action) => {
 };
 
 const actionPlayHubInitialState = {
-    player: '1'
+    player: Players.NATIVE_PLAYER
 };
 
 export const playhubPlayerActionReducer = (state = actionPlayHubInitialState, action) => {

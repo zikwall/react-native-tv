@@ -7,9 +7,21 @@ import { getChannelsPending, getSelectChannel, getSelectPlayer } from '../../red
 import { initPlayer } from '../../redux/actions';
 import PureVideoWebView from './PureVideoWebView';
 import NativeVideoView from './NativeVideoView';
-import { SafeValidator } from '../../utils';
+import { DataHelper, SafeValidator} from '../../utils';
 
 const resolveSelectedPlayer = (player, channel) => {
+    if (player === Players.NATIVE_PLAYER) {
+        player = '1';
+    }
+
+    if (DataHelper.hasOwnPlayer(channel)) {
+        return channel.own_player_url;
+    }
+
+    if (!!channel.default_player && !player) {
+        `http://tv.zikwall.ru/vktv/embed/give?player=${channel.default_player}&epg=${channel.epg_id}`;
+    }
+
     if (player === Players.ORIGIN_PLAYER) {
         return channel.url;
     }
@@ -30,11 +42,17 @@ const VideoView = ({ channel, pending, player, selectPlayer }) => {
         selectPlayer(channel.epg_id);
     }, [ channel ]);
 
+    const source = resolveSelectedPlayer(player, channel);
+
+    if (!!channel.ad_exist || !channel.use_origin) {
+        return (
+            <PureVideoWebView source={source} />
+        );
+    }
+
     if (SafeValidator.isNativePlayer(player)) {
         return <NativeVideoView source={channel.url} />
     }
-
-    const source = SafeValidator.isNativeWebPlayer(channel.use_origin) ?  channel.url : resolveSelectedPlayer(player, channel);
 
     return (
         <PureVideoWebView source={source} />

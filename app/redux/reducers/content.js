@@ -78,7 +78,9 @@ const actionInitialState = {
         ad_url: '',
         use_own_player_url: 0,
         own_player_url: '',
-        tags: null
+        tags: null,
+        ad_exist: 0,
+        native_available: 0
     },
 };
 

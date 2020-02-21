@@ -10,6 +10,10 @@ import { Players } from '../../constants';
 import { DataHelper } from '../../utils';
 
 const resolveSelectedPlayer = (player, content) => {
+    if (player === Players.NATIVE_PLAYER) {
+        player = '1';
+    }
+
     if (DataHelper.hasOwnPlayer(content)) {
         return content.own_player_url;
     }
@@ -34,11 +38,17 @@ const VideoViewContent = ({ content, player, selectPlayer, onFullscreen }) => {
         selectPlayer(content.id);
     }, [ content ]);
 
+    const source = resolveSelectedPlayer(player, content);
+
+    if (content.ad_exist === 1 || content.use_origin === 0) {
+        return (
+            <PureVideoWebView source={source} />
+        );
+    }
+
     if (SafeValidator.isNativePlayer(player)) {
         return <NativeVideoView source={content.url} onFullscreen={onFullscreen}/>
     }
-
-    const source = resolveSelectedPlayer(player, content);
 
     return (
         <PureVideoWebView source={source} />
