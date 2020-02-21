@@ -1,4 +1,4 @@
-import React, { useEffect,  useState } from 'react';
+import React, { useEffect,  useState, useRef } from 'react';
 
 import {
     StyleSheet,
@@ -7,6 +7,7 @@ import {
     View,
     Dimensions,
     BackHandler,
+    Animated
 } from 'react-native';
 
 import Slider from '@react-native-community/slider';
@@ -26,6 +27,18 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
     const [ fullscreen, setFullscreen ] = useState(false);
     const [ showControlPanel, setShowControlPanel ] = useState(false);
     const [timing, setTiming] = useState(null);
+
+    const Animation = useRef(new Animated.Value(0)).current;
+    const AnimationOverlay = useRef(new Animated.Value(0)).current;
+
+    const AnimationBottomTransformX = Animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [-100, 0]
+    });
+    const AnimationMainTransformX = Animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [100, 0]
+    });
 
     useEffect(() => {
         Orientation.addOrientationListener(handleOrientation);
@@ -189,8 +202,24 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
         )
     };
 
-    const handleshowControlPanel = () => {
+    const runAnimatedControlPanel = (state) => {
+        Animated.parallel([
+            Animated.timing(Animation, {
+                toValue: 1,
+                duration: 300,
+                useNativeDriver: true,
+            }),
+            Animated.timing(AnimationOverlay, {
+                toValue: state,
+                duration: 200,
+                useNativeDriver: true
+            })
+        ]).start();
+    };
+
+    const handleShowControlPanel = () => {
         setShowControlPanel(true)
+        runAnimatedControlPanel(1);
         restartTiming(paused)
     };
 
@@ -210,7 +239,7 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
         <View style={fullscreen && styles.fullscreenVideoContainer}>
             <TouchableOpacity
                 activeOpacity={1}
-                onPress={() => handleshowControlPanel()}
+                onPress={() => handleShowControlPanel()}
             >
                 <Video
                     ref={(ref) => { video = ref }}
@@ -229,11 +258,11 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
             </TouchableOpacity>
 
             {showControlPanel &&
-            <View style={styles.controlPanel}>
-                <View style={styles.mainPanel}>
+            <Animated.View style={[ styles.controlPanel, { opacity: AnimationOverlay } ]}>
+                <Animated.View style={[ styles.mainPanel, { transform: [{ translateX: AnimationMainTransformX }] } ]}>
                     {renderPlayerAction(2)}
-                </View>
-                <View style={styles.bottomPanel}>
+                </Animated.View>
+                <Animated.View style={[ styles.bottomPanel, { transform: [{ translateX: AnimationBottomTransformX }] } ]}>
                     <View style={styles.leftSide}>
                         {renderPlayerAction()}
                         {renderVolumeAction()}
@@ -241,8 +270,8 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
                     <View style={styles.rightSide}>
                         {renderFullscreenControl()}
                     </View>
-                </View>
-            </View>
+                </Animated.View>
+            </Animated.View>
             }
         </View>
     );
