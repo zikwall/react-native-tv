@@ -1,6 +1,27 @@
 import { apiFetch } from '../api';
 import { UserHelper } from "../../utils";
 
+export const makePremium = (token, attributes) => {
+    return apiFetch(`/vktv/premium/activate`, {
+            method: 'POST',
+            body: JSON.stringify(attributes)
+        },
+        {
+            "Authorization": UserHelper.makeAuthorizationHeader(token)
+        })
+        .then(res => {
+            return {
+                code: res.code,
+                message: res.message,
+                attributes: res.attributes || [],
+                user: res.user || {}
+            };
+        })
+        .catch(error => {
+            new Error(error);
+        })
+};
+
 export const cancelRequest = (token, userId) => {
     return apiFetch(`/vktv/friends-request/delete`, {
             method: 'POST',
@@ -94,7 +115,6 @@ export const changeSecuritySettings = (token, attributes) => {
             new Error(error);
         })
 };
-
 
 export const fetchUsers = () => {
     return apiFetch(`/vktv/user/list`)

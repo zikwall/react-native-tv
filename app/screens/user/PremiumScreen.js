@@ -4,11 +4,15 @@ import {
     Form,
     ThemedView,
 } from '../../components';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
+import { User} from '../../services';
+import { UPDATE_USER } from "../../redux/types";
 
 const PremiumScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const token = useSelector(state => state.authentication.token);
+
     const [ premiumKey, setPremiumKey] = useState(null);
     const [ success, setSuccess ] = useState({
         has: false,
@@ -21,8 +25,34 @@ const PremiumScreen = ({ navigation }) => {
         attributes: []
     });
 
-    const handleFormSubmit = async () => {
+    const dispatch = useDispatch();
 
+    const handleFormSubmit = async () => {
+        User.makePremium(token, { key: premiumKey }).then(({ code, message, attributes, user }) => {
+            if (code === 200) {
+                setSuccess({
+                    has: true,
+                    text: message
+                });
+
+                setError({
+                   has: false,
+                   error: ""
+                });
+
+                dispatch({
+                    type: UPDATE_USER, user: user
+                });
+
+                return true;
+            }
+
+            setError({
+                has: true,
+                error: message,
+                attributes: attributes
+            });
+        });
     };
 
     return (
