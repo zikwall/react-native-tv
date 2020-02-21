@@ -5,20 +5,27 @@ import {
     Text,
     TouchableOpacity,
     View,
-    Dimensions
+    Dimensions,
+    BackHandler,
 } from 'react-native';
+
+import Slider from '@react-native-community/slider';
 
 import Video from 'react-native-video';
 import Orientation from 'react-native-orientation';
+import Icon from "react-native-vector-icons/Ionicons";
 
 const NativeVideoView = ({ onFullscreen, ...props }) => {
 
     const [ rate, setRate ] = useState(1);
-    const [ volume, setVoulem ] = useState(1);
+    const [ volume, setVoulem ] = useState(0.5);
+    const [ rememberVolume, setRememberVolume ] = useState(0.5);
     const [ muted, setMuted ] = useState(false);
     const [ resizeMode, setResizeMode ] = useState('contain');
     const [ paused, setPaused ] = useState(false);
     const [ fullscreen, setFullscreen ] = useState(false);
+    const [ showControlPanel, setShowControlPanel ] = useState(false);
+    const [timing, setTiming] = useState(null);
 
     useEffect(() => {
         Orientation.addOrientationListener(handleOrientation);
@@ -27,6 +34,24 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
             Orientation.removeOrientationListener(handleOrientation);
         };
     }, []);
+
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        }
+    }, [fullscreen])
+
+    const handleBackButtonClick = () => {
+        if (fullscreen) {
+            handleFullscreen(fullscreen)
+
+            return true;
+        }
+        // вернуться назад
+        //return true;
+    }
 
     const handleOrientation = (orientation) => {
         orientation === 'LANDSCAPE'
@@ -80,27 +105,28 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
 
     const handleFullscreen = (isSelected) => {
         setFullscreen(!isSelected);
-        onFullscreen(isSelected);
-
-        fullscreen
+        //onFullscreen(isSelected);
+        restartTiming(paused);
+        isSelected
             ? Orientation.lockToPortrait()
             : Orientation.lockToLandscape();
     };
 
     const renderFullscreenControl = () => {
-        const isSelected = fullscreen;
-
         return (
-            <TouchableOpacity onPress={() => handleFullscreen(isSelected) }>
-                <Text style={[styles.controlOption, { fontWeight: isSelected ? 'bold' : 'normal' }]}>
-                    fullscreen
+            <TouchableOpacity onPress={() => handleFullscreen(fullscreen) }>
+                <Text style={styles.controlOptionRight}>
+                    {fullscreen
+                        ?<Icon name='ios-contract' size={fullscreen ? 30 : 20}/>
+                        :<Icon name='ios-expand' size={fullscreen ? 30 : 20}/>
+                    }
                 </Text>
             </TouchableOpacity>
         )
     };
 
     const renderVolumeControl = (v) => {
-        const isSelected = (volume === v);
+        const isSelected = (volume === v)
 
         return (
             <TouchableOpacity onPress={() => { setVoulem(v) }}>
@@ -111,16 +137,83 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
         )
     };
 
+    const togglePlay = () => {
+        setPaused(!paused)
+        restartTiming(!paused)
+    }
+
+    const renderPlayerAction = (size = 1) => {
+        return (
+            <TouchableOpacity onPress={() => togglePlay()}>
+                <Text style={styles.controlOptionLeft}>
+                    {!paused
+                        ?<Icon name='ios-pause' size={!fullscreen ? size*20 : size*30}/>
+                        :<Icon name='ios-play' size={!fullscreen ? size*20 : size*30}/>
+                    }
+                </Text>
+            </TouchableOpacity>
+        )
+    };
+    const handlerOnValueChange = (vol) => {
+        setVoulem(vol)
+        setRememberVolume(vol)
+        restartTiming()
+    }
+    const toggleVolume = () => {
+        volume ? setVoulem(0) : setVoulem(rememberVolume)
+        restartTiming()
+    }
+
+    const renderVolumeAction = () => {
+        return (
+            <View style={{...styles.controlOptionLeft, flexDirection: 'row'}}>
+                <TouchableOpacity onPress={() => toggleVolume()}>
+                    <Text style={{...styles.controlOptionLeft, marginLeft: 10, width: fullscreen ? 40 : 30}}>
+                        {volume == 0 && <Icon name='ios-volume-off' size={fullscreen ? 30 : 20}/>}
+                        {volume > 0 && volume < 0.5 && <Icon name='ios-volume-mute' size={fullscreen ? 30 : 20}/>}
+                        {volume >= 0.5 && volume < 1 && <Icon name='ios-volume-low' size={fullscreen ? 30 : 20}/>}
+                        {volume == 1 && <Icon name='ios-volume-high' size={fullscreen ? 30 : 20}/>}
+                    </Text>
+                </TouchableOpacity>
+                <Slider
+                    style={fullscreen ? {width: 150, height: 30} : {width: 100, height: 20}}
+                    onValueChange={(vol) => handlerOnValueChange(vol)}
+                    value={volume}
+                    minimumValue={0}
+                    maximumValue={1}
+                    minimumTrackTintColor="#fff"
+                    maximumTrackTintColor="#fff"
+                    thumbTintColor="#fff"
+                />
+            </View>
+        )
+    };
+
+    const handleshowControlPanel = () => {
+        setShowControlPanel(true)
+        restartTiming(paused)
+    };
+
+    const restartTiming = (paused = null) => {
+        clearTimeout(timing)
+        if (paused) {
+            setTiming(null)
+
+            return
+        }
+
+        const pointer = setTimeout(() => {setShowControlPanel(false); setTiming(null)}, 3000)
+        setTiming(pointer)
+    }
+
     return (
-        <View style={styles.container}>
+        <View style={fullscreen && styles.fullscreenVideoContainer}>
             <TouchableOpacity
-                style={styles.fullScreen}
-                onPress={() => setPaused(!paused)}
+                activeOpacity={1}
+                onPress={() => handleshowControlPanel()}
             >
                 <Video
                     ref={(ref) => { video = ref }}
-                    /* For ExoPlayer */
-                    //source={{ uri: 'http://www.youtube.com/api/manifest/dash/id/bf5bb2419360daf1/source/youtube?as=fmp4_audio_clear,fmp4_sd_hd_clear&sparams=ip,ipbits,expire,source,id,as&ip=0.0.0.0&ipbits=0&expire=19000000000&signature=51AF5F39AB0CEC3E5497CD9C900EBFEAECCCB5C7.8506521BFC350652163895D4C26DEE124209AA9E&key=ik0', type: 'mpd' }}
                     source={{ uri: props.source }}
                     style={fullscreen ? styles.fullscreenVideo : styles.video}
                     rate={rate}
@@ -129,33 +222,28 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
                     muted={muted}
                     resizeMode={resizeMode}
                     onLoad={onLoad}
-                    //onProgress={this.onProgress}
-                    //onEnd={this.onEnd}
                     onAudioBecomingNoisy={onAudioBecomingNoisy}
                     onAudioFocusChanged={onAudioFocusChanged}
                     repeat={false}
-                    fullscreen={true}
                 />
             </TouchableOpacity>
 
-            <View style={[ styles.controls ]}>
-                <View style={styles.generalControls}>
-                    <View style={styles.rateControl}>
-                        {renderRateControl(0.25)}
-                        {renderRateControl(0.5)}
-                        {renderRateControl(1.0)}
-                        {renderRateControl(1.5)}
-                        {renderRateControl(2.0)}
+            {showControlPanel &&
+            <View style={styles.controlPanel}>
+                <View style={styles.mainPanel}>
+                    {renderPlayerAction(2)}
+                </View>
+                <View style={styles.bottomPanel}>
+                    <View style={styles.leftSide}>
+                        {renderPlayerAction()}
+                        {renderVolumeAction()}
                     </View>
-
-                    <View style={styles.resizeModeControl}>
-                        {renderResizeModeControl('cover')}
-                        {renderResizeModeControl('contain')}
-                        {renderResizeModeControl('stretch')}
+                    <View style={styles.rightSide}>
                         {renderFullscreenControl()}
                     </View>
                 </View>
             </View>
+            }
         </View>
     );
 };
@@ -163,87 +251,56 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
 export default NativeVideoView;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'black',
+    fullscreenVideoContainer: {
+        backgroundColor: 'black'
     },
     video: {
-        height: Dimensions.get('window').width * (9 / 16),
-        width: Dimensions.get('window').width,
-        backgroundColor: 'black',
+        width: '100%',
+        height: '100%'
     },
     fullscreenVideo: {
         height: Dimensions.get('window').width,
-        width: Dimensions.get('window').height,
-        backgroundColor: 'black',
+        width: Dimensions.get('window').height
     },
-    fullScreen: {
+    controlPanel: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        zIndex: 999
-    },
-    controls: {
-        backgroundColor: 'transparent',
-        //position: 'absolute',
-        //flex: 1,
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderRadius: 5,
-        zIndex: 1000
-    },
-    innerProgressCompleted: {
-        height: 20,
-        backgroundColor: '#cccccc',
-    },
-    innerProgressRemaining: {
-        height: 20,
-        backgroundColor: '#2C2C2C',
-    },
-    generalControls: {
-        flex: 1,
-        flexDirection: 'row',
-        borderRadius: 4,
-        overflow: 'hidden',
-        paddingBottom: 10,
-    },
-    rateControl: {
-        flex: 1,
-        flexDirection: 'row',
-        //justifyContent: 'center',
-    },
-    volumeControl: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    resizeModeControl: {
-        //flex: 1,
-        flexDirection: 'row',
-        //alignItems: 'center',
-        justifyContent: 'center',
-    },
-    controlOption: {
-        alignSelf: 'center',
-        fontSize: 11,
-        color: 'white',
-        paddingLeft: 2,
-        paddingRight: 2,
-        lineHeight: 12,
-    },
-    controlOverlay: {
-        position: 'absolute',
         top: 0,
-        bottom: 0,
         left: 0,
+        bottom: 0,
         right: 0,
-        backgroundColor: '#000000c4',
-        justifyContent: 'space-between',
-        zIndex: 1000
+        zIndex: 999,
+        backgroundColor: 'rgba( 0, 0, 0, 0.3);'
     },
+    mainPanel: {
+        flex: 5,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    bottomPanel: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: 'rgba( 0, 0, 0, 0.5);'
+    },
+    leftSide: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+    },
+    rightSide: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+
+    },
+    controlOptionRight: {
+        color: '#fff',
+        paddingRight: 10,
+    },
+    controlOptionLeft: {
+        color: '#fff',
+        paddingLeft: 10,
+    }
 });
