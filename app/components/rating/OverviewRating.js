@@ -19,8 +19,8 @@ const OverViewRating = ({ totalCount, rating, stars }) => {
     const [ contentStars, setContentStars ] = useState(starsMark);
 
     useEffect(() => {
-        if (!Array.isArray(stars) && stars.length !== 0) {
-            setContentStars(stars)
+        if (!Array.isArray(stars) && !!stars) {
+            setContentStars(stars);
         }
     }, []);
 

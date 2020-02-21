@@ -97,7 +97,7 @@ const UserTop = ({ id, owner, displayName, username, avatar, onAvatarPress, isOf
                     @{username}
                 </Text>
                 {
-                    id !== user.id && <FlatButton
+                    parseInt(id) !== user.id && <FlatButton
                         onPress={onPressFriendButton}
                         text={buttonMessage}
                         color={!fiendStatus ? theme.primaryBackgroundColor : theme.primaryColor}
