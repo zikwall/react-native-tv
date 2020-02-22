@@ -370,7 +370,6 @@ ContentWatch.navigationOptions = ({ navigation }) => {
                 </>
             }
             leftComponent={ <NavigationHeaderLeft onHome /> } {...props}
-            rightComponent={<IconWrap name={'frown'} size={25} style={{ paddingHorizontal: 15  }} />}
         />
     }
 };
