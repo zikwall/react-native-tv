@@ -42,7 +42,6 @@ const LocalContentWatch = ({ navigation, localContent, toDatabase, removeDatabas
 
     useEffect(() => {
         let has = currentDatabase.find((item) => localContent.id === item.id);
-        console.log(['aaaa', !!has, currentDatabase, localContent]);
 
         if (!!has) {
             setHasInDatabase(true);
@@ -83,7 +82,7 @@ const LocalContentWatch = ({ navigation, localContent, toDatabase, removeDatabas
                     top: 0,
                     backgroundColor: theme.primaryBackgroundColor
                 }}>
-                    <VideoViewLocalContent onFullscreen={onFullscreen}/>
+                    <VideoViewLocalContent onFullscreen={onFullscreen} />
                 </View>
             </View>
             <Row style={{ padding: 10, alignItems: 'center' }}>
