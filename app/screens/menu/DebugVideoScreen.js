@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Clipboard } from 'react-native';
-import { NavigationHeaderLeft, NavigationHeaderTitle, ThemedView, Heading, PureVideoWebView, TextInput, ExtendedButton } from '../../components';
+import { View, Clipboard } from 'react-native';
+import {
+    NavigationHeaderLeft,
+    NavigationHeaderTitle,
+    ThemedView,
+    Heading,
+    PureVideoWebView,
+    TextInput,
+    FlatButton,
+    Row,
+} from '../../components';
 import { useSelector } from 'react-redux';
 import { getAppTheme, getChannels } from '../../redux/reducers';
 
@@ -49,12 +58,13 @@ const DebugVideoScreen = ({ navigation }) => {
                 <PureVideoWebView source={useSource} />
             </View>
             <View style={{ padding: 5 }}>
-                <TextInput value={source} onChangeText={handleSelectSource} placeholder={'Input url here'} />
+                <TextInput maxLength={255} value={source} onChangeText={handleSelectSource} placeholder={'Input url here'} />
             </View>
-
-            <ExtendedButton onPress={handleTestPress} buttonStyle={{ marginHorizontal: 5, marginTop: 5, marginBottom: 10 }} backgroundColor={'#21bf73'} title={'Run Test'} />
-            <ExtendedButton onPress={fromClipboard} buttonStyle={{ marginHorizontal: 5, marginBottom: 10 }} backgroundColor={'#ffd700'} title={'From Clipboard'} />
-            <ExtendedButton onPress={handleResetPress} buttonStyle={{ marginHorizontal: 5, marginBottom: 10 }} backgroundColor={'#d72323'} title={'Reset'} />
+            <Row>
+                <FlatButton text={'Run Test'} onPress={handleTestPress} style={{ backgroundColor: theme.secondaryBackgroundColor, borderRadius: 5, padding: 10 }} />
+                <FlatButton text={'From Clipboard'} onPress={fromClipboard} style={{ backgroundColor: theme.secondaryBackgroundColor, borderRadius: 5, padding: 10 }} />
+                <FlatButton text={'Reset'} onPress={handleResetPress} style={{ backgroundColor: theme.secondaryBackgroundColor, borderRadius: 5, padding: 10 }} />
+            </Row>
         </ThemedView>
     )
 };
