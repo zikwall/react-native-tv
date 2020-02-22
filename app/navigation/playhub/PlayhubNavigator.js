@@ -131,7 +131,7 @@ const PlayhubNavigator = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: theme.primaryBackgroundColor }}>
-            {
+            {/*{
                 (!isAuthorized && isVisibleNotify ) &&
                 <Animated.View style={{
                     transform: [{ translateY: translationY }],
@@ -152,7 +152,7 @@ const PlayhubNavigator = ({ navigation }) => {
                         <IconWrap name={'x-square'} size={25} style={{ paddingRight: 10 }} />
                     </TouchableOpacity>
                 </Animated.View>
-            }
+            }*/}
 
             <StaticNavigation navigation={ navigation } />
         </View>
