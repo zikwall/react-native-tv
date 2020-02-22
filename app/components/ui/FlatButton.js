@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import IconWrap from "../icon/IconWrap";
 
-const FlatButton = ({ text, icon, onPress, backgroundColor, color, style, containerStyle }) => (
+const FlatButton = ({ text, icon, onPress, backgroundColor, color, style, containerStyle, isSelected }) => (
     <TouchableOpacity onPress={onPress} style={[styles.container, containerStyle]}>
-        <View style={[styles.button, { backgroundColor: backgroundColor }, {...style} ]}>
+        <View style={[styles.button, { backgroundColor: backgroundColor }, {...style}, isSelected ? { borderColor: '#7cbb4f', borderWidth: 1 } : {} ]}>
             {
                 icon && <IconWrap name={icon} style={{ paddingRight: 5 }} color={color} size={15}/>
             }
@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
 });
 
 FlatButton.defaultProps = {
-    onPress: () => {}
+    onPress: () => {},
+    isSelected: false
 };
 
 export default FlatButton;

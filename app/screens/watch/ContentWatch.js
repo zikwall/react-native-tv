@@ -221,10 +221,6 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
         hideMenu();
     };
 
-    const onSendReport = (id, reportObject, extraComment) => {
-
-    };
-
     return (
         <ThemedView>
             <View style={{ paddingTop: '56.25%' }}>
@@ -352,7 +348,7 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
             <ModalizeWrapper
                 referal={reportModal}
             >
-                <ReportModal onCloseModal={closeReportModal} content={content} onSend={() => {alert('Ok'); closeReportModal();}} />
+                <ReportModal onCloseModal={closeReportModal} content={content} />
             </ModalizeWrapper>
         </ThemedView>
     );
