@@ -274,13 +274,6 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
                         }}>
                             Use Native Player
                         </MenuItem>
-                        <MenuDivider />
-                        <MenuItem onPress={ hideMenu }>Save to watch latter</MenuItem>
-                        <MenuItem onPress={ hideMenu }>Save to Playlist</MenuItem>
-                        <MenuItem onPress={ handleOpenStatic }>Share</MenuItem>
-                        <MenuDivider />
-                        <MenuItem onPress={ hideMenu }>Report</MenuItem>
-                        <MenuItem onPress={ hideMenu }>Block this Playlist</MenuItem>
                     </Menu>
                 }
             />
