@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import { Content } from '../../constants';
 import IconWrap from '../icon/IconWrap';
-import {SafeValidator} from "../../utils";
+import { SafeValidator } from "../../utils";
+import { human } from 'react-native-typography';
 
 const hasFriend = (isAuth, users, user_id) => {
     if (!users) {
@@ -29,7 +30,7 @@ const ChannelBackgroundCard = ({ type, name, image, onPress, playlist }) => {
     }
 
     return (
-        <TouchableOpacity style={{ marginHorizontal: 5, width: 95 }} onPress={() => onPress(playlist, hasIsMyFriend)}>
+        <TouchableOpacity style={{ marginHorizontal: 5, width: 95, paddingBottom: 15 }} onPress={() => onPress(playlist, hasIsMyFriend)}>
             <ImageBackground
                 source={safeImage}
                 style={{ width: 85, height: 85 }}
@@ -45,7 +46,7 @@ const ChannelBackgroundCard = ({ type, name, image, onPress, playlist }) => {
             </Text>
             <View style={{ flexDirection: 'row' }}>
                 {
-                    Content.is18YearOld(playlist.age_limit) && <IconWrap name={'eye-off'} size={10} style={{ paddingLeft: 5, paddingRight: 5 }} />
+                    Content.is18YearOld(playlist.age_limit) && <Text style={[human.caption2, { paddingLeft: 5, paddingRight: 5 } ]}>18+</Text>
                 }
                 {
                     playlist.visibility === Content.VISIBILITY.FRIENDS && !hasIsMyFriend && <IconWrap name={'users'} size={10} style={{ paddingLeft: 5, paddingRight: 5 }} />

@@ -15,7 +15,7 @@ import {
 import { Avatar } from '../avatar';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
-import {Content} from '../../constants';
+import { Content } from '../../constants';
 import IconWrap from '../icon/IconWrap';
 
 const { height } = Dimensions.get('window');
@@ -46,23 +46,25 @@ const CommonChannelCardItem = ({ playlist, title, subtitle, image, imageWidth, i
             <View style={{ flex: 1, alignItems: 'center' }}>
                 <Avatar src={image} resizeMode="contain" width={imageWidth} height={imageHeight}/>
             </View>
-            {
-                Content.is18YearOld(playlist.ageLimit) && <IconWrap name={'eye-off'} size={20} style={{ paddingRight: 10 }} />
-            }
-            {
-                visibility === Content.VISIBILITY.FRIENDS && !hasIsMyFriend && <IconWrap name={'users'} size={20} style={{ paddingRight: 10 }} />
-            }
-            {
-                (visibility === Content.VISIBILITY.PREMIUM && !isPremium) && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />
-            }
-            {
-                (visibility === Content.VISIBILITY.USERS && !isAuthorized) && <IconWrap name={'key'} size={20} style={{ paddingRight: 10 }} />
-            }
             <Text numberOfLines={1} style={[ human.footnote, { color: theme.primaryColor, paddingBottom: 5 }]}>{title}</Text>
             <View style={{ flexDirection: 'row' }}>
                 <Text style={[human.caption2, { color: theme.secondaryColor }]}>
                     {subtitle}
                 </Text>
+            </View>
+            <View style={{ paddingTop: 5, flexDirection: 'row' }}>
+                {
+                    Content.is18YearOld(playlist.ageLimit) && <Text style={[human.caption2, { paddingRight: 5 } ]}>18+</Text>
+                }
+                {
+                    visibility === Content.VISIBILITY.FRIENDS && !hasIsMyFriend && <IconWrap name={'users'} size={10} style={{ paddingRight: 10 }} />
+                }
+                {
+                    (visibility === Content.VISIBILITY.PREMIUM && !isPremium) && <IconWrap name={'lock'} size={10} style={{ paddingRight: 10, color: '#FFD700' }} />
+                }
+                {
+                    (visibility === Content.VISIBILITY.USERS && !isAuthorized) && <IconWrap name={'key'} size={10} style={{ paddingRight: 10 }} />
+                }
             </View>
         </TouchableOpacity>
     )

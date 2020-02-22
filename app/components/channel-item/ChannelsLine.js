@@ -15,7 +15,7 @@ const ChannelsLine = ({ title, titlePress, items, onContentPress }) => {
     };
 
     return (
-        <View style={{ paddingTop: 10, paddingBottom: 20 }}>
+        <View style={{ paddingTop: 10, paddingBottom: 0 }}>
             <TouchableOpacity onPress={handleTitlePress}>
                 <Row style={{ alignItems: 'center' }}>
                     <Text style={[ iOSUIKit.title3, { padding: 5, paddingLeft: 15, paddingBottom: 15, fontWeight: '500', color: theme.primaryColor } ]}>

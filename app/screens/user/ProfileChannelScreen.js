@@ -178,7 +178,7 @@ const ProfileChannelScreen = ({ navigation, screenProps, selectContent }) => {
                                                 type={playlist.type}
                                                 subtitle={playlist.category}
                                                 image={{ uri: playlist.image }}
-                                                size={130}
+                                                size={140}
                                                 visibility={playlist.visibility}
                                                 playlist={playlist}
                                                 onPress={handleOnClickContent}
