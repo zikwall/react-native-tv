@@ -80,3 +80,4 @@ export { default as ModalReview } from './rating/ModalReview';
 export { default as WriteReview } from './rating/WriteReview';
 export { default as ModalizeCloseHeader} from './modalize/ModalizeCloseHeader';
 export { default as ReviewMaker } from './rating/ReviewMaker';
+export { default as ReportModal } from './modalize/ReportModal';

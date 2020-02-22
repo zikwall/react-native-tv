@@ -18,7 +18,9 @@ import {
     Verified,
     RatingOverView,
     LoadMoreButton,
-    ReviewMaker
+    ReviewMaker,
+    ModalizeWrapper,
+    ReportModal
 } from '../../components';
 import { AdEventType, InterstitialAd } from "@react-native-firebase/admob";
 
@@ -57,6 +59,20 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
         username: 'loading',
         image: theme.userAvatarPlaceholder
     });
+
+    const reportModal = React.createRef();
+
+    const openReportModal = () => {
+        if (reportModal.current) {
+            reportModal.current.open();
+        }
+    };
+
+    const closeReportModal = () => {
+        if (reportModal.current) {
+            reportModal.current.close();
+        }
+    };
 
     const hasOwnPlayer = DataHelper.hasOwnPlayer(content);
 
@@ -200,6 +216,15 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
         });
     };
 
+    const onPressReport = () => {
+        openReportModal();
+        hideMenu();
+    };
+
+    const onSendReport = (id, reportObject, extraComment) => {
+
+    };
+
     return (
         <ThemedView>
             <View style={{ paddingTop: '56.25%' }}>
@@ -284,7 +309,7 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
                                         </MenuItem>
                                     }
                                     <MenuDivider />
-                                    <MenuItem onPress={ hideMenu }>Report</MenuItem>
+                                    <MenuItem onPress={ onPressReport }>Report</MenuItem>
                                 </Menu>
                             </View>
                         </Row>
@@ -324,6 +349,11 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
                         />
                     </>
             }
+            <ModalizeWrapper
+                referal={reportModal}
+            >
+                <ReportModal onCloseModal={closeReportModal} content={content} onSend={() => {alert('Ok'); closeReportModal();}} />
+            </ModalizeWrapper>
         </ThemedView>
     );
 };
