@@ -3,6 +3,24 @@ import { WebView } from 'react-native-webview';
 import { Alert, Linking } from 'react-native';
 import { StringHelper } from '../../utils';
 
+const UserAgentMap = [
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36",
+    "Mozilla/5.0 (Linux; Android 6.0.1; RedMi Note 5 Build/RB3N5C; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/68.0.3440.91 Mobile Safari/537.36",
+    "Mozilla/5.0 (Linux; Android 7.1.2; AFTMM Build/NS6265; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/70.0.3538.110 Mobile Safari/537.36",
+    "Mozilla/5.0 (Linux; Android 9; SM-G960F Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.157 Mobile Safari/537.36",
+    "Mozilla/5.0 (Linux; Android 6.0.1; SM-G532G Build/MMB29T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.83 Mobile Safari/537.36",
+    "Mozilla/5.0 (Linux; Android 6.0; vivo 1713 Build/MRA58K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36",
+    "Mozilla/5.0 (Linux; Android 7.1; Mi A1 Build/N2G47H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.83 Mobile Safari/537.36",
+    "Mozilla/5.0 (Linux; Android 8.0.0; SM-G930F Build/R16NW; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.157 Mobile Safari/537.36",
+
+];
+
 const PureVideoWebView = ({ source, onNavigationStateChange }) => {
     const [ canGoBack, setCanGoBack ] = useState(false);
     let webView = null;
@@ -59,14 +77,14 @@ const PureVideoWebView = ({ source, onNavigationStateChange }) => {
             style={{ backgroundColor: 'transparent' }}
             // TODO PREMIUM just past channel.url for use native web player
             // without AD and blocking by ORIGIN
-            source={{ uri: source, headers: {"Origin": StringHelper.extractHostname(source)} }}
+            source={{ uri: source }}
             javaScriptEnabled={ true }
             domStorageEnabled={ true }
             thirdPartyCookiesEnabled={ true }
             sharedCookiesEnabled={ true }
             geolocationEnabled={ true }
             cacheEnabled={ true }
-            origin={StringHelper.extractHostname(source)}
+            origin={"tv.zikwall.ru"}
             originWhitelist={['*']}
             allowFileAccess={true}
             allowUniversalAccessFromFileURLs={true}
@@ -76,7 +94,7 @@ const PureVideoWebView = ({ source, onNavigationStateChange }) => {
             }}
             automaticallyAdjustContentInsets={ false }
             mixedContentMode="always"
-            userAgent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36"
+            userAgent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36"
             allowsFullscreenVideo={ true }
             onShouldStartLoadWithRequest={(request) => {
                 return true;
