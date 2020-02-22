@@ -15,7 +15,7 @@ const ParentControlScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const dispatch = useDispatch();
     const changeParentControl = useCallback(controlOptions => dispatch(changeParentControlMode(controlOptions)), [ dispatch ]);
-    const [ securityKey, setSecurityKey] = useState(null);
+    const [ securityKey, setSecurityKey] = useState('');
     const [ enabledControl, setEnabledControl ] = useState(false);
 
     const [ success, setSuccess ] = useState({
@@ -44,14 +44,28 @@ const ParentControlScreen = ({ navigation }) => {
             securityKey: securityKey
         };
 
+        if (!securityKey || securityKey.length === 0) {
+            setError({
+                has: true,
+                error: 'Кажется Вы забыли указать пароль.'
+            });
+
+            return true;
+        }
+
         if (enabledControl) {
             ParentControlService.setParentControlMode(options).then(() => {
                 changeParentControl(options);
 
+                setError({
+                    has: false,
+                    error: ''
+                });
+
                 setSuccess({
                     has: true,
                     text: `Вы успешно ${enabledControl ? 'включили' : 'выключили'} родительский контроль`
-                })
+                });
             });
         }
     };
