@@ -16,6 +16,8 @@ import { Fake } from '../../utils';
 
 const UserMenuScreen = ({ navigation, checkAuth }) => {
     const theme = useSelector(state => getAppTheme(state));
+    const user = useSelector(state => state.authentication.user);
+
     const parentControlMode = useSelector(state => getAppParentControl(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
 
@@ -70,16 +72,16 @@ const UserMenuScreen = ({ navigation, checkAuth }) => {
                 <ThemePicker />
                 <MenuItemLine onPress={onMenuPress} to={'CreativeStudioScreen'} icon={'film'} name={'Творческая студия'} />
                 <MenuItemLine onPress={onMenuPress} to={'FriendshipRequestsScreen'} icon={'user-check'} name={'Заявки в друзья'} onLongPress={() => alert('Looong!')} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'message-square'} name={'Сообщения'} unreadItems={20} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'grid'} name={'Сообщества'} />
+                {/*<MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'message-square'} name={'Сообщения'} unreadItems={20} />*/}
+                {/*<MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'grid'} name={'Сообщества'} />*/}
                 <MenuItemLine onPress={onMenuPress} to={'UsersScreen'} icon={'users'} name={'Пользователи'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'shopping-bag'} name={'Покупки'} />
+                {/*<MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'shopping-bag'} name={'Покупки'} />*/}
                 {/*<Heading icon={'server'} text={'The main'} color={theme.primaryColor} />*/}
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'bell'} name={'Уведомления'} />
+                {/*<MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'bell'} name={'Уведомления'} />*/}
                 <MenuItemLine onPress={onMenuPress} to={'AccountScreen'} icon={'user-check'} name={'Аккаунт'} />
                 <MenuItemLine onPress={onMenuPress} to={'SecurityScreen'} icon={'lock'} name={'Безопасность'} />
                 <MenuItemLine onPress={handleParentControlMenuItem} to={'ParentControlScreen'} icon={'shield'} name={'Родительский контроль'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'eye'} name={'Настройки приватности'} />
+                {/*<MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'eye'} name={'Настройки приватности'} />*/}
                 {/*<Heading icon={'database'} text={'Content'} color={theme.primaryColor} />*/}
                 {/*<Heading icon={'terminal'} text={'Developer Block'} color={theme.primaryColor} />*/}
                 <MenuItemLine onPress={onMenuPress} to={'DebugVideoScreen'} icon={'video'} name={'Проверить контент'} />
@@ -88,7 +90,7 @@ const UserMenuScreen = ({ navigation, checkAuth }) => {
                 <MenuItemLine onPress={onMenuPress} to={'WriteDeveloperScreen'} icon={'edit-3'} name={'Написать разработчику'} />
                 <MenuItemLine onPress={onMenuPress} to={'PremiumScreen'} icon={'gift'} iconColor={'#DC143C'} name={'Активировать премиум'} />
                 <MenuItemLine onPress={onMenuPress} to={'AuthorsScreen'} icon={'code'} name={'Авторы'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={'Andrey, хотите в команду PlayHub?'} />
+                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={`${user.username}, хотите в команду PlayHub?`} />
             </ScrollView>
 
             <ModalizeWrapper
