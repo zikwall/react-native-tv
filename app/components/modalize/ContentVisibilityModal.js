@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { Avatar } from '../index';
 import { human } from 'react-native-typography';
 import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
+import ChannelAvatar from '../avatar/ChannelAvatar';
 
 const ContentVisibilityModal = ({ onCloseModal, image, title, content, visibility, button, owner_id }) => {
     const theme = useSelector(state => getAppTheme(state));
@@ -12,7 +12,7 @@ const ContentVisibilityModal = ({ onCloseModal, image, title, content, visibilit
         <View style={s.content}>
             <Text style={s.content__subheading}>{'ОПАЧКИ'.toUpperCase()}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Avatar src={image} resizeMode="contain"/>
+                <ChannelAvatar src={image} resizeMode="contain"/>
                 <Text style={[human.headline, { paddingLeft: 10, color: theme.primaryColor }]}>Контент: {title}</Text>
             </View>
             <Text style={[human.callout, { paddingBottom: 10, paddingTop: 10, color: theme.primaryColor }]}>
