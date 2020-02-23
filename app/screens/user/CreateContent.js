@@ -11,7 +11,7 @@ import {
 import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 import { View } from 'react-native';
-import { Content } from '../../constants';
+import {Content, Players} from '../../constants';
 import { Validator } from '../../utils';
 import { ContentService } from '../../services';
 
@@ -34,6 +34,11 @@ const CreateContentScreen = ({ navigation }) => {
     const [ useOwnPlayer, setUseOwnPlayer ] = useState(false);
     const [ ownPlayerUrl, setOwnPlayerUrl ] = useState('');
     const [ isAge18, setIsAge18 ] = useState(false);
+    const [ useOrigin, setUseOrigin ] = useState(true);
+    const [ visibility, setVisibility ] = useState([Content.VISIBILITY.PUBLIC]);
+    const [ defaultPlayer, setDefaultPlayer ] = useState([Players.NATIVE_PLAYER]);
+
+    const { __onCreateContent } = navigation.state.params;
 
     const [ success, setSuccess ] = useState({
         has: false,
@@ -172,12 +177,20 @@ const CreateContentScreen = ({ navigation }) => {
             is_active: isActive,
             use_own_player: useOwnPlayer,
             own_player_url: ownPlayerUrl,
-            is_18_years_old: isAge18
+            is_18_years_old: isAge18,
+            use_origin: !!useOrigin ? 1 : 0,
+            visibility: visibility[0],
+            default_player: defaultPlayer[0]
         };
 
         ContentService.createContent(fields, token).then((response) => {
             if (response.code === 200) {
                 markAsSuccess(response.response);
+
+                if (typeof __onCreateContent === 'function') {
+                    // todo
+                    __onCreateContent({});
+                }
 
                 return true;
             }
@@ -267,6 +280,28 @@ const CreateContentScreen = ({ navigation }) => {
                     tags={Object.values(Content.CATEGORIES)}
                 />
 
+                <TagPicker
+                    headingColor={error.attributes.includes('visibility') ? 'red' : theme.primaryColor}
+                    selectedItems={visibility}
+                    onSelect={(items) => {
+                        setVisibility(items);
+                    }}
+                    label={'Видимость'}
+                    multiple={false}
+                    tags={Object.values(Content.VISIBILITY_MAP)}
+                />
+
+                <TagPicker
+                    headingColor={error.attributes.includes('default_player') ? 'red' : theme.primaryColor}
+                    selectedItems={defaultPlayer}
+                    onSelect={(items) => {
+                        setDefaultPlayer(items);
+                    }}
+                    label={'Плеер по умолчанию'}
+                    multiple={false}
+                    tags={Object.values(Players.PLAYERS_MAP)}
+                />
+
                 <Heading styles={{ paddingLeft: 0, justifyContent: 'center' }} color={theme.primaryColor} text={'Ой сколько галочек, без паники!'} />
 
                 <Heading
@@ -317,6 +352,20 @@ const CreateContentScreen = ({ navigation }) => {
                         disabled={false}
                         onValueChange={(status) => setIsActive(status)}
                         value={isActive}
+                    />
+                </View>
+
+                <Heading
+                    styles={{ paddingLeft: 0, paddingBottom: 5 }}
+                    color={theme.primaryColor}
+                    text={'Возможность использовать нативный плеер'}
+                    description={'Дает пользователям возможность смотреть контент в нативном плеере.'}
+                />
+                <View style={{ alignItems: 'flex-start' }}>
+                    <CellViewSwitch
+                        disabled={false}
+                        onValueChange={(status) => setUseOrigin(status)}
+                        value={useOrigin}
                     />
                 </View>
 

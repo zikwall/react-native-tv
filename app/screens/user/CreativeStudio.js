@@ -24,7 +24,13 @@ const CreativeStudioScreen = ({ navigation }) => {
 
     const onPressContentHandle = ({ id }) => {
         navigation.navigate('EditContentScreen', {
-            contentId: id
+            contentId: id,
+            __onDeleteContent: (id) => {
+                setOwnContent(ownContent.filter((content) => content.id !== id))
+            },
+            __onEditContent: (newAttributes) => {
+                // todo
+            }
         });
     };
 
@@ -38,7 +44,11 @@ const CreativeStudioScreen = ({ navigation }) => {
                                 text={'Добавить новый контент'}
                                 icon={'upload-cloud'} color={theme.primaryColor}
                                 onPress={() => {
-                                    navigation.navigate('CreateContentScreen');
+                                    navigation.navigate('CreateContentScreen', {
+                                        __onCreateContent: (newContent) => {
+                                            // todo
+                                        },
+                                    });
                                 }}
                             />
                             <Heading text={'Ваши видео'} color={theme.primaryColor} />

@@ -21,6 +21,39 @@ export const fetchBestContent = () => {
         })
 };
 
+export const deleteContent = (token, content_id) => {
+    return apiFetch(`/vktv/content/delete`, {
+        method: 'POST',
+        body: JSON.stringify({content_id: content_id})
+    }, {"Authorization": UserHelper.makeAuthorizationHeader(token)})
+        .then(res => {
+            return {
+                code: res.code,
+                message: res.message,
+            };
+        })
+        .catch(error => {
+            new Error(error);
+        })
+};
+
+export const editContent = (id, fields, token) => {
+    return apiFetch(`/vktv/content/edit?id=${id}`, {
+        method: 'POST',
+        body: JSON.stringify(fields)
+    }, {"Authorization": UserHelper.makeAuthorizationHeader(token)})
+        .then(res => {
+            return {
+                code: res.code,
+                response: res.response || res.message,
+                attributes: res.attributes || []
+            };
+        })
+        .catch(error => {
+            new Error(error);
+        })
+};
+
 export const editContentInfo = (id, token) => {
     return apiFetch(`/vktv/content/edit?id=${id}`, {
         method: 'GET',

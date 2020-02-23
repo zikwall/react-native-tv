@@ -32,7 +32,8 @@ import {
 import {
     NavigationHeaderComponent,
     NavigationHeaderLeft,
-    NavigationHeaderTitle
+    NavigationHeaderTitle,
+    ContentDeleteButton
 } from "../../components";
 import TabBarComponent from "../../components/navigation-header/CustomTab";
 
@@ -174,11 +175,14 @@ const MenuNavigator = createStackNavigator({
     },
     EditContentScreen: {
         screen: EditContentScreen,
-        navigationOptions:{
-            header: (props) => <NavigationHeaderComponent
-                titleComponent={<NavigationHeaderTitle title={'Edit content'} />}
-                leftComponent={ <NavigationHeaderLeft /> } {...props}
-            />
+        navigationOptions: ({ navigation }) => {
+            return {
+                header: (props) => <NavigationHeaderComponent
+                    titleComponent={<NavigationHeaderTitle title={'Edit content'} />}
+                    leftComponent={ <NavigationHeaderLeft /> } {...props}
+                    rightComponent={<ContentDeleteButton />}
+                />
+            }
         }
     },
     LocalDatabaseScreen: {

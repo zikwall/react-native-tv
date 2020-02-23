@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import BigTag from '../ui/BigTag';
 import Heading from '../heading';
@@ -9,6 +9,10 @@ import Tag from './Tag';
 const TagPicker = ({ small, label, labelIcon, tags, onSelect, multiple, selectedItems, headingColor }) => {
     const theme = useSelector(state => getAppTheme(state));
     const [ selectItems, setSelectItems ] = useState(selectedItems);
+
+    useEffect(() => {
+        setSelectItems(selectedItems);
+    }, [ selectedItems ]);
 
     const handleOnSelect = (id, isSelected) => {
         let selected = [];

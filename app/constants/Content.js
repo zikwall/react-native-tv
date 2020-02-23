@@ -7,6 +7,39 @@ export const VISIBILITY = {
     FRIENDS: 60,
 };
 
+export const VISIBILITY_MAP = {
+    10: {
+        id: 10,
+        title: 'Общедоступное',
+        description: 'Контент будет доступен всем пользователям, без исключения.',
+        disabled: false,
+    },
+    20: {
+        id: 20,
+        title: 'Приватное',
+        description: 'Контент будет доступен только Вам. Видимость сохраняется.',
+        disabled: false,
+    },
+    40: {
+        id: 40,
+        title: 'Премиум',
+        description: 'Контент будет доступен только премиум пользователям. Видимость сохраняется.',
+        disabled: false,
+    },
+    50: {
+        id: 50,
+        title: 'Авторизированным',
+        description: 'Контент будет доступен всем авторизированным пользователям. Видимость сохраняется.',
+        disabled: false,
+    },
+    60: {
+        id: 60,
+        title: 'Друзьям',
+        description: 'Контент будет доступен только Вашим друзьям. Видимость сохраняется.',
+        disabled: false,
+    },
+};
+
 export const TYPE = {
     CHANNEL: 10,
     FILM: 20

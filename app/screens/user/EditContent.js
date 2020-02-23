@@ -6,12 +6,12 @@ import {
     ThemedView,
     Heading,
     CellViewSwitch,
-    TagPicker, OverlayLoader,
+    TagPicker, OverlayLoader, FlatButton,
 } from '../../components';
 import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 import { View } from 'react-native';
-import { Content } from '../../constants';
+import {Content, Players} from '../../constants';
 import { Validator } from '../../utils';
 import { ContentService } from '../../services';
 
@@ -19,6 +19,8 @@ const EditContentScreen = ({ navigation, route }) => {
     const theme = useSelector(state => getAppTheme(state));
     const user = useSelector(state => state.authentication.user);
     const token = useSelector(state => state.authentication.token);
+
+    const { contentId, __onDeleteContent, __onEditContent } = navigation.state.params;
 
     const [ inMain, setInMain ] = useState(false);
     const [ name, setName ] = useState('');
@@ -34,14 +36,28 @@ const EditContentScreen = ({ navigation, route }) => {
     const [ useOwnPlayer, setUseOwnPlayer ] = useState(false);
     const [ ownPlayerUrl, setOwnPlayerUrl ] = useState('');
     const [ isAge18, setIsAge18 ] = useState(false);
+    const [ useOrigin, setUseOrigin ] = useState(true);
+    const [ visibility, setVisibility ] = useState([Content.VISIBILITY.PUBLIC]);
+    const [ defaultPlayer, setDefaultPlayer ] = useState([Players.NATIVE_PLAYER]);
 
     const [ completeConfiguring, setCompleteConfiguring ] = useState(false);
-    const { contentId } = navigation.state.params;
+
+    const onFail = (id, code, message) => {
+        markAsError(message, []);
+    };
+
+    const onDelete = (id, code, message) => {
+        markAsSuccess(message);
+
+        if (typeof __onDeleteContent === 'function') {
+            __onDeleteContent(id);
+        }
+    };
 
     useEffect(() => {
-        ContentService.editContentInfo(contentId, token).then((response) => {
-            setCompleteConfiguring(true);
+        navigation.setParams({ onFail: onFail, onDelete: onDelete });
 
+        ContentService.editContentInfo(contentId, token).then((response) => {
             /**
              * "active": 1,
              * "age_limit": 0,
@@ -66,15 +82,24 @@ const EditContentScreen = ({ navigation, route }) => {
              * "visibility": 10}
              */
             const content = response.response;
+
             setName(content.name);
             setUrl(content.url);
             setImageUrl(content.image);
-            //setAdUrl(content.ad_url);
+            setAdUrl(content.ad_url);
             setDesc(content.desc);
             setType([content.type]);
             setCategory([content.category]);
-            setPinned(content.pinned);
+            setPinned(parseInt(content.pinned) === 1);
 
+            setIsArchive(content.archived);
+            setIsActive(parseInt(content.active) === 1);
+            setInMain(parseInt(content.in_main) === 1);
+            setVisibility([content.visibility]);
+            setUseOrigin(parseInt(content.use_origin) === 1);
+            setDefaultPlayer([content.default_player]);
+
+            setCompleteConfiguring(true);
         }).catch((err) => {
             setCompleteConfiguring(true);
         });
@@ -217,12 +242,20 @@ const EditContentScreen = ({ navigation, route }) => {
             is_active: isActive,
             use_own_player: useOwnPlayer,
             own_player_url: ownPlayerUrl,
-            is_18_years_old: isAge18
+            is_18_years_old: isAge18,
+            use_origin: !!useOrigin ? 1 : 0,
+            visibility: visibility[0],
+            default_player: defaultPlayer[0]
         };
 
-        ContentService.createContent(fields, token).then((response) => {
+        ContentService.editContent(contentId, fields, token).then((response) => {
             if (response.code === 200) {
                 markAsSuccess(response.response);
+
+                if (typeof __onEditContent === 'function') {
+                    // todo
+                    __onEditContent({});
+                }
 
                 return true;
             }
@@ -234,11 +267,10 @@ const EditContentScreen = ({ navigation, route }) => {
     return (
         <ThemedView>
             <OverlayLoader visible={!completeConfiguring} />
-
             <Form
                 onSubmit={handleFormSubmit}
-                header={'Создание нового контента'}
-                buttonTitle={'Давай, давай. создавай быстрее!'}
+                header={'Редактирование контента'}
+                buttonTitle={'Обновить!'}
                 headerColor={theme.primaryColor}
                 hasError={error.has}
                 hasSuccess={success.has}
@@ -314,6 +346,28 @@ const EditContentScreen = ({ navigation, route }) => {
                     tags={Object.values(Content.CATEGORIES)}
                 />
 
+                <TagPicker
+                    headingColor={error.attributes.includes('visibility') ? 'red' : theme.primaryColor}
+                    selectedItems={visibility}
+                    onSelect={(items) => {
+                        setVisibility(items);
+                    }}
+                    label={'Видимость'}
+                    multiple={false}
+                    tags={Object.values(Content.VISIBILITY_MAP)}
+                />
+
+                <TagPicker
+                    headingColor={error.attributes.includes('default_player') ? 'red' : theme.primaryColor}
+                    selectedItems={defaultPlayer}
+                    onSelect={(items) => {
+                        setDefaultPlayer(items);
+                    }}
+                    label={'Плеер по умолчанию'}
+                    multiple={false}
+                    tags={Object.values(Players.PLAYERS_MAP)}
+                />
+
                 <Heading styles={{ paddingLeft: 0, justifyContent: 'center' }} color={theme.primaryColor} text={'Ой сколько галочек, без паники!'} />
 
                 <Heading
@@ -369,6 +423,20 @@ const EditContentScreen = ({ navigation, route }) => {
 
                 <Heading
                     styles={{ paddingLeft: 0, paddingBottom: 5 }}
+                    color={theme.primaryColor}
+                    text={'Возможность использовать нативный плеер'}
+                    description={'Дает пользователям возможность смотреть контент в нативном плеере.'}
+                />
+                <View style={{ alignItems: 'flex-start' }}>
+                    <CellViewSwitch
+                        disabled={false}
+                        onValueChange={(status) => setUseOrigin(status)}
+                        value={useOrigin}
+                    />
+                </View>
+
+                <Heading
+                    styles={{ paddingLeft: 0, paddingBottom: 5 }}
                     color={error.attributes.includes('own_player_url') ? 'red' : theme.primaryColor} text={'Использовать свой плеер?'}
                     description={'Что это и с чем его есть? Понимаю. Крч есть возможность добавить полностью свой плеер и включть его, тогда всегда будет отображаться Ваш плеер не зависимо от выбора пользователя.'}
                 />
@@ -404,12 +472,6 @@ const EditContentScreen = ({ navigation, route }) => {
                         value={isAge18}
                     />
                 </View>
-
-                <Heading
-                    styles={{ paddingLeft: 0, paddingBottom: 5 }}
-                    color={theme.primaryColor} text={'Минутка принятия решений'}
-                    description={'Нажимая на кнопку создания контента "Давай, давай. создавай быстрее!" Вы соглашаетесь с правилами публикациями контента и сервиса. Данную информацию можно легко найти в меню.'}
-                />
             </Form>
         </ThemedView>
     );
