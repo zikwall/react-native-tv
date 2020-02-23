@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import { Content } from '../../constants';
 import IconWrap from '../icon/IconWrap';
+import { SafeValidator } from '../../utils';
 
 const { height } = Dimensions.get('window');
 
@@ -35,6 +36,7 @@ const CommonChannelCardItem = ({ playlist, title, subtitle, image, imageWidth, i
 
     const user = useSelector(state => state.authentication.user);
 
+    const safeImage = SafeValidator.isTrustSrc(image) ? image : theme.channelPlaceholder;
     let hasIsMyFriend = false;
 
     if (visibility === Content.VISIBILITY.FRIENDS) {
@@ -44,7 +46,7 @@ const CommonChannelCardItem = ({ playlist, title, subtitle, image, imageWidth, i
     return (
         <TouchableOpacity onPress={() => onPress(playlist, hasIsMyFriend)} style={[styles.channelCard, { height: size, width: size, borderColor: theme.primaryColor }]}>
             <View style={{ flex: 1, alignItems: 'center' }}>
-                <Avatar src={image} resizeMode="contain" width={imageWidth} height={imageHeight}/>
+                <Avatar src={safeImage} resizeMode="contain" width={imageWidth} height={imageHeight}/>
             </View>
             <Text numberOfLines={1} style={[ human.footnote, { color: theme.primaryColor, paddingBottom: 5 }]}>{title}</Text>
             <View style={{ flexDirection: 'row' }}>
