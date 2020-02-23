@@ -26,7 +26,8 @@ import {
     FriendsIncomingScreen,
     FriendsOutcomingScreen,
     UsersScreen,
-    AuthorsScreen
+    AuthorsScreen,
+    ReportsScreen
 } from "../../screens";
 import {
     NavigationHeaderComponent,
@@ -197,6 +198,15 @@ const MenuNavigator = createStackNavigator({
         navigationOptions:{
             header: (props) => <NavigationHeaderComponent
                 titleComponent={<NavigationHeaderTitle title={'IPTV'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
+    },
+    ReportsScreen: {
+        screen: ReportsScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Reports'} />}
                 leftComponent={ <NavigationHeaderLeft /> } {...props}
             />
         }

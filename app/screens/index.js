@@ -43,6 +43,7 @@ import FriendsIncomingScreen from "./user/FriendsIncomingScreen";
 import FriendsOutcomingScreen from "./user/FriendsOutcomingScreen";
 import UsersScreen from "./user/UsersScreen";
 import AuthorsScreen from './menu/AuthorsScreen';
+import ReportsScreen from './user/ReportsScreen';
 
 export {
     /**
@@ -99,6 +100,7 @@ export {
     LocalDatabaseScreen,
     UsersScreen,
     AuthorsScreen,
+    ReportsScreen,
 
     /**
      *  PlayHub service namespace

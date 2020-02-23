@@ -84,6 +84,7 @@ const UserMenuScreen = ({ navigation, checkAuth }) => {
                 {/*<MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'eye'} name={'Настройки приватности'} />*/}
                 {/*<Heading icon={'database'} text={'Content'} color={theme.primaryColor} />*/}
                 {/*<Heading icon={'terminal'} text={'Developer Block'} color={theme.primaryColor} />*/}
+                <MenuItemLine onPress={onMenuPress} to={'ReportsScreen'} icon={'frown'} name={'Ваши жалобы'} />
                 <MenuItemLine onPress={onMenuPress} to={'DebugVideoScreen'} icon={'video'} name={'Проверить контент'} />
                 <MenuItemLine onPress={onMenuPress} to={'LocalDatabaseScreen'} icon={'database'} name={'Локальная база данных'} />
                 <MenuItemLine onPress={onMenuPress} to={'IPTVScreen'} icon={'tv'} name={'IPTV'} />
