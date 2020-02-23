@@ -81,7 +81,7 @@ const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, numb
                     </View>
                 </View>
                 {
-                    Content.is18YearOld(ageLimit) && <Text style={[human.footnote, { paddingRight: 5 } ]}>18+</Text>
+                    Content.is18YearOld(ageLimit) && <Text style={[human.footnote, { paddingRight: 5, color: theme.primaryColor } ]}>18+</Text>
                 }
                 {
                     visibility === Content.VISIBILITY.FRIENDS && !hasIsMyFriend && <IconWrap name={'users'} size={20} style={{ paddingRight: 10 }} />

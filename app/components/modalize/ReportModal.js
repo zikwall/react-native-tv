@@ -93,7 +93,7 @@ const ReportModal = ({ onCloseModal, onSend, content }) => {
                     <SuccessText hasMessage={success.has} message={success.message} />
                 </View>
             }
-            <Text>
+            <Text style={{ color: theme.primaryColor }}>
                 { text1 + text2 + text3 }
             </Text>
 

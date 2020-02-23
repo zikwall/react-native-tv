@@ -54,7 +54,7 @@ const CommonChannelCardItem = ({ playlist, title, subtitle, image, imageWidth, i
             </View>
             <View style={{ paddingTop: 5, flexDirection: 'row' }}>
                 {
-                    Content.is18YearOld(playlist.ageLimit) && <Text style={[human.caption2, { paddingRight: 5 } ]}>18+</Text>
+                    Content.is18YearOld(playlist.ageLimit) && <Text style={[human.caption2, { paddingRight: 5, color: theme.primaryColor } ]}>18+</Text>
                 }
                 {
                     visibility === Content.VISIBILITY.FRIENDS && !hasIsMyFriend && <IconWrap name={'users'} size={10} style={{ paddingRight: 10 }} />
