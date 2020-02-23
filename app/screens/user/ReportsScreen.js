@@ -16,9 +16,11 @@ const ReportsScreen = () => {
     const [ ownReports, setOwnReports ] = useState([]);
 
     useEffect(() => {
-        ReportContent.own(token).then(({ response }) => {
-            setOwnReports(response);
-        });
+        if (!!token) {
+            ReportContent.own(token).then(({ response }) => {
+                setOwnReports(response);
+            });
+        }
 
     }, []);
 
