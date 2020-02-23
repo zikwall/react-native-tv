@@ -49,7 +49,7 @@ const ChannelBackgroundCard = ({ type, name, image, onPress, playlist }) => {
                     Content.is18YearOld(playlist.age_limit) && <Text style={[human.caption2, { paddingLeft: 5, paddingRight: 5, color: theme.primaryColor } ]}>18+</Text>
                 }
                 {
-                    playlist.visibility === Content.VISIBILITY.FRIENDS && !hasIsMyFriend && <IconWrap name={'users'} size={10} style={{ paddingLeft: 5, paddingRight: 5 }} />
+                    playlist.visibility === Content.VISIBILITY.FRIENDS && playlist.user_id !== user.id && !hasIsMyFriend && <IconWrap name={'users'} size={10} style={{ paddingLeft: 5, paddingRight: 5 }} />
                 }
                 {
                     (playlist.visibility === Content.VISIBILITY.PREMIUM && !isPremium) && <IconWrap name={'lock'} size={10} style={{ paddingLeft: 5, paddingRight: 5, color: '#FFD700' }} />

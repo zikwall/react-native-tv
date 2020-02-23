@@ -84,7 +84,7 @@ const CommonChannelListItem = ({ playlist, image, title, subtitle, onPress, numb
                     Content.is18YearOld(ageLimit) && <Text style={[human.footnote, { paddingRight: 5, color: theme.primaryColor } ]}>18+</Text>
                 }
                 {
-                    visibility === Content.VISIBILITY.FRIENDS && !hasIsMyFriend && <IconWrap name={'users'} size={20} style={{ paddingRight: 10 }} />
+                    visibility === Content.VISIBILITY.FRIENDS && playlist.user_id !== user.id && !hasIsMyFriend && <IconWrap name={'users'} size={20} style={{ paddingRight: 10 }} />
                 }
                 {
                     visibility === Content.VISIBILITY.PREMIUM && !isPremium && <IconWrap name={'lock'} size={20} style={{ paddingRight: 10, color: '#FFD700' }} />

@@ -35,6 +35,7 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
     const currentPage = useSelector(state => getCurrentPage(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
+    const userId = useSelector(state => state.authentication.user.id);
     const parentControlMode = useSelector(state => getAppParentControl(state));
 
     const [ isVisibleFloatButton, setIsVisibleFloatButton ] = useState(false);
@@ -170,7 +171,7 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
             return true;
         }
 
-        if (playlist.visibility === Content.VISIBILITY.FRIENDS && !isMyFriend) {
+        if (playlist.visibility === Content.VISIBILITY.FRIENDS && playlist.user_id !== userId && !isMyFriend) {
             content = 'Данный контент доступен только друзьям автора.';
             button = 'Перейти на страницу автора.';
         }

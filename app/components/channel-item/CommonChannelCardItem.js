@@ -57,7 +57,7 @@ const CommonChannelCardItem = ({ playlist, title, subtitle, image, imageWidth, i
                     Content.is18YearOld(playlist.ageLimit) && <Text style={[human.caption2, { paddingRight: 5, color: theme.primaryColor } ]}>18+</Text>
                 }
                 {
-                    visibility === Content.VISIBILITY.FRIENDS && !hasIsMyFriend && <IconWrap name={'users'} size={10} style={{ paddingRight: 10 }} />
+                    visibility === Content.VISIBILITY.FRIENDS && playlist.user_id !== user.id && !hasIsMyFriend && <IconWrap name={'users'} size={10} style={{ paddingRight: 10 }} />
                 }
                 {
                     (visibility === Content.VISIBILITY.PREMIUM && !isPremium) && <IconWrap name={'lock'} size={10} style={{ paddingRight: 10, color: '#FFD700' }} />
