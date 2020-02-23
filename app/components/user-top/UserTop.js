@@ -79,7 +79,7 @@ const UserTop = ({ id, owner, displayName, username, avatar, onAvatarPress, isOf
     };
 
     return (
-        <View style={{ flexDirection: 'row', paddingBottom: 5, marginHorizontal: 10, backgroundColor: theme.primaryBackgroundColor }}>
+        <View style={{ flexDirection: 'row', paddingBottom: 5, paddingHorizontal: 10, backgroundColor: theme.primaryBackgroundColor }}>
             <TouchableOpacity onPress={() => onAvatarPress(avatar)}>
                 <Avatar
                     src={avatar}
