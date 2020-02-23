@@ -19,14 +19,14 @@ const resolveSelectedPlayer = (player, channel) => {
     }
 
     if (!!channel.default_player && !player) {
-        `http://tv.zikwall.ru/vktv/embed/give?player=${channel.default_player}&epg=${channel.epg_id}`;
+        `http://tv.zikwall.ru/vktv/embed/give?player=${channel.default_player}&epg=${channel.id}`;
     }
 
     if (player === Players.ORIGIN_PLAYER) {
         return channel.url;
     }
 
-    return `http://tv.zikwall.ru/vktv/embed/give?player=${player}&epg=${channel.epg_id}`;
+    return `http://tv.zikwall.ru/vktv/embed/give?player=${player}&epg=${channel.id}`;
 };
 
 const VideoView = ({ channel, pending, player, selectPlayer }) => {
@@ -44,13 +44,7 @@ const VideoView = ({ channel, pending, player, selectPlayer }) => {
 
     const source = resolveSelectedPlayer(player, channel);
 
-    if (!!channel.ad_exist || !channel.use_origin) {
-        return (
-            <PureVideoWebView source={source} />
-        );
-    }
-
-    if (SafeValidator.isNativePlayer(player)) {
+    if (channel.use_origin == 1 && SafeValidator.isNativePlayer(player)) {
         return <NativeVideoView source={channel.url} />
     }
 

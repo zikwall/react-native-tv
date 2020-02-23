@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {View, Dimensions} from 'react-native';
+import { View } from 'react-native';
 import Orientation from 'react-native-orientation';
-import Menu, { MenuDivider, MenuItem } from "react-native-material-menu";
+import Menu, { MenuItem } from "react-native-material-menu";
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
-import ContentLoader, { Bullets } from '@sarmad1995/react-native-content-loader';
+import ContentLoader from '@sarmad1995/react-native-content-loader';
 
 import {
     VideoView,
@@ -23,12 +23,10 @@ import { setPlayer } from '../../redux/actions';
 import { getAppTheme, getSelectChannel } from '../../redux/reducers';
 import { Players } from '../../constants';
 import { EPG } from '../../services';
-import { SafeValidator } from '../../utils';
+import { DataHelper, SafeValidator } from '../../utils';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { InterstitialAd, TestIds, AdEventType } from '@react-native-firebase/admob';
-
-const {height, width} = Dimensions.get('window');
 
 const defaultEpg = [
     {title: 'Позапозавчера', data: <TVProgramNotItem />},
@@ -66,6 +64,8 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     const [ modalContent, setModalContent ] = useState(null);
     const [ epgContent, setEpgContent ] = useState(null);
     const [ activeTab, setActiveTab ] = useState(3);
+    const hasOwnPlayer = DataHelper.hasOwnPlayer(channel);
+
     let _menu = null;
 
     useEffect(() => {
@@ -264,16 +264,20 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
                             Use Player 2
                         </MenuItem>
 
-                        <MenuItem onPress={() => {
-                            handleSelectPlayer(Players.ORIGIN_PLAYER);
-                        }}>
-                            Use Origin Player
-                        </MenuItem>
-                        <MenuItem onPress={() => {
-                            handleSelectPlayer(Players.NATIVE_PLAYER);
-                        }}>
-                            Use Native Player
-                        </MenuItem>
+                        {
+                            channel.use_origin == 1 && <MenuItem disabled={hasOwnPlayer} onPress={() => {
+                                handleSelectPlayer(Players.ORIGIN_PLAYER);
+                            }}>
+                                Use Origin Player
+                            </MenuItem>
+                        }
+                        {
+                            channel.use_origin == 1 && <MenuItem disabled={hasOwnPlayer} onPress={() => {
+                                handleSelectPlayer(Players.NATIVE_PLAYER);
+                            }}>
+                                Use Native Player
+                            </MenuItem>
+                        }
                     </Menu>
                 }
             />

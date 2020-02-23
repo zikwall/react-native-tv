@@ -76,9 +76,8 @@ const HomeScreen = ({ navigation }) => {
                     renderItem={({ item, index }) => (
                         <ChannelCard
                             name={ item.name }
-                            epg_id={ item.epg_id }
+                            id={ item.id }
                             image={ item.image }
-                            id={ index }
                             onSelectHandle={ handleOnChannelPress }
                         />
                     )}
