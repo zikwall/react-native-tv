@@ -43,9 +43,9 @@ const FilterBar = ({ onSearch, onPressFilter, onAccept, visibleSearchCancel }) =
 
     const handleCloseEvent = (reset = true) => {
         if (reset) {
-            setIsSelectedChannels(false);
-            setIsSelectedMovies(false);
-            setIsSelectedAdults(false);
+            setIsSelectedChannels(true);
+            setIsSelectedMovies(true);
+            setIsSelectedAdults(true);
         }
 
         Animated.parallel([
