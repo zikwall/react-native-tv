@@ -1,6 +1,17 @@
 import { apiFetch } from '../api';
 import { UserHelper } from "../../utils";
 
+export const getSocialLinks = () => {
+    return apiFetch('/vktv/common/socials').then((response) => {
+        return {
+            code: response.code,
+            socials: response.socials
+        }
+    }).catch(error => {
+        new Error(error);
+    });
+};
+
 export const makePremium = (token, attributes) => {
     return apiFetch(`/vktv/premium/activate`, {
             method: 'POST',

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, ScrollView, Linking } from 'react-native';
 import { useSelector } from 'react-redux';
 import {
     MenuItemLine,
@@ -13,6 +13,7 @@ import {
 } from '../../components';
 import { getAppTheme, getAppParentControl } from '../../redux/reducers';
 import { Fake } from '../../utils';
+import { User } from '../../services';
 
 const UserMenuScreen = ({ navigation, checkAuth }) => {
     const theme = useSelector(state => getAppTheme(state));
@@ -21,11 +22,23 @@ const UserMenuScreen = ({ navigation, checkAuth }) => {
     const parentControlMode = useSelector(state => getAppParentControl(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
 
+    const [ telegram, setTelegram ] = useState({
+        label: '',
+        link: ''
+    });
+
     useEffect(() => {
         if (!isAuthorized) {
             navigation.goBack();
         }
     }, [ isAuthorized ]);
+
+    useEffect(() => {
+        User.getSocialLinks().then(({ socials }) => {
+            // todo maybe dinamical set social links in future
+            setTelegram(socials.telegram);
+        });
+    }, []);
 
     const modal = React.createRef();
 
@@ -90,6 +103,9 @@ const UserMenuScreen = ({ navigation, checkAuth }) => {
                 <MenuItemLine onPress={onMenuPress} to={'IPTVScreen'} icon={'tv'} name={'IPTV'} />
                 <MenuItemLine onPress={onMenuPress} to={'WriteDeveloperScreen'} icon={'edit-3'} name={'Написать разработчику'} />
                 <MenuItemLine onPress={onMenuPress} to={'PremiumScreen'} icon={'gift'} iconColor={'#DC143C'} name={'Активировать премиум'} />
+                {
+                    !!telegram.link && <MenuItemLine onPress={() => { Linking.openURL(telegram.link) }} to={'AboutScreen'} icon={'send'} name={telegram.label} />
+                }
                 <MenuItemLine onPress={onMenuPress} to={'AuthorsScreen'} icon={'code'} name={'Авторы'} />
                 <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={`${user.username}, хотите в команду PlayHub?`} />
             </ScrollView>
