@@ -107,7 +107,7 @@ const UserMenuScreen = ({ navigation, checkAuth }) => {
                     !!telegram.link && <MenuItemLine onPress={() => { Linking.openURL(telegram.link) }} to={'AboutScreen'} icon={'send'} name={telegram.label} />
                 }
                 <MenuItemLine onPress={onMenuPress} to={'AuthorsScreen'} icon={'code'} name={'Авторы'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'heart'} iconColor={'#DC143C'} name={`${user.username}, хотите в команду PlayHub?`} />
+                <MenuItemLine onPress={onMenuPress} to={'WantTeamScreen'} icon={'heart'} iconColor={'#DC143C'} name={`${user.username}, хотите в команду PlayHub?`} />
             </ScrollView>
 
             <ModalizeWrapper

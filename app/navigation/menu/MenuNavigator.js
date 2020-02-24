@@ -27,7 +27,8 @@ import {
     FriendsOutcomingScreen,
     UsersScreen,
     AuthorsScreen,
-    ReportsScreen
+    ReportsScreen,
+    WantTeamScreen
 } from "../../screens";
 import {
     NavigationHeaderComponent,
@@ -151,6 +152,15 @@ const MenuNavigator = createStackNavigator({
         navigationOptions:{
             header: (props) => <NavigationHeaderComponent
                 titleComponent={<NavigationHeaderTitle title={'Write to Developer'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
+    },
+    WantTeamScreen: {
+        screen: WantTeamScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'I Want A Team'} />}
                 leftComponent={ <NavigationHeaderLeft /> } {...props}
             />
         }
