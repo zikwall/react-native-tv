@@ -22,7 +22,7 @@ const RequestActions = ({ id, onAccept, onCancel }) => {
     )
 };
 
-const FriendsIncomingScreen = () => {
+const FriendsIncomingScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const token = useSelector(state => state.authentication.token);
 
@@ -74,6 +74,11 @@ const FriendsIncomingScreen = () => {
                                 onCancel={(id) => onCancelRequest(id)}
                             />
                         }
+                        onPress={() => {
+                            navigation.navigate('Profile', {
+                                id: user.id
+                            })
+                        }}
                     />
                 })}
             </ScrollView>

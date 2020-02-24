@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import { human } from 'react-native-typography';
 import UserLineItem from '../user-item/UserLineItem';
 import Row from '../ui/Row';
@@ -8,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import Ratings from './Ratings';
 
-const Review = ({ user, review, date, stars, usefulCount, isOwnUseful }) => {
+const Review = ({ user, review, date, stars, usefulCount, isOwnUseful, navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const [ usefulStatus, setUsefulStatus ] = useState(isOwnUseful);
     const [ usefulCountStatus, setUsefulCountStatus ] = useState(usefulCount);
@@ -31,7 +32,16 @@ const Review = ({ user, review, date, stars, usefulCount, isOwnUseful }) => {
 
     return (
         <View style={{ flexDirection: 'column' }}>
-            <UserLineItem name={user.name} username={user.username} image={{ uri: user.avatar }} />
+            <UserLineItem
+                name={user.name}
+                username={user.username}
+                image={{ uri: user.avatar }}
+                onPress={() => {
+                    navigation.navigate('Profile', {
+                        id: user.id
+                    })
+                }}
+            />
             <Text style={[ human.caption1, textStyle, { paddingTop: 5, color: theme.primaryColor } ]}>
                 { review }
             </Text>
@@ -65,4 +75,4 @@ Review.defaultProps = {
     usefulCount: 0
 };
 
-export default Review;
+export default withNavigation(Review);

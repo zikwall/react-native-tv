@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 import { User } from "../../services";
 
-const FriendsIncomingScreen = () => {
+const FriendsIncomingScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const token = useSelector(state => state.authentication.token);
 
@@ -46,6 +46,11 @@ const FriendsIncomingScreen = () => {
                                 <IconWrap name={'x-square'} size={25} />
                             </TouchableOpacity>
                         }
+                        onPress={() => {
+                            navigation.navigate('Profile', {
+                                id: user.id
+                            })
+                        }}
                     />
                 })}
             </ScrollView>
