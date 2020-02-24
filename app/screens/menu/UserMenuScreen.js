@@ -35,7 +35,7 @@ const UserMenuScreen = ({ navigation, checkAuth }) => {
 
     useEffect(() => {
         User.getSocialLinks().then(({ socials }) => {
-            // todo maybe dinamical set social links in future
+            // todo maybe dynamical set social links in future
             setTelegram(socials.telegram);
         });
     }, []);
