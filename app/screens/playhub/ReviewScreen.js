@@ -19,7 +19,7 @@ const ReviewScreen = ({ navigation }) => {
     const theme = useSelector(state => getAppTheme(state));
     const token = useSelector(state => state.authentication.token);
 
-    const { user, id, value, existReview } = navigation.state.params;
+    const { user, id, value, existReview, __onActionReview } = navigation.state.params;
     const [ reviewContent, setReviewContent ] = useState(!!existReview.exist ? existReview.review.content : '');
     const [ extraTags, setExtraTags ] = useState([]);
 
@@ -76,10 +76,10 @@ const ReviewScreen = ({ navigation }) => {
 
             };
 
-            Review.editReview(token, attributes).then(({ code, message, attributes }) => {
+            Review.editReview(token, attributes).then(({ code, message, attributes, edit_review }) => {
                 if (code === 200) {
                     markAsSuccess(message);
-
+                    __onActionReview('add', edit_review);
                     return true;
                 }
 
@@ -95,10 +95,10 @@ const ReviewScreen = ({ navigation }) => {
             value: value
         };
 
-        Review.addReview(token, attributes).then(({ code, message, attributes }) => {
+        Review.addReview(token, attributes).then(({ code, message, attributes, add_review }) => {
             if (code === 200) {
                 markAsSuccess(message);
-
+                __onActionReview('edit', add_review);
                 return true;
             }
 
@@ -114,7 +114,7 @@ const ReviewScreen = ({ navigation }) => {
             <Form
                 headerColor={theme.primaryColor}
                 header={'Оставьте свой нереальный отзыв!'}
-                buttonTitle={'Оставить отзыв!'}
+                buttonTitle={!!existReview.exist ? 'Изменить отзыв!' : 'Оставить отзыв!'}
                 onSubmit={onSendReview}
                 hasError={error.has}
                 hasSuccess={success.has}

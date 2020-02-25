@@ -39,7 +39,8 @@ export const addReview = (token, attributes) => {
 
         return {
             code: res.code,
-            message: res.message
+            message: res.message,
+            add_review: res.add_review
         }
 
     }).catch((error) => {
@@ -69,7 +70,8 @@ export const editReview = (token, attributes) => {
 
         return {
             code: res.code,
-            message: res.message
+            message: res.message,
+            edit_review: res.edit_review
         }
 
     }).catch((error) => {

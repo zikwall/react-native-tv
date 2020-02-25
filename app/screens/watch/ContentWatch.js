@@ -185,6 +185,14 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
             existReview: {
                 exist: isAlreadyExistReview,
                 review: existReview
+            },
+            __onActionReview: (action, review) => {
+                setExistReview({
+                    id: review.id,
+                    content: review.content,
+                    value: review.value,
+                    date: review.date
+                });
             }
         });
     };
