@@ -189,7 +189,12 @@ const CreateContentScreen = ({ navigation }) => {
 
                 if (typeof __onCreateContent === 'function') {
                     // todo
-                    __onCreateContent({});
+                    __onCreateContent({
+                        ...fields,
+                        id: response.new_content.id,
+                        image: fields.image_url,
+                        age_limit: fields.is_18_years_old
+                    });
                 }
 
                 return true;

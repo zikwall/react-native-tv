@@ -98,6 +98,7 @@ const EditContentScreen = ({ navigation, route }) => {
             setVisibility([content.visibility]);
             setUseOrigin(parseInt(content.use_origin) === 1);
             setDefaultPlayer([content.default_player]);
+            setIsAge18(parseInt(content.age_limit) === 50);
 
             setCompleteConfiguring(true);
         }).catch((err) => {
@@ -254,7 +255,12 @@ const EditContentScreen = ({ navigation, route }) => {
 
                 if (typeof __onEditContent === 'function') {
                     // todo
-                    __onEditContent({});
+                    __onEditContent({
+                        ...fields,
+                        id: response.edit_content.id,
+                        image: fields.image_url,
+                        age_limit: fields.is_18_years_old
+                    });
                 }
 
                 return true;

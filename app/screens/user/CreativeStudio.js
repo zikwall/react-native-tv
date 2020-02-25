@@ -28,8 +28,9 @@ const CreativeStudioScreen = ({ navigation }) => {
             __onDeleteContent: (id) => {
                 setOwnContent(ownContent.filter((content) => content.id !== id))
             },
-            __onEditContent: (newAttributes) => {
+            __onEditContent: (editAttributes) => {
                 // todo
+                setOwnContent(ownContent.map((content, index) => content.id == id ? editAttributes : content))
             }
         });
     };
@@ -47,6 +48,10 @@ const CreativeStudioScreen = ({ navigation }) => {
                                     navigation.navigate('CreateContentScreen', {
                                         __onCreateContent: (newContent) => {
                                             // todo
+                                            setOwnContent([
+                                                ...ownContent,
+                                                newContent
+                                            ]);
                                         },
                                     });
                                 }}
@@ -66,7 +71,7 @@ const CreativeStudioScreen = ({ navigation }) => {
                         playlist={item}
                         onPress={onPressContentHandle}
                     />}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => `__${item.id}`}
                 />
             </View>
         )

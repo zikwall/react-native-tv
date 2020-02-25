@@ -46,7 +46,8 @@ export const editContent = (id, fields, token) => {
             return {
                 code: res.code,
                 response: res.response || res.message,
-                attributes: res.attributes || []
+                attributes: res.attributes || [],
+                edit_content: res.edit_content
             };
         })
         .catch(error => {
@@ -82,7 +83,8 @@ export const createContent = (fields, token) => {
             return {
                 code: res.code,
                 response: res.response || res.message,
-                attributes: res.attributes || []
+                attributes: res.attributes || [],
+                new_content: res.new_content
             };
         })
         .catch(error => {
