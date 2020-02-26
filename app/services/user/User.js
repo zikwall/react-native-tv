@@ -153,8 +153,9 @@ export const fetchUserFriends = (id) => {
         })
 };
 
-export const fetchUserContent = (id) => {
-    return apiFetch(`/vktv/user/content?userId=${id}`)
+export const fetchUserContent = (id, token) => {
+    return apiFetch(`/vktv/user/content?userId=${id}`, {},
+        {"Authorization": UserHelper.makeAuthorizationHeader(token)})
         .then(res => {
             return {
                 code: res.code,

@@ -30,6 +30,7 @@ import { setContent } from '../../redux/actions';
 const ProfileChannelScreen = ({ navigation, screenProps, selectContent }) => {
     const theme = useSelector(state => getAppTheme(state));
     const isAuthorized = useSelector(state => !!state.authentication.token);
+    const token = useSelector(state => state.authentication.token);
     const isPremium = useSelector(state => state.authentication.user.is_premium);
     const [ isFetched, setIsFetched ] = useState(true);
     const [ userContent, setUserContent ] = useState([]);
@@ -38,7 +39,7 @@ const ProfileChannelScreen = ({ navigation, screenProps, selectContent }) => {
     const { id } = screenProps;
 
     useEffect(() => {
-        User.fetchUserContent(id).then(({ response }) => {
+        User.fetchUserContent(id, token).then(({ response }) => {
             setUserContent(response);
             setIsFetched(false);
         });
