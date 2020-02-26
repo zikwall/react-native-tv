@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
 import Heading from '../heading';
@@ -10,7 +10,13 @@ const BigTag = ({ id, title, description, onSelect, disabled, isSelected }) => {
 
     const handleOnSelect = () => {
         if (disabled) {
-            alert(`Хрен вам а не ${title}`);
+            Alert.alert('Сообщение', `${title} к сожалению не доступен!`,
+                [
+                    {text: 'Ничего не понял, но лады', style: 'cancel'},
+                    {text: 'Ок, оч жаль'},
+                ],
+                { cancelable: false }
+            );
             return true;
         }
 
