@@ -194,3 +194,13 @@ export const getStateForUser = (token, id) => {
             new Error(error);
         })
 };
+
+export const IWantATeamRequest = (token, attributes) => {
+    return apiFetch('/vktv/user/i-want', {
+        method: 'POST',
+        body: JSON.stringify(attributes)
+    }, {
+        "Authorization": UserHelper.makeAuthorizationHeader(token)
+    })
+};
+
