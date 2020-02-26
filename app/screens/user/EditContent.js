@@ -6,12 +6,13 @@ import {
     ThemedView,
     Heading,
     CellViewSwitch,
-    TagPicker, OverlayLoader, FlatButton,
+    TagPicker,
+    OverlayLoader,
 } from '../../components';
 import { useSelector } from "react-redux";
 import { getAppTheme } from "../../redux/reducers";
 import { View } from 'react-native';
-import {Content, Players} from '../../constants';
+import { Content, Players } from '../../constants';
 import { Validator } from '../../utils';
 import { ContentService } from '../../services';
 
@@ -237,7 +238,7 @@ const EditContentScreen = ({ navigation, route }) => {
             type: type[0],
             desc: desc,
             category: category[0],
-            in_main: inMain,
+            in_main: !!inMain ? 1 : 0,
             is_pinned: pinned,
             is_archive: isArchive,
             is_active: isActive,
@@ -259,7 +260,9 @@ const EditContentScreen = ({ navigation, route }) => {
                         ...fields,
                         id: response.edit_content.id,
                         image: fields.image_url,
-                        age_limit: fields.is_18_years_old
+                        age_limit: fields.is_18_years_old,
+                        category: Content.CATEGORIES[fields.category].title,
+                        type: Content.TYPES[fields.type].title
                     });
                 }
 
