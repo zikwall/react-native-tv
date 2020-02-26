@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import { getAppTheme } from '../../redux/reducers';
