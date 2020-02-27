@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import Slider from "@react-native-community/slider";
 import Icon from "react-native-vector-icons/Feather";
+import IconFontisto from "react-native-vector-icons/Fontisto";
 import NativeVideoPlayer from "./NativeVideoPlayer";
 import Orientation from "react-native-orientation";
 
@@ -181,7 +182,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
         return (
             <TouchableOpacity onPress={onCropPress}>
                 <Text style={{ paddingRight: 20, color: '#fff' }}>
-                    <Icon name={'crop'} size={ fullscreen ? 30 : 20 } />
+                    <IconFontisto name={'crop'} size={ fullscreen ? 30 : 20 } />
                 </Text>
             </TouchableOpacity>
         )
@@ -196,7 +197,17 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
         return (
             <TouchableOpacity onPress={() => onTogglePlayPause()}>
                 <Text style={{ color: '#fff', paddingLeft: 10 }}>
-                    <Icon name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 20 : 30 } />
+                    <IconFontisto name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 15 : 20 } />
+                </Text>
+            </TouchableOpacity>
+        )
+    };
+
+    const renderBigPlayerAction = (size) => {
+        return (
+            <TouchableOpacity onPress={() => onTogglePlayPause()}>
+                <Text style={{ color: '#fff', paddingLeft: 10, paddingTop: fullscreen ? 55 : 35 }}>
+                    <IconFontisto name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 30 : 45 } />
                 </Text>
             </TouchableOpacity>
         )
@@ -214,23 +225,23 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
     };
 
     const renderVolumeAction = () => {
-        let icon = 'volume';
+        let icon = 'volume-mute';
 
         if (volume === 0) {
-            icon = 'volume-x'
+            icon = 'volume-off'
         } else if (volume > 0 && volume < 0.5) {
-            icon = 'volume';
+            icon = 'volume-mute';
         } else if (volume >= 0.5 && volume < 1) {
-            icon = 'volume-1'
+            icon = 'volume-down'
         } else if (volume === 1) {
-            icon = 'volume-2'
+            icon = 'volume-up'
         }
 
         return (
-            <View style={{ color: '#fff', paddingLeft: 10, flexDirection: 'row' }}>
+            <View style={{ color: '#fff', paddingLeft: 10, flexDirection: 'row', alignItems: 'center' }}>
                 <TouchableOpacity onPress={ onVolumeMute }>
-                    <Text style={{ color: '#fff', paddingLeft: 10, marginLeft: 10, width: fullscreen ? 40 : 30 }}>
-                        <Icon name={ icon } size={ fullscreen ? 30 : 20 } />
+                    <Text style={{ color: '#fff', paddingLeft: 10, marginLeft: 10, width: fullscreen ? 45 : 35 }}>
+                        <IconFontisto name={ icon } size={ fullscreen ? 20 : 15 } />
                     </Text>
                 </TouchableOpacity>
 
@@ -309,7 +320,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                         paddingTop: 15
                     }}>
 
-                        {renderPlayerAction(1.5)}
+                        {renderBigPlayerAction(2.5)}
 
                     </Animated.View>
 
@@ -331,7 +342,9 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                         flex: 1,
                         flexDirection: 'row',
                         backgroundColor: 'rgba( 0, 0, 0, 0.5);',
-                        paddingBottom: 1
+                        paddingBottom: 4,
+                        paddingTop: 4,
+                        paddingHorizontal: 10
                     }}>
                         <View style={{
                             flex: 1,
