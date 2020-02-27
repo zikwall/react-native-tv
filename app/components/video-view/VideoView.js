@@ -6,7 +6,7 @@ import { Players } from '../../constants';
 import { getChannelsPending, getSelectChannel, getSelectPlayer } from '../../redux/reducers';
 import { initPlayer } from '../../redux/actions';
 import PureVideoWebView from './PureVideoWebView';
-import NativeVideoView from './NativeVideoView';
+import NativeVideoPlayerContainer from "./NativeVideoPlayerContainer";
 import { DataHelper, SafeValidator} from '../../utils';
 
 const resolveSelectedPlayer = (player, channel) => {
@@ -45,7 +45,7 @@ const VideoView = ({ channel, pending, player, selectPlayer }) => {
     const source = resolveSelectedPlayer(player, channel);
 
     if (channel.use_origin == 1 && SafeValidator.isNativePlayer(player)) {
-        return <NativeVideoView source={channel.url} />
+        return <NativeVideoPlayerContainer source={channel.url} />
     }
 
     return (

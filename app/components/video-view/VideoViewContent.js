@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PureVideoWebView from './PureVideoWebView';
-import NativeVideoView from './NativeVideoView';
+import unused__NativeVideoView from './unused__NativeVideoView';
 import { SafeValidator } from '../../utils';
 import { getSelectPlayhubPlayer } from '../../redux/reducers';
 import { initPlayhubPlayer } from '../../redux/actions';
@@ -47,7 +47,7 @@ const VideoViewContent = ({ content, player, selectPlayer, onFullscreen }) => {
     }
 
     if (SafeValidator.isNativePlayer(player)) {
-        return <NativeVideoView source={content.url} onFullscreen={onFullscreen}/>
+        return <unused__NativeVideoView source={content.url} onFullscreen={onFullscreen}/>
     }
 
     return (

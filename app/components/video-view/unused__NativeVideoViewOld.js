@@ -11,7 +11,7 @@ import {
 import Video from 'react-native-video';
 import Orientation from 'react-native-orientation';
 
-const NativeVideoViewOld = ({ onFullscreen, ...props }) => {
+const unused__NativeVideoViewOld = ({ onFullscreen, ...props }) => {
 
     const [ rate, setRate ] = useState(1);
     const [ volume, setVoulem ] = useState(1);
@@ -160,7 +160,7 @@ const NativeVideoViewOld = ({ onFullscreen, ...props }) => {
     );
 };
 
-export default NativeVideoViewOld;
+export default unused__NativeVideoViewOld;
 
 const styles = StyleSheet.create({
     container: {

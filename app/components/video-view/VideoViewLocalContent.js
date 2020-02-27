@@ -4,7 +4,7 @@ import PureVideoWebView from './PureVideoWebView';
 import { getActiveLocalContent } from '../../redux/reducers';
 import { Players } from '../../constants';
 import { SafeValidator } from '../../utils';
-import NativeVideoView from './NativeVideoView';
+import unused__NativeVideoView from './unused__NativeVideoView';
 
 const resolveSelectedPlayer = (url, player, content) => {
     if (player === Players.NATIVE_PLAYER) {
@@ -24,7 +24,7 @@ const VideoViewLocalContent = ({ localContent, player, onFullscreen }) => {
     }
 
     if (SafeValidator.isNativePlayer(player)) {
-        return <NativeVideoView source={localContent.url} onFullscreen={onFullscreen}/>
+        return <unused__NativeVideoView source={localContent.url} onFullscreen={onFullscreen}/>
     }
 
     const source = resolveSelectedPlayer(localContent.url, player, localContent);
