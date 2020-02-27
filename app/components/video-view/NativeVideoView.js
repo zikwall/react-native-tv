@@ -138,6 +138,36 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
         )
     };
 
+    const onCropPress = () => {
+        let rzm = 'cover';
+
+        switch (resizeMode) {
+            case 'cover':
+                rzm = 'contain';
+                break;
+            case 'contain':
+                rzm = 'stretch';
+                break;
+            case 'stretch':
+                rzm = 'cover';
+                break;
+            default:
+                rzm = 'cover'
+        }
+
+        setResizeMode(rzm);
+    };
+
+    const renderCropControl = () => {
+        return (
+            <TouchableOpacity onPress={onCropPress}>
+                <Text style={[ styles.controlOptionRight, { paddingRight: 20 } ]}>
+                    <Icon name='crop' size={fullscreen ? 30 : 20}/>
+                </Text>
+            </TouchableOpacity>
+        )
+    };
+
     const renderVolumeControl = (v) => {
         const isSelected = (volume === v)
 
@@ -268,6 +298,7 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
                         {renderVolumeAction()}
                     </View>
                     <View style={styles.rightSide}>
+                        {renderCropControl()}
                         {renderFullscreenControl()}
                     </View>
                 </Animated.View>
