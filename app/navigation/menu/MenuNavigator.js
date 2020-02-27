@@ -28,7 +28,8 @@ import {
     UsersScreen,
     AuthorsScreen,
     ReportsScreen,
-    WantTeamScreen
+    WantTeamScreen,
+    MessagesScreen
 } from "../../screens";
 import {
     NavigationHeaderComponent,
@@ -161,6 +162,15 @@ const MenuNavigator = createStackNavigator({
         navigationOptions:{
             header: (props) => <NavigationHeaderComponent
                 titleComponent={<NavigationHeaderTitle title={'I Want A Team'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
+    },
+    MessagesScreen: {
+        screen: MessagesScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Messages'} />}
                 leftComponent={ <NavigationHeaderLeft /> } {...props}
             />
         }

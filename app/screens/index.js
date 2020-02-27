@@ -45,6 +45,7 @@ import UsersScreen from "./user/UsersScreen";
 import AuthorsScreen from './menu/AuthorsScreen';
 import ReportsScreen from './user/ReportsScreen';
 import WantTeamScreen from './user/WantTeamScreen';
+import MessagesScreen from './user/MessagesScreen';
 
 export {
     /**
@@ -103,6 +104,7 @@ export {
     AuthorsScreen,
     ReportsScreen,
     WantTeamScreen,
+    MessagesScreen,
 
     /**
      *  PlayHub service namespace

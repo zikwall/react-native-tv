@@ -85,7 +85,7 @@ const UserMenuScreen = ({ navigation, checkAuth }) => {
                 <ThemePicker />
                 <MenuItemLine onPress={onMenuPress} to={'CreativeStudioScreen'} icon={'film'} name={'Творческая студия'} />
                 <MenuItemLine onPress={onMenuPress} to={'FriendshipRequestsScreen'} icon={'user-check'} name={'Заявки в друзья'} onLongPress={() => alert('Looong!')} />
-                {/*<MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'message-square'} name={'Сообщения'} unreadItems={20} />*/}
+                <MenuItemLine onPress={onMenuPress} to={'MessagesScreen'} icon={'message-square'} name={'Сообщения'} unreadItems={20} />
                 {/*<MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'grid'} name={'Сообщества'} />*/}
                 <MenuItemLine onPress={onMenuPress} to={'UsersScreen'} icon={'users'} name={'Пользователи'} />
                 {/*<MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'shopping-bag'} name={'Покупки'} />*/}
