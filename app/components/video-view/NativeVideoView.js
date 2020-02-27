@@ -14,7 +14,7 @@ import Slider from '@react-native-community/slider';
 
 import Video from 'react-native-video';
 import Orientation from 'react-native-orientation';
-import Icon from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/Feather";
 
 const NativeVideoView = ({ onFullscreen, ...props }) => {
 
@@ -40,13 +40,13 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
         outputRange: [100, 0]
     });
 
-    useEffect(() => {
+    /*useEffect(() => {
         Orientation.addOrientationListener(handleOrientation);
 
         return () => {
             Orientation.removeOrientationListener(handleOrientation);
         };
-    }, []);
+    }, []);*/
 
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -58,20 +58,20 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
 
     const handleBackButtonClick = () => {
         if (fullscreen) {
-            handleFullscreen(fullscreen)
+            handleFullscreen(fullscreen);
 
             return true;
         }
         // вернуться назад
         //return true;
-    }
+    };
 
-    const handleOrientation = (orientation) => {
+   /* const handleOrientation = (orientation) => {
         orientation === 'LANDSCAPE'
             ? setFullscreen(true)
             : setFullscreen(false)
     };
-
+*/
     let video;
 
     const onLoad = (data) => {};
@@ -130,8 +130,8 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
             <TouchableOpacity onPress={() => handleFullscreen(fullscreen) }>
                 <Text style={styles.controlOptionRight}>
                     {fullscreen
-                        ?<Icon name='ios-contract' size={fullscreen ? 30 : 20}/>
-                        :<Icon name='ios-expand' size={fullscreen ? 30 : 20}/>
+                        ?<Icon name='minimize' size={fullscreen ? 30 : 20}/>
+                        :<Icon name='maximize' size={fullscreen ? 30 : 20}/>
                     }
                 </Text>
             </TouchableOpacity>
@@ -160,8 +160,8 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
             <TouchableOpacity onPress={() => togglePlay()}>
                 <Text style={styles.controlOptionLeft}>
                     {!paused
-                        ?<Icon name='ios-pause' size={!fullscreen ? size*20 : size*30}/>
-                        :<Icon name='ios-play' size={!fullscreen ? size*20 : size*30}/>
+                        ?<Icon name='pause' size={!fullscreen ? size * 20 : size * 30}/>
+                        :<Icon name='play' size={!fullscreen ? size * 20 : size * 30}/>
                     }
                 </Text>
             </TouchableOpacity>
@@ -182,10 +182,10 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
             <View style={{...styles.controlOptionLeft, flexDirection: 'row'}}>
                 <TouchableOpacity onPress={() => toggleVolume()}>
                     <Text style={{...styles.controlOptionLeft, marginLeft: 10, width: fullscreen ? 40 : 30}}>
-                        {volume == 0 && <Icon name='ios-volume-off' size={fullscreen ? 30 : 20}/>}
-                        {volume > 0 && volume < 0.5 && <Icon name='ios-volume-mute' size={fullscreen ? 30 : 20}/>}
-                        {volume >= 0.5 && volume < 1 && <Icon name='ios-volume-low' size={fullscreen ? 30 : 20}/>}
-                        {volume == 1 && <Icon name='ios-volume-high' size={fullscreen ? 30 : 20}/>}
+                        {volume == 0 && <Icon name='volume-x' size={fullscreen ? 30 : 20}/>}
+                        {volume > 0 && volume < 0.5 && <Icon name='volume' size={fullscreen ? 30 : 20} />}
+                        {volume >= 0.5 && volume < 1 && <Icon name='volume-1' size={fullscreen ? 30 : 20} />}
+                        {volume == 1 && <Icon name='volume-2' size={fullscreen ? 30 : 20}/>}
                     </Text>
                 </TouchableOpacity>
                 <Slider
@@ -259,10 +259,10 @@ const NativeVideoView = ({ onFullscreen, ...props }) => {
 
             {showControlPanel &&
             <Animated.View style={[ styles.controlPanel, { opacity: AnimationOverlay } ]}>
-                <Animated.View style={[ styles.mainPanel, { transform: [{ translateX: AnimationMainTransformX }] } ]}>
-                    {renderPlayerAction(2)}
+                <Animated.View style={styles.mainPanel}>
+                    {renderPlayerAction(1.5)}
                 </Animated.View>
-                <Animated.View style={[ styles.bottomPanel, { transform: [{ translateX: AnimationBottomTransformX }] } ]}>
+                <Animated.View style={styles.bottomPanel}>
                     <View style={styles.leftSide}>
                         {renderPlayerAction()}
                         {renderVolumeAction()}
@@ -304,7 +304,8 @@ const styles = StyleSheet.create({
     mainPanel: {
         flex: 5,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: 15
     },
     bottomPanel: {
         flex: 1,
