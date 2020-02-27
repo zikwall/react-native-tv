@@ -27,6 +27,7 @@ import { DataHelper, SafeValidator } from '../../utils';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { InterstitialAd, TestIds, AdEventType } from '@react-native-firebase/admob';
+import { isTrustImage } from "../../utils/SafeValidator";
 
 const defaultEpg = [
     {title: 'Позапозавчера', data: <TVProgramNotItem />},
@@ -206,7 +207,7 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
         hideMenu();
     };
 
-    const ifImage = SafeValidator.getSafeChannelImage(channel.image ? channel.image : null);
+    const ifImage = isTrustImage(channel.image) ? { uri : channel.image } : theme.channelPlaceholder
 
     const ifRenderContent = () => {
         if (epgContent === null) {
