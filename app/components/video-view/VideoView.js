@@ -44,6 +44,10 @@ const VideoView = ({ channel, pending, player, selectPlayer }) => {
 
     const source = resolveSelectedPlayer(player, channel);
 
+    if (!!channel.default_player) {
+        player = channel.default_player;
+    }
+
     if (channel.use_origin == 1 && SafeValidator.isNativePlayer(player)) {
         return <NativeVideoPlayerContainer source={channel.url} />
     }

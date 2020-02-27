@@ -11,6 +11,30 @@ import Icon from "react-native-vector-icons/Feather";
 import IconFontisto from "react-native-vector-icons/Fontisto";
 import NativeVideoPlayer from "./NativeVideoPlayer";
 import Orientation from "react-native-orientation";
+import Row from '../ui/Row';
+import { StringHelper } from '../../utils';
+
+const NativeVideoPlayerActionOverlayContainer = ({ onClose, style, closeStyle, width }) => {
+    return (
+        <Animated.View style={{
+            position: 'absolute',
+            bottom: 0,
+            right: 0,
+            backgroundColor: 'rgba( 0, 0, 0, 0.3);',
+            width: width,
+            height: '100%',
+            zIndex: 99999,
+            ...style
+        }}>
+            <Row>
+                <View />
+                <TouchableOpacity onPress={ onClose }>
+                    <IconFontisto name={'arrow-right-l'} size={25} style={{ color: '#fff', ...closeStyle }} />
+                </TouchableOpacity>
+            </Row>
+        </Animated.View>
+    )
+};
 
 const NativeVideoPlayerContainer = ({ source, isDebug }) => {
 
@@ -24,13 +48,21 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
 
     const [ isVisible, setIsVisible ] = useState(false);
     const [ sliderValue, setSliderValue ] = useState(0);
-    const [ duration, setDuration ] = useState(1);
+    const [ duration, setDuration ] = useState(0);
     const [ currentTime, setCurrentTime ] = useState(0);
     const [ isLoaded, setIsLoaded ] = useState(false);
 
+    const [ isVisibleOverlay, setIsVisibleOverlay ] = useState(true);
+
     const TimerHandler = useRef(null);
     const AnimationOverlay = useRef(new Animated.Value(0)).current;
+    const AnimationTransformActionOverlay = useRef(new Animated.Value(0)).current;
     const video = useRef(null);
+
+    const translationX = AnimationTransformActionOverlay.interpolate({
+        inputRange: [0, 1],
+        outputRange: [350, 0]
+    });
 
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', onBackHundle);
@@ -196,7 +228,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
     const renderPlayerAction = (size = 1) => {
         return (
             <TouchableOpacity onPress={() => onTogglePlayPause()}>
-                <Text style={{ color: '#fff', paddingLeft: 10 }}>
+                <Text style={{ color: '#fff' }}>
                     <IconFontisto name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 15 : 20 } />
                 </Text>
             </TouchableOpacity>
@@ -268,6 +300,37 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
         )
     };
 
+    const onActionControlToggle = () => {
+        setIsVisibleOverlay(true);
+        Animated.timing(AnimationTransformActionOverlay, {
+            toValue: 1,
+            duration: 300,
+            useNativeDriver: true,
+        }).start();
+
+        onRefreshTimer();
+    };
+
+    const onOverlayActionClose = () => {
+        Animated.timing(AnimationTransformActionOverlay, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: true,
+        }).start(() => {
+            setIsVisibleOverlay(false);
+        });
+    };
+
+    const renderActionControl = () => {
+        return (
+            <TouchableOpacity onPress={ onActionControlToggle }>
+                <Text style={{ color: '#fff', paddingLeft: 10 }}>
+                    <IconFontisto name={ 'nav-icon-grid' } size={ !fullscreen ? 15 : 20 } />
+                </Text>
+            </TouchableOpacity>
+        )
+    };
+
     const onShowControlsHandle = () => {
         setIsVisible(true);
         onAnimationRun();
@@ -299,7 +362,15 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                     onAudioFocusChanged={ onAudioFocusChanged }
                 />
             </TouchableOpacity>
-
+            {
+                isVisibleOverlay &&
+                <NativeVideoPlayerActionOverlayContainer
+                    closeStyle={{ paddingRight: fullscreen ? 20 : 10, paddingTop: fullscreen ? 10 : 5 }}
+                    width={ fullscreen ? 350 : 150 }
+                    onClose={onOverlayActionClose}
+                    style={{ transform: [{ translateX: translationX }] }}
+                />
+            }
             {
                 isVisible &&
                 <Animated.View style={{
@@ -321,21 +392,31 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                     }}>
 
                         {renderBigPlayerAction(2.5)}
-
                     </Animated.View>
 
                     {
-                        <Slider
-                            style={{ height: 50, flex: 1 }}
-                            value={sliderValue}
-                            minimumValue={0}
-                            maximumValue={duration}
-                            step={1}
-                            onValueChange={ onSeek }
-                            minimumTrackTintColor="#fff"
-                            maximumTrackTintColor="#fff"
-                            thumbTintColor="#fff"
-                        />
+                        duration > 0 &&
+                        <>
+                            <Row style={{ paddingHorizontal: 15 }}>
+                                <Text style={{ color: '#fff' }}>
+                                    { StringHelper.formatTime(currentTime) }
+                                </Text>
+                                <Text style={{ color: '#fff' }}>
+                                    { StringHelper.formatTime(duration) }
+                                </Text>
+                            </Row>
+                            <Slider
+                                style={{ height: 50, flex: 1 }}
+                                value={sliderValue}
+                                minimumValue={0}
+                                maximumValue={duration}
+                                step={1}
+                                onValueChange={ onSeek }
+                                minimumTrackTintColor="#fff"
+                                maximumTrackTintColor="#fff"
+                                thumbTintColor="#fff"
+                            />
+                        </>
                     }
 
                     <Animated.View style={{
@@ -344,7 +425,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                         backgroundColor: 'rgba( 0, 0, 0, 0.5);',
                         paddingBottom: 4,
                         paddingTop: 4,
-                        paddingHorizontal: 10
+                        paddingHorizontal: fullscreen ? 25 : 15
                     }}>
                         <View style={{
                             flex: 1,
@@ -366,7 +447,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
 
                             {renderCropControl()}
                             {renderFullscreenControl()}
-
+                            {renderActionControl()}
                         </View>
                     </Animated.View>
                 </Animated.View>
