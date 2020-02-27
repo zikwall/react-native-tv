@@ -4,8 +4,7 @@ import PureVideoWebView from './PureVideoWebView';
 import { getActiveLocalContent } from '../../redux/reducers';
 import { Players } from '../../constants';
 import { SafeValidator } from '../../utils';
-import unused__NativeVideoView from './unused__NativeVideoView';
-
+import NativeVideoPlayerContainer from './NativeVideoPlayerContainer';
 const resolveSelectedPlayer = (url, player, content) => {
     if (player === Players.NATIVE_PLAYER) {
         player = '1';
@@ -18,13 +17,13 @@ const resolveSelectedPlayer = (url, player, content) => {
     return `http://tv.zikwall.ru/vktv/embed/by-url?url=${url}&player=2`;
 };
 
-const VideoViewLocalContent = ({ localContent, player, onFullscreen }) => {
+const VideoViewLocalContent = ({ localContent, player }) => {
     if (!localContent) {
         return null;
     }
 
     if (SafeValidator.isNativePlayer(player)) {
-        return <unused__NativeVideoView source={localContent.url} onFullscreen={onFullscreen}/>
+        return <NativeVideoPlayerContainer source={localContent.url} />
     }
 
     const source = resolveSelectedPlayer(localContent.url, player, localContent);

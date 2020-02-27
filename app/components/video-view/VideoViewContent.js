@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PureVideoWebView from './PureVideoWebView';
-import unused__NativeVideoView from './unused__NativeVideoView';
+import NativeVideoPlayerContainer from './NativeVideoPlayerContainer';
 import { SafeValidator } from '../../utils';
 import { getSelectPlayhubPlayer } from '../../redux/reducers';
 import { initPlayhubPlayer } from '../../redux/actions';
@@ -29,7 +29,7 @@ const resolveSelectedPlayer = (player, content) => {
     return `http://tv.zikwall.ru/vktv/embed/give-content?player=${player}&id=${content.id}`;
 };
 
-const VideoViewContent = ({ content, player, selectPlayer, onFullscreen }) => {
+const VideoViewContent = ({ content, player, selectPlayer }) => {
     if (!content) {
         return null;
     }
@@ -47,7 +47,7 @@ const VideoViewContent = ({ content, player, selectPlayer, onFullscreen }) => {
     }
 
     if (SafeValidator.isNativePlayer(player)) {
-        return <unused__NativeVideoView source={content.url} onFullscreen={onFullscreen}/>
+        return <NativeVideoPlayerContainer source={content.url} />
     }
 
     return (
