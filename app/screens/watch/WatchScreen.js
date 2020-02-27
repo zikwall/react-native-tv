@@ -203,7 +203,7 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     };
 
     const handleSelectPlayer = (playerId) => {
-        selectPlayer(channel.epg_id, playerId);
+        selectPlayer(channel.id, playerId);
         hideMenu();
     };
 
