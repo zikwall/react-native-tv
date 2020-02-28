@@ -391,53 +391,59 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                     backgroundColor: 'rgba( 0, 0, 0, 0.3);',
                     opacity: AnimationOverlay,
                 }}>
-                    <DoubleTap
-                        delay={250}
-                        style={{
-                            position: 'absolute',
-                            left: 0,
-                            bottom: 0,
-                            height: '100%',
-                            width: Dimensions.get('window').width * 0.3,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            paddingBottom: 15
-                        }}
-                        onDoubleTap={() => {
-                            onDoubleSeek(currentTime - 10);
-                        }}
-                    >
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={[ human.callout, { color: '#fff', paddingRight: 10 } ]}>
-                                - 10
-                            </Text>
-                            <IconFontisto name={'backward'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
-                        </View>
-                    </DoubleTap>
+                    {
+                        duration > 0 &&
+                        <DoubleTap
+                            delay={250}
+                            style={{
+                                position: 'absolute',
+                                left: 0,
+                                bottom: 0,
+                                height: '100%',
+                                width: Dimensions.get('window').width * 0.3,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                paddingBottom: 15
+                            }}
+                            onDoubleTap={() => {
+                                onDoubleSeek(currentTime - 10);
+                            }}
+                        >
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <Text style={[ human.callout, { color: '#fff', paddingRight: 10 } ]}>
+                                    - 10
+                                </Text>
+                                <IconFontisto name={'backward'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
+                            </View>
+                        </DoubleTap>
+                    }
 
-                    <DoubleTap
-                        delay={200}
-                        style={{
-                            position: 'absolute',
-                            right: 0,
-                            bottom: 0,
-                            height: '100%',
-                            width: Dimensions.get('window').width * 0.3,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            paddingBottom: 15
-                        }}
-                        onDoubleTap={() => {
-                            onDoubleSeek(currentTime + 10);
-                        }}
-                    >
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <IconFontisto name={'forward'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
-                            <Text style={[ human.callout, { color: '#fff', paddingLeft: 10 } ]}>
-                                10 +
-                            </Text>
-                        </View>
-                    </DoubleTap>
+                    {
+                        duration > 0 &&
+                        <DoubleTap
+                            delay={200}
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                bottom: 0,
+                                height: '100%',
+                                width: Dimensions.get('window').width * 0.3,
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                paddingBottom: 15
+                            }}
+                            onDoubleTap={() => {
+                                onDoubleSeek(currentTime + 10);
+                            }}
+                        >
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <IconFontisto name={'forward'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
+                                <Text style={[ human.callout, { color: '#fff', paddingLeft: 10 } ]}>
+                                    10 +
+                                </Text>
+                            </View>
+                        </DoubleTap>
+                    }
 
                     <Animated.View style={{
                         flex: fullscreen ? 7 : 5,
@@ -491,7 +497,15 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
 
                             {renderPlayerAction()}
                             {renderVolumeAction()}
-
+                            {
+                                duration <= 0 &&
+                                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                    <IconFontisto name={'record'} size={ 10 } color={'#fff'} />
+                                    <Text style={[ human.callout, { color: '#fff', paddingLeft: 5 } ]}>
+                                        Live
+                                    </Text>
+                                </View>
+                            }
                         </View>
                         <View style={{
                             flex: 1,
@@ -499,7 +513,6 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                             justifyContent: 'flex-end',
                             alignItems: 'center'
                         }}>
-
                             {renderCropControl()}
                             {renderFullscreenControl()}
                             {renderActionControl()}
