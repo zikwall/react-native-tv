@@ -56,14 +56,14 @@ const AccountScreen = ({ navigation, updateAccount, token, user }) => {
         if (status.state === true) {
             setSuccess({
                 has: true,
-                text: status.response.message
+                text: status.response.response.message
             });
             return true;
         }
 
         setError({
             has: true,
-            error: status.response.message,
+            error: status.response.response.message,
             attributes: status.response.attributes
         });
     };
@@ -73,14 +73,14 @@ const AccountScreen = ({ navigation, updateAccount, token, user }) => {
             <Form
                 onSubmit={handleFormSubmit}
                 header={'Change Account'}
-                buttonTitle={'Send'}
+                buttonTitle={'Обновить данные'}
                 headerColor={theme.primaryColor}
                 hasError={error.has}
                 hasSuccess={success.has}
                 flashText={error.has ? error.error : (success.has ? success.text : '')}
             >
-                <TextInput value={user.profile.name} onChangeText={(name) => setName(name)} customErrors={error.attributes} placeholder={'Your name'} label={'Name'} inputname={'name'} />
-                <TextInput value={user.profile.email} onChangeText={(email) => setEmail(email)} customErrors={error.attributes} placeholder={'Your email'} label={'Public email'} inputname={'email'} />
+                <TextInput value={name} onChangeText={(name) => setName(name)} customErrors={error.attributes} placeholder={'Your name'} label={'Name'} inputname={'name'} />
+                <TextInput value={email} onChangeText={(email) => setEmail(email)} customErrors={error.attributes} placeholder={'Your email'} label={'Public email'} inputname={'email'} />
             </Form>
         </ThemedView>
     );
