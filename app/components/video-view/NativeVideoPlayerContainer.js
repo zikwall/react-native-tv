@@ -185,9 +185,9 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
     const renderFullscreenControl = () => {
         return (
             <TouchableOpacity onPress={() => onFullscreen(fullscreen) }>
-                <Text style={{ color: '#fff', paddingRight: 10 }}>
-                    <Icon name={fullscreen ? 'minimize' : 'maximize'} size={ fullscreen ? 30 : 20 } />
-                </Text>
+                <View style={{ paddingRight: 10 }}>
+                    <Icon name={fullscreen ? 'minimize' : 'maximize'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
+                </View>
             </TouchableOpacity>
         )
     };
@@ -216,9 +216,9 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
     const renderCropControl = () => {
         return (
             <TouchableOpacity onPress={onCropPress}>
-                <Text style={{ paddingRight: 20, color: '#fff' }}>
-                    <IconFontisto name={'crop'} size={ fullscreen ? 30 : 20 } />
-                </Text>
+                <View style={{ paddingRight: 20 }}>
+                    <IconFontisto name={'crop'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
+                </View>
             </TouchableOpacity>
         )
     };
@@ -231,9 +231,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
     const renderPlayerAction = (size = 1) => {
         return (
             <TouchableOpacity onPress={() => onTogglePlayPause()}>
-                <Text style={{ color: '#fff' }}>
-                    <IconFontisto name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 15 : 20 } />
-                </Text>
+                <IconFontisto name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 15 : 20 } color={'#fff'} />
             </TouchableOpacity>
         )
     };
@@ -241,9 +239,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
     const renderBigPlayerAction = (size) => {
         return (
             <TouchableOpacity onPress={() => onTogglePlayPause()}>
-                <Text style={{ color: '#fff', paddingLeft: 10, paddingTop: fullscreen ? 55 : 35 }}>
-                    <IconFontisto name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 30 : 45 } />
-                </Text>
+                <IconFontisto name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 30 : 45 } color={'#fff'} />
             </TouchableOpacity>
         )
     };
@@ -275,9 +271,9 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
         return (
             <View style={{ color: '#fff', paddingLeft: 10, flexDirection: 'row', alignItems: 'center' }}>
                 <TouchableOpacity onPress={ onVolumeMute }>
-                    <Text style={{ color: '#fff', paddingLeft: 10, marginLeft: 10, width: fullscreen ? 45 : 35 }}>
-                        <IconFontisto name={ icon } size={ fullscreen ? 20 : 15 } />
-                    </Text>
+                    <View style={{ paddingLeft: 10, marginLeft: 10, width: fullscreen ? 45 : 35 }}>
+                        <IconFontisto name={ icon } size={ fullscreen ? 20 : 15 } color={'#fff'} />
+                    </View>
                 </TouchableOpacity>
 
                 <Slider
@@ -327,9 +323,9 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
     const renderActionControl = () => {
         return (
             <TouchableOpacity onPress={ onActionControlToggle }>
-                <Text style={{ color: '#fff', paddingLeft: 10 }}>
-                    <IconFontisto name={ 'nav-icon-grid' } size={ !fullscreen ? 15 : 20 } />
-                </Text>
+                <View style={{ paddingLeft: 10 }}>
+                    <IconFontisto name={ 'nav-icon-grid' } size={ !fullscreen ? 15 : 20 } color={'#fff'} />
+                </View>
             </TouchableOpacity>
         )
     };
@@ -444,10 +440,10 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                     </DoubleTap>
 
                     <Animated.View style={{
-                        flex: 5,
+                        flex: fullscreen ? 7 : 5,
                         justifyContent: 'center',
                         alignItems: 'center',
-                        paddingTop: 15
+                        paddingTop: fullscreen ? 60 : 40
                     }}>
 
                         {renderBigPlayerAction(2.5)}
