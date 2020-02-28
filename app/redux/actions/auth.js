@@ -3,7 +3,7 @@ import { apiFetch, formDataPost } from "../../services/api";
 import {Identity, Session} from '../../services/auth';
 import {UserHelper} from '../../utils';
 
-export const updateAccount = ({ name, publicEmail }, token) => {
+export const updateAccount = ({ name, publicEmail, avatar }, token) => {
     return (dispatch) => {
         return apiFetch('/vktv/account/change', {
             method: 'POST',
@@ -28,11 +28,11 @@ export const updateAccount = ({ name, publicEmail }, token) => {
     }
 };
 
-export const registerFinished = ({ name, publicEmail }, token) => {
+export const registerFinished = ({ name, publicEmail, avatar }, token) => {
     return (dispatch) => {
         return apiFetch('/vktv/auth/continue-signup', {
             method: 'POST',
-            body: JSON.stringify({name, publicEmail})
+            body: JSON.stringify({name, publicEmail, avatar})
         }, {"Authorization": UserHelper.makeAuthorizationHeader(token)}).then((response) => {
 
             if (response.code && response.code === 200) {

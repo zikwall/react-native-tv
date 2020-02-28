@@ -5,7 +5,11 @@ import { connect, useSelector } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Feather';
 
-import {NavigationHeaderComponent, NavigationHeaderLeft, NavigationHeaderTitle} from '../../components';
+import {
+    NavigationHeaderComponent,
+    NavigationHeaderLeft,
+    NavigationHeaderTitle
+} from '../../components';
 import { registerFinished, setProfile } from '../../redux/actions';
 import { Validator, FormHelper } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_NAME } from '../../constants';
@@ -39,12 +43,6 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
     };
 
     const handleOnContinueRegister = async () => {
-        /*const photo = {
-            uri: Platform.OS === 'android' ? avatar.uri.replace('file:///', 'file:///')  : avatar.uri,
-            type: avatar.type,
-            name: 'avatar.jpg',
-        };*/
-
         if (name && !Validator.isValidName(name)) {
             setError({
                 has: true,
@@ -65,7 +63,7 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
             return false;
         }
 
-        const status = await registerFinished({name: name, publicEmail: email}, token);
+        const status = await registerFinished({name: name, publicEmail: email, avatar: 'data:image/jpeg;base64,' + avatar.data} , token);
 
         if (status.state === true) {
             navigation.navigate('HomeScreen');
