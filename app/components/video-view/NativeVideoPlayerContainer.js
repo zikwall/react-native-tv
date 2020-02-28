@@ -339,7 +339,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
     };
 
     return (
-        <View style={fullscreen ? { backgroundColor: '#000' } : {}}>
+        <View style={{ backgroundColor: '#000' }}>
             <TouchableOpacity
                 activeOpacity={1}
                 onPress={ onShowControlsHandle }
