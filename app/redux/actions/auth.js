@@ -7,7 +7,7 @@ export const updateAccount = ({ name, publicEmail, avatar }, token) => {
     return (dispatch) => {
         return apiFetch('/vktv/account/change', {
             method: 'POST',
-            body: JSON.stringify({name, publicEmail})
+            body: JSON.stringify({ name, publicEmail, avatar })
         }, {"Authorization": UserHelper.makeAuthorizationHeader(token)}).then((response) => {
 
             if (response.code && response.code === 200) {

@@ -4,17 +4,23 @@ import { getAppTheme } from '../../redux/reducers';
 import {
     TextInput,
     Form,
-    ThemedView,
+    ThemedView, Avatar,
 } from '../../components';
 import { bindActionCreators } from 'redux';
 import { updateAccount } from '../../redux/actions';
 import { Validator } from '../../utils';
 import { ERROR_INVALID_EMAIL_ADRESS, ERROR_INVALID_NAME } from '../../constants';
+import ImagePicker from "react-native-image-picker";
+import {TouchableOpacity, View} from "react-native";
 
 const AccountScreen = ({ navigation, updateAccount, token, user }) => {
     const theme = useSelector(state => getAppTheme(state));
     const [ name, setName] = useState(user.profile.name);
     const [ email, setEmail ] = useState(user.profile.public_email);
+    const [ avatar, setAvatar ] = useState({
+        uri: user.profile.avatar
+    });
+
     const [ success, setSuccess ] = useState({
         has: false,
         text: 'Unexpected text'
@@ -51,7 +57,7 @@ const AccountScreen = ({ navigation, updateAccount, token, user }) => {
             return false;
         }
 
-        const status = await updateAccount({name: name, publicEmail: email}, token);
+        const status = await updateAccount({name: name, publicEmail: email, avatar: 'data:image/jpeg;base64,' + avatar.data }, token);
 
         if (status.state === true) {
             setSuccess({
@@ -68,6 +74,35 @@ const AccountScreen = ({ navigation, updateAccount, token, user }) => {
         });
     };
 
+    const onTouchAvatar = (avatar) => {
+        const options = {
+            quality: 1.0,
+            maxWidth: 500,
+            maxHeight: 500,
+            storageOptions: {
+                skipBackup: true,
+            },
+        };
+
+        ImagePicker.showImagePicker(options, response => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled photo picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            } else {
+                // You can also display the image using data:
+                // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+                setAvatar(response);
+            }
+        });
+    };
+
+    const defaultAvatar = avatar.uri != null || avatar.uri !== '' ? avatar: require('../../assets/images/placeholders/image-placeholder-350x350.png');
+
     return (
         <ThemedView>
             <Form
@@ -81,6 +116,16 @@ const AccountScreen = ({ navigation, updateAccount, token, user }) => {
             >
                 <TextInput value={name} onChangeText={(name) => setName(name)} customErrors={error.attributes} placeholder={'Your name'} label={'Name'} inputname={'name'} />
                 <TextInput value={email} onChangeText={(email) => setEmail(email)} customErrors={error.attributes} placeholder={'Your email'} label={'Public email'} inputname={'email'} />
+
+                <View style={{
+                    alignItems: 'center',
+                    justifyContent: "center",
+                }}>
+                    <TouchableOpacity onPress={onTouchAvatar} >
+                        <Avatar size={150} src={defaultAvatar} />
+                    </TouchableOpacity>
+                </View>
+
             </Form>
         </ThemedView>
     );
