@@ -40,7 +40,7 @@ export const addReview = (token, attributes) => {
         return {
             code: res.code,
             message: res.message,
-            add_review: res.add_review
+            new_review: res.new_review
         }
 
     }).catch((error) => {

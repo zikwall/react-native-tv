@@ -193,6 +193,8 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
                     value: review.value,
                     date: review.date
                 });
+
+                setIsAlreadyExistReview(true);
             }
         });
     };

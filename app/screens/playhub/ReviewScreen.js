@@ -79,7 +79,7 @@ const ReviewScreen = ({ navigation }) => {
             Review.editReview(token, attributes).then(({ code, message, attributes, edit_review }) => {
                 if (code === 200) {
                     markAsSuccess(message);
-                    __onActionReview('add', edit_review);
+                    __onActionReview('edit', edit_review);
                     return true;
                 }
 
@@ -95,10 +95,10 @@ const ReviewScreen = ({ navigation }) => {
             value: value
         };
 
-        Review.addReview(token, attributes).then(({ code, message, attributes, add_review }) => {
+        Review.addReview(token, attributes).then(({ code, message, attributes, new_review }) => {
             if (code === 200) {
                 markAsSuccess(message);
-                __onActionReview('edit', add_review);
+                __onActionReview('add', new_review);
                 return true;
             }
 
