@@ -82,3 +82,4 @@ export { default as ReviewMaker } from './rating/ReviewMaker';
 export { default as ReportModal } from './modalize/ReportModal';
 export { default as ContentDeleteButton } from './navigation-header/ContentDeleteButton';
 export { default as NativeVideoPlayerContainer } from './video-view/NativeVideoPlayerContainer';
+export { default as DoubleTap } from './ui/DoubleTap';

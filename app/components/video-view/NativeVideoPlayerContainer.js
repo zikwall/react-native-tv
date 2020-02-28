@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
     Animated,
-    BackHandler,
+    BackHandler, Dimensions,
     Text,
     TouchableOpacity,
     View,
@@ -13,8 +13,10 @@ import NativeVideoPlayer from "./NativeVideoPlayer";
 import Orientation from "react-native-orientation";
 import Row from '../ui/Row';
 import { StringHelper } from '../../utils';
+import DoubleTap from "../ui/DoubleTap";
+import {human} from "react-native-typography";
 
-const NativeVideoPlayerActionOverlayContainer = ({ onClose, style, closeStyle, width }) => {
+const NativeVideoPlayerActionOverlayContainer = ({ children, onClose, style, closeStyle, width }) => {
     return (
         <Animated.View style={{
             position: 'absolute',
@@ -32,6 +34,7 @@ const NativeVideoPlayerActionOverlayContainer = ({ onClose, style, closeStyle, w
                     <IconFontisto name={'arrow-right-l'} size={25} style={{ color: '#fff', ...closeStyle }} />
                 </TouchableOpacity>
             </Row>
+            { children }
         </Animated.View>
     )
 };
@@ -338,6 +341,12 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
         console.log('FFF');
     };
 
+    const onDoubleSeek = (toSeek) => {
+        video.current.seek(toSeek);
+
+        onRefreshTimer(paused);
+    };
+
     return (
         <View style={{ backgroundColor: '#000' }}>
             <TouchableOpacity
@@ -369,7 +378,9 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                     width={ fullscreen ? 350 : 150 }
                     onClose={onOverlayActionClose}
                     style={{ transform: [{ translateX: translationX }] }}
-                />
+                >
+
+                </NativeVideoPlayerActionOverlayContainer>
             }
             {
                 isVisible &&
@@ -384,6 +395,54 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                     backgroundColor: 'rgba( 0, 0, 0, 0.3);',
                     opacity: AnimationOverlay,
                 }}>
+                    <DoubleTap
+                        delay={250}
+                        style={{
+                            position: 'absolute',
+                            left: 0,
+                            bottom: 0,
+                            height: '100%',
+                            width: Dimensions.get('window').width * 0.3,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            paddingBottom: 15
+                        }}
+                        onDoubleTap={() => {
+                            onDoubleSeek(currentTime - 10);
+                        }}
+                    >
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={[ human.callout, { color: '#fff', paddingRight: 10 } ]}>
+                                - 10
+                            </Text>
+                            <IconFontisto name={'backward'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
+                        </View>
+                    </DoubleTap>
+
+                    <DoubleTap
+                        delay={200}
+                        style={{
+                            position: 'absolute',
+                            right: 0,
+                            bottom: 0,
+                            height: '100%',
+                            width: Dimensions.get('window').width * 0.3,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            paddingBottom: 15
+                        }}
+                        onDoubleTap={() => {
+                            onDoubleSeek(currentTime + 10);
+                        }}
+                    >
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <IconFontisto name={'forward'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
+                            <Text style={[ human.callout, { color: '#fff', paddingLeft: 10 } ]}>
+                                10 +
+                            </Text>
+                        </View>
+                    </DoubleTap>
+
                     <Animated.View style={{
                         flex: 5,
                         justifyContent: 'center',
