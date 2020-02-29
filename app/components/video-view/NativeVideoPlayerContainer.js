@@ -161,6 +161,16 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
         ]).start();
     };
 
+    const onOutAnimationRun = (callback) => {
+        Animated.timing(AnimationOverlay, {
+            toValue: 0,
+            duration: 200,
+            useNativeDriver: true
+        }).start(() => {
+            callback();
+        });
+    };
+
     const onRefreshTimer = () => {
         clearTimeout(TimerHandler.current);
 
@@ -170,7 +180,10 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
         }
 
         TimerHandler.current = setTimeout(() => {
-            setIsVisible(false);
+            onOutAnimationRun(() => {
+                setIsVisible(false);
+            });
+
             TimerHandler.current = null;
 
         }, 3000);
