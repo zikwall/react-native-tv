@@ -103,7 +103,8 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
             setOwnerInfo({
                 name: response.name,
                 username: response.username,
-                image: !!response.avatar ? { uri: response.avatar } : theme.userAvatarPlaceholder
+                image: !!response.avatar ? { uri: response.avatar } : theme.userAvatarPlaceholder,
+                is_official: parseInt(response.is_official) === 1
             });
         });
     }, []);
@@ -255,7 +256,7 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
                                     <Avatar
                                         src={ownerInfo.image}
                                         badgeRight={
-                                            <Verified size={15} />
+                                            !!ownerInfo.is_official && <Verified size={15} />
                                         }
                                     />
                                     <View style={{ marginLeft: 10 }}>
