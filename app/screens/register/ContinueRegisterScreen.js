@@ -28,7 +28,7 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
     const [ name, setName] = useState(null);
     const [ email, setEmail ] = useState(null);
     const [ avatar, setAvatar ] = useState({
-        uri: null, type: null, name: null
+        uri: null, type: null, name: null, data: null
     });
 
     const [ error, setError ] = useState({
@@ -63,7 +63,8 @@ const ContinueRegisterScreen = ({ navigation, registerFinished, setProfile, isAu
             return false;
         }
 
-        const status = await registerFinished({name: name, publicEmail: email, avatar: 'data:image/jpeg;base64,' + avatar.data} , token);
+        let avatarData = !!avatar.data ? 'data:image/jpeg;base64,' + avatar.data : null;
+        const status = await registerFinished({name: name, publicEmail: email, avatar: avatarData} , token);
 
         if (status.state === true) {
             navigation.navigate('HomeScreen');
