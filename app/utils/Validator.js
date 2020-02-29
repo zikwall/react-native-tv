@@ -23,7 +23,7 @@ export const isValidName = (name) => {
         return false;
     }
 
-    return /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g.test(name);
+    return /^[a-zA-Zа-яА-Я]+(([',. -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/g.test(name);
 };
 
 export const isValidURL = (str) => {
