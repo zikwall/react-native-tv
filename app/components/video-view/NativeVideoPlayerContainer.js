@@ -245,7 +245,11 @@ const NativeVideoPlayerContainer = ({ source, isDebug, title }) => {
     const renderPlayerAction = (size = 1) => {
         return (
             <TouchableOpacity onPress={() => onTogglePlayPause()}>
-                <IconFontisto name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 15 : 20 } color={'#fff'} />
+                <View style={{ paddingRight: 10 }}>
+                    <View style={{ width: fullscreen ? 20 : 15 }}>
+                        <IconFontisto name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 15 : 20 } color={'#fff'} />
+                    </View>
+                </View>
             </TouchableOpacity>
         )
     };
@@ -294,7 +298,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug, title }) => {
         }
 
         return (
-            <View style={{ color: '#fff', paddingLeft: 10, flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ color: '#fff', flexDirection: 'row', alignItems: 'center' }}>
                 <TouchableOpacity onPress={ onVolumeMute }>
                     <View style={{ paddingLeft: 10, marginLeft: 10, width: fullscreen ? 45 : 35 }}>
                         <IconFontisto name={ icon } size={ fullscreen ? 20 : 15 } color={'#fff'} />
