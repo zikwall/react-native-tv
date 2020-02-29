@@ -16,7 +16,7 @@ import { StringHelper } from '../../utils';
 import DoubleTap from "../ui/DoubleTap";
 import { human } from "react-native-typography";
 
-const NativeVideoPlayerActionOverlayContainer = ({ children, onClose, style, closeStyle, width }) => {
+const NativeVideoPlayerActionOverlayContainer = ({ children, onClose, style, closeStyle, width, iconSize }) => {
     return (
         <Animated.View style={{
             position: 'absolute',
@@ -31,7 +31,7 @@ const NativeVideoPlayerActionOverlayContainer = ({ children, onClose, style, clo
             <Row>
                 <View />
                 <TouchableOpacity onPress={ onClose }>
-                    <IconFontisto name={'arrow-right-l'} size={25} style={{ color: '#fff', ...closeStyle }} />
+                    <IconFontisto name={'arrow-right-l'} size={iconSize} style={{ color: '#fff', ...closeStyle }} />
                 </TouchableOpacity>
             </Row>
             { children }
@@ -239,9 +239,20 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
 
     const renderBigPlayerAction = (size) => {
         return (
-            <TouchableOpacity onPress={() => onTogglePlayPause()}>
-                <IconFontisto name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 30 : 45 } color={'#fff'} />
-            </TouchableOpacity>
+            <Animated.View style={{
+                flex: fullscreen ? 7 : 5,
+                justifyContent: 'center',
+                alignItems: 'center',
+                // временный костыль почему то боковые стрелки переключения по видео выталкивают
+                // бедную кнопочку большой плей
+                // не хорошо, надо разбираться!
+                paddingTop: fullscreen ? ( duration > 0 ? 50 : 30 ) : ( duration > 0 ? 45 : 20 )
+            }}>
+
+                <TouchableOpacity onPress={() => onTogglePlayPause()}>
+                    <IconFontisto name={ !paused ? 'pause' : 'play' } size={ size * !fullscreen ? 30 : 45 } color={'#fff'} />
+                </TouchableOpacity>
+            </Animated.View>
         )
     };
 
@@ -344,6 +355,70 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
         onRefreshTimer(paused);
     };
 
+    const renderLeftDoubleTap = () => {
+        if (duration <= 0) {
+            return null;
+        }
+
+        return (
+            <DoubleTap
+                delay={250}
+                style={{
+                    position: 'absolute',
+                    left: 0,
+                    bottom: 0,
+                    height: '100%',
+                    width: Dimensions.get('window').width * 0.3,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    paddingBottom: 15
+                }}
+                onDoubleTap={() => {
+                    onDoubleSeek(currentTime - 10);
+                }}
+            >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={[ human.callout, { color: '#fff', paddingRight: 10 } ]}>
+                        - 10
+                    </Text>
+                    <IconFontisto name={'arrow-return-left'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
+                </View>
+            </DoubleTap>
+        );
+    };
+
+    const renderRightDoubleTap = () => {
+        if (duration <= 0) {
+            return null;
+        }
+
+        return (
+            <DoubleTap
+                delay={200}
+                style={{
+                    position: 'absolute',
+                    right: 0,
+                    bottom: 0,
+                    height: '100%',
+                    width: Dimensions.get('window').width * 0.3,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    paddingBottom: 15
+                }}
+                onDoubleTap={() => {
+                    onDoubleSeek(currentTime + 10);
+                }}
+            >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <IconFontisto name={'arrow-return-right'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
+                    <Text style={[ human.callout, { color: '#fff', paddingLeft: 10 } ]}>
+                        10 +
+                    </Text>
+                </View>
+            </DoubleTap>
+        )
+    };
+
     const renderBackArrow = () => {
         if (!fullscreen) {
             return <View />
@@ -390,6 +465,104 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
         )
     };
 
+    const renderProgressBar = () => {
+        if (duration <= 0) {
+            return null;
+        }
+
+        return (
+            <>
+                <Row style={{ paddingHorizontal: 15 }}>
+                    <Text style={{ color: '#fff' }}>
+                        { StringHelper.formatTime(currentTime) }
+                    </Text>
+                    <Text style={{ color: '#fff' }}>
+                        { StringHelper.formatTime(duration) }
+                    </Text>
+                </Row>
+                <Slider
+                    style={{ height: 50, flex: 1 }}
+                    value={sliderValue}
+                    minimumValue={0}
+                    maximumValue={duration}
+                    step={1}
+                    onValueChange={ onSeek }
+                    minimumTrackTintColor="#fff"
+                    maximumTrackTintColor="#fff"
+                    thumbTintColor="#fff"
+                />
+            </>
+        )
+    };
+
+    const renderLiveTranslationMark = () => {
+        if (duration > 0) {
+            return null;
+        }
+
+        return (
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <IconFontisto name={'record'} size={ 10 } color={'#fff'} />
+                <Text style={[ human.callout, { color: '#fff', paddingLeft: 5 } ]}>
+                    Live
+                </Text>
+            </View>
+        )
+    };
+
+    const renderBottomLine = () => {
+        return (
+            <Animated.View style={{
+                flex: 1,
+                flexDirection: 'row',
+                backgroundColor: 'rgba( 0, 0, 0, 0.5);',
+                paddingBottom: 4,
+                paddingTop: 4,
+                paddingHorizontal: fullscreen ? 25 : 15
+            }}>
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center'
+                }}>
+
+                    {renderPlayerAction()}
+                    {renderVolumeAction()}
+                    {renderLiveTranslationMark()}
+                </View>
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'flex-end',
+                    alignItems: 'center'
+                }}>
+                    {renderCropControl()}
+                    {renderFullscreenControl()}
+                    {renderActionControl()}
+                </View>
+            </Animated.View>
+        )
+    };
+
+    const renderNativeOverlayContainer = (children = null) => {
+        if (!isVisibleOverlay) {
+            return null;
+        }
+
+        return (
+            <NativeVideoPlayerActionOverlayContainer
+                closeStyle={{ paddingRight: fullscreen ? 20 : 10, paddingTop: fullscreen ? 10 : 5 }}
+                width={ fullscreen ? 350 : 150 }
+                onClose={onOverlayActionClose}
+                style={{ transform: [{ translateX: translationX }] }}
+                iconSize={ fullscreen ? 30 : 20 }
+            >
+                { children }
+            </NativeVideoPlayerActionOverlayContainer>
+        )
+    };
+
     return (
         <View style={{ backgroundColor: '#000' }}>
             <TouchableOpacity
@@ -414,18 +587,8 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                     onAudioFocusChanged={ onAudioFocusChanged }
                 />
             </TouchableOpacity>
-            {
-                isVisibleOverlay &&
-                <NativeVideoPlayerActionOverlayContainer
-                    closeStyle={{ paddingRight: fullscreen ? 20 : 10, paddingTop: fullscreen ? 10 : 5 }}
-                    width={ fullscreen ? 350 : 150 }
-                    onClose={onOverlayActionClose}
-                    style={{ transform: [{ translateX: translationX }] }}
-                >
 
-                </NativeVideoPlayerActionOverlayContainer>
-            }
-
+            {renderNativeOverlayContainer()}
             {renderHeaderLine()}
 
             {
@@ -441,133 +604,11 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                     backgroundColor: 'rgba( 0, 0, 0, 0.3);',
                     opacity: AnimationOverlay,
                 }}>
-                    {
-                        duration > 0 &&
-                        <DoubleTap
-                            delay={250}
-                            style={{
-                                position: 'absolute',
-                                left: 0,
-                                bottom: 0,
-                                height: '100%',
-                                width: Dimensions.get('window').width * 0.3,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                paddingBottom: 15
-                            }}
-                            onDoubleTap={() => {
-                                onDoubleSeek(currentTime - 10);
-                            }}
-                        >
-                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Text style={[ human.callout, { color: '#fff', paddingRight: 10 } ]}>
-                                    - 10
-                                </Text>
-                                <IconFontisto name={'backward'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
-                            </View>
-                        </DoubleTap>
-                    }
-
-                    {
-                        duration > 0 &&
-                        <DoubleTap
-                            delay={200}
-                            style={{
-                                position: 'absolute',
-                                right: 0,
-                                bottom: 0,
-                                height: '100%',
-                                width: Dimensions.get('window').width * 0.3,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                paddingBottom: 15
-                            }}
-                            onDoubleTap={() => {
-                                onDoubleSeek(currentTime + 10);
-                            }}
-                        >
-                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <IconFontisto name={'forward'} size={ fullscreen ? 30 : 20 } color={'#fff'} />
-                                <Text style={[ human.callout, { color: '#fff', paddingLeft: 10 } ]}>
-                                    10 +
-                                </Text>
-                            </View>
-                        </DoubleTap>
-                    }
-
-                    <Animated.View style={{
-                        flex: fullscreen ? 7 : 5,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        paddingTop: fullscreen ? 60 : 40
-                    }}>
-
-                        {renderBigPlayerAction(2.5)}
-                    </Animated.View>
-
-                    {
-                        duration > 0 &&
-                        <>
-                            <Row style={{ paddingHorizontal: 15 }}>
-                                <Text style={{ color: '#fff' }}>
-                                    { StringHelper.formatTime(currentTime) }
-                                </Text>
-                                <Text style={{ color: '#fff' }}>
-                                    { StringHelper.formatTime(duration) }
-                                </Text>
-                            </Row>
-                            <Slider
-                                style={{ height: 50, flex: 1 }}
-                                value={sliderValue}
-                                minimumValue={0}
-                                maximumValue={duration}
-                                step={1}
-                                onValueChange={ onSeek }
-                                minimumTrackTintColor="#fff"
-                                maximumTrackTintColor="#fff"
-                                thumbTintColor="#fff"
-                            />
-                        </>
-                    }
-
-                    <Animated.View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        backgroundColor: 'rgba( 0, 0, 0, 0.5);',
-                        paddingBottom: 4,
-                        paddingTop: 4,
-                        paddingHorizontal: fullscreen ? 25 : 15
-                    }}>
-                        <View style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            justifyContent: 'flex-start',
-                            alignItems: 'center'
-                        }}>
-
-                            {renderPlayerAction()}
-                            {renderVolumeAction()}
-                            {
-                                duration <= 0 &&
-                                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                    <IconFontisto name={'record'} size={ 10 } color={'#fff'} />
-                                    <Text style={[ human.callout, { color: '#fff', paddingLeft: 5 } ]}>
-                                        Live
-                                    </Text>
-                                </View>
-                            }
-                        </View>
-                        <View style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            justifyContent: 'flex-end',
-                            alignItems: 'center'
-                        }}>
-                            {renderCropControl()}
-                            {renderFullscreenControl()}
-                            {renderActionControl()}
-                        </View>
-                    </Animated.View>
+                    {renderLeftDoubleTap()}
+                    {renderRightDoubleTap()}
+                    {renderBigPlayerAction(2.5)}
+                    {renderProgressBar()}
+                    {renderBottomLine()}
                 </Animated.View>
             }
         </View>
