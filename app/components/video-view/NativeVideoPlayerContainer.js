@@ -45,7 +45,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
     const [ volume, setVolume ] = useState(0.5);
     const [ rememberVolume, setRememberVolume ] = useState(0.5);
     const [ muted, setMuted ] = useState(false);
-    const [ resizeMode, setResizeMode ] = useState('contain');
+    const [ resizeMode, setResizeMode ] = useState('cover');
     const [ paused, setPaused ] = useState(false);
     const [ fullscreen, setFullscreen ] = useState(false);
 
