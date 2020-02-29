@@ -47,7 +47,7 @@ const VideoViewContent = ({ content, player, selectPlayer }) => {
     }
 
     if (SafeValidator.isNativePlayer(player)) {
-        return <NativeVideoPlayerContainer source={content.url} />
+        return <NativeVideoPlayerContainer source={content.url} title={content.name} />
     }
 
     return (

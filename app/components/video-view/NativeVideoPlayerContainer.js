@@ -39,7 +39,7 @@ const NativeVideoPlayerActionOverlayContainer = ({ children, onClose, style, clo
     )
 };
 
-const NativeVideoPlayerContainer = ({ source, isDebug }) => {
+const NativeVideoPlayerContainer = ({ source, isDebug, title }) => {
 
     const [ rate, setRate ] = useState(1);
     const [ volume, setVolume ] = useState(0.5);
@@ -434,7 +434,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
 
     const renderBackArrow = () => {
         if (!fullscreen) {
-            return <View />
+            return <View style={{ paddingHorizontal: fullscreen ? 25 : 15 }}/>
         }
 
         return (
@@ -449,6 +449,18 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
             <TouchableOpacity onPress={() => setIsLocked(!isLocked)} style={{ paddingHorizontal: fullscreen ? 25 : 15 }}>
                 <IconFontisto name={ isLocked ? 'unlocked' : 'locked'} size={ fullscreen ? 20 : 15 } color={'#fff'} />
             </TouchableOpacity>
+        )
+    };
+
+    const renderTitle = () => {
+        if (!fullscreen) {
+            return null;
+        }
+
+        return (
+            <Text style={{ color: '#fff', maxWidth: Dimensions.get('window').width * 0.5 }} numberOfLines={1}>
+                { title }
+            </Text>
         )
     };
 
@@ -472,6 +484,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                 }}>
                 <Row>
                     {renderBackArrow()}
+                    {renderTitle()}
                     {renderLockAction()}
                 </Row>
             </Animated.View>
