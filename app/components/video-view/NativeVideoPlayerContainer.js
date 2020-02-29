@@ -565,9 +565,11 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
 
     return (
         <View style={{ backgroundColor: '#000' }}>
-            <TouchableOpacity
+            <DoubleTap
                 activeOpacity={1}
-                onPress={ onShowControlsHandle }
+                delay={180}
+                onTap={ onShowControlsHandle }
+                onDoubleTap={ () => onFullscreen(fullscreen) }
             >
                 <NativeVideoPlayer
                     setRef={ ref => video.current = ref }
@@ -586,7 +588,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
                     onAudioBecomingNoisy={ onAudioBecomingNoisy }
                     onAudioFocusChanged={ onAudioFocusChanged }
                 />
-            </TouchableOpacity>
+            </DoubleTap>
 
             {renderNativeOverlayContainer()}
             {renderHeaderLine()}
