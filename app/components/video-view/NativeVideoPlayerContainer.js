@@ -532,7 +532,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug, title }) => {
 
         return (
             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <IconFontisto name={'record'} size={ 10 } color={'#fff'} />
+                <IconFontisto name={'record'} size={ 10 } color={'red'} />
                 <Text style={[ human.callout, { color: '#fff', paddingLeft: 5 } ]}>
                     Live
                 </Text>
