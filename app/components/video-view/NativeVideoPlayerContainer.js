@@ -14,7 +14,7 @@ import Orientation from "react-native-orientation";
 import Row from '../ui/Row';
 import { StringHelper } from '../../utils';
 import DoubleTap from "../ui/DoubleTap";
-import {human} from "react-native-typography";
+import { human } from "react-native-typography";
 
 const NativeVideoPlayerActionOverlayContainer = ({ children, onClose, style, closeStyle, width }) => {
     return (
@@ -56,6 +56,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
     const [ isLoaded, setIsLoaded ] = useState(false);
 
     const [ isVisibleOverlay, setIsVisibleOverlay ] = useState(true);
+    const [ isLocked, setIsLocked ] = useState(false);
 
     const TimerHandler = useRef(null);
     const AnimationOverlay = useRef(new Animated.Value(0)).current;
@@ -343,6 +344,52 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
         onRefreshTimer(paused);
     };
 
+    const renderBackArrow = () => {
+        if (!fullscreen) {
+            return <View />
+        }
+
+        return (
+            <TouchableOpacity onPress={() => onFullscreen(fullscreen)} style={{ paddingHorizontal: fullscreen ? 25 : 15 }}>
+                <IconFontisto name={'arrow-left-l'} size={ fullscreen ? 20 : 15 } color={'#fff'} />
+            </TouchableOpacity>
+        )
+    };
+
+    const renderLockAction = () => {
+        return (
+            <TouchableOpacity onPress={() => setIsLocked(!isLocked)} style={{ paddingHorizontal: fullscreen ? 25 : 15 }}>
+                <IconFontisto name={ isLocked ? 'unlocked' : 'locked'} size={ fullscreen ? 20 : 15 } color={'#fff'} />
+            </TouchableOpacity>
+        )
+    };
+
+    const renderHeaderLine = () => {
+        if (!isVisible) {
+            return null;
+        }
+
+        return (
+            <Animated.View
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    height: fullscreen ? 35 : 25,
+                    width: '100%',
+                    //backgroundColor: 'rgba( 0, 0, 0, 0.3);',
+                    justifyContent: 'center',
+                    opacity: AnimationOverlay,
+                    zIndex: 9999
+                }}>
+                <Row>
+                    {renderBackArrow()}
+                    {renderLockAction()}
+                </Row>
+            </Animated.View>
+        )
+    };
+
     return (
         <View style={{ backgroundColor: '#000' }}>
             <TouchableOpacity
@@ -378,8 +425,11 @@ const NativeVideoPlayerContainer = ({ source, isDebug }) => {
 
                 </NativeVideoPlayerActionOverlayContainer>
             }
+
+            {renderHeaderLine()}
+
             {
-                isVisible &&
+                (!isLocked && isVisible) &&
                 <Animated.View style={{
                     position: 'absolute',
                     flexDirection: 'column',
