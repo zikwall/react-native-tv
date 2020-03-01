@@ -18,7 +18,7 @@ const AccountScreen = ({ navigation, updateAccount, token, user }) => {
     const [ name, setName] = useState(user.profile.name);
     const [ email, setEmail ] = useState(user.profile.public_email);
     const [ avatar, setAvatar ] = useState({
-        uri: user.profile.avatar
+        uri: user.profile.avatar, type: null, name: null, data: null
     });
 
     const [ success, setSuccess ] = useState({
@@ -57,7 +57,8 @@ const AccountScreen = ({ navigation, updateAccount, token, user }) => {
             return false;
         }
 
-        const status = await updateAccount({name: name, publicEmail: email, avatar: 'data:image/jpeg;base64,' + avatar.data }, token);
+        let avatarData = !!avatar.data ? 'data:image/jpeg;base64,' + avatar.data : null;
+        const status = await updateAccount({name: name, publicEmail: email, avatar: avatarData }, token);
 
         if (status.state === true) {
             setSuccess({
