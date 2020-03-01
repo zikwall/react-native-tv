@@ -56,7 +56,7 @@ const MenuScreen = ({ navigation, user, isAuthenticated, checkAuth }) => {
 
                 <MenuItemLine onPress={onMenuPress} to={'ContactsScreen'} icon={'at-sign'} name={'Контакты'} />
                 <MenuItemLine onPress={onMenuPress} to={'FaqScreen'} icon={'help-circle'} name={'FAQ'} />
-                <MenuItemLine onPress={Fake.onComingSoonFeaturePress} to={''} icon={'help-circle'} name={'Помощь'} />
+                <MenuItemLine onPress={() => alert('Раздел находится в разработке!')} to={''} icon={'help-circle'} name={'Помощь'} />
 
                 <MenuItemLine onPress={onMenuPress} to={'SystemScreen'} icon={'layers'} name={'Система & Сервис'} />
                 <MenuItemLine onPress={onMenuPress} to={'AboutScreen'} icon={'info'} name={'О Проекте'} />
