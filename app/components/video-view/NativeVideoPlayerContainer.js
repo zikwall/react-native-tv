@@ -599,7 +599,7 @@ const NativeVideoPlayerContainer = ({ source, isDebug, title }) => {
                 activeOpacity={1}
                 delay={180}
                 onTap={ onShowControlsHandle }
-                onDoubleTap={ () => onFullscreen(fullscreen) }
+                onDoubleTap={ () => !isLocked && onFullscreen(fullscreen) }
             >
                 <NativeVideoPlayer
                     setRef={ ref => video.current = ref }
