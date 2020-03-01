@@ -127,12 +127,13 @@ export const changeSecuritySettings = (token, attributes) => {
         })
 };
 
-export const fetchUsers = () => {
-    return apiFetch(`/vktv/user/list`)
+export const fetchUsers = (page) => {
+    return apiFetch(`/vktv/user/list?offset=${page}`)
         .then(res => {
             return {
                 code: res.code,
-                response: res.response,
+                response_users: res.response.users,
+                end: res.response.end
             };
         })
         .catch(error => {
