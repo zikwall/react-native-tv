@@ -20,7 +20,8 @@ const BottomContainer = props => {
         emailTextinputValue,
         emailPlaceholder,
         emailOnChangeText,
-        emailIconComponent
+        emailIconComponent,
+        errors
     } = props;
 
     return (
@@ -33,6 +34,7 @@ const BottomContainer = props => {
                     placeholder={usernamePlaceholder}
                     onChangeText={usernameOnChangeText}
                     iconComponent={usernameIconComponent}
+                    errors={ errors }
                     {...props}
                 />
                 <CardInput
@@ -42,6 +44,7 @@ const BottomContainer = props => {
                     placeholder={emailPlaceholder}
                     onChangeText={emailOnChangeText}
                     iconComponent={emailIconComponent}
+                    errors={ errors }
                     {...props}
                 />
                 <CardInput
@@ -54,6 +57,7 @@ const BottomContainer = props => {
                     placeholder={passwordPlaceholder}
                     onChangeText={text => passwordOnChangeText(text)}
                     iconComponent={passwordIconComponent}
+                    errors={ errors }
                     {...props}
                 />
             </View>

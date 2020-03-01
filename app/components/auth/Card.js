@@ -33,7 +33,7 @@ const Card = props => {
     };
 
     return (
-        <View style={ [ styles.container, _markAsError(), { borderColor: theme.primaryColor, backgroundColor: theme.primaryBackgroundColor } ] }>
+        <View style={ [ styles.container, { borderColor: theme.primaryColor, backgroundColor: theme.primaryBackgroundColor }, _markAsError() ] }>
             <View style={styles.containerGlue}>
                 <View style={{ width: 35, justifyContent: "center" }}>
                     {iconComponent || (
