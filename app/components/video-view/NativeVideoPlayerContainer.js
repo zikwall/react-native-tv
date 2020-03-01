@@ -448,9 +448,14 @@ const NativeVideoPlayerContainer = ({ source, isDebug, title }) => {
         )
     };
 
+    const onLock = () => {
+        setIsLocked(!isLocked);
+        onRefreshTimer();
+    };
+
     const renderLockAction = () => {
         return (
-            <TouchableOpacity onPress={() => setIsLocked(!isLocked)} style={{ paddingHorizontal: fullscreen ? 25 : 15 }}>
+            <TouchableOpacity onPress={onLock} style={{ paddingHorizontal: fullscreen ? 25 : 15 }}>
                 <IconFontisto name={ isLocked ? 'unlocked' : 'locked'} size={ fullscreen ? 20 : 15 } color={'#fff'} />
             </TouchableOpacity>
         )
