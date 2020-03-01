@@ -167,7 +167,7 @@ const EditContentScreen = ({ navigation, route }) => {
         }
 
 
-        if (url && (!url.match( /([a-zA-Z0-9\s_\\.\-\(\):])+(.m3u|.m3u8)$/i ) || !Validator.isValidURL(url))) {
+        if (url && (!url.match( /([a-zA-Z0-9\s_\\.\-\(\):])+(.m3u|.m3u8|.mp4|.avi)$/i ) || !Validator.isValidURL(url))) {
             markAsError('Некорректная ссылка на вещание.', ['url']);
             return true;
         }
