@@ -59,9 +59,17 @@ const DebugVideoScreen = ({ navigation }) => {
 
     return (
         <ThemedView>
-            <Heading text={'Debug your video'} color={theme.primaryColor} />
-            <View style={{ height: 205 }}>
-                <NativeVideoPlayerContainer source={useSource.url} title={useSource.name} />
+            <View style={{ paddingTop: '56.25%' }}>
+                <View style={{
+                    position: 'absolute',
+                    left: 0,
+                    right:0,
+                    bottom: 0,
+                    top: 0,
+                    backgroundColor: theme.primaryBackgroundColor
+                }}>
+                    <NativeVideoPlayerContainer source={useSource.url} title={useSource.name} />
+                </View>
             </View>
             <View style={{ padding: 5 }}>
                 <TextInput maxLength={255} value={source} onChangeText={handleSelectSource} placeholder={'Input url here'} />

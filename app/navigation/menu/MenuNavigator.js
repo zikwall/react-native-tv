@@ -216,6 +216,12 @@ const MenuNavigator = createStackNavigator({
     },
     DebugVideoScreen: {
         screen: DebugVideoScreen,
+        navigationOptions:{
+            header: (props) => <NavigationHeaderComponent
+                titleComponent={<NavigationHeaderTitle title={'Video Debug'} />}
+                leftComponent={ <NavigationHeaderLeft /> } {...props}
+            />
+        }
     },
     IPTVScreen: {
         screen: IPTVScreen,
