@@ -9,6 +9,7 @@ import {
     TextInput,
     FlatButton,
     Row,
+    NativeVideoPlayerContainer
 } from '../../components';
 import { useSelector } from 'react-redux';
 import { getAppTheme, getChannels } from '../../redux/reducers';
@@ -49,13 +50,18 @@ const DebugVideoScreen = ({ navigation }) => {
         }
     };
 
-    const useSource = !!source && useMy ? source : Object.values(channels)[1].url;
+    const useSource = !!source && useMy ? source : Object.values(channels)[0];
+
+    if (!useSource.hasOwnProperty('url')) {
+        useSource.url = '';
+        useSource.name = '';
+    }
 
     return (
         <ThemedView>
             <Heading text={'Debug your video'} color={theme.primaryColor} />
             <View style={{ height: 205 }}>
-                <PureVideoWebView source={useSource} />
+                <NativeVideoPlayerContainer source={useSource.url} title={useSource.name} />
             </View>
             <View style={{ padding: 5 }}>
                 <TextInput maxLength={255} value={source} onChangeText={handleSelectSource} placeholder={'Input url here'} />
