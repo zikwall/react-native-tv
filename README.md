@@ -100,7 +100,7 @@
 
 ### View on YouTube
 
-[![PLAYHUB_PROMO](https://img.youtube.com/vi/UkiR4-f4Zag/0.jpg)](https://www.youtube.com/watch?v=UkiR4-f4Zag)
+[![PLAYHUB_PROMO](https://img.youtube.com/vi/3g99PkxdXiE/0.jpg)](https://www.youtube.com/watch?v=3g99PkxdXiE)
 
 ### Responsive Layout
 
