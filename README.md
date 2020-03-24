@@ -5,6 +5,48 @@
   <h5>An application in which users can create and share with their personal or public playlists with other users of the application with the possibility of monetization.</h5>
 </div>
 
+### Try It
+
+#### Android different app split by CPU architecture
+
+- [x] [armeabi-v7a](https://drive.google.com/file/d/1iUdLoLwNO_BHcZqM6oUKRZZYzwFKrFkq/view?usp=sharing): 
+- [x] [arm64-v81](https://drive.google.com/file/d/17NEERR9oqZl5rH3LtETwYSxcSSexzXBn/view?usp=sharing)
+- [x] [x86_64](https://drive.google.com/file/d/1mKTe7ARn2u0bgg5W1a1v5KodjHuVQgo5/view?usp=sharing)
+- [x] [x86](https://drive.google.com/file/d/1EtxKAzntGIlp9PdzNzHFmTabNxJghvNj/view?usp=sharing)
+
+#### iOS
+
+nothing...
+
+### View on YouTube
+
+[![PLAYHUB_PROMO](https://img.youtube.com/vi/3g99PkxdXiE/0.jpg)](https://www.youtube.com/watch?v=3g99PkxdXiE)
+
+### Responsive Layout
+
+Mobile | Tabled/Pad
+--- | --- |
+![Mobile](screenshots/responsive_layout.png "Mobile responsive layout") | ![Tabled](screenshots/responsive_layout_tabled_pad.png "Tabled responsive layout")
+
+### Disclaimer
+
+At the moment, the code in some places may force you:
+
+- scared
+- I do not like
+- refusal
+- trembling skin
+
+I apologize, everything will be fixed in the future. ^_^
+
+> Premature optimization is the root of all evil (or at least most of it) in programming.
+> -- <cite>[Donald Ervin Knuth][1]</cite> «Computer Programming as an Art», «Communications of the ACM» (Vol. 17, Issue 12)
+
+[1]:http://www.paulgraham.com/knuth.html
+
+
+Functionality, UI, screenshots and content in different languages: English and Russian. Soon there will be i18n.
+
 ## Функционал
 
 #### Основное
@@ -97,35 +139,6 @@
 - [ ] iOS
 - [ ] Android TV
 - [ ] tvOS
-
-### View on YouTube
-
-[![PLAYHUB_PROMO](https://img.youtube.com/vi/3g99PkxdXiE/0.jpg)](https://www.youtube.com/watch?v=3g99PkxdXiE)
-
-### Responsive Layout
-
-Mobile | Tabled/Pad
---- | --- |
-![Mobile](screenshots/responsive_layout.png "Mobile responsive layout") | ![Tabled](screenshots/responsive_layout_tabled_pad.png "Tabled responsive layout")
-
-### Disclaimer
-
-At the moment, the code in some places may force you:
-
-- scared
-- I do not like
-- refusal
-- trembling skin
-
-I apologize, everything will be fixed in the future. ^_^
-
-> Premature optimization is the root of all evil (or at least most of it) in programming.
-> -- <cite>[Donald Ervin Knuth][1]</cite> «Computer Programming as an Art», «Communications of the ACM» (Vol. 17, Issue 12)
-
-[1]:http://www.paulgraham.com/knuth.html
-
-
-Functionality, UI, screenshots and content in different languages: English and Russian. Soon there will be i18n.
 
 ### Related Projects
 
