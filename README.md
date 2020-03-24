@@ -1,4 +1,3 @@
-![GitHub followers](https://img.shields.io/github/followers/zikwall?label=Follow&style=social)
 ![GitHub last commit](https://img.shields.io/github/last-commit/zikwall/react-native-tv)
 ![GitHub](https://img.shields.io/github/license/zikwall/react-native-tv)
 
