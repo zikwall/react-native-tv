@@ -162,38 +162,6 @@ export const homeFeed = [
     }
 ];
 
-export const searchFeed = {
-    main: {
-        title:
-            "See how will be 'Wizards Unite' new phone game inspired on Harry Potter",
-        topic: "Games",
-        time: "Earlier Today",
-        image: require("../assets/images/wizardsunite.png")
-    },
-    trends: [
-        {
-            title: "Worldwide trends"
-        },
-        {
-            title: "Twitter Clone App",
-            tweets: "1,3M tweets"
-        },
-        {
-            title: "Zidane",
-            tweets: "609k tweets"
-        },
-        {
-            title: "Noick Foles",
-            tweets: "21,7k tweets"
-        },
-        {
-            title: "#FlyEaglesFly",
-            tweets: "12,3k tweets"
-        },
-        { title: "Show more" }
-    ]
-};
-
 export const notificationFeed = {
     all: [
         {
