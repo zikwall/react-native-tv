@@ -31,6 +31,17 @@ Mobile | Tabled/Pad
 --- | --- |
 ![Mobile](screenshots/responsive_layout.png "Mobile responsive layout") | ![Tabled](screenshots/responsive_layout_tabled_pad.png "Tabled responsive layout")
 
+### Over 45+ screens, preview
+
+1 | 2 | 3 | 4 | 5 | 6 |
+--- | --- | --- | --- | --- | ---
+![Img](screenshots/1.jpg "Img") | ![Img](screenshots/2.jpg "Img") | ![Img](screenshots/3.jpg "Img") | ![Img](screenshots/4.jpg "Img") | ![Img](screenshots/5.jpg "Img") | ![Img](screenshots/6.jpg "Img")
+![Img](screenshots/7.jpg "Img") | ![Img](screenshots/8.jpg "Img") | ![Img](screenshots/9.jpg "Img") | ![Img](screenshots/10.jpg "Img") | ![Img](screenshots/11.jpg "Img") | ![Img](screenshots/12.jpg "Img")
+![Img](screenshots/13.jpg "Img") | ![Img](screenshots/14.jpg "Img") | ![Img](screenshots/15.jpg "Img") | ![Img](screenshots/16.jpg "Img") | ![Img](screenshots/17.jpg "Img") | ![Img](screenshots/18.jpg "Img")
+![Img](screenshots/19.jpg "Img") | ![Img](screenshots/20.jpg "Img") | ![Img](screenshots/21.jpg "Img") | ![Img](screenshots/22.jpg "Img") | ![Img](screenshots/23.jpg "Img") | ![Img](screenshots/24.jpg "Img")
+![Img](screenshots/25.jpg "Img") | ![Img](screenshots/26.jpg "Img") | ![Img](screenshots/27.jpg "Img") | ![Img](screenshots/28.jpg "Img") | ![Img](screenshots/29.jpg "Img") | ![Img](screenshots/30.jpg "Img")
+![Img](screenshots/31.jpg "Img") | ![Img](screenshots/32.jpg "Img") | ![Img](screenshots/33.jpg "Img") | ![Img](screenshots/34.jpg "Img") | - | -
+
 ### Disclaimer
 
 At the moment, the code in some places may force you:
