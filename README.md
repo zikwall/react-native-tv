@@ -25,19 +25,19 @@
 
 #### iOS
 
-nothing...
+nothing... :pensive:
 
-### View on YouTube
+### View on YouTube :scream:
 
 [![PLAYHUB_PROMO](https://img.youtube.com/vi/3g99PkxdXiE/0.jpg)](https://www.youtube.com/watch?v=3g99PkxdXiE)
 
-### Responsive Layout
+### Responsive Layout :heart_eyes:
 
 Mobile | Tabled/Pad
 --- | --- |
 ![Mobile](screenshots/responsive_layout.png "Mobile responsive layout") | ![Tabled](screenshots/responsive_layout_tabled_pad.png "Tabled responsive layout")
 
-### Over 45+ screens, preview
+### Over 45+ screens, preview :boom:
 
 1 | 2 | 3 | 4 | 5 | 6 |
 --- | --- | --- | --- | --- | ---
@@ -48,7 +48,7 @@ Mobile | Tabled/Pad
 ![Img](screenshots/25.jpg "Img") | ![Img](screenshots/26.jpg "Img") | ![Img](screenshots/27.jpg "Img") | ![Img](screenshots/28.jpg "Img") | ![Img](screenshots/29.jpg "Img") | ![Img](screenshots/30.jpg "Img")
 ![Img](screenshots/31.jpg "Img") | ![Img](screenshots/32.jpg "Img") | ![Img](screenshots/33.jpg "Img") | ![Img](screenshots/34.jpg "Img") | - | -
 
-### Disclaimer
+### Disclaimer :innocent:
 
 At the moment, the code in some places may force you:
 
