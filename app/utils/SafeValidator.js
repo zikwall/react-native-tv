@@ -20,10 +20,6 @@ export const isTrustSrc = (src) => {
     return src && src.uri !== '' && src.uri !== null;
 };
 
-export const getSafeChannelImage = (image) => {
-    return isTrustImage(image) ? { uri: image } : require('../assets/images/blank_channel.png');
-};
-
 export const isNativeWebPlayer = (state) => {
     return state == 1;
 };

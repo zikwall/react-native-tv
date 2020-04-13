@@ -25,7 +25,7 @@ const ContinueRegisterScreenComponent = props => {
         onTouchAvatar,
     } = props;
 
-    const defaultAvatar = avatar.uri != null ? avatar: require('../../assets/images/placeholders/image-placeholder-350x350.png');
+    const defaultAvatar = avatar.uri != null ? avatar: require('../../assets/images/image-placeholder-350x350.png');
 
     const renderLoginButton = () => (
         <View style={styles.continueButtonsContainerStyle}>

@@ -102,7 +102,7 @@ const AccountScreen = ({ navigation, updateAccount, token, user }) => {
         });
     };
 
-    const defaultAvatar = avatar.uri != null || avatar.uri !== '' ? avatar: require('../../assets/images/placeholders/image-placeholder-350x350.png');
+    const defaultAvatar = avatar.uri != null || avatar.uri !== '' ? avatar: require('../../assets/images/image-placeholder-350x350.png');
 
     return (
         <ThemedView>
