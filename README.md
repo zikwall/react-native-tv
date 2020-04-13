@@ -18,10 +18,10 @@
 
 #### Android different app split by CPU architecture
 
-- [x] [armeabi-v7a](https://drive.google.com/file/d/1iUdLoLwNO_BHcZqM6oUKRZZYzwFKrFkq/view?usp=sharing)
-- [x] [arm64-v81](https://drive.google.com/file/d/17NEERR9oqZl5rH3LtETwYSxcSSexzXBn/view?usp=sharing)
-- [x] [x86_64](https://drive.google.com/file/d/1mKTe7ARn2u0bgg5W1a1v5KodjHuVQgo5/view?usp=sharing)
-- [x] [x86](https://drive.google.com/file/d/1EtxKAzntGIlp9PdzNzHFmTabNxJghvNj/view?usp=sharing)
+- [x] [armeabi-v7a](https://yadi.sk/d/QDo8Ak5c2E3y-Q)
+- [x] [arm64-v81](https://yadi.sk/d/2DdQh1ARvw0C4Q)
+- [x] [x86_64](https://yadi.sk/d/rUy3OrGvZqKuAg)
+- [x] [x86](https://yadi.sk/d/ZzlOspjhanzgrg)
 
 #### iOS
 
