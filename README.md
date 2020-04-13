@@ -8,7 +8,13 @@
   <h5>An application in which users can create and share with their personal or public playlists with other users of the application with the possibility of monetization.</h5>
 </div>
 
-### Try It
+### Profit :yum:
+
+- Functional, includes many functions: watching TV, movies and videos, publishing its content, friends and much more.
+- Lightweight, takes `9MB` as installing apk and after installing `22MB`
+- Fast, real 60fps
+
+### Try It :sunglasses:
 
 #### Android different app split by CPU architecture
 
