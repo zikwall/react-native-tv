@@ -16,6 +16,10 @@
 
 ### Try It :sunglasses:
 
+#### PlayMarket
+
+- [x] [Install](https://play.google.com/store/apps/details?id=com.zikwall.playhub)
+
 #### Android different app split by CPU architecture
 
 - [x] [armeabi-v7a](https://yadi.sk/d/QDo8Ak5c2E3y-Q)
