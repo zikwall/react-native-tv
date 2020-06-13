@@ -11,7 +11,7 @@ import {
     OverlayLoader,
     FilterBar,
     LoadMoreButton,
-    AdmobBanner,
+   /* AdmobBanner,*/
     ModalizeWrapper, ParentControlModal,
 } from '../../components';
 import styles from './styles';
@@ -283,7 +283,7 @@ const PlayHubScreen = ({ navigation, fetchContents, selectContent }) => {
                 data={items}
                 renderItem={({ item, index }) => typeof item.is_banner !== "undefined"
                     ?
-                    <AdmobBanner />
+                    null // is banner
                     :
                     <CommonChannelListItem
                         key={index}

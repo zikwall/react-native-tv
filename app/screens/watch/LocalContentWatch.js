@@ -11,10 +11,12 @@ import {
     VideoViewLocalContent,
     IconWrap,
     NavigationHeaderTitle,
-    LargeAdmobBanner,
+    /*LargeAdmobBanner,*/
     AntIconWrap, Row,
 } from '../../components';
+/*
 import { AdEventType, InterstitialAd } from "@react-native-firebase/admob";
+*/
 
 import { getActiveLocalContent, getAppTheme, getCurrentDatabase } from '../../redux/reducers';
 import { appendRedux, removeRedux } from '../../services/content/LocalDatabase';
@@ -26,7 +28,7 @@ const LocalContentWatch = ({ navigation, localContent, toDatabase, removeDatabas
     const [ hasInDatabase, setHasInDatabase ] = useState(false);
 
     useEffect(() => {
-        const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
+        /*const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
             requestNonPersonalizedAdsOnly: true,
         });
 
@@ -36,7 +38,7 @@ const LocalContentWatch = ({ navigation, localContent, toDatabase, removeDatabas
             }
         });
 
-        interstitial.load();
+        interstitial.load();*/
 
     }, []);
 
@@ -93,7 +95,7 @@ const LocalContentWatch = ({ navigation, localContent, toDatabase, removeDatabas
                     </TouchableOpacity>
                 </View>
             </Row>
-            <LargeAdmobBanner style={{ paddingTop: 50 }}/>
+            {/*<LargeAdmobBanner style={{ paddingTop: 50 }}/>*/}
         </ThemedView>
     );
 };

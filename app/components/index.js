@@ -64,7 +64,7 @@ export { default as Verified } from './ui/Verified';
 export { default as Progress } from './ui/Progress';
 export { default as RatingOverView } from './rating/OverviewRating';
 export { default as LoadMoreButton } from './ui/LoadMoreButton';
-export { default as AdmobBanner } from './firebase/AdmobBanner';
+/*export { default as AdmobBanner } from './firebase/AdmobBanner';*/
 export { default as PickerInput } from './ui/Picker';
 export { default as TagPicker } from './ui/TagPicker';
 export { default as BigTag } from './ui/BigTag';
@@ -72,7 +72,7 @@ export { default as Wheel } from './spinner/Wheel';
 export { default as VideoViewLocalContent } from './video-view/VideoViewLocalContent';
 export { default as ModalizeWrapper } from './modalize/ModilizeWrapper';
 export { default as ParentControlModal } from './modalize/ParentControlModal';
-export { default as LargeAdmobBanner } from './firebase/LargeAdmobBanner';
+/*export { default as LargeAdmobBanner } from './firebase/LargeAdmobBanner';*/
 export { default as ChannelBackgroundCard } from './channel-item/ChannelBackgroundCard';
 export { default as ChannelsLine } from './channel-item/ChannelsLine';
 export { default as ModalReview } from './rating/ModalReview';

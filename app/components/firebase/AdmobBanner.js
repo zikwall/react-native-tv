@@ -1,3 +1,4 @@
+/*
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { BannerAd, BannerAdSize } from "@react-native-firebase/admob";
@@ -30,3 +31,4 @@ const AdmobBanner = () => {
 };
 
 export default AdmobBanner;
+*/
