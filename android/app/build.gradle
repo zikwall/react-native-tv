@@ -175,6 +175,18 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    // https://github.com/facebook/react-native/issues/26400
+    // https://github.com/facebook/react-native/issues/25730
+    // https://github.com/facebook/react-native/issues/25927
+    packagingOptions {
+        // exclude '**/libjscexecutor.so'
+    }
+    configurations.all {
+        resolutionStrategy {
+            force "com.facebook.soloader:soloader:0.8.0"
+        }
+    }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
