@@ -22,7 +22,9 @@ import {
     ModalizeWrapper,
     ReportModal
 } from '../../components';
+/*
 import { AdEventType, InterstitialAd } from "@react-native-firebase/admob";
+*/
 
 import { getActiveContent, getAppTheme, getCurrentDatabase } from '../../redux/reducers';
 import { human } from "react-native-typography";
@@ -77,7 +79,7 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
     const hasOwnPlayer = DataHelper.hasOwnPlayer(content);
 
     useEffect(() => {
-        const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
+        /*const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
             requestNonPersonalizedAdsOnly: true,
         });
 
@@ -87,7 +89,7 @@ const ContentWatch = ({ navigation, content, selectPlayer, toDatabase, removeDat
             }
         });
 
-        interstitial.load();
+        interstitial.load();*/
     }, []);
 
     useEffect(() => {
