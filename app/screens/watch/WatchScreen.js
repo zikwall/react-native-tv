@@ -26,7 +26,9 @@ import { EPG } from '../../services';
 import { DataHelper, SafeValidator } from '../../utils';
 import Icon from 'react-native-vector-icons/Feather';
 
+/*
 import { InterstitialAd, TestIds, AdEventType } from '@react-native-firebase/admob';
+*/
 import { isTrustImage } from "../../utils/SafeValidator";
 
 const defaultEpg = [
@@ -70,17 +72,17 @@ const WatchScreen = ({ navigation, selectPlayer, channel }) => {
     let _menu = null;
 
     useEffect(() => {
-        const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
+        /*const interstitial = InterstitialAd.createForAdRequest('ca-app-pub-3049855368077051/6147049645', {
             requestNonPersonalizedAdsOnly: true,
-        });
+        });*/
 
-        interstitial.onAdEvent((type) => {
+        /*interstitial.onAdEvent((type) => {
             if (type === AdEventType.LOADED) {
                 interstitial.show();
             }
-        });
+        });*/
 
-        interstitial.load();
+        //interstitial.load();
 
         console.log('MOUNT WATCH');
 
